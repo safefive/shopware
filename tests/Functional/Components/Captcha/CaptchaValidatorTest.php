@@ -29,8 +29,8 @@ namespace Shopware\Tests\Functional\Components\Captcha;
 use Enlight_Controller_Request_RequestTestCase;
 use Enlight_Template_Manager;
 use PHPUnit\Framework\TestCase;
-use Shopware\Components\Captcha\CaptchaValidator;
 use Shopware\Components\Captcha\DefaultCaptcha;
+use Shopware\Components\Random;
 use Shopware_Components_Config;
 
 class CaptchaValidatorTest extends TestCase
@@ -48,7 +48,6 @@ class CaptchaValidatorTest extends TestCase
 
     public function testValidateCustomCaptchaHoneypot(): void
     {
-        /** @var CaptchaValidator $validator */
         $validator = Shopware()->Container()->get('shopware.captcha.validator');
         $honeypotParams = include __DIR__ . '/fixtures/honeypotRequest.php';
 
@@ -62,7 +61,6 @@ class CaptchaValidatorTest extends TestCase
     {
         $this->captcha->getTemplateData();
 
-        /** @var CaptchaValidator $validator */
         $validator = Shopware()->Container()->get('shopware.captcha.validator');
         $defaultParam = include __DIR__ . '/fixtures/honeypotRequest.php';
         $defaultParam['captchaName'] = 'default';
@@ -81,7 +79,6 @@ class CaptchaValidatorTest extends TestCase
     {
         $this->captcha->getTemplateData();
 
-        /** @var CaptchaValidator $validator */
         $validator = Shopware()->Container()->get('shopware.captcha.validator');
         $defaultParam = include __DIR__ . '/fixtures/honeypotRequest.php';
         $defaultParam['captchaName'] = 'default';
@@ -90,7 +87,7 @@ class CaptchaValidatorTest extends TestCase
         $request->setParams($defaultParam);
 
         // set a random false parameter
-        $request->setParam('sCaptcha', uniqid());
+        $request->setParam('sCaptcha', Random::getString(8));
 
         static::assertFalse($validator->validateByName($defaultParam['captchaName'], $request));
     }

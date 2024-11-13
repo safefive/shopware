@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -23,13 +26,15 @@
 
 namespace Shopware\Commands;
 
+use Doctrine\DBAL\Connection;
+use Shopware\Components\CacheManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FirstRunWizardDisableCommand extends ShopwareCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure()
     {
@@ -44,9 +49,9 @@ class FirstRunWizardDisableCommand extends ShopwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $conn = $this->container->get(\Doctrine\DBAL\Connection::class);
-        $elementId = $conn->fetchColumn('SELECT id FROM s_core_config_elements WHERE name LIKE "firstRunWizardEnabled"');
-        $valueid = $conn->fetchColumn('SELECT id FROM s_core_config_values WHERE element_id = :elementId', ['elementId' => $elementId]);
+        $conn = $this->container->get(Connection::class);
+        $elementId = (int) $conn->fetchOne('SELECT id FROM s_core_config_elements WHERE name LIKE "firstRunWizardEnabled"');
+        $valueId = (int) $conn->fetchOne('SELECT id FROM s_core_config_values WHERE element_id = :elementId', ['elementId' => $elementId]);
 
         $data = [
             'element_id' => $elementId,
@@ -54,18 +59,17 @@ class FirstRunWizardDisableCommand extends ShopwareCommand
             'value' => serialize(false),
         ];
 
-        if ($valueid) {
+        if ($valueId) {
             $conn->update(
                 's_core_config_values',
                 $data,
-                ['id' => $valueid]
+                ['id' => $valueId]
             );
         } else {
             $conn->insert('s_core_config_values', $data);
         }
 
-        /** @var \Shopware\Components\CacheManager $cacheManager */
-        $cacheManager = $this->container->get(\Shopware\Components\CacheManager::class);
+        $cacheManager = $this->container->get(CacheManager::class);
         $cacheManager->clearConfigCache();
 
         $output->writeln('<info>First Run Wizard disabled</info>');

@@ -61,7 +61,7 @@ class CookieRemoveSubscriberTest extends TestCase
         $cookieRemoveSubscriber->onPostDispatch($this->getEventArgs($controller));
 
         // More code than allowed got executed if this fails
-        static::assertNotEmpty($controller->Response()->getCookies());
+        static::assertCount(2, $controller->Response()->getCookies());
     }
 
     public function testPostDispatchDoesNothingAllowAllModeCookieSet(): void

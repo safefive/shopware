@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -25,28 +28,17 @@ namespace Shopware\Components;
 
 use Enlight\Event\SubscriberInterface;
 use Enlight_Controller_Request_Request;
-use Enlight_Controller_Response_Response;
 use Enlight_Event_EventArgs;
-use Psr\Link\LinkProviderInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\WebLink\HttpHeaderSerializer;
-use Traversable;
 
 class AddLinkHeaderSubscriber implements SubscriberInterface
 {
-    /**
-     * @var HttpHeaderSerializer
-     */
-    private $serializer;
+    private HttpHeaderSerializer $serializer;
 
-    /**
-     * @var bool
-     */
-    private $pushEnabled;
+    private bool $pushEnabled;
 
-    /**
-     * @var WebLinkManager
-     */
-    private $webLinkManager;
+    private WebLinkManager $webLinkManager;
 
     public function __construct(
         HttpHeaderSerializer $headerSerializer,
@@ -70,8 +62,10 @@ class AddLinkHeaderSubscriber implements SubscriberInterface
 
     public function onDispatchLoopShutdown(Enlight_Event_EventArgs $args): void
     {
-        /** @var Enlight_Controller_Request_Request $request */
         $request = $args->get('request');
+        if (!$request instanceof Enlight_Controller_Request_Request) {
+            return;
+        }
 
         // Only use Server Push if it is enabled in the settings and the current module is "frontend"
         if (!$this->pushEnabled
@@ -79,20 +73,13 @@ class AddLinkHeaderSubscriber implements SubscriberInterface
             return;
         }
 
-        /** @var Enlight_Controller_Response_Response $response */
         $response = $args->get('response');
-
-        $linkProvider = $this->webLinkManager->getLinkProvider();
-        if (!$linkProvider instanceof LinkProviderInterface) {
+        if (!$response instanceof Response) {
             return;
         }
 
-        $links = $linkProvider->getLinks();
-        if (is_countable($links) && \count($links) === 0) {
-            return;
-        }
-
-        if ($links instanceof Traversable && iterator_count($links) === 0) {
+        $links = $this->webLinkManager->getLinkProvider()->getLinks();
+        if (empty($links)) {
             return;
         }
 

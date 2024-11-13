@@ -31,33 +31,22 @@ use sSystem as System;
 
 class ConditionalLineItemService implements ConditionalLineItemServiceInterface
 {
-    /**
-     * @var System
-     */
-    private $system;
+    private System $system;
 
-    /**
-     * @var Session
-     */
-    private $session;
+    private Session $session;
 
-    /**
-     * @var Config
-     */
-    private $config;
+    private Config $config;
 
-    /**
-     * @var BasketHelperInterface
-     */
-    private $basketHelper;
+    private BasketHelperInterface $basketHelper;
 
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(
-        System $sSystem, Session $session, Config $config, BasketHelperInterface $basketHelper, Connection $connection
+        System $sSystem,
+        Session $session,
+        Config $config,
+        BasketHelperInterface $basketHelper,
+        Connection $connection
     ) {
         $this->system = $sSystem;
         $this->session = $session;
@@ -68,9 +57,9 @@ class ConditionalLineItemService implements ConditionalLineItemServiceInterface
 
     public function addConditionalLineItem(string $name, string $orderNumber, float $price, float $tax, int $mode): void
     {
-        $currencyFactor = empty($this->system->sCurrency['factor']) ? 1 : $this->system->sCurrency['factor'];
+        $currencyFactor = (float) (empty($this->system->sCurrency['factor']) ? 1 : $this->system->sCurrency['factor']);
         $taxFree = empty($this->system->sUSERGROUPDATA['tax']) && !empty($this->system->sUSERGROUPDATA['id']);
-        $sessionId = $this->session->get('sessionId');
+        $sessionId = (string) $this->session->get('sessionId');
 
         if ($taxFree) {
             $netPrice = $price;
@@ -109,7 +98,7 @@ class ConditionalLineItemService implements ConditionalLineItemServiceInterface
                 ]
             );
 
-            $this->connection->insert('s_order_basket_attributes', ['basketID' => $this->connection->lastInsertId()]);
+            $this->connection->insert('s_order_basket_attributes', ['basketID' => (int) $this->connection->lastInsertId()]);
         }
     }
 }

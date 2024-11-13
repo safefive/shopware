@@ -30,7 +30,6 @@ use PHPUnit\Framework\TestCase;
 use Shopware\Bundle\MediaBundle\Adapters\LocalAdapterFactory;
 use Shopware\Bundle\SitemapBundle\Service\SitemapLister;
 use Shopware\Bundle\SitemapBundle\Service\SitemapNameGenerator;
-use Shopware\Bundle\SitemapBundle\Struct\Sitemap;
 use Shopware\Components\DependencyInjection\Container;
 use Shopware\Components\Filesystem\PublicUrlGenerator;
 
@@ -78,7 +77,7 @@ class SitemapListenerTest extends TestCase
         $sitemaps = $this->listener->getSitemaps(1);
         static::assertNotEmpty($sitemaps);
 
-        static::assertInstanceOf(Sitemap::class, $sitemaps[0]);
+        static::assertStringStartsWith('foo/', $sitemaps[0]->getFilename());
 
         // Subshop specific sitemaps
         static::assertEmpty($this->listener->getSitemaps(2));

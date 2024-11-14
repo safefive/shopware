@@ -3221,11 +3221,6 @@ parameters:
 			path: engine/Library/Enlight/Template/Plugins/block.stripLines.php
 
 		-
-			message: "#^Function smarty_block_stripLines\\(\\) never returns void so it can be removed from the return type\\.$#"
-			count: 1
-			path: engine/Library/Enlight/Template/Plugins/block.stripLines.php
-
-		-
 			message: "#^Method Smarty_Compiler_Config\\:\\:compile\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: engine/Library/Enlight/Template/Plugins/compiler.config.php
@@ -11856,36 +11851,6 @@ parameters:
 			path: engine/Shopware/Commands/DatabaseSetupCommand.php
 
 		-
-			message: "#^Method Shopware\\\\Commands\\\\FirstRunWizardDisableCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: engine/Shopware/Commands/FirstRunWizardDisableCommand.php
-
-		-
-			message: "#^Query error\\: Column \"s_core_config_values\\.element_id\" expects value type int, got type mixed$#"
-			count: 2
-			path: engine/Shopware/Commands/FirstRunWizardDisableCommand.php
-
-		-
-			message: "#^Query error\\: Column \"s_core_config_values\\.id\" expects value type int, got type mixed~0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null$#"
-			count: 1
-			path: engine/Shopware/Commands/FirstRunWizardDisableCommand.php
-
-		-
-			message: "#^Method Shopware\\\\Commands\\\\FirstRunWizardEnableCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: engine/Shopware/Commands/FirstRunWizardEnableCommand.php
-
-		-
-			message: "#^Query error\\: Column \"s_core_config_values\\.element_id\" expects value type int, got type mixed$#"
-			count: 2
-			path: engine/Shopware/Commands/FirstRunWizardEnableCommand.php
-
-		-
-			message: "#^Query error\\: Column \"s_core_config_values\\.id\" expects value type int, got type mixed~0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null$#"
-			count: 1
-			path: engine/Shopware/Commands/FirstRunWizardEnableCommand.php
-
-		-
 			message: "#^Method Shopware\\\\Commands\\\\GenerateAttributesCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: engine/Shopware/Commands/GenerateAttributesCommand.php
@@ -12684,11 +12649,6 @@ parameters:
 			message: "#^Method Shopware_Components_Acl\\:\\:createResource\\(\\) has parameter \\$privileges with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: engine/Shopware/Components/Acl.php
-
-		-
-			message: "#^Access to an undefined property Enlight_Controller_Response_Response\\:\\:\\$headers\\.$#"
-			count: 1
-			path: engine/Shopware/Components/AddLinkHeaderSubscriber.php
 
 		-
 			message: "#^Cannot call method setAcl\\(\\) on object\\|null\\.$#"
@@ -14124,21 +14084,6 @@ parameters:
 			message: "#^Query error\\: Argument \\#1 is not a constant array, got non\\-empty\\-array\\<string, mixed\\>&hasOffsetValue\\('basketID', int\\|string\\|false\\)$#"
 			count: 1
 			path: engine/Shopware/Components/Cart/CartPersistService.php
-
-		-
-			message: "#^Query error\\: Column \"s_order_basket\\.currencyFactor\" expects value type float\\|int, got type mixed~0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null$#"
-			count: 1
-			path: engine/Shopware/Components/Cart/ConditionalLineItemService.php
-
-		-
-			message: "#^Query error\\: Column \"s_order_basket\\.sessionID\" expects value type string\\|null, got type mixed$#"
-			count: 1
-			path: engine/Shopware/Components/Cart/ConditionalLineItemService.php
-
-		-
-			message: "#^Query error\\: Column \"s_order_basket_attributes\\.basketID\" expects value type int\\|null, got type int\\|string\\|false$#"
-			count: 1
-			path: engine/Shopware/Components/Cart/ConditionalLineItemService.php
 
 		-
 			message: "#^Parameter \\#4 \\$path of class Symfony\\\\Component\\\\HttpFoundation\\\\Cookie constructor expects string\\|null, string\\|false given\\.$#"
@@ -17956,47 +17901,12 @@ parameters:
 			path: engine/Shopware/Components/Plugin/Configuration/ReaderInterface.php
 
 		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:addCronjob\\(\\) has no return type specified\\.$#"
+			message: "#^Query error\\: Argument \\#1 is not a constant array, got array\\<string, mixed\\>&hasOffsetValue\\('pluginID', int\\)$#"
 			count: 1
 			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
 
 		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:addCronjob\\(\\) has parameter \\$cronjob with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:removeNotExistingEntries\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:removeNotExistingEntries\\(\\) has parameter \\$cronjobActions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:synchronize\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Method Shopware\\\\Components\\\\Plugin\\\\CronjobSynchronizer\\:\\:synchronize\\(\\) has parameter \\$cronjobs with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Query error\\: Argument \\#1 is not a constant array, got array\\<mixed~'active', mixed\\>&hasOffsetValue\\('pluginID', int\\)$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Query error\\: Argument \\#1 is not a constant array, got hasOffsetValue\\('end', DateTime\\)&hasOffsetValue\\('next', DateTime\\)&hasOffsetValue\\('pluginID', int\\)&non\\-empty\\-array$#"
-			count: 1
-			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
-
-		-
-			message: "#^Query error\\: Column \"s_crontab\\.id\" expects value type int, got type mixed~0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null$#"
+			message: "#^Query error\\: Argument \\#1 is not a constant array, got non\\-empty\\-array\\<string, mixed\\>&hasOffsetValue\\('end', DateTime\\)&hasOffsetValue\\('next', DateTime\\)&hasOffsetValue\\('pluginID', int\\)$#"
 			count: 1
 			path: engine/Shopware/Components/Plugin/CronjobSynchronizer.php
 

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -33,10 +36,6 @@ class ShortForeachResolver extends AbstractResolver
 
         if (!empty($matches)) {
             foreach ($matches as $match) {
-                if (!isset($match['arrayName'], $match['value'])) {
-                    continue;
-                }
-
                 $value = $this->getValueFromPath($context, $match['arrayName']);
 
                 if ($value === null) {
@@ -46,14 +45,10 @@ class ShortForeachResolver extends AbstractResolver
                 if (\count($value)) {
                     $key = array_keys($value)[0];
                     $context[$match['value']] = $value[$key];
-                    if (isset($match['key'])) {
-                        $context[$match['key']] = $key;
-                    }
+                    $context[$match['key']] = $key;
                 } else {
                     $context[$match['value']] = [];
-                    if (isset($match['key'])) {
-                        $context[$match['key']] = 0;
-                    }
+                    $context[$match['key']] = 0;
                 }
             }
         }

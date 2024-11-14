@@ -636,7 +636,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                             $valid = false;
                             break;
                         }
-                        $host = trim(substr($value, strpos($value, '@') + 1));
+                        $host = trim(substr($value, strpos($value, '@') + 1) ?: '');
                         if (empty($host) || !gethostbyname($host)) {
                             unset($value);
                             $valid = false;

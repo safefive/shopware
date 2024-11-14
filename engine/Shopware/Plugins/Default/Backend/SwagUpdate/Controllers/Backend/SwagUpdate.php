@@ -446,9 +446,7 @@ class Shopware_Controllers_Backend_SwagUpdate extends Shopware_Controllers_Backe
      */
     private function mapResult($result): array
     {
-        $mapper = new ExtJsResultMapper();
-
-        return $mapper->toExtJs($result);
+        return (new ExtJsResultMapper())->toExtJs($result);
     }
 
     private function getUserLanguage(stdClass $user): string
@@ -456,7 +454,7 @@ class Shopware_Controllers_Backend_SwagUpdate extends Shopware_Controllers_Backe
         $locale = $user->locale;
         $locale = strtolower($locale->getLocale());
 
-        return substr($locale, 0, 2);
+        return substr($locale, 0, 2) ?: 'en';
     }
 
     private function checkSecurityPlugin(): bool

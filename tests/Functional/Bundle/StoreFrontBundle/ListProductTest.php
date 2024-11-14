@@ -57,9 +57,7 @@ class ListProductTest extends TestCase
         static::assertNotEmpty($product->getVariantId());
         static::assertNotEmpty($product->getName());
         static::assertNotEmpty($product->getNumber());
-        static::assertNotEmpty($product->getManufacturer());
         static::assertNotEmpty($product->getTax());
-        static::assertNotEmpty($product->getUnit());
 
         static::assertInstanceOf(Unit::class, $product->getUnit());
         static::assertInstanceOf(Manufacturer::class, $product->getManufacturer());
@@ -67,14 +65,11 @@ class ListProductTest extends TestCase
         static::assertNotEmpty($product->getPrices());
         static::assertNotEmpty($product->getPriceRules());
         foreach ($product->getPrices() as $price) {
-            static::assertInstanceOf(Price::class, $price);
             static::assertInstanceOf(Unit::class, $price->getUnit());
             static::assertGreaterThanOrEqual(1, $price->getUnit()->getMinPurchase());
         }
 
-        foreach ($product->getPriceRules() as $price) {
-            static::assertInstanceOf(PriceRule::class, $price);
-        }
+        static::assertCount(3, $product->getPriceRules());
 
         static::assertInstanceOf(Price::class, $product->getCheapestPrice());
         static::assertInstanceOf(PriceRule::class, $product->getCheapestPriceRule());

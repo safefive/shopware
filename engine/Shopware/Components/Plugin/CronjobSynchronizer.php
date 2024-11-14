@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -30,10 +33,7 @@ use Shopware\Models\Plugin\Plugin;
 
 class CronjobSynchronizer
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -41,7 +41,11 @@ class CronjobSynchronizer
     }
 
     /**
+     * @param array<array<string, mixed>> $cronjobs
+     *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function synchronize(Plugin $plugin, array $cronjobs)
     {
@@ -53,9 +57,9 @@ class CronjobSynchronizer
     }
 
     /**
-     * @param array $cronjob
+     * @param array<string, mixed> $cronjob
      */
-    private function addCronjob(Plugin $plugin, $cronjob)
+    private function addCronjob(Plugin $plugin, array $cronjob): void
     {
         $cronjob['pluginID'] = $plugin->getId();
 
@@ -72,16 +76,16 @@ class CronjobSynchronizer
             $plugin->getId(),
         ];
 
-        $id = $this->connection->fetchColumn($selectStatement, $params);
+        $id = (int) $this->connection->fetchOne($selectStatement, $params);
 
         /*
          * Check if this cronjob's action is named without a preceding 'Shopware_CronJob_',
          * which is valid but after first run, every cronjob gets prefixed with that, so we might not have gotten
          * the id because we were asking for the wrong action.
          */
-        if (!$id && strpos($action, 'Shopware_CronJob_') !== 0) {
+        if (!$id && !str_starts_with($action, 'Shopware_CronJob_')) {
             $params[0] = 'Shopware_CronJob_' . $action;
-            $id = $this->connection->fetchColumn($selectStatement, $params);
+            $id = (int) $this->connection->fetchOne($selectStatement, $params);
         }
 
         if ($id) {
@@ -97,9 +101,9 @@ class CronjobSynchronizer
     }
 
     /**
-     * @param int $pluginId
+     * @param list<string> $cronjobActions
      */
-    private function removeNotExistingEntries($pluginId, array $cronjobActions)
+    private function removeNotExistingEntries(int $pluginId, array $cronjobActions): void
     {
         $builder = $this->connection->createQueryBuilder();
         $builder->delete('s_crontab');

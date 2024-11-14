@@ -39,6 +39,7 @@ This changelog references changes done in Shopware 5.7 patch versions.
 * Updated `symfony/polyfill-php81` to version 1.31.0
 * Updated `symfony/polyfill-php82` to version 1.31.0
 * Updated `symfony/polyfill-php83` to version 1.31.0
+* Updated `symfony/process` to version 5.4.46
 * Updated `symfony/http-kernel` to version 4.4.51
 * Updated `symfony/serializer` to version 5.4.45
 * Updated `voku/anti-xss` to version 4.1.42

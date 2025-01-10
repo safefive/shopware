@@ -24921,11 +24921,6 @@ parameters:
 			path: engine/Shopware/Core/sAdmin.php
 
 		-
-			message: "#^Binary operation \"\\-\" between int\\|string and 1 results in an error\\.$#"
-			count: 1
-			path: engine/Shopware/Core/sArticles.php
-
-		-
 			message: "#^Cannot call method getId\\(\\) on Shopware\\\\Bundle\\\\StoreFrontBundle\\\\Struct\\\\Media\\|null\\.$#"
 			count: 1
 			path: engine/Shopware/Core/sArticles.php
@@ -34497,11 +34492,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method getModuleName\\(\\) on Enlight_Controller_Request_Request\\|null\\.$#"
-			count: 1
-			path: engine/Shopware/Plugins/Default/Core/RestApi/Bootstrap.php
-
-		-
-			message: "#^Parameter \\#1 \\$encodedValue of static method Zend_Json\\:\\:decode\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: engine/Shopware/Plugins/Default/Core/RestApi/Bootstrap.php
 

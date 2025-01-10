@@ -1137,7 +1137,7 @@ class LegacyStructConverter
         $price = str_replace('.', ',', (string) $price); // Replace points with commas
         $commaPos = strpos($price, ',');
         if ($commaPos) {
-            $part = substr($price, $commaPos + 1, \strlen($price) - $commaPos);
+            $part = (string) substr($price, $commaPos + 1, \strlen($price) - $commaPos);
             switch (\strlen($part)) {
                 case 1:
                     $price .= '0';

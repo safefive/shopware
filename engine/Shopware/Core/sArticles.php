@@ -1155,7 +1155,7 @@ class sArticles implements Enlight_Hook
         $price = str_replace('.', ',', (string) $price); // Replaces points with commas
         $commaPos = strpos((string) $price, ',');
         if ($commaPos) {
-            $part = substr((string) $price, $commaPos + 1, \strlen((string) $price) - $commaPos);
+            $part = (string) substr((string) $price, $commaPos + 1, \strlen((string) $price) - $commaPos);
             switch (\strlen($part)) {
                 case 1:
                     $price .= '0';

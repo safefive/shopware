@@ -24,7 +24,7 @@ This changelog references changes done in Shopware 5.7 patch versions.
 * Updated `doctrine/common` to version 3.5.0
 * Updated `doctrine/inflector` to version 2.0.10
 * Updated `doctrine/orm` to version 2.15.5
-* Updated `doctrine/persistence` to version 3.3.3
+* Updated `doctrine/persistence` to version 3.4.0
 * Updated `friendsofphp/proxy-manager-lts` to version 1.0.18
 * Updated `google/cloud-storage` to version 1.39.0
 * Updated `guzzlehttp/guzzle` to version 7.9.2

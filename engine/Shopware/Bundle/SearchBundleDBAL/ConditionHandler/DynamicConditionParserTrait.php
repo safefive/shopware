@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -67,7 +68,7 @@ trait DynamicConditionParserTrait
             ->listTableColumns($table);
 
         if (empty($columns)) {
-            throw new RuntimeException(sprintf('Could not retrieve columns from "%s".', $table));
+            throw new RuntimeException(\sprintf('Could not retrieve columns from "%s".', $table));
         }
 
         $names = array_map(function (Column $column) {
@@ -75,7 +76,7 @@ trait DynamicConditionParserTrait
         }, $columns);
 
         if (!\array_key_exists(strtolower($field), $names)) {
-            throw new InvalidArgumentException(sprintf('Invalid column name "%s" specified.', $field), 1);
+            throw new InvalidArgumentException(\sprintf('Invalid column name "%s" specified.', $field), 1);
         }
 
         $validOperators = [
@@ -102,12 +103,12 @@ trait DynamicConditionParserTrait
          * When an operator is not specified, by default, return all results that are not null
          */
         if (empty($operator)) {
-            throw new InvalidArgumentException(sprintf('Must specify an operator, please use one of: %s', implode(', ', $validOperators)), 3);
+            throw new InvalidArgumentException(\sprintf('Must specify an operator, please use one of: %s', implode(', ', $validOperators)), 3);
         }
 
         // Identify each field placeholder value with table alias and a hash of condition properties
-        $boundParamName = sprintf(':%s_%s', $tableAlias, md5($field . $operator . json_encode($value)));
-        $field = sprintf('%s.%s', $tableAlias, $field);
+        $boundParamName = \sprintf(':%s_%s', $tableAlias, md5($field . $operator . json_encode($value)));
+        $field = \sprintf('%s.%s', $tableAlias, $field);
 
         switch (true) {
             case $operator === Condition::OPERATOR_EQ:
@@ -202,7 +203,7 @@ trait DynamicConditionParserTrait
                 break;
 
             default:
-                throw new InvalidArgumentException(sprintf('Invalid operator specified, please use one of: %s', implode(', ', $validOperators)), 3);
+                throw new InvalidArgumentException(\sprintf('Invalid operator specified, please use one of: %s', implode(', ', $validOperators)), 3);
         }
     }
 }

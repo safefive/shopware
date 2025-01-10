@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -29,6 +30,6 @@ class DuplicateFilesystemFactoryException extends Exception
 {
     public static function fromAdapterType($type)
     {
-        return new self(sprintf('The type of factory "%s" must be unique.', $type));
+        return new self(\sprintf('The type of factory "%s" must be unique.', $type));
     }
 }

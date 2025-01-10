@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -111,7 +112,7 @@ class SnippetsToSqlCommand extends ShopwareCommand implements CompletionAwareInt
             return 1;
         }
 
-        $output->writeln(sprintf('<info>Writing to file "%s".</info>', $input->getArgument('file')));
+        $output->writeln(\sprintf('<info>Writing to file "%s".</info>', $input->getArgument('file')));
 
         /** @var QueryHandler $queryLoader */
         $queryLoader = $this->container->get('shopware.snippet_query_handler');

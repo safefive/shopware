@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -320,7 +321,7 @@ class Shopware_Plugins_Core_HttpCache_Bootstrap extends Shopware_Components_Plug
             return null;
         }
 
-        return sprintf(
+        return \sprintf(
             '%s://%s%s/',
             $shop->getSecure() ? 'https' : 'http',
             $shop->getHost(),
@@ -380,7 +381,7 @@ class Shopware_Plugins_Core_HttpCache_Bootstrap extends Shopware_Components_Plug
             $params['nocache'] = 1;
         }
 
-        $url = sprintf('%s/?%s', $request->getBaseUrl(), http_build_query($params, '', '&'));
+        $url = \sprintf('%s/?%s', $request->getBaseUrl(), http_build_query($params, '', '&'));
 
         return '<esi:include src="' . $url . '" />';
     }

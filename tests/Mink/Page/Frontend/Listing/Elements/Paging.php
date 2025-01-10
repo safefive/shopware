@@ -76,7 +76,7 @@ class Paging extends Element implements HelperSelectorInterface
 
             if ($result !== true) {
                 Helper::throwException(
-                    [sprintf('There is no more "%s" button! (after %d steps)', $direction, $i)]
+                    [\sprintf('There is no more "%s" button! (after %d steps)', $direction, $i)]
                 );
             }
 
@@ -91,7 +91,7 @@ class Paging extends Element implements HelperSelectorInterface
     {
         while (!$this->hasLink($page)) {
             if ($this->noElement('next', false)) {
-                $message = sprintf('Page %d was not found!', $page);
+                $message = \sprintf('Page %d was not found!', $page);
                 Helper::throwException($message);
             }
             $this->moveDirection('next');
@@ -119,7 +119,7 @@ class Paging extends Element implements HelperSelectorInterface
         }
 
         if ($throwException) {
-            $message = sprintf('The Paging Link "%s" exists, but should not!', $locator);
+            $message = \sprintf('The Paging Link "%s" exists, but should not!', $locator);
             Helper::throwException($message);
         }
 

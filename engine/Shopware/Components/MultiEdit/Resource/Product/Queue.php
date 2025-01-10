@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -148,7 +149,7 @@ class Queue
             /** @var QueueModel|null $queue */
             $queue = $entityManager->find(QueueModel::class, $queueId);
             if (!$queue) {
-                throw new RuntimeException(sprintf('Queue with ID %s not found', $queueId));
+                throw new RuntimeException(\sprintf('Queue with ID %s not found', $queueId));
             }
         } else {
             $newBackup = true;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -85,7 +86,7 @@ class DefaultGenerator implements GeneratorInterface
 
         foreach ($params as $key => $value) {
             if (\is_object($value)) {
-                trigger_error(sprintf('Using objects as params in %s:%s is deprecated since Shopware 5.6 and will result in an exception with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+                trigger_error(\sprintf('Using objects as params in %s:%s is deprecated since Shopware 5.6 and will result in an exception with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
             }
 
             $route[] = $key;

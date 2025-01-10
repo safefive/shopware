@@ -79,6 +79,6 @@ VALUES
 (@parent, 'captchaMethod', '%s', 'Captcha Methode', 'Wählen Sie hier eine Methode aus, wie die Formulare gegen Spam-Bots geschützt werden sollen', 'combo', 1, 0, 1, 'a:5:{s:8:"editable";b:0;s:10:"valueField";s:2:"id";s:12:"displayField";s:11:"displayname";s:13:"triggerAction";s:3:"all";s:5:"store";s:12:"base.Captcha";}'),
 (@parent, 'noCaptchaAfterLogin', 'b:0;', 'Nach Login ausblenden', 'Nach dem Login können Kunden Formulare ohne Captcha-Überprüfung absenden.', 'checkbox', 0, 1, 1, '');
 EOD;
-        $this->addSql(sprintf($sql, serialize($captchaMethod)));
+        $this->addSql(\sprintf($sql, serialize($captchaMethod)));
     }
 }

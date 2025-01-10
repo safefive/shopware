@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -46,7 +47,7 @@ class OpenSSLVerifier
     public function __construct($publicKey)
     {
         if (!is_readable($publicKey)) {
-            throw new InvalidArgumentException(sprintf('Public keyfile "%s" not readable', $publicKey));
+            throw new InvalidArgumentException(\sprintf('Public keyfile "%s" not readable', $publicKey));
         }
 
         $this->publicKeyPath = $publicKey;
@@ -85,7 +86,7 @@ class OpenSSLVerifier
         }
         while ($errors[] = openssl_error_string()) {
         }
-        throw new RuntimeException(sprintf("Error during private key read: \n%s", implode("\n", $errors)));
+        throw new RuntimeException(\sprintf("Error during private key read: \n%s", implode("\n", $errors)));
     }
 
     /**
@@ -103,7 +104,7 @@ class OpenSSLVerifier
         if ($keyResource === false) {
             while ($errors[] = openssl_error_string()) {
             }
-            throw new RuntimeException(sprintf("Error during public key read: \n%s", implode("\n", $errors)));
+            throw new RuntimeException(\sprintf("Error during public key read: \n%s", implode("\n", $errors)));
         }
 
         $this->keyResource = $keyResource;

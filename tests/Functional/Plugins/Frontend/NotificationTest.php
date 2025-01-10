@@ -202,7 +202,7 @@ class NotificationTest extends Enlight_Components_Test_Plugin_TestCase
 
     private function saveNotifyCaptcha(string $value): void
     {
-        $formattedValue = sprintf('s:%d:"%s";', \strlen($value), $value);
+        $formattedValue = \sprintf('s:%d:"%s";', \strlen($value), $value);
         $this->getContainer()->get(Connection::class)->executeQuery(
             'UPDATE s_core_config_elements SET value = ? WHERE name = ?',
             [$formattedValue, 'notificationCaptchaConfig']

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -361,14 +362,14 @@ class Installer
                 'template' => $theme->getTemplate(),
             ]);
             if (!$template instanceof Template) {
-                throw new Exception(sprintf('Template of theme %s not found', $theme->getTemplate()));
+                throw new Exception(\sprintf('Template of theme %s not found', $theme->getTemplate()));
             }
 
             $parent = $this->repository->findOneBy([
                 'template' => $theme->getExtend(),
             ]);
             if (!$parent instanceof Template) {
-                throw new Exception(sprintf('Parent %s of theme %s not found', $theme->getExtend(), $theme->getTemplate()));
+                throw new Exception(\sprintf('Parent %s of theme %s not found', $theme->getExtend(), $theme->getTemplate()));
             }
 
             $template->setParent($parent);

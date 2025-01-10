@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -471,7 +472,7 @@ class sOrder implements Enlight_Hook
             $affectedRows = $this->db->insert('s_order', $data);
             $orderID = $this->db->lastInsertId();
         } catch (Exception $e) {
-            throw new Enlight_Exception(sprintf('##sOrder-sTemporaryOrder-#01:%s', $e->getMessage()), 0, $e);
+            throw new Enlight_Exception(\sprintf('##sOrder-sTemporaryOrder-#01:%s', $e->getMessage()), 0, $e);
         }
         if (!$affectedRows || !$orderID) {
             throw new Enlight_Exception('##sOrder-sTemporaryOrder-#01: No rows affected or no order id saved', 0);
@@ -524,7 +525,7 @@ class sOrder implements Enlight_Hook
                 $this->db->insert('s_order_details', $data);
                 $orderDetailId = $this->db->lastInsertId();
             } catch (Exception $e) {
-                throw new Enlight_Exception(sprintf('##sOrder-sTemporaryOrder-Position-#02:%s', $e->getMessage()), 0, $e);
+                throw new Enlight_Exception(\sprintf('##sOrder-sTemporaryOrder-Position-#02:%s', $e->getMessage()), 0, $e);
             }
 
             // Create order detail attributes
@@ -645,11 +646,11 @@ class sOrder implements Enlight_Hook
             $this->db->commit();
         } catch (Exception $e) {
             $this->db->rollBack();
-            throw new Enlight_Exception(sprintf('Shopware Order Fatal-Error %s :%s', $_SERVER['HTTP_HOST'], $e->getMessage()), 0, $e);
+            throw new Enlight_Exception(\sprintf('Shopware Order Fatal-Error %s :%s', $_SERVER['HTTP_HOST'], $e->getMessage()), 0, $e);
         }
 
         if (!$affectedRows || !$orderID) {
-            throw new Enlight_Exception(sprintf('Shopware Order Fatal-Error %s : No rows affected or no order id created.', $_SERVER['HTTP_HOST']), 0);
+            throw new Enlight_Exception(\sprintf('Shopware Order Fatal-Error %s : No rows affected or no order id created.', $_SERVER['HTTP_HOST']), 0);
         }
 
         try {
@@ -708,7 +709,7 @@ class sOrder implements Enlight_Hook
                 VALUES (%d, %s, %d, %s, %f, %d, %s, %d, %s, %d, %d, %d, %f, %s, %s, %s, %s)
             ';
 
-            $sql = sprintf(
+            $sql = \sprintf(
                 $preparedQuery,
                 $orderID,
                 $this->db->quote((string) $orderNumber),
@@ -754,7 +755,7 @@ class sOrder implements Enlight_Hook
                 $this->db->executeUpdate($sql);
                 $orderdetailsID = (int) $this->db->lastInsertId();
             } catch (Exception $e) {
-                throw new Enlight_Exception(sprintf('Shopware Order Fatal-Error %s :%s', $_SERVER['HTTP_HOST'], $e->getMessage()), 0, $e);
+                throw new Enlight_Exception(\sprintf('Shopware Order Fatal-Error %s :%s', $_SERVER['HTTP_HOST'], $e->getMessage()), 0, $e);
             }
 
             $this->sBasketData[CartKey::POSITIONS][$key]['orderDetailId'] = $orderdetailsID;
@@ -2103,7 +2104,7 @@ EOT;
      */
     private function logOrderMailException(Exception $e, $orderNumber, $email)
     {
-        $message = sprintf(
+        $message = \sprintf(
             'Could not send order mail for ordernumber %s to address %s',
             $orderNumber,
             $email

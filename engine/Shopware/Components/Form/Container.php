@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -30,7 +31,7 @@ use Shopware\Components\Form\Interfaces\Element;
 class Container extends Base implements ContainerInterface
 {
     /**
-     * @var ArrayCollection<\Shopware\Components\Form\Interfaces\Element>
+     * @var ArrayCollection<Element>
      */
     protected $elements;
 
@@ -69,7 +70,7 @@ class Container extends Base implements ContainerInterface
     }
 
     /**
-     * @param ArrayCollection<\Shopware\Components\Form\Interfaces\Element> $elements
+     * @param ArrayCollection<Element> $elements
      */
     public function setElements($elements)
     {
@@ -77,7 +78,7 @@ class Container extends Base implements ContainerInterface
     }
 
     /**
-     * @return ArrayCollection<\Shopware\Components\Form\Interfaces\Element>
+     * @return ArrayCollection<Element>
      */
     public function getElements()
     {

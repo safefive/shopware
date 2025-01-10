@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -61,6 +62,6 @@ class ResultMapper
             ];
         }
 
-        throw new Exception(sprintf('Result type %s can not be mapped.', \get_class($result)));
+        throw new Exception(\sprintf('Result type %s can not be mapped.', \get_class($result)));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -46,8 +47,8 @@ class Migrations_Migration1444 extends Shopware\Components\Migrations\AbstractMi
 
     public function up($modus)
     {
-        $this->addSql(sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_mailer"', serialize($this->mailer)));
-        $this->addSql(sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_smtpsecure"', serialize($this->mailerSecure)));
-        $this->addSql(sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_auth"', serialize($this->mailerAuth)));
+        $this->addSql(\sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_mailer"', serialize($this->mailer)));
+        $this->addSql(\sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_smtpsecure"', serialize($this->mailerSecure)));
+        $this->addSql(\sprintf('UPDATE s_core_config_elements SET options = \'%s\', type = "combo", description = NULL WHERE `name` = "mailer_auth"', serialize($this->mailerAuth)));
     }
 }

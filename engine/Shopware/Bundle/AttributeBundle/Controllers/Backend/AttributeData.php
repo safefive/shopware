@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -134,7 +135,7 @@ class Shopware_Controllers_Backend_AttributeData extends Shopware_Controllers_Ba
             $arrayStore = json_decode($column->getArrayStore(), true);
             if (!empty($arrayStore)) {
                 foreach ($arrayStore as &$option) {
-                    $optionKey = sprintf('%soptions_store_%s', $key, strtolower($option['key']));
+                    $optionKey = \sprintf('%soptions_store_%s', $key, strtolower($option['key']));
                     $option['value'] = $snippets->get($optionKey, $option['value']);
                 }
                 unset($option);

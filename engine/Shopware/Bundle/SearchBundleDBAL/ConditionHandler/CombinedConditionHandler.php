@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -89,6 +90,6 @@ class CombinedConditionHandler implements ConditionHandlerInterface
             }
         }
 
-        throw new RuntimeException(sprintf('Condition %s not supported', \get_class($condition)));
+        throw new RuntimeException(\sprintf('Condition %s not supported', \get_class($condition)));
     }
 }

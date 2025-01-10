@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -75,12 +76,12 @@ class MediaReplaceService implements MediaReplaceServiceInterface
         $media = $this->modelManager->find(Media::class, $mediaId);
 
         if ($media === null) {
-            throw new InvalidArgumentException(sprintf('Media with id %s not found', $mediaId));
+            throw new InvalidArgumentException(\sprintf('Media with id %s not found', $mediaId));
         }
 
         $filePath = $file->getRealPath();
         if (!\is_string($filePath)) {
-            throw new UnexpectedValueException(sprintf('Could not get path of file "%s"', $file->getFilename()));
+            throw new UnexpectedValueException(\sprintf('Could not get path of file "%s"', $file->getFilename()));
         }
 
         $uploadedFileExtension = $this->getExtension($file);
@@ -102,7 +103,7 @@ class MediaReplaceService implements MediaReplaceServiceInterface
             $this->mediaService->write($media->getPath(), $fileContent);
         } else {
             $pathInfo = pathinfo($media->getPath());
-            $newFileName = sprintf('%s/%s.%s', $pathInfo['dirname'] ?? '', $pathInfo['filename'], $newExtension);
+            $newFileName = \sprintf('%s/%s.%s', $pathInfo['dirname'] ?? '', $pathInfo['filename'], $newExtension);
             $this->mediaService->delete($media->getPath());
             $this->mediaService->write($newFileName, $fileContent);
             $this->modelManager->getConnection()->update('s_articles_img', [

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -157,7 +158,7 @@ class ListingPriceHelper
         $template = 'IFNULL(customerPrice.%s, defaultPrice.%s) as %s';
         $switch = [];
         foreach ($this->getPriceColumns() as $column) {
-            $switch[] = sprintf($template, $column, $column, $column);
+            $switch[] = \sprintf($template, $column, $column, $column);
         }
 
         $switch[] = 'defaultPrice.articleID as product_id';
@@ -176,10 +177,10 @@ class ListingPriceHelper
         $template = 'defaultPrice.%s';
         $switch = [];
         foreach ($this->getPriceColumns() as $column) {
-            $switch[] = sprintf($template, $column);
+            $switch[] = \sprintf($template, $column);
         }
-        $switch[] = sprintf($template, 'articleID as product_id');
-        $switch[] = sprintf($template, 'articledetailsID as variant_id');
+        $switch[] = \sprintf($template, 'articleID as product_id');
+        $switch[] = \sprintf($template, 'articledetailsID as variant_id');
 
         return implode(',', $switch);
     }

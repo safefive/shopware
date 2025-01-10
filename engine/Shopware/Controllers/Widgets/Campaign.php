@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -44,7 +45,7 @@ class Shopware_Controllers_Widgets_Campaign extends Shopware_Controllers_Widgets
      */
     public function getEmotion($repository)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $emotionId = (int) $this->Request()->getParam('emotionId');
         $query = $repository->getEmotionById($emotionId);

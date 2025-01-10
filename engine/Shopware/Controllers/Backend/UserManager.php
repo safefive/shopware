@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -388,7 +389,7 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
             $this->View()->assign([
                 'success' => false,
                 'data' => $this->Request()->getParams(),
-                'message' => sprintf('User with ID "%s" not found', $userID),
+                'message' => \sprintf('User with ID "%s" not found', $userID),
             ]);
 
             return;

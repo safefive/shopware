@@ -581,7 +581,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
             try {
                 $mail = $this->getMailForOrder($order->getId(), $status->getId());
             } catch (Exception $e) {
-                $warning = sprintf(
+                $warning = \sprintf(
                     $namespace->get('warning/mail_creation_failed'),
                     $status->getName(),
                     $e->getMessage()
@@ -898,7 +898,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
                 $modelManager->flush($order);
             } catch (Exception $e) {
                 $data['success'] = false;
-                $data['errorMessage'] = sprintf(
+                $data['errorMessage'] = \sprintf(
                     $namespace->get('save_order_failed', 'Error when saving the order. Error: %s'),
                     $e->getMessage()
                 );
@@ -930,7 +930,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
             } catch (Exception $e) {
                 $data['mail'] = null;
                 $data['success'] = false;
-                $data['errorMessage'] = sprintf(
+                $data['errorMessage'] = \sprintf(
                     $namespace->get('send_mail_failed', 'Error when sending mail. Error: %s'),
                     $e->getMessage()
                 );
@@ -984,7 +984,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
         $models = $this->getOrderDocumentsQuery($data->orders, $data->docType)->getResult();
         foreach ($models as $model) {
             foreach ($model->getDocuments() as $document) {
-                $file = $this->downloadFileFromFilesystem(sprintf('documents/%s.pdf', $document->getHash()));
+                $file = $this->downloadFileFromFilesystem(\sprintf('documents/%s.pdf', $document->getHash()));
                 if ($file !== null) {
                     $files[] = $file;
                 }
@@ -1109,7 +1109,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
                 ->setParameter('documentId', $documentId)
                 ->execute();
 
-            $file = sprintf('documents/%s.pdf', $documentHash);
+            $file = \sprintf('documents/%s.pdf', $documentHash);
             if ($filesystem->has($file)) {
                 $filesystem->delete($file);
             }
@@ -1248,7 +1248,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
     public function openPdfAction()
     {
         $filesystem = $this->container->get('shopware.filesystem.private');
-        $file = sprintf('documents/%s.pdf', basename($this->Request()->getParam('id')));
+        $file = \sprintf('documents/%s.pdf', basename($this->Request()->getParam('id')));
 
         if ($filesystem->has($file) === false) {
             $this->View()->assign([
@@ -1286,7 +1286,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
             $this->View()->assign([
                 'success' => false,
                 'data' => $this->Request()->getParams(),
-                'message' => sprintf('Could not open file: %s', $file),
+                'message' => \sprintf('Could not open file: %s', $file),
             ]);
 
             return;
@@ -1436,7 +1436,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
      */
     protected function getDocumentRepository()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if (self::$documentRepository === null) {
             self::$documentRepository = $this->getManager()->getRepository(Document::class);
@@ -1812,7 +1812,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
         $filesystem = $this->container->get('shopware.filesystem.private');
 
         foreach ($attachments as $attachment) {
-            $filePath = sprintf('documents/%s.pdf', $attachment['hash']);
+            $filePath = \sprintf('documents/%s.pdf', $attachment['hash']);
             $fileName = $this->getFileName($orderId, (int) $attachment['type'][0]['id']);
 
             if ($filesystem->has($filePath) === false) {
@@ -2313,7 +2313,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
         if (!\is_resource($source)) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('Could not read from path: %s', $path),
+                'message' => \sprintf('Could not read from path: %s', $path),
             ]);
 
             return null;
@@ -2322,7 +2322,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
         if (!\is_resource($downstream)) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('Could not read from path: %s', $tmpFile),
+                'message' => \sprintf('Could not read from path: %s', $tmpFile),
             ]);
 
             return null;

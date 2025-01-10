@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -76,7 +77,7 @@ class CustomerGroup extends Resource
         $result = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$result) {
-            throw new NotFoundException(sprintf('CustomerGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('CustomerGroup by id %d not found', $id));
         }
 
         return $result;
@@ -168,7 +169,7 @@ class CustomerGroup extends Resource
         $result = $this->getRepository()->find($id);
 
         if (!$result) {
-            throw new NotFoundException(sprintf('CustomerGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('CustomerGroup by id %d not found', $id));
         }
 
         $params = $this->prepareCustomerGroupData($params, $result);
@@ -210,7 +211,7 @@ class CustomerGroup extends Resource
         $result = $this->getRepository()->find($id);
 
         if (!$result) {
-            throw new NotFoundException(sprintf('CustomerGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('CustomerGroup by id %d not found', $id));
         }
 
         $this->getManager()->remove($result);
@@ -269,20 +270,20 @@ class CustomerGroup extends Resource
             }
 
             if (empty($params['name'])) {
-                throw new CustomValidationException(sprintf("Parameter '%s' is missing", 'name'));
+                throw new CustomValidationException(\sprintf("Parameter '%s' is missing", 'name'));
             }
 
             if (empty($params['key'])) {
-                throw new CustomValidationException(sprintf("Parameter '%s' is missing", 'key'));
+                throw new CustomValidationException(\sprintf("Parameter '%s' is missing", 'key'));
             }
         }
 
         if (isset($params['name']) && empty($params['name'])) {
-            throw new CustomValidationException(sprintf("Parameter '%s' is missing", 'name'));
+            throw new CustomValidationException(\sprintf("Parameter '%s' is missing", 'name'));
         }
 
         if (isset($params['key']) && empty($params['key'])) {
-            throw new CustomValidationException(sprintf("Parameter '%s' is missing", 'key'));
+            throw new CustomValidationException(\sprintf("Parameter '%s' is missing", 'key'));
         }
 
         $discountRepository = $this->getManager()->getRepository(Discount::class);

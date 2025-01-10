@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -119,7 +120,7 @@ class StoreXmlValueParserTest extends TestCase
     private function getStoreElement(int $elementIndex): DOMElement
     {
         $stores = $this->xpath->query(
-            sprintf(
+            \sprintf(
                 '//config/elements/element[%s]/store',
                 $elementIndex
             )

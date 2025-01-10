@@ -49,9 +49,9 @@ class SitemapIndexXml extends Page
             Helper::throwException('Sitemap is missing in /sitemap_index.xml');
         }
 
-        $expected = sprintf('/web/sitemap/shop-1/%s', $links[0]['name']);
+        $expected = \sprintf('/web/sitemap/shop-1/%s', $links[0]['name']);
         if (!str_contains($xml['sitemap']['loc'], $expected)) {
-            Helper::throwException(sprintf('Sitemap url does not match excepted, excepted: %s, given %s', $expected, $xml['sitemap']['loc']));
+            Helper::throwException(\sprintf('Sitemap url does not match excepted, excepted: %s, given %s', $expected, $xml['sitemap']['loc']));
         }
     }
 }

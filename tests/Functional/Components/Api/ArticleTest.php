@@ -2880,7 +2880,7 @@ class ArticleTest extends TestCase
 
         static::assertNull(
             $productRepository->find($createdProductId),
-            sprintf(
+            \sprintf(
                 'Deletion of the product (id = %s) itself failed.',
                 $createdProductId
             )
@@ -2892,7 +2892,7 @@ class ArticleTest extends TestCase
             $detailRepository->findBy([
                 'id' => $createdDetailIds,
             ]),
-            sprintf(
+            \sprintf(
                 'Deletion of the product\'s (id = %s) details (%s) failed.',
                 $createdProductId,
                 implode(', ', $createdDetailIds)
@@ -2901,7 +2901,7 @@ class ArticleTest extends TestCase
         static::assertCount(
             0,
             $attributeRepository->findBy(['id' => $createdAttributeIds]),
-            sprintf(
+            \sprintf(
                 "Deletion of the product's (id = %s) details' (%s) attributes (%s) failed.",
                 $createdProductId,
                 implode(', ', $createdDetailIds),

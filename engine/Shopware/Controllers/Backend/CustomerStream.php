@@ -133,7 +133,7 @@ class Shopware_Controllers_Backend_CustomerStream extends Shopware_Controllers_B
         $this->View()->assign([
             'success' => true,
             'finish' => false,
-            'text' => sprintf($snippets->get('refresh_stream'), $handled, $total),
+            'text' => \sprintf($snippets->get('refresh_stream'), $handled, $total),
             'progress' => $handled / $total,
         ]);
     }
@@ -193,7 +193,7 @@ class Shopware_Controllers_Backend_CustomerStream extends Shopware_Controllers_B
             'success' => true,
             'finish' => false,
             'params' => ['lastId' => (int) array_pop($ids)],
-            'text' => sprintf($snippets->get('refresh_customer'), $handled, $total),
+            'text' => \sprintf($snippets->get('refresh_customer'), $handled, $total),
             'progress' => $handled / $total,
         ]);
     }

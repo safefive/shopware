@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -126,7 +127,7 @@ class Backup
             }
 
             if (!is_dir($this->backupPath)) {
-                throw new RuntimeException(sprintf('Could not find nor create "%s"', $this->backupPath));
+                throw new RuntimeException(\sprintf('Could not find nor create "%s"', $this->backupPath));
             }
         }
     }
@@ -232,7 +233,7 @@ class Backup
         $backup = $entityManager->find(BackupModel::class, $id);
 
         if (!$backup instanceof BackupModel) {
-            throw new RuntimeException(sprintf('Backup by id %d not found', $id));
+            throw new RuntimeException(\sprintf('Backup by id %d not found', $id));
         }
 
         $path = $backup->getPath();
@@ -306,7 +307,7 @@ class Backup
         $backup = $entityManager->find(BackupModel::class, $id);
 
         if (!$backup) {
-            throw new RuntimeException(sprintf('Backup by id %d not found', $id));
+            throw new RuntimeException(\sprintf('Backup by id %d not found', $id));
         }
 
         $dir = \dirname($backup->getPath());
@@ -459,7 +460,7 @@ class Backup
         $prefix = $this->affectedTables[$table]['prefix'];
 
         if (!$prefix) {
-            throw new RuntimeException(sprintf('Empty prefix for %s', $table));
+            throw new RuntimeException(\sprintf('Empty prefix for %s', $table));
         }
 
         return $prefix;
@@ -477,7 +478,7 @@ class Backup
         $columns = $this->affectedTables[$table]['columns'];
 
         if (!$columns) {
-            throw new RuntimeException(sprintf('Empty column for %s', $table));
+            throw new RuntimeException(\sprintf('Empty column for %s', $table));
         }
 
         return $columns;
@@ -548,7 +549,7 @@ class Backup
 
         $fileHandle = fopen($outFileData, 'w');
         if (!\is_resource($fileHandle)) {
-            throw new RuntimeException(sprintf('Could not open stream at "%s"', $outFileData));
+            throw new RuntimeException(\sprintf('Could not open stream at "%s"', $outFileData));
         }
 
         $columns = $this->getAffectedColumns($table);
@@ -654,7 +655,7 @@ class Backup
         $zip = new ZipArchive();
 
         if ($zip->open($zipPath, ZipArchive::CREATE) !== true) {
-            throw new RuntimeException(sprintf('Could not open %s, please check the permissions.', $zipPath));
+            throw new RuntimeException(\sprintf('Could not open %s, please check the permissions.', $zipPath));
         }
 
         $files = $this->getDirectoryList($this->outputPath);
@@ -699,7 +700,7 @@ class Backup
         $zip->open($path);
         $success = $zip->extractTo($dir);
         if (!$success) {
-            throw new RuntimeException(sprintf('Could not extract %s to %s', $path, $dir));
+            throw new RuntimeException(\sprintf('Could not extract %s to %s', $path, $dir));
         }
         $zip->close();
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -148,6 +149,6 @@ class EntitySearchSubscriber implements SubscriberInterface
             }
         }
 
-        throw new RuntimeException(sprintf('Type %s needs a label', $type->getName()));
+        throw new RuntimeException(\sprintf('Type %s needs a label', $type->getName()));
     }
 }

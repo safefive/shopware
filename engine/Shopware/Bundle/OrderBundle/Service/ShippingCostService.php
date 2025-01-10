@@ -52,7 +52,7 @@ class ShippingCostService implements ShippingCostServiceInterface
                 return round((float) ($basket['calculation_value_' . $dispatchData['id']] ?? 1.0), 2);
         }
 
-        throw new RuntimeException(sprintf('Shipping calculation type "%d" not supported', $calculationType));
+        throw new RuntimeException(\sprintf('Shipping calculation type "%d" not supported', $calculationType));
     }
 
     public function calculateDispatchSurcharge(array $basket, array $dispatch): float
@@ -61,7 +61,7 @@ class ShippingCostService implements ShippingCostServiceInterface
 
         $calculationType = (int) $dispatch['calculation'];
         if (!\in_array($calculationType, Dispatch::CALCULATIONS, true)) {
-            throw new RuntimeException(sprintf('Invalid shipping calculation type "%d"', $calculationType));
+            throw new RuntimeException(\sprintf('Invalid shipping calculation type "%d"', $calculationType));
         }
 
         $from = $this->getShippingCostMultiplier($calculationType, $basket, $dispatch);
@@ -74,7 +74,7 @@ class ShippingCostService implements ShippingCostServiceInterface
             LIMIT 1', [$from, $dispatch['id']]);
 
         if ($result === false) {
-            throw new RuntimeException(sprintf('Shipping calculation not found for dispatch ID "%d" and from value of "%d"', $dispatch['id'], $from));
+            throw new RuntimeException(\sprintf('Shipping calculation not found for dispatch ID "%d" and from value of "%d"', $dispatch['id'], $from));
         }
         $surcharge += $result['value'];
         if (!empty($result['factor'])) {

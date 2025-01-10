@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -74,7 +75,7 @@ class EntityTransformer implements DataTransformerInterface
             // causes a validation error
             // this message is not shown to the user
             // see the invalid_message option
-            throw new TransformationFailedException(sprintf('An entity with id "%s" does not exist! (%s)', $entityId, $this->entityName));
+            throw new TransformationFailedException(\sprintf('An entity with id "%s" does not exist! (%s)', $entityId, $this->entityName));
         }
 
         return $entity;

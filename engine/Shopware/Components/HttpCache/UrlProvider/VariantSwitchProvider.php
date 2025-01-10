@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -49,7 +50,7 @@ class VariantSwitchProvider extends ProductProvider
                   ORDER BY opt.group_id ASC
                   SEPARATOR '&')
               AS 'link'"])
-            ->where(sprintf('article.id IN (%s)', $this->prepareSubQuery()->getSQL()))
+            ->where(\sprintf('article.id IN (%s)', $this->prepareSubQuery()->getSQL()))
             ->groupBy('details.ordernumber')
             ->orderBy('details.ordernumber', 'ASC')
             ->setParameter(':shop', $context->getShopId());
@@ -92,7 +93,7 @@ class VariantSwitchProvider extends ProductProvider
     {
         return (int) $this->getBaseQuery()
             ->addSelect(['COUNT(DISTINCT details.ordernumber)'])
-            ->where(sprintf('article.id IN (%s)', $this->prepareSubQuery()->getSQL()))
+            ->where(\sprintf('article.id IN (%s)', $this->prepareSubQuery()->getSQL()))
             ->setParameter(':shop', $context->getShopId())
             ->execute()
             ->fetchColumn();

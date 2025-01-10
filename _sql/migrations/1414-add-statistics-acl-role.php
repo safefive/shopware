@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -30,7 +31,7 @@ class Migrations_Migration1414 extends Shopware\Components\Migrations\AbstractMi
 
         // Fetch id for later use
         $this->addSql(
-            sprintf(
+            \sprintf(
                 'SET @resourceId = (%s);',
                 "SELECT id FROM `s_core_acl_resources` WHERE name = 'benchmark' LIMIT 1"
             )

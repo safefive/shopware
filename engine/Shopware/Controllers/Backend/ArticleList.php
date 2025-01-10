@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -506,13 +507,13 @@ class Shopware_Controllers_Backend_ArticleList extends Shopware_Controllers_Back
         $offset = $this->Request()->getParam('offset', 0);
         $filterArray = json_decode($filterArray, true);
         if ($filterArray === false) {
-            throw new RuntimeException(sprintf('Could not decode "%s"', $this->Request()->getParam('filterArray')));
+            throw new RuntimeException(\sprintf('Could not decode "%s"', $this->Request()->getParam('filterArray')));
         }
 
         /** @var array|false $operations */
         $operations = json_decode($operations, true);
         if ($operations === false) {
-            throw new RuntimeException(sprintf('Could not decode "%s"', $this->Request()->getParam('operations')));
+            throw new RuntimeException(\sprintf('Could not decode "%s"', $this->Request()->getParam('operations')));
         }
 
         /** @var ResourceInterface $resource */

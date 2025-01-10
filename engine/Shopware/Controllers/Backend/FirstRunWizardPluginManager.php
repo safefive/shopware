@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -220,7 +221,7 @@ class Shopware_Controllers_Backend_FirstRunWizardPluginManager extends Shopware_
         $payPalPlusEnabled = (bool) $this->Request()->getParam('payPalPlus');
 
         if (!class_exists('\SwagPaymentPayPalUnified\Setup\FirstRunWizardInstaller')) {
-            throw new Exception(sprintf('Class %s does not exist.', '\SwagPaymentPayPalUnified\Setup\FirstRunWizardInstaller'));
+            throw new Exception(\sprintf('Class %s does not exist.', '\SwagPaymentPayPalUnified\Setup\FirstRunWizardInstaller'));
         }
 
         $payPalInstaller = new FirstRunWizardInstaller();

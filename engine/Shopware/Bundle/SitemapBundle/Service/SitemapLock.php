@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -61,7 +62,7 @@ class SitemapLock implements SitemapLockInterface
             return false;
         }
 
-        $data = sprintf('Locked: %s', (new DateTime('NOW', new DateTimeZone('UTC')))->format(DateTime::ATOM));
+        $data = \sprintf('Locked: %s', (new DateTime('NOW', new DateTimeZone('UTC')))->format(DateTime::ATOM));
 
         $this->cache->save($this->generateCacheKeyForShop($shop), $data, $lifeTime);
 
@@ -93,6 +94,6 @@ class SitemapLock implements SitemapLockInterface
      */
     private function generateCacheKeyForShop(Shop $shop)
     {
-        return sprintf($this->cacheKey, $shop->getId());
+        return \sprintf($this->cacheKey, $shop->getId());
     }
 }

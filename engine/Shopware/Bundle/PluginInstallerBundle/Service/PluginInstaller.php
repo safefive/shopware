@@ -464,7 +464,7 @@ class PluginInstaller
         $plugins = $this->kernel->getPlugins();
 
         if (!isset($plugins[$pluginName])) {
-            throw new InvalidArgumentException(sprintf('Plugin by name "%s" not found.', $pluginName));
+            throw new InvalidArgumentException(\sprintf('Plugin by name "%s" not found.', $pluginName));
         }
 
         return $plugins[$pluginName];

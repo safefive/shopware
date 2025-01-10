@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -50,7 +51,7 @@ class UrlProviderFactory implements UrlProviderFactoryInterface
             }
         }
 
-        throw new RuntimeException(sprintf('No provider with name "%s" found', $providerName));
+        throw new RuntimeException(\sprintf('No provider with name "%s" found', $providerName));
     }
 
     /**

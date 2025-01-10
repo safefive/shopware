@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -115,10 +116,10 @@ class GenerateProductFeedCommand extends ShopwareCommand implements CompletionAw
 
         if (!is_dir($this->cacheDir)) {
             if (@mkdir($this->cacheDir, 0777, true) === false) {
-                throw new RuntimeException(sprintf("Unable to create directory '%s'\n", $this->cacheDir));
+                throw new RuntimeException(\sprintf("Unable to create directory '%s'\n", $this->cacheDir));
             }
         } elseif (!is_writable($this->cacheDir)) {
-            throw new RuntimeException(sprintf("Unable to write in directory '%s'\n", $this->cacheDir));
+            throw new RuntimeException(\sprintf("Unable to write in directory '%s'\n", $this->cacheDir));
         }
 
         $feedId = (int) $input->getOption('feed-id');
@@ -147,16 +148,16 @@ class GenerateProductFeedCommand extends ShopwareCommand implements CompletionAw
             /** @var ProductFeed|null $productFeed */
             $productFeed = $productFeedRepository->find((int) $feedId);
             if ($productFeed === null) {
-                throw new RuntimeException(sprintf("Unable to load feed with id %s\n", $feedId));
+                throw new RuntimeException(\sprintf("Unable to load feed with id %s\n", $feedId));
             }
 
             if ($productFeed->getActive() !== 1) {
-                throw new RuntimeException(sprintf("The feed with id %s is not active\n", $feedId));
+                throw new RuntimeException(\sprintf("The feed with id %s is not active\n", $feedId));
             }
             $this->generateFeed($export, $productFeed);
         }
 
-        $this->output->writeln(sprintf('Product feed cache successfully refreshed'));
+        $this->output->writeln(\sprintf('Product feed cache successfully refreshed'));
 
         return 0;
     }
@@ -166,7 +167,7 @@ class GenerateProductFeedCommand extends ShopwareCommand implements CompletionAw
      */
     private function generateFeed($export, ProductFeed $feedModel)
     {
-        $this->output->writeln(sprintf('Refreshing cache for ' . $feedModel->getName()));
+        $this->output->writeln(\sprintf('Refreshing cache for ' . $feedModel->getName()));
 
         $export->sFeedID = $feedModel->getId();
         $export->sHash = $feedModel->getHash();
@@ -180,7 +181,7 @@ class GenerateProductFeedCommand extends ShopwareCommand implements CompletionAw
         $handleResource = fopen($feedCachePath, 'w');
 
         if (!\is_resource($handleResource)) {
-            throw new RuntimeException(sprintf('Feed cache path %s can not be opened', $feedCachePath));
+            throw new RuntimeException(\sprintf('Feed cache path %s can not be opened', $feedCachePath));
         }
 
         $export->executeExport($handleResource);

@@ -240,7 +240,7 @@ class Helper
             $messages = ['The following elements of ' . \get_class($parent) . ' were not found:'];
 
             foreach ($notFound as $key => $locator) {
-                $messages[] = sprintf('%s ("%s")', $key, $locator);
+                $messages[] = \sprintf('%s ("%s")', $key, $locator);
             }
 
             if (\count($messages) > 1) {
@@ -279,7 +279,7 @@ class Helper
             $messages = ['The following elements of ' . \get_class($parent) . ' were not found:'];
 
             foreach ($notFound as $key => $locator) {
-                $messages[] = sprintf('%s ("%s")', $key, $locator);
+                $messages[] = \sprintf('%s ("%s")', $key, $locator);
             }
 
             if (\count($messages) > 1) {
@@ -328,10 +328,10 @@ class Helper
         $message = ['Following element selectors of ' . \get_class($parent) . ' are wrong:'];
 
         if (isset($errors['noSelector'])) {
-            $message[] = sprintf('%s (not defined)', implode(', ', $errors['noSelector']));
+            $message[] = \sprintf('%s (not defined)', implode(', ', $errors['noSelector']));
         }
         if (isset($errors['emptySelector'])) {
-            $message[] = sprintf('%s (empty)', implode(', ', $errors['emptySelector']));
+            $message[] = \sprintf('%s (empty)', implode(', ', $errors['emptySelector']));
         }
 
         self::throwException($message, self::EXCEPTION_PENDING);
@@ -350,7 +350,7 @@ class Helper
             return $selectors[$key];
         }
 
-        self::throwException(sprintf('Could not find "%s" selector', $key));
+        self::throwException(\sprintf('Could not find "%s" selector', $key));
     }
 
     /**
@@ -572,7 +572,7 @@ EOD
                 }
 
                 if ($key !== 'value') {
-                    $fieldName = sprintf('%s[%s]', $key, $tempFieldName);
+                    $fieldName = \sprintf('%s[%s]', $key, $tempFieldName);
                 }
 
                 if (str_contains($fieldName, '.')) {
@@ -589,7 +589,7 @@ EOD
                         continue;
                     }
 
-                    $message = sprintf('The form "%s" has no field "%s"!', $formKey, $fieldName);
+                    $message = \sprintf('The form "%s" has no field "%s"!', $formKey, $fieldName);
                     self::throwException($message);
                 }
 
@@ -759,7 +759,7 @@ EOD
         if (\count($unique) > 1) {
             $messages = ['There are more than one unique values in the array!'];
             foreach ($unique as $key => $value) {
-                $messages[] = sprintf('"%s" (Key: "%s")', $value, $key);
+                $messages[] = \sprintf('"%s" (Key: "%s")', $value, $key);
             }
 
             self::throwException($messages);
@@ -850,7 +850,7 @@ EOD
     public static function assertElementCount(MultipleElement $elements, int $count = 0): void
     {
         if ($count !== \count($elements)) {
-            $message = sprintf(
+            $message = \sprintf(
                 'There are %d elements of type "%s" on page (should be %d)',
                 \count($elements),
                 \get_class($elements),
@@ -863,7 +863,7 @@ EOD
     public static function spin(callable $lambda, int $wait = self::DEFAULT_WAIT_TIME, ?object $callingClass = null): void
     {
         if (!self::spinWithNoException($lambda, $wait, $callingClass)) {
-            self::throwException(sprintf('Spin function timed out after %s seconds', $wait));
+            self::throwException(\sprintf('Spin function timed out after %s seconds', $wait));
         }
     }
 

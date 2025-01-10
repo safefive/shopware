@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -46,7 +47,7 @@ class Shopware_Controllers_Backend_NewsletterManager extends Shopware_Controller
      */
     public function getCampaignsRepository()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if ($this->campaignsRepository === null) {
             $this->campaignsRepository = $this->get('models')->getRepository(Newsletter::class);
@@ -590,7 +591,7 @@ class Shopware_Controllers_Backend_NewsletterManager extends Shopware_Controller
      */
     public function getPreviewNewslettersQuery()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $builder = $this->get('models')->createQueryBuilder();
 

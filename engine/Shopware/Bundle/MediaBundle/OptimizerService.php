@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -77,7 +78,7 @@ class OptimizerService implements OptimizerServiceInterface
             }
         }
 
-        throw new OptimizerNotFoundException(sprintf('Optimizer for mime-type "%s" not found.', $mime));
+        throw new OptimizerNotFoundException(\sprintf('Optimizer for mime-type "%s" not found.', $mime));
     }
 
     /**

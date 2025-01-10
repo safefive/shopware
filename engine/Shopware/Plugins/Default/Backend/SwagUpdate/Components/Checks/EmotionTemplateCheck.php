@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -77,7 +78,7 @@ class EmotionTemplateCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf(
+            'message' => \sprintf(
                 $this->namespace->get('check_emotiontemplate_failure'),
                 implode(',', $names)
             ),

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -65,7 +66,7 @@ class PluginInstaller extends Shopware_Controllers_Backend_ExtJs
         if (!$plugin instanceof Plugin) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('Plugin not found %s', $this->Request()->getParam('technicalName')),
+                'message' => \sprintf('Plugin not found %s', $this->Request()->getParam('technicalName')),
             ]);
 
             return;
@@ -226,7 +227,7 @@ class PluginInstaller extends Shopware_Controllers_Backend_ExtJs
         if ($extension !== 'zip') {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('Wrong archive extension %s. Zip archive expected', $extension),
+                'message' => \sprintf('Wrong archive extension %s. Zip archive expected', $extension),
             ]);
             unlink($file->getPathname());
 

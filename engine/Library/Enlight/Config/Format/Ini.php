@@ -144,7 +144,7 @@ class Enlight_Config_Format_Ini extends Enlight_Config_BaseConfig
             $dataArray = [];
             foreach ($section as $sectionName) {
                 if (!isset($iniArray[$sectionName])) {
-                    throw new Enlight_Config_Exception(sprintf("Section '%s' cannot be found in %s", $sectionName, $filename));
+                    throw new Enlight_Config_Exception(\sprintf("Section '%s' cannot be found in %s", $sectionName, $filename));
                 }
                 $dataArray = $this->_arrayMergeRecursive($this->_processSection($iniArray, $sectionName), $dataArray);
             }
@@ -214,7 +214,7 @@ class Enlight_Config_Format_Ini extends Enlight_Config_BaseConfig
                     break;
 
                 default:
-                    throw new Enlight_Config_Exception(sprintf("Section '%s' may not extend multiple sections in %s", $thisSection, $filename));
+                    throw new Enlight_Config_Exception(\sprintf("Section '%s' may not extend multiple sections in %s", $thisSection, $filename));
             }
         }
 
@@ -247,7 +247,7 @@ class Enlight_Config_Format_Ini extends Enlight_Config_BaseConfig
                         $config = $this->_processSection($iniArray, $value, $config);
                     }
                 } else {
-                    throw new Enlight_Config_Exception(sprintf("Parent section '%s' cannot be found", $section));
+                    throw new Enlight_Config_Exception(\sprintf("Parent section '%s' cannot be found", $section));
                 }
             } else {
                 $config = $this->_processKey($config, $key, $value);
@@ -282,11 +282,11 @@ class Enlight_Config_Format_Ini extends Enlight_Config_BaseConfig
                         $config[$pieces[0]] = [];
                     }
                 } elseif (!\is_array($config[$pieces[0]])) {
-                    throw new Enlight_Config_Exception(sprintf("Cannot create sub-key for '%s' as key already exists", $pieces[0]));
+                    throw new Enlight_Config_Exception(\sprintf("Cannot create sub-key for '%s' as key already exists", $pieces[0]));
                 }
                 $config[$pieces[0]] = $this->_processKey($config[$pieces[0]], $pieces[1], $value);
             } else {
-                throw new Enlight_Config_Exception(sprintf("Invalid key '%s'", $key));
+                throw new Enlight_Config_Exception(\sprintf("Invalid key '%s'", $key));
             }
         } else {
             $config[$key] = $value;

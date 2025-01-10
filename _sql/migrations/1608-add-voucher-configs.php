@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -68,7 +69,7 @@ class Migrations_Migration1608 extends Shopware\Components\Migrations\AbstractMi
         INSERT IGNORE INTO `s_core_config_element_translations` (`element_id`, `locale_id`, `label`)
         VALUES (@elementId, '2', 'Display voucher field in shopping cart');
 EOD;
-        $this->addSql(sprintf($sql, serialize($options)));
+        $this->addSql(\sprintf($sql, serialize($options)));
 
         if ($modus === self::MODUS_UPDATE) {
             $sql = "INSERT INTO `s_core_config_values` (`element_id`, `shop_id`, `value`)

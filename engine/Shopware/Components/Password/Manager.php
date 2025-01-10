@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -62,7 +63,7 @@ class Manager
         $name = strtolower(trim($encoder->getName()));
 
         if (isset($this->encoder[$name])) {
-            throw new Exception(sprintf('Encoder by name %s already registered', $name));
+            throw new Exception(\sprintf('Encoder by name %s already registered', $name));
         }
 
         $this->encoder[$name] = $encoder;
@@ -80,13 +81,13 @@ class Manager
         $name = strtolower(trim($name));
 
         if (!isset($this->encoder[$name])) {
-            throw new DomainException(sprintf('Encoder by name %s not found', $name));
+            throw new DomainException(\sprintf('Encoder by name %s not found', $name));
         }
 
         $encoder = $this->encoder[$name];
 
         if (method_exists($encoder, 'isCompatible') && !$encoder->isCompatible()) {
-            throw new Exception(sprintf('Encoder by name %s is not compatible with your system', $name));
+            throw new Exception(\sprintf('Encoder by name %s is not compatible with your system', $name));
         }
 
         return $encoder;
@@ -166,7 +167,7 @@ class Manager
         $encodedPassword = $encoder->encodePassword($password);
 
         if (!\is_string($encodedPassword)) {
-            throw new DomainException(sprintf('The password could not be encoded by %s.', $encoderName));
+            throw new DomainException(\sprintf('The password could not be encoded by %s.', $encoderName));
         }
 
         return $encodedPassword;

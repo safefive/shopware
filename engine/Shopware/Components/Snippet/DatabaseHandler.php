@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -159,7 +160,7 @@ class DatabaseHandler
 
         $locale = $this->em->getRepository('Shopware\Models\Shop\Locale')->findOneByLocale($localeName);
         if (!$locale) {
-            throw new Exception(sprintf('Locale "%s" not found.', $localeName));
+            throw new Exception(\sprintf('Locale "%s" not found.', $localeName));
         }
 
         $outputAdapter = new Enlight_Config_Adapter_File([

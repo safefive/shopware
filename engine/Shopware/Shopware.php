@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -77,7 +78,7 @@ class Shopware extends Enlight_Application
 
         if (!$this->container->has($name)) {
             throw new Enlight_Exception(
-                sprintf('Method "%s::%s" not found failure', \get_class($this), $name),
+                \sprintf('Method "%s::%s" not found failure', \get_class($this), $name),
                 Enlight_Exception::METHOD_NOT_FOUND
             );
         }

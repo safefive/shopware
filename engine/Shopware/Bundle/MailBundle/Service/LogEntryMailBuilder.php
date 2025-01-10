@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -100,8 +101,8 @@ class LogEntryMailBuilder implements LogEntryMailBuilderInterface
         }
 
         foreach ($logEntry->getDocuments() as $document) {
-            $filePath = sprintf('documents/%s.pdf', $document->getHash());
-            $fileName = sprintf('%s.pdf', $document->getType()->getName());
+            $filePath = \sprintf('documents/%s.pdf', $document->getHash());
+            $fileName = \sprintf('%s.pdf', $document->getType()->getName());
 
             if (!$this->filesystem->has($filePath)) {
                 continue;

@@ -94,7 +94,7 @@ class Shopware_Controllers_Api_Error extends Shopware_Controllers_Api_Rest
             if ($exception->getViolations() instanceof ConstraintViolationListInterface) {
                 $errors = [];
                 foreach ($exception->getViolations() as $violation) {
-                    $errors[] = sprintf(
+                    $errors[] = \sprintf(
                         '%s: %s',
                         $violation->getPropertyPath(),
                         $violation->getMessage()

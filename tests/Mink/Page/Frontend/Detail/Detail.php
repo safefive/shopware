@@ -172,7 +172,7 @@ class Detail extends Page implements HelperSelectorInterface
 
         $messages = ['The following $evaluations are wrong:'];
         foreach ($result as $evaluation) {
-            $messages[] = sprintf(
+            $messages[] = \sprintf(
                 '%s - Bewertung: %s (%s is "%s", should be "%s")',
                 $evaluation['properties']['author'],
                 $evaluation['properties']['stars'],
@@ -194,7 +194,7 @@ class Detail extends Page implements HelperSelectorInterface
         $configuratorType = '';
 
         foreach ($configuration as $group) {
-            $field = sprintf('group[%d]', $group['groupId']);
+            $field = \sprintf('group[%d]', $group['groupId']);
             $this->selectFieldOption($field, $group['value']);
 
             if ($configuratorType === 'select') {
@@ -222,7 +222,7 @@ class Detail extends Page implements HelperSelectorInterface
         $group = $this->findField($configuratorGroup);
 
         if (empty($group)) {
-            $message = sprintf('Configurator group "%s" was not found!', $configuratorGroup);
+            $message = \sprintf('Configurator group "%s" was not found!', $configuratorGroup);
             Helper::throwException($message);
         }
 
@@ -230,7 +230,7 @@ class Detail extends Page implements HelperSelectorInterface
 
         foreach ($options as $option) {
             if ($option->getText() === $configuratorOption) {
-                $message = sprintf('Configurator option %s founded but should not', $configuratorOption);
+                $message = \sprintf('Configurator option %s founded but should not', $configuratorOption);
                 Helper::throwException($message);
             }
         }
@@ -260,7 +260,7 @@ class Detail extends Page implements HelperSelectorInterface
         $selectBox = $this->findField($select);
 
         if (empty($selectBox)) {
-            $message = sprintf('Select box "%s" was not found!', $select);
+            $message = \sprintf('Select box "%s" was not found!', $select);
             Helper::throwException($message);
         }
 
@@ -273,7 +273,7 @@ class Detail extends Page implements HelperSelectorInterface
         $unit = isset($parts[1]) ? ' ' . $parts[1] : '';
 
         if ($optionText !== $min) {
-            $errors[] = sprintf('The first option of "%s" is "%s"! (should be "%s")', $select, $optionText, $min);
+            $errors[] = \sprintf('The first option of "%s" is "%s"! (should be "%s")', $select, $optionText, $min);
         }
 
         while ($option = next($options)) {
@@ -281,7 +281,7 @@ class Detail extends Page implements HelperSelectorInterface
             $value += $graduation;
 
             if ($optionText !== $value . $unit) {
-                $errors[] = sprintf(
+                $errors[] = \sprintf(
                     'There is the invalid option "%s" in "%s"! ("%s" expected)',
                     $optionText,
                     $select,
@@ -291,7 +291,7 @@ class Detail extends Page implements HelperSelectorInterface
         }
 
         if ($optionText !== $max) {
-            $errors[] = sprintf('The last option of "%s" is "%s"! (should be "%s")', $select, $value, $max);
+            $errors[] = \sprintf('The last option of "%s" is "%s"! (should be "%s")', $select, $value, $max);
         }
 
         if (!empty($errors)) {
@@ -343,7 +343,7 @@ class Detail extends Page implements HelperSelectorInterface
         $result = Helper::checkArray($check);
 
         if ($result !== true) {
-            $message = sprintf('There was a different value of the evaluation! (%s: "%s" instead of %s)', $result, $check[$result][0], $check[$result][1]);
+            $message = \sprintf('There was a different value of the evaluation! (%s: "%s" instead of %s)', $result, $check[$result][0], $check[$result][1]);
             Helper::throwException($message);
         }
     }

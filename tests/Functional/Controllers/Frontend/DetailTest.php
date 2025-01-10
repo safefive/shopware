@@ -149,7 +149,7 @@ class DetailTest extends ControllerTestCase
 
         if (\is_string($gtin)) {
             static::assertStringContainsString($gtin, $body);
-            static::assertStringContainsString(sprintf('"%s"', trim($value)), $body);
+            static::assertStringContainsString(\sprintf('"%s"', trim($value)), $body);
         } else {
             static::assertStringNotContainsString(trim($value), $body);
         }

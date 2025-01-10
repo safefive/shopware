@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -33,7 +34,7 @@ class Migrations_Migration932 extends AbstractMigration
             'widgets/compare compare',
         ]);
 
-        $this->addSql(sprintf(
+        $this->addSql(\sprintf(
             "UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'noCacheControllers'",
             serialize($tags)
         ));
@@ -59,7 +60,7 @@ class Migrations_Migration932 extends AbstractMigration
                     $controller .= ',slt';
                 }
             }
-            $this->addSql(sprintf(
+            $this->addSql(\sprintf(
                 "UPDATE s_core_config_values SET value = '%s' WHERE id = " . $value['id'],
                 serialize(implode("\n", $controllers))
             ));

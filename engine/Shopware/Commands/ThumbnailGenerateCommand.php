@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -227,7 +228,7 @@ class ThumbnailGenerateCommand extends ShopwareCommand implements CompletionAwar
     private function createMediaThumbnails(Media $media)
     {
         if (!$this->imageExists($media)) {
-            throw new Exception(sprintf('Base image file "%s" does not exist', $media->getPath()));
+            throw new Exception(\sprintf('Base image file "%s" does not exist', $media->getPath()));
         }
 
         $thumbnails = $media->getThumbnailFilePaths();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -114,7 +115,7 @@ class AdminCreateCommand extends ShopwareCommand
 
         $this->persistUser($user);
 
-        $io->success(sprintf('Adminuser "%s" was successfully created.', $user->getUsername()));
+        $io->success(\sprintf('Adminuser "%s" was successfully created.', $user->getUsername()));
 
         return 0;
     }
@@ -152,7 +153,7 @@ class AdminCreateCommand extends ShopwareCommand
             return $locales[$locale];
         }
 
-        throw new RuntimeException(sprintf('Backend Locale "%s" not supported', $locale));
+        throw new RuntimeException(\sprintf('Backend Locale "%s" not supported', $locale));
     }
 
     private function setPassword(User $user, string $plainPassword): void

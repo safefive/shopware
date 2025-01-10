@@ -69,10 +69,10 @@ class ExportTest extends TestCase
 
         if (!is_dir($this->cacheDir)) {
             if (@mkdir($this->cacheDir, 0777, true) === false) {
-                throw new RuntimeException(sprintf("Unable to create directory '%s'\n", $this->cacheDir));
+                throw new RuntimeException(\sprintf("Unable to create directory '%s'\n", $this->cacheDir));
             }
         } elseif (!is_writable($this->cacheDir)) {
-            throw new RuntimeException(sprintf("Unable to write in directory '%s'\n", $this->cacheDir));
+            throw new RuntimeException(\sprintf("Unable to write in directory '%s'\n", $this->cacheDir));
         }
 
         $this->connection = $this->getContainer()->get('dbal_connection');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -105,7 +106,7 @@ class EmotionProvider extends CategoryProvider
             )
             ->leftJoin('emo_cat', 's_categories', 'cat', 'emo_cat.category_id = cat.id')
             ->where('emo.active = 1')
-            ->andWhere(sprintf('emo_cat.category_id IN (%s)', $this->prepareSubQuery()->getSQL()))
+            ->andWhere(\sprintf('emo_cat.category_id IN (%s)', $this->prepareSubQuery()->getSQL()))
             ->andWhere('emo.valid_to > NOW() OR emo.valid_to IS NULL');
     }
 

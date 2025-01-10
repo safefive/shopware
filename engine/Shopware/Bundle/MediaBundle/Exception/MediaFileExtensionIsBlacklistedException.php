@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -35,7 +36,7 @@ class MediaFileExtensionIsBlacklistedException extends Exception
     public function __construct($extension)
     {
         $this->extension = $extension;
-        $message = sprintf('The file extension "%s" is blacklisted.', $extension);
+        $message = \sprintf('The file extension "%s" is blacklisted.', $extension);
 
         parent::__construct($message);
     }

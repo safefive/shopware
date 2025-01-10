@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -166,7 +167,7 @@ class Repository implements RepositoryInterface
                             continue;
                         }
 
-                        $query->orWhere(sprintf('`%s` LIKE :search', $field->getName()));
+                        $query->orWhere(\sprintf('`%s` LIKE :search', $field->getName()));
                     }
                 } else {
                     $where = $item['value'];
@@ -225,7 +226,7 @@ class Repository implements RepositoryInterface
         if ($idSearch && \count($filters) === 1) {
             $idSearch = array_map('intval', $idSearch);
 
-            $orderBy = sprintf('FIELD(id, %s)', implode(',', $idSearch));
+            $orderBy = \sprintf('FIELD(id, %s)', implode(',', $idSearch));
 
             $query->addOrderBy($orderBy);
         }
@@ -286,7 +287,7 @@ class Repository implements RepositoryInterface
             }
 
             if (empty($data[$field->getName()])) {
-                throw new CustomValidationException(sprintf('Field %s is required', $field->getName()));
+                throw new CustomValidationException(\sprintf('Field %s is required', $field->getName()));
             }
         }
     }

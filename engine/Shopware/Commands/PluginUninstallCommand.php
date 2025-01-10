@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -104,13 +105,13 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
 
         if (!$plugin->getInstalled()) {
-            $output->writeln(sprintf('The plugin %s is already uninstalled.', $pluginName));
+            $output->writeln(\sprintf('The plugin %s is already uninstalled.', $pluginName));
 
             return 1;
         }
@@ -118,7 +119,7 @@ EOF
         $removeData = !(bool) $input->getOption('secure');
 
         $uninstallationContext = $pluginManager->uninstallPlugin($plugin, $removeData);
-        $output->writeln(sprintf('Plugin %s has been uninstalled successfully.', $pluginName));
+        $output->writeln(\sprintf('Plugin %s has been uninstalled successfully.', $pluginName));
 
         $this->clearCachesIfRequested($input, $output, $uninstallationContext);
 

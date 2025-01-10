@@ -37,7 +37,7 @@ class ResourceNotFoundException extends ControllerException
             $referer = 'notFound';
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             '%s. The request comes from: "%s". Module: "%s", Controller: "%s", Action: "%s",',
             $exceptionMessagePrefix,
             $referer,

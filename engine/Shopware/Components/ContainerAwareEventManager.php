@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -230,7 +231,7 @@ class ContainerAwareEventManager extends Enlight_Event_EventManager
     private function checkForDeprecatedEvent(string $eventName): void
     {
         if (\in_array($eventName, self::DEPRECATED_EVENTS, true)) {
-            $this->container->get('corelogger')->warning(sprintf('Event "%s" is deprecated. Do not use it anymore.', $eventName));
+            $this->container->get('corelogger')->warning(\sprintf('Event "%s" is deprecated. Do not use it anymore.', $eventName));
         }
     }
 }

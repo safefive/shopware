@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -29,6 +30,6 @@ class AdapterFactoryNotFoundException extends Exception
 {
     public static function fromAdapterType($type)
     {
-        return new self(sprintf('Adapter factory for type "%s" was not found.', $type));
+        return new self(\sprintf('Adapter factory for type "%s" was not found.', $type));
     }
 }

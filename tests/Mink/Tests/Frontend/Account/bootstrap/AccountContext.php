@@ -265,7 +265,7 @@ class AccountContext extends SubContext
             }
         }
 
-        $message = sprintf('Newly created address not found! (%s)', $address);
+        $message = \sprintf('Newly created address not found! (%s)', $address);
         Helper::throwException($message);
     }
 
@@ -307,7 +307,7 @@ class AccountContext extends SubContext
             return;
         }
 
-        $message = sprintf('Given address not found! (%s)', $address);
+        $message = \sprintf('Given address not found! (%s)', $address);
         Helper::throwException($message);
     }
 
@@ -331,7 +331,7 @@ class AccountContext extends SubContext
         }
 
         if ($addressCount !== 1) {
-            $message = sprintf('Wrong number of given addresses titled "%s" found! Expected 1, found %d.', $addressTitle, $addressCount);
+            $message = \sprintf('Wrong number of given addresses titled "%s" found! Expected 1, found %d.', $addressTitle, $addressCount);
             Helper::throwException($message);
         }
     }
@@ -404,7 +404,7 @@ class AccountContext extends SubContext
 
         foreach ($addressManagementAddressBoxes as $box) {
             if ($box->hasTitle($title) && ($box->hasLink($elementName) || $box->hasButton($elementName))) {
-                $message = sprintf('Wrong number of boxes with title "%s" and delete button found! Expected 0, found at least 1.', $title);
+                $message = \sprintf('Wrong number of boxes with title "%s" and delete button found! Expected 0, found at least 1.', $title);
                 Helper::throwException($message);
             }
         }

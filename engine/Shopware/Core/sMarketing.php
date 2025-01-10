@@ -140,7 +140,7 @@ class sMarketing implements Enlight_Hook
 
         $where = '';
         if (!empty($this->sBlacklist)) {
-            $where = sprintf(' AND similarShown.related_article_id NOT IN (%s)', implode(',', $this->sBlacklist));
+            $where = \sprintf(' AND similarShown.related_article_id NOT IN (%s)', implode(',', $this->sBlacklist));
         }
 
         $sql = "
@@ -208,7 +208,7 @@ class sMarketing implements Enlight_Hook
         $where = '';
 
         if (!empty($this->sBlacklist)) {
-            $where = sprintf(' AND alsoBought.related_article_id NOT IN (%s)', implode(',', $this->sBlacklist));
+            $where = \sprintf(' AND alsoBought.related_article_id NOT IN (%s)', implode(',', $this->sBlacklist));
         }
 
         $sql = "

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -41,7 +42,7 @@ class Requirements
     public function __construct(string $sourceFile, PDO $connection, Shopware_Components_Snippet_Manager $snippetManager)
     {
         if (!is_readable($sourceFile)) {
-            throw new RuntimeException(sprintf('Cannot read requirements file in %s.', $sourceFile));
+            throw new RuntimeException(\sprintf('Cannot read requirements file in %s.', $sourceFile));
         }
 
         $this->sourceFile = $sourceFile;
@@ -503,7 +504,7 @@ class Requirements
         if (version_compare($check['version'], $check['maxCompatibleVersion'], '>')) {
             $check['check'] = false;
             $maxCompatibleVersion = str_replace('.99', '', $check['maxCompatibleVersion']);
-            $check['notice'] = sprintf($this->snippetManager->getNamespace('backend/systeminfo/view')->get('php_version_is_too_new_warning'), $maxCompatibleVersion);
+            $check['notice'] = \sprintf($this->snippetManager->getNamespace('backend/systeminfo/view')->get('php_version_is_too_new_warning'), $maxCompatibleVersion);
         }
 
         return $check;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -67,7 +68,7 @@ EOF
         $count = session_gc();
         session_destroy();
 
-        $io->success(sprintf('Successfully removed %d expired sessions', $count));
+        $io->success(\sprintf('Successfully removed %d expired sessions', $count));
 
         return 0;
     }

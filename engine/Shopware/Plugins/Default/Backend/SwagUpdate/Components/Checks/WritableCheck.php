@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -87,7 +88,7 @@ class WritableCheck implements CheckInterface
             return [
                 'type' => self::CHECK_TYPE,
                 'errorLevel' => Validation::REQUIREMENT_VALID,
-                'message' => sprintf(
+                'message' => \sprintf(
                     $successMessage,
                     implode('<br>', $checkedDirectories)
                 ),
@@ -97,7 +98,7 @@ class WritableCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf(
+            'message' => \sprintf(
                 $failMessage,
                 implode('<br>', $directories)
             ),

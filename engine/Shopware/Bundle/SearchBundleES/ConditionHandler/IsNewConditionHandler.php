@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -80,7 +81,7 @@ class IsNewConditionHandler implements PartialConditionHandlerInterface
         $dayLimit = (int) $this->config->get('markAsNew');
         $timestamp = strtotime('-' . $dayLimit . ' days');
         if ($timestamp === false) {
-            throw new RuntimeException(sprintf('Could not convert "-%s days" into a timestamp', $dayLimit));
+            throw new RuntimeException(\sprintf('Could not convert "-%s days" into a timestamp', $dayLimit));
         }
 
         return new RangeQuery('formattedCreatedAt', [

@@ -178,7 +178,7 @@ class UserManagerTest extends Enlight_Components_Test_Controller_TestCase
 
         $user = $this->getUserByUsername($username);
 
-        $randomName = sprintf('RandomName_%s', md5((string) rand(0, time())));
+        $randomName = \sprintf('RandomName_%s', md5((string) rand(0, time())));
 
         static::assertGreaterThan(0, $user['id']);
 
@@ -212,7 +212,7 @@ class UserManagerTest extends Enlight_Components_Test_Controller_TestCase
 
         static::assertTrue(
             $this->View()->getAssign('success'),
-            sprintf(
+            \sprintf(
                 'User %s with id %s not found',
                 $user['id'],
                 $user['username']

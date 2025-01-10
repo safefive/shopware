@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -66,6 +67,6 @@ class Migrations_Migration1461 extends Shopware\Components\Migrations\AbstractMi
 		UPDATE s_core_config_values SET value = 'i:2;' WHERE element_id = @elementId AND value = 'b:0;';
         UPDATE s_core_config_values SET value = 'i:0;' WHERE element_id = @elementId AND value = 'b:1;';
 SQL;
-        $this->addSql(sprintf($sql, serialize($options)));
+        $this->addSql(\sprintf($sql, serialize($options)));
     }
 }

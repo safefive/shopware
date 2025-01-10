@@ -198,7 +198,7 @@ class LogTest extends Enlight_Components_Test_Controller_TestCase
         $environment = $container->getParameter('kernel.environment');
 
         // test filtering
-        $file = sprintf('core_%s', $environment);
+        $file = \sprintf('core_%s', $environment);
         $this->Request()->setParams([
             'limit' => 1,
             'query' => $file,

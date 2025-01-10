@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -104,7 +105,7 @@ class DatabaseService
         }
 
         return $this->connection->exec(
-            sprintf(
+            \sprintf(
                 '%s DATABASE `%s` CHARACTER SET `%s` COLLATE `%s`',
                 $dbExists ? 'ALTER' : 'CREATE',
                 $name,
@@ -150,7 +151,7 @@ class DatabaseService
         }
 
         if (!\is_string($permissions) && !\is_array($permissions)) {
-            $msg = sprintf('String or array expected, got: %s', \gettype($permissions));
+            $msg = \sprintf('String or array expected, got: %s', \gettype($permissions));
             throw new InvalidArgumentException($msg);
         }
 
@@ -234,7 +235,7 @@ EOL;
     public function checkUserPrivileges($privileges)
     {
         if (!\is_string($privileges) && !\is_array($privileges)) {
-            $msg = sprintf('String or array expected, got: %s', \gettype($privileges));
+            $msg = \sprintf('String or array expected, got: %s', \gettype($privileges));
             throw new InvalidArgumentException($msg);
         }
 

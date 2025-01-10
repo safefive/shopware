@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -582,14 +583,14 @@ class CacheManager
         $finder = new Finder();
 
         $tempFileExtension = 'sw_bak';
-        $tempFileName = sprintf('%s_%s.%s', $dir, uniqid(), $tempFileExtension);
+        $tempFileName = \sprintf('%s_%s.%s', $dir, uniqid(), $tempFileExtension);
 
         // Move the existing cache to a temporary new location prior to deletion, so it won't be written to in the meantime
         $fileSystem->rename($dir, $tempFileName);
 
         $finder->directories()
             ->in(\dirname($dir, 1))
-            ->name(sprintf('*.%s', $tempFileExtension));
+            ->name(\sprintf('*.%s', $tempFileExtension));
 
         if ($finder->hasResults()) {
             $fileSystem->remove($finder);

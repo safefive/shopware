@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -104,7 +105,7 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
@@ -125,7 +126,7 @@ EOF
             /** @var Shop|null $shop */
             $shop = $em->getRepository(Shop::class)->find($shopId);
             if (!$shop) {
-                $output->writeln(sprintf('Could not find shop with id %s.', $shopId));
+                $output->writeln(\sprintf('Could not find shop with id %s.', $shopId));
 
                 return 1;
             }
@@ -138,7 +139,7 @@ EOF
         foreach ($shops as $shop) {
             $config = $pluginManager->getPluginConfig($plugin, $shop);
 
-            $output->writeln(sprintf('Plugin configuration for Plugin %s and shop %s:', $pluginName, $shop->getName()));
+            $output->writeln(\sprintf('Plugin configuration for Plugin %s and shop %s:', $pluginName, $shop->getName()));
             $output->writeln(print_r($config, true));
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -37,7 +38,7 @@ use Shopware\Components\Model\ModelEntity;
 class Template extends ModelEntity
 {
     /**
-     * @var ArrayCollection<\Shopware\Models\Emotion\Emotion>
+     * @var ArrayCollection<Emotion>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Emotion\Emotion", mappedBy="template")
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -47,12 +48,12 @@ class Product extends ListProduct
     protected $similarProducts = [];
 
     /**
-     * @var Product\Download[]
+     * @var Download[]
      */
     protected $downloads = [];
 
     /**
-     * @var Product\Link[]
+     * @var Link[]
      */
     protected $links = [];
 
@@ -62,7 +63,7 @@ class Product extends ListProduct
     protected $media = [];
 
     /**
-     * @var Product\Vote[]
+     * @var Vote[]
      */
     protected $votes = [];
 

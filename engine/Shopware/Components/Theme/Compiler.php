@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -210,10 +211,10 @@ class Compiler
         $dir = \dirname($file);
         if (!is_dir($dir)) {
             if (@mkdir($dir, 0777, true) === false && !is_dir($dir)) {
-                throw new RuntimeException(sprintf("Unable to create the %s directory (%s)\n", 'web', $dir));
+                throw new RuntimeException(\sprintf("Unable to create the %s directory (%s)\n", 'web', $dir));
             }
         } elseif (!is_writable($dir)) {
-            throw new RuntimeException(sprintf("Unable to write in the %s directory (%s)\n", 'web', $dir));
+            throw new RuntimeException(\sprintf("Unable to write in the %s directory (%s)\n", 'web', $dir));
         }
 
         $file = new SplFileObject($file, 'w');

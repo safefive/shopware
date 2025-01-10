@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -39,6 +40,6 @@ INSERT IGNORE INTO `s_core_config_elements`
 VALUES
 (@formId, 'hrefLangDefaultShop', 's:0:"";', 'href-lang Standardsprache', 'Gibt für diesen Shop "x-default" im href-lang-Tag aus und definiert damit die Sprache dieses Shops als Standardsprache.', 'combo', 0, 0, 0, '%s');
 EOD;
-        $this->addSql(sprintf($sql, serialize($settings)));
+        $this->addSql(\sprintf($sql, serialize($settings)));
     }
 }

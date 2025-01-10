@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -58,7 +59,7 @@ trait FileCheckerTrait
             static::assertSame(
                 $expectedCount,
                 $count,
-                sprintf('%s "%s" expected to have %s matches. Got %s matches instead', $itemToTest, $itemName, $expectedCount, $count)
+                \sprintf('%s "%s" expected to have %s matches. Got %s matches instead', $itemToTest, $itemName, $expectedCount, $count)
             );
         }
     }

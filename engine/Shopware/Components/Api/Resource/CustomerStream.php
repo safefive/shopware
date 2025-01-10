@@ -239,7 +239,7 @@ class CustomerStream extends Resource
         $stream = $this->getManager()->find(CustomerStreamEntity::class, $id);
 
         if (!$stream instanceof CustomerStreamEntity) {
-            throw new NotFoundException(sprintf('Customer Stream by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Customer Stream by id %d not found', $id));
         }
 
         $data = $this->prepareData($data);
@@ -277,7 +277,7 @@ class CustomerStream extends Resource
 
         $stream = $this->manager->find(CustomerStreamEntity::class, $id);
         if (!$stream instanceof CustomerStreamEntity) {
-            throw new NotFoundException(sprintf('Customer Stream by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Customer Stream by id %d not found', $id));
         }
 
         $this->manager->remove($stream);

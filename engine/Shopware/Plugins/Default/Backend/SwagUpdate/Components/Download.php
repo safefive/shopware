@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -97,11 +98,11 @@ class Download
 
         $destination = fopen($destinationUri, 'a+');
         if (!\is_resource($destination)) {
-            throw new Exception(sprintf('Destination "%s" is invalid.', $destinationUri));
+            throw new Exception(\sprintf('Destination "%s" is invalid.', $destinationUri));
         }
 
         if (filesize($destinationUri) > 0) {
-            throw new Exception(sprintf('File on destination %s does already exist.', $destinationUri));
+            throw new Exception(\sprintf('File on destination %s does already exist.', $destinationUri));
         }
 
         $partFile = $destinationUri . '.part';

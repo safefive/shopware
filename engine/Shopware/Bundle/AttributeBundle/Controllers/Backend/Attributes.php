@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -72,11 +73,11 @@ class Shopware_Controllers_Backend_Attributes extends Shopware_Controllers_Backe
         $column = $this->Request()->getParam($columnParamName);
 
         if (!$table) {
-            throw new Exception(sprintf('Required parameter "%s" not found', $tableParamName));
+            throw new Exception(\sprintf('Required parameter "%s" not found', $tableParamName));
         }
 
         if (!$column) {
-            throw new Exception(sprintf('Required parameter "%s" not found', $columnParamName));
+            throw new Exception(\sprintf('Required parameter "%s" not found', $columnParamName));
         }
 
         $schemaOperator = $this->get(SchemaOperatorInterface::class);

@@ -1121,7 +1121,7 @@ class LegacyStructConverter
     private function getSourceSet(Thumbnail $thumbnail): string
     {
         if ($thumbnail->getRetinaSource() !== null) {
-            return sprintf('%s, %s 2x', $thumbnail->getSource(), $thumbnail->getRetinaSource());
+            return \sprintf('%s, %s 2x', $thumbnail->getSource(), $thumbnail->getRetinaSource());
         }
 
         return $thumbnail->getSource();

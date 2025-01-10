@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -61,12 +62,12 @@ class Basic implements GeneratorInterface
         $quality = (int) $quality;
 
         if (!$this->mediaService->has($imagePath)) {
-            throw new RuntimeException(sprintf('File not found: %s', $imagePath));
+            throw new RuntimeException(\sprintf('File not found: %s', $imagePath));
         }
 
         $content = $this->mediaService->read($imagePath);
         if (!\is_string($content)) {
-            throw new RuntimeException(sprintf('Could not read image from file: %s', $imagePath));
+            throw new RuntimeException(\sprintf('Could not read image from file: %s', $imagePath));
         }
         $image = $this->createImageResource($content, $imagePath);
 
@@ -129,7 +130,7 @@ class Basic implements GeneratorInterface
     {
         $image = imagecreatefromstring($fileContent);
         if ($image === false) {
-            throw new RuntimeException(sprintf('Image is not in a recognized format (%s)', $imagePath));
+            throw new RuntimeException(\sprintf('Image is not in a recognized format (%s)', $imagePath));
         }
 
         return $image;
@@ -301,12 +302,12 @@ class Basic implements GeneratorInterface
         }
         $handle = fopen($tmpFilename, 'wb');
         if (!\is_resource($handle)) {
-            throw new RuntimeException(sprintf('Could not open file at: %s', $tmpFilename));
+            throw new RuntimeException(\sprintf('Could not open file at: %s', $tmpFilename));
         }
 
         $fromHandle = $this->mediaService->readStream($destination);
         if (!\is_resource($fromHandle)) {
-            throw new RuntimeException(sprintf('Could not open file at: %s', $destination));
+            throw new RuntimeException(\sprintf('Could not open file at: %s', $destination));
         }
         stream_copy_to_stream(
             $fromHandle,
@@ -320,7 +321,7 @@ class Basic implements GeneratorInterface
     {
         $fileHandle = fopen($tmpFilename, 'rb');
         if (!\is_resource($fileHandle)) {
-            throw new RuntimeException(sprintf('Could not open file at: %s', $tmpFilename));
+            throw new RuntimeException(\sprintf('Could not open file at: %s', $tmpFilename));
         }
         $this->mediaService->writeStream($destination, $fileHandle);
         fclose($fileHandle);

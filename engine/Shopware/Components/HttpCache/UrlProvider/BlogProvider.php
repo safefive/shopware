@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -92,7 +93,7 @@ class BlogProvider extends CategoryProvider
                 'blog',
                 's_categories',
                 'cat',
-                sprintf('blog.category_id = cat.id
+                \sprintf('blog.category_id = cat.id
                         AND blog.category_id IN (%s)', $this->prepareSubQuery()->getSQL())
             )
             ->where('blog.active = 1');

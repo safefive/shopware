@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -57,16 +58,16 @@ class CustomerStreamCriteriaFactory implements CustomerStreamCriteriaFactoryInte
     {
         $stream = $this->getStream($streamId);
         if (!$stream) {
-            throw new RuntimeException(sprintf('Stream by id %s not found', $streamId));
+            throw new RuntimeException(\sprintf('Stream by id %s not found', $streamId));
         }
 
         if (empty($stream['conditions'])) {
-            throw new RuntimeException(sprintf('Stream %s has no conditions', $stream['name']));
+            throw new RuntimeException(\sprintf('Stream %s has no conditions', $stream['name']));
         }
 
         $conditions = $this->reflectionHelper->unserialize(
             json_decode($stream['conditions'], true),
-            sprintf('Error while unserialize stream conditions')
+            \sprintf('Error while unserialize stream conditions')
         );
 
         $criteria = new Criteria();

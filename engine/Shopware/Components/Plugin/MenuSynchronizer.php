@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -69,7 +70,7 @@ class MenuSynchronizer
                 }
                 $parent = $this->menuRepository->findOneBy($menuItem['parent']);
                 if (!$parent) {
-                    throw new InvalidArgumentException(sprintf('Unable to find parent for query %s', print_r($menuItem['parent'], true)));
+                    throw new InvalidArgumentException(\sprintf('Unable to find parent for query %s', print_r($menuItem['parent'], true)));
                 }
             }
 

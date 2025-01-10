@@ -97,7 +97,7 @@ class Customer extends Resource
         }
 
         if (!$id) {
-            throw new NotFoundException(sprintf('Customer by number %s not found', $number));
+            throw new NotFoundException(\sprintf('Customer by number %s not found', $number));
         }
 
         return $id['id'];
@@ -165,7 +165,7 @@ class Customer extends Resource
         $customer = $builder->getQuery()->getOneOrNullResult($this->getResultMode());
 
         if (!$customer) {
-            throw new NotFoundException(sprintf('Customer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Customer by id %d not found', $id));
         }
 
         return $customer;
@@ -288,7 +288,7 @@ class Customer extends Resource
         $customer = $this->getRepository()->find($id);
 
         if (!$customer instanceof CustomerModel) {
-            throw new NotFoundException(sprintf('Customer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Customer by id %d not found', $id));
         }
 
         $this->setupContext($customer->getShop()->getId());
@@ -357,7 +357,7 @@ class Customer extends Resource
         $customer = $this->getRepository()->find($id);
 
         if (!$customer) {
-            throw new NotFoundException(sprintf('Customer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Customer by id %d not found', $id));
         }
 
         $this->getManager()->remove($customer);
@@ -429,7 +429,7 @@ class Customer extends Resource
             if (isset($paymentDataData['paymentMeanId'])) {
                 $paymentMean = $this->getManager()->getRepository(Payment::class)->find($paymentDataData['paymentMeanId']);
                 if ($paymentMean === null) {
-                    throw new CustomValidationException(sprintf('%s by %s %s not found', Payment::class, 'id', $paymentDataData['paymentMeanId']));
+                    throw new CustomValidationException(\sprintf('%s by %s %s not found', Payment::class, 'id', $paymentDataData['paymentMeanId']));
                 }
                 $paymentData->setPaymentMean($paymentMean);
                 unset($paymentDataData['paymentMeanId']);
@@ -467,14 +467,14 @@ class Customer extends Resource
         if (\array_key_exists('groupKey', $params)) {
             $params['group'] = Shopware()->Models()->getRepository(Group::class)->findOneBy(['key' => $params['groupKey']]);
             if (!$params['group']) {
-                throw new CustomValidationException(sprintf('CustomerGroup by key %s not found', $params['groupKey']));
+                throw new CustomValidationException(\sprintf('CustomerGroup by key %s not found', $params['groupKey']));
             }
         }
 
         if (\array_key_exists('shopId', $params)) {
             $params['shop'] = Shopware()->Models()->find(ShopModel::class, $params['shopId']);
             if (!$params['shop']) {
-                throw new CustomValidationException(sprintf('Shop by id %s not found', $params['shopId']));
+                throw new CustomValidationException(\sprintf('Shop by id %s not found', $params['shopId']));
             }
         }
 
@@ -507,7 +507,7 @@ class Customer extends Resource
         if ($shopId) {
             $shop = $shopRepository->getActiveById($shopId);
             if (!$shop) {
-                throw new CustomValidationException(sprintf('Shop by id %s not found', $shopId));
+                throw new CustomValidationException(\sprintf('Shop by id %s not found', $shopId));
             }
         } else {
             $shop = $shopRepository->getActiveDefault();
@@ -583,11 +583,11 @@ class Customer extends Resource
         unset($params['billing'], $params['shipping'], $params['defaultBillingAddress'], $params['defaultShippingAddress']);
 
         if (!$customer->getDefaultBillingAddress() instanceof AddressModel) {
-            throw new CustomValidationException(sprintf('Customer with ID "%s" has no default billing address', $customer->getId()));
+            throw new CustomValidationException(\sprintf('Customer with ID "%s" has no default billing address', $customer->getId()));
         }
         $customer->getDefaultBillingAddress()->fromArray($billingData);
         if (!$customer->getDefaultShippingAddress() instanceof AddressModel) {
-            throw new CustomValidationException(sprintf('Customer with ID "%s" has no default shipping address', $customer->getId()));
+            throw new CustomValidationException(\sprintf('Customer with ID "%s" has no default shipping address', $customer->getId()));
         }
         $customer->getDefaultShippingAddress()->fromArray($shippingData);
 

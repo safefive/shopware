@@ -84,7 +84,7 @@ class GenericPage extends Page implements HelperSelectorInterface
         $expectedUrlParts = parse_url($expectedUrl);
 
         if ($linkParts != $expectedUrlParts) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Link "%s" does not match expected value "%s" while looking for ' . $locator,
                 $link,
                 $expectedUrl
@@ -109,7 +109,7 @@ class GenericPage extends Page implements HelperSelectorInterface
         $robotsParts = array_map('trim', $robotsParts);
 
         if ($robotsParts != $content) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Canonical link "%s" does not match expected value "%s"',
                 implode(', ', $robotsParts),
                 implode(', ', $content)

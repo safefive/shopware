@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -58,11 +59,11 @@ class StreamProtocolValidator implements StreamProtocolValidatorInterface
     {
         $urlArray = parse_url($url);
         if (!\is_array($urlArray)) {
-            throw new InvalidArgumentException(sprintf('Invalid stream URL "%s"', $url));
+            throw new InvalidArgumentException(\sprintf('Invalid stream URL "%s"', $url));
         }
 
         if (isset($urlArray['scheme']) && !\in_array($urlArray['scheme'], $this->allowedProtocols, true)) {
-            throw new InvalidArgumentException(sprintf("Invalid stream protocol '%s'", $urlArray['scheme']));
+            throw new InvalidArgumentException(\sprintf("Invalid stream protocol '%s'", $urlArray['scheme']));
         }
 
         return true;

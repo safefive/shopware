@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -48,7 +49,7 @@ class AdditionalTextService implements AdditionalTextServiceInterface
 
         $product = array_shift($products);
         if (!$product instanceof ListProduct) {
-            throw new UnexpectedValueException(sprintf('Expect instance of "%s", got "%s" instead', ListProduct::class, \gettype($product)));
+            throw new UnexpectedValueException(\sprintf('Expect instance of "%s", got "%s" instead', ListProduct::class, \gettype($product)));
         }
 
         return $product;

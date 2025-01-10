@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -61,7 +62,7 @@ class ProductNumberService implements ProductNumberServiceInterface
         $number = $query->execute()->fetch(PDO::FETCH_COLUMN);
 
         if (!$number) {
-            throw new RuntimeException(sprintf('No valid product number found by id %d', $productId));
+            throw new RuntimeException(\sprintf('No valid product number found by id %d', $productId));
         }
 
         return $number;
@@ -75,11 +76,11 @@ class ProductNumberService implements ProductNumberServiceInterface
         $productId = $this->getProductIdByNumber($number);
 
         if ($productId === 0) {
-            throw new RuntimeException(sprintf('No valid product id found for product with number "%s"', $number));
+            throw new RuntimeException(\sprintf('No valid product id found for product with number "%s"', $number));
         }
 
         if (!$this->isProductAvailableInShop($productId, $context->getShop())) {
-            throw new RuntimeException(sprintf('Product with number "%s" is not available in current shop', $number));
+            throw new RuntimeException(\sprintf('Product with number "%s" is not available in current shop', $number));
         }
 
         $selected = '';
@@ -101,7 +102,7 @@ class ProductNumberService implements ProductNumberServiceInterface
 
         $selected = $this->findFallbackById($productId);
         if ($selected === '') {
-            throw new RuntimeException(sprintf('No active product variant found for product with number "%s" and id "%s"', $number, $productId));
+            throw new RuntimeException(\sprintf('No active product variant found for product with number "%s" and id "%s"', $number, $productId));
         }
 
         return $selected;

@@ -42,7 +42,7 @@ class ParameterMissingException extends Enlight_Exception implements ApiExceptio
     public function __construct($param)
     {
         $this->setMissingParam($param);
-        parent::__construct(sprintf('A required parameter is missing: %s', $param), Response::HTTP_BAD_REQUEST);
+        parent::__construct(\sprintf('A required parameter is missing: %s', $param), Response::HTTP_BAD_REQUEST);
     }
 
     /**

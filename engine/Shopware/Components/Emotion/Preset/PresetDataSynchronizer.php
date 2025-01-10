@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -81,7 +82,7 @@ class PresetDataSynchronizer implements PresetDataSynchronizerInterface
         $presetData = json_decode($preset->getPresetData(), true);
 
         if (!$presetData || !\is_array($presetData) || !\array_key_exists('elements', $presetData)) {
-            throw new PresetAssetImportException(sprintf('The preset data of the %s preset seems to be invalid.', $preset->getName()));
+            throw new PresetAssetImportException(\sprintf('The preset data of the %s preset seems to be invalid.', $preset->getName()));
         }
 
         // continue if no sync data present or we just have an assets key which is empty

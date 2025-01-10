@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -277,7 +278,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
         if (property_exists($this, $var_name)) {
             return $this->$var_name;
         }
-        throw new Enlight_Exception(sprintf('Property %s does not exist', $var_name));
+        throw new Enlight_Exception(\sprintf('Property %s does not exist', $var_name));
     }
 
     /**
@@ -297,7 +298,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
             [$this->_id]);
 
         if (!\is_array($order)) {
-            throw new Enlight_Exception(sprintf('Order with id %d not found!', $this->_id));
+            throw new Enlight_Exception(\sprintf('Order with id %d not found!', $this->_id));
         }
 
         $this->_order = new ArrayObject($order, ArrayObject::ARRAY_AS_PROPS);
@@ -1039,7 +1040,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
     {
         $country = $this->countryGateway->getCountry($countryId, $this->context);
         if (!$country instanceof Country) {
-            throw new RuntimeException(sprintf('Country with ID "%s" not found', $countryId));
+            throw new RuntimeException(\sprintf('Country with ID "%s" not found', $countryId));
         }
 
         return $this->structConverter->convertCountryStruct($country);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -30,14 +31,14 @@ interface Container
     /**
      * Overrides all elements of this container
      *
-     * @param ArrayCollection<\Shopware\Components\Form\Interfaces\Element> $elements
+     * @param ArrayCollection<Element> $elements
      */
     public function setElements($elements);
 
     /**
      * Returns all elements of this container.
      *
-     * @return ArrayCollection<\Shopware\Components\Form\Interfaces\Element>
+     * @return ArrayCollection<Element>
      */
     public function getElements();
 

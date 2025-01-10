@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -133,7 +134,7 @@ class RegisterControllerCompilerPass implements CompilerPassInterface
      */
     private function buildEventName($module, $controller)
     {
-        return sprintf(
+        return \sprintf(
             'Enlight_Controller_Dispatcher_ControllerPath_%s_%s',
             $module,
             $controller

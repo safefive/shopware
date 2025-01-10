@@ -219,7 +219,7 @@ class Manager
         } catch (Exception $e) {
             $this->markMigrationAsFailed($migration, $e);
 
-            throw new Exception(sprintf('Could not apply migration (%s). Error: %s ', \get_class($migration), $e->getMessage()));
+            throw new Exception(\sprintf('Could not apply migration (%s). Error: %s ', \get_class($migration), $e->getMessage()));
         }
 
         $this->markMigrationAsFinished($migration);
@@ -235,14 +235,14 @@ class Manager
         $this->createSchemaTable();
 
         $currentVersion = $this->getCurrentVersion();
-        $this->log(sprintf('Current MigrationNumber: %s', $currentVersion));
+        $this->log(\sprintf('Current MigrationNumber: %s', $currentVersion));
 
         $migrations = $this->getMigrationsForVersion($currentVersion);
 
-        $this->log(sprintf('Found %s migrations to apply', \count($migrations)));
+        $this->log(\sprintf('Found %s migrations to apply', \count($migrations)));
 
         foreach ($migrations as $migration) {
-            $this->log(sprintf('Apply MigrationNumber: %s - %s', $migration->getVersion(), $migration->getLabel()));
+            $this->log(\sprintf('Apply MigrationNumber: %s - %s', $migration->getVersion(), $migration->getLabel()));
             try {
                 $this->apply($migration, $modus);
             } catch (Exception $e) {
@@ -264,7 +264,7 @@ class Manager
             /** @var AbstractMigration $migrationClass */
             $migrationClass = new $migrationClassName($this->getConnection());
         } catch (Exception $e) {
-            throw new RuntimeException(sprintf('Could not instantiate Object of class "%s"', $migrationClassName));
+            throw new RuntimeException(\sprintf('Could not instantiate Object of class "%s"', $migrationClassName));
         }
 
         $this->validateMigration($migrationClass, $result);
@@ -308,7 +308,7 @@ class Manager
         $version = (int) $result['0'];
 
         if ($migrationClass->getVersion() !== $version) {
-            throw new Exception(sprintf('Version mismatch. Version in filename: %s, Version in Class: %s', $result['1'], $migrationClass->getVersion()));
+            throw new Exception(\sprintf('Version mismatch. Version in filename: %s, Version in Class: %s', $result['1'], $migrationClass->getVersion()));
         }
     }
 }

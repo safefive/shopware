@@ -54,7 +54,7 @@ trait MigrationTestTrait
 
         $configPath = $rootDirectory . '/config.php';
         if (!is_file($configPath)) {
-            throw new UnexpectedValueException(sprintf('Config file not found: %s', $configPath));
+            throw new UnexpectedValueException(\sprintf('Config file not found: %s', $configPath));
         }
 
         $config = require $configPath;
@@ -76,7 +76,7 @@ trait MigrationTestTrait
         $rootDirectory = realpath(__DIR__ . '/../../../');
 
         if (!\is_string($rootDirectory)) {
-            throw new UnexpectedValueException(sprintf('Root directory not found: %s', $rootDirectory));
+            throw new UnexpectedValueException(\sprintf('Root directory not found: %s', $rootDirectory));
         }
 
         return $rootDirectory;

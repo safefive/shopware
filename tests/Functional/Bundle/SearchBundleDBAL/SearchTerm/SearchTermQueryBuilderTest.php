@@ -48,7 +48,7 @@ class SearchTermQueryBuilderTest extends TestCase
         $query = $searchTermQueryBuilder->buildQuery(self::SEARCH_TERM);
 
         if (!($query instanceof QueryBuilder)) {
-            static::fail(sprintf('Instance of %s expected.', QueryBuilder::class));
+            static::fail(\sprintf('Instance of %s expected.', QueryBuilder::class));
         }
 
         $stmt = $query->execute();
@@ -59,7 +59,7 @@ class SearchTermQueryBuilderTest extends TestCase
         $product = $productRepository->find($bestMatch['product_id']);
 
         if (!($product instanceof Article)) {
-            static::fail(sprintf('Instance of %s expected.', Article::class));
+            static::fail(\sprintf('Instance of %s expected.', Article::class));
         }
 
         $product->setActive(false);

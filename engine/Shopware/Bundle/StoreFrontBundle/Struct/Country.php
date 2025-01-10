@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -300,7 +301,7 @@ class Country extends Extendable
     }
 
     /**
-     * @return Country\State[]
+     * @return State[]
      */
     public function getStates()
     {
@@ -308,7 +309,7 @@ class Country extends Extendable
     }
 
     /**
-     * @param Country\State[] $states
+     * @param State[] $states
      */
     public function setStates($states)
     {

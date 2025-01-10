@@ -171,7 +171,7 @@ class XmlConfigReaderTest extends TestCase
     private function readFile(string $file): array
     {
         return $this->configReader->read(
-            sprintf('%s/examples/config/%s', __DIR__, $file)
+            \sprintf('%s/examples/config/%s', __DIR__, $file)
         );
     }
 }

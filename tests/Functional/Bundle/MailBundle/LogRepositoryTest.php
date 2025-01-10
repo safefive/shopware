@@ -73,7 +73,7 @@ class LogRepositoryTest extends TestCase
         $this->builder = new LogEntryBuilder($this->entityManager);
         $this->repository = $this->entityManager->getRepository(Log::class);
 
-        $oneDay = new DateInterval(sprintf('P%dD', 1));
+        $oneDay = new DateInterval(\sprintf('P%dD', 1));
         $this->pastDate = new DateTime(self::PAST_DATE);
         $this->pastDatePlusOneDay = (new DateTime(self::PAST_DATE))->add($oneDay);
         $this->currentDate = new DateTime('now');
@@ -137,8 +137,8 @@ class LogRepositoryTest extends TestCase
         $secondMail->setBodyText($firstMail->getBodyText()->getRawContent());
 
         // Try to create log entries with addresses the MySQL UNIQUE-constraint would treat as equal.
-        $secondMail->addTo(sprintf('%s ', $firstMail->getRecipients()[0]));
-        $secondMail->addTo(sprintf('    %s     ', $firstMail->getRecipients()[0]));
+        $secondMail->addTo(\sprintf('%s ', $firstMail->getRecipients()[0]));
+        $secondMail->addTo(\sprintf('    %s     ', $firstMail->getRecipients()[0]));
         $secondMail->addTo(ucfirst($firstMail->getRecipients()[0]));
 
         $first = $this->builder->build($firstMail);

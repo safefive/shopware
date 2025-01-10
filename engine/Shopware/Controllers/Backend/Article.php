@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -1315,7 +1316,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
 
         $configuratorSet = $product->getConfiguratorSet();
         if (!$configuratorSet instanceof Set) {
-            throw new Exception(sprintf('Should not happen. The product with the given ID "%s" must be a variant product at this point.', $productId));
+            throw new Exception(\sprintf('Should not happen. The product with the given ID "%s" must be a variant product at this point.', $productId));
         }
         $dependencies = $this->getRepository()->getConfiguratorDependenciesQuery($configuratorSet->getId())->getArrayResult();
         $priceVariations = $this->getRepository()->getConfiguratorPriceVariationsQuery($configuratorSet->getId())->getArrayResult();
@@ -1683,7 +1684,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         if (!$variant) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('Product variant by id %s not found', $variantId),
+                'message' => \sprintf('Product variant by id %s not found', $variantId),
             ]);
 
             return;
@@ -1712,7 +1713,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         if (!$esd) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('ESD by id %s not found', $esdId),
+                'message' => \sprintf('ESD by id %s not found', $esdId),
             ]);
 
             return;
@@ -1851,7 +1852,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         if (!$esd) {
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf('ESD by id %s not found', $esdId),
+                'message' => \sprintf('ESD by id %s not found', $esdId),
             ]);
 
             return;
@@ -2001,7 +2002,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         $filePath = (string) $file->getRealPath();
         $upstream = fopen($filePath, 'rb');
         if (!\is_resource($upstream)) {
-            throw new RuntimeException(sprintf('Could not open file at: %s', $filePath));
+            throw new RuntimeException(\sprintf('Could not open file at: %s', $filePath));
         }
         $filesystem->writeStream($destinationPath, $upstream);
         fclose($upstream);
@@ -2040,7 +2041,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
 
         $response = $this->Response();
         $response->headers->set('content-type', $mimeType);
-        $response->headers->set('content-disposition', sprintf('attachment; filename="%s"', basename($path)));
+        $response->headers->set('content-disposition', \sprintf('attachment; filename="%s"', basename($path)));
         $response->headers->set('content-length', $meta['size']);
         $response->headers->set('content-transfer-encoding', 'binary');
         $response->sendHeaders();
@@ -2048,7 +2049,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
 
         $upstream = $filesystem->readStream($path);
         if (!\is_resource($upstream)) {
-            throw new RuntimeException(sprintf('Could not open file from: %s', $path));
+            throw new RuntimeException(\sprintf('Could not open file from: %s', $path));
         }
         $downstream = fopen('php://output', 'wb');
         if (!\is_resource($downstream)) {
@@ -2079,7 +2080,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         $dateFormat = '%Y%m';
         $limit = 12;
 
-        $sql = sprintf("
+        $sql = \sprintf("
             SELECT
                 SUM(price*quantity) AS revenue,
                 SUM(quantity) AS orders,
@@ -2398,7 +2399,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function getConfiguratorGroupRepository()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if ($this->configuratorGroupRepository === null) {
             $this->configuratorGroupRepository = $this->get('models')->getRepository(Group::class);
@@ -3338,15 +3339,15 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         $selectSql = [];
 
         // We have remove the first group id, but we need the first id in the select, from and where path.
-        $selectSql[] = sprintf($selectTemplate, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId);
-        $groupSql[] = sprintf($fromTemplate, $firstId, $firstId, $firstId, $firstId);
-        $whereSql = sprintf($whereTemplate, $firstId, $firstId, $firstId, implode(',', $first['options']));
+        $selectSql[] = \sprintf($selectTemplate, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId, $firstId);
+        $groupSql[] = \sprintf($fromTemplate, $firstId, $firstId, $firstId, $firstId);
+        $whereSql = \sprintf($whereTemplate, $firstId, $firstId, $firstId, implode(',', $first['options']));
 
         // Now we iterate all other groups, and create a select sql path and a cross join sql path.
         foreach ($activeGroups as $group) {
             $groupId = (int) $group['id'];
-            $selectSql[] = sprintf($selectTemplate, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId);
-            $groupSql[] = sprintf($joinTemplate, $groupId, $groupId, $groupId, $groupId, implode(',', $group['options']), $groupId, $groupId, $groupId);
+            $selectSql[] = \sprintf($selectTemplate, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId, $groupId);
+            $groupSql[] = \sprintf($joinTemplate, $groupId, $groupId, $groupId, $groupId, implode(',', $group['options']), $groupId, $groupId, $groupId);
         }
 
         // Concat the sql statement
@@ -3530,7 +3531,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function getDependencyByOptionId($optionId, $dependencies)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $returnValue = [];
         foreach ($dependencies as $dependency) {
@@ -4479,7 +4480,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function getViolationFields($violations)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $fields = [];
         foreach ($violations as $violation) {

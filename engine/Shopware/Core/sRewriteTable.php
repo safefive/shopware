@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -744,7 +745,7 @@ class sRewriteTable implements Enlight_Hook
                 $path = $this->template->fetch('string:' . $type->getSeoUrlTemplate(), ['type' => $typeArray, 'item' => $item, 'context' => $context]);
                 $path = $this->sCleanupPath($path);
 
-                $org_path = sprintf('sViewport=%s&sAction=detail&id=%d', $type->getControllerName(), $item['id']);
+                $org_path = \sprintf('sViewport=%s&sAction=detail&id=%d', $type->getControllerName(), $item['id']);
                 $this->sInsertUrl($org_path, $path);
             }
         }
@@ -867,7 +868,7 @@ class sRewriteTable implements Enlight_Hook
      */
     public function getData()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this->data;
     }

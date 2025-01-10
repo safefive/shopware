@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -49,7 +50,7 @@ class Manager
                 /** @var Resource\Resource $resource */
                 $resource = $container->get($serviceId);
             } else {
-                trigger_error(sprintf('The requested service with id %s is deprecated. Please use CamelCased service id instead.', $name), E_USER_DEPRECATED);
+                trigger_error(\sprintf('The requested service with id %s is deprecated. Please use CamelCased service id instead.', $name), E_USER_DEPRECATED);
                 $resource = $container->get('shopware.api.' . strtolower($name));
             }
         } catch (ServiceNotFoundException $e) {

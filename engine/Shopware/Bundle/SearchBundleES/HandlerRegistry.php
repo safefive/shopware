@@ -58,7 +58,7 @@ class HandlerRegistry
             }
         }
 
-        throw new RuntimeException(sprintf('%s class not supported', \get_class($condition)));
+        throw new RuntimeException(\sprintf('%s class not supported', \get_class($condition)));
     }
 
     /**

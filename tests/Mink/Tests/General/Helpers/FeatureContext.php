@@ -171,7 +171,7 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
      */
     public function saveScreenshot(?string $filename = null, ?string $filepath = null): void
     {
-        $generatedFilename = sprintf('%s_%s.%s', $this->getMinkParameter('browser_name'), $this->getDateTimeWithRandomString(), 'png');
+        $generatedFilename = \sprintf('%s_%s.%s', $this->getMinkParameter('browser_name'), $this->getDateTimeWithRandomString(), 'png');
         $filename = $filename ?: $generatedFilename;
         $filepath = $filepath ?: (ini_get('upload_tmp_dir') ?: sys_get_temp_dir());
         file_put_contents($filepath . '/' . $filename, $this->getSession()->getScreenshot());
@@ -189,7 +189,7 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
         );
 
         if (!$configId) {
-            $message = sprintf('Configuration "%s" doesn\'t exist!', $configName);
+            $message = \sprintf('Configuration "%s" doesn\'t exist!', $configName);
             Helper::throwException($message);
         }
 
@@ -261,7 +261,7 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
             ];
             $filepath = $this->getService(Kernel::class)->getRootDir() . '/build/logs/mink';
 
-            $filename = sprintf('errors_%s.%s', $this->getDateTimeWithRandomString(), 'log');
+            $filename = \sprintf('errors_%s.%s', $this->getDateTimeWithRandomString(), 'log');
             $filepath .= '/' . $filename;
             file_put_contents($filepath, $errorNameMap[$errno] . ': ' . $errstr, FILE_APPEND);
 
@@ -314,14 +314,14 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
         restore_error_handler();
 
         // get the template id
-        $sql = sprintf(
+        $sql = \sprintf(
             'SELECT id FROM `s_core_templates` WHERE template = "%s"',
             self::$suite->getSetting('template')
         );
 
         $templateId = $this->getService(Connection::class)->fetchOne($sql);
         if (!$templateId) {
-            Helper::throwException(sprintf('Unable to find template by name %s', self::$suite->getSetting('template')));
+            Helper::throwException(\sprintf('Unable to find template by name %s', self::$suite->getSetting('template')));
         }
 
         // set the template for shop "Deutsch" and activate SEPA payment method
@@ -364,7 +364,7 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
     private function logRequest(): void
     {
         $session = $this->getSession();
-        $log = sprintf('Current page: %d %s', $this->getStatusCode(), $session->getCurrentUrl()) . "\n";
+        $log = \sprintf('Current page: %d %s', $this->getStatusCode(), $session->getCurrentUrl()) . "\n";
         $log .= $this->getResponseHeadersLogMessage($session);
         $log .= $this->getRequestContentLogMessage($session);
         $this->saveLog($log);
@@ -374,9 +374,9 @@ class FeatureContext extends SubContext implements SnippetAcceptingContext
     {
         $logDir = $this->getService(Kernel::class)->getRootDir() . '/build/logs/mink';
 
-        $path = sprintf('%s/behat-%s.%s', $logDir, $this->getDateTime(), 'log');
+        $path = \sprintf('%s/behat-%s.%s', $logDir, $this->getDateTime(), 'log');
         if (!file_put_contents($path, $content)) {
-            Helper::throwException(sprintf('Failed while trying to write log in "%s".', $path));
+            Helper::throwException(\sprintf('Failed while trying to write log in "%s".', $path));
         }
     }
 

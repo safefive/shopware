@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -183,7 +184,7 @@ class Cache extends Resource implements BatchInterface
      */
     protected function getRequest()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this->request;
     }
@@ -248,7 +249,7 @@ class Cache extends Resource implements BatchInterface
                 $this->cacheManager->clearOpCache();
                 break;
             default:
-                throw new NotFoundException(sprintf('Cache "%s" is not a valid cache id.', $cache));
+                throw new NotFoundException(\sprintf('Cache "%s" is not a valid cache id.', $cache));
         }
 
         if (!empty($capabilities['tags'])) {
@@ -289,7 +290,7 @@ class Cache extends Resource implements BatchInterface
                 $cacheInfo = $this->cacheManager->getOpCacheCacheInfo();
                 break;
             default:
-                throw new NotFoundException(sprintf('Cache "%s" is not a valid cache id.', $cache));
+                throw new NotFoundException(\sprintf('Cache "%s" is not a valid cache id.', $cache));
         }
 
         $cacheInfo['id'] = $cache;

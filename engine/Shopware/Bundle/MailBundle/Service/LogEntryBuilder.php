@@ -299,6 +299,6 @@ class LogEntryBuilder implements LogEntryBuilderInterface
             return null;
         }
 
-        return sprintf('%s.pdf', $document['type']['name']);
+        return \sprintf('%s.pdf', $document['type']['name']);
     }
 }

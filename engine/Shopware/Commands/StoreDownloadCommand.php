@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -125,7 +126,7 @@ class StoreDownloadCommand extends StoreCommand implements CompletionAwareInterf
 
         if ($plugin && $plugin->getCode() !== null) {
             if ($plugin->hasFreeDownload() === false && $plugin->hasCapabilityDummy() === false) {
-                $io->note(sprintf('You must be authenticated to download: %s', $plugin->getLabel()));
+                $io->note(\sprintf('You must be authenticated to download: %s', $plugin->getLabel()));
 
                 $token = $this->checkAuthentication();
             }
@@ -157,13 +158,13 @@ class StoreDownloadCommand extends StoreCommand implements CompletionAwareInterf
         }
 
         if (!$plugin) {
-            $io->error(sprintf('Plugin %s not found', $technicalName));
+            $io->error(\sprintf('Plugin %s not found', $technicalName));
 
             return 1;
         }
 
         $io->section($plugin->getLabel());
-        $io->comment(sprintf('Checking system requirements for plugin %s', $plugin->getLabel()));
+        $io->comment(\sprintf('Checking system requirements for plugin %s', $plugin->getLabel()));
 
         $plugin = $this->createPluginStruct($plugin);
 
@@ -212,12 +213,12 @@ class StoreDownloadCommand extends StoreCommand implements CompletionAwareInterf
     private function handleDummyUpdate(PluginStruct $plugin, $domain, $version)
     {
         if (!$plugin->isUpdateAvailable()) {
-            $this->io->text(sprintf('No update available for plugin %s', $plugin->getLabel()));
+            $this->io->text(\sprintf('No update available for plugin %s', $plugin->getLabel()));
 
             return;
         }
 
-        $this->io->comment(sprintf('Download plugin update package %s', $plugin->getLabel()));
+        $this->io->comment(\sprintf('Download plugin update package %s', $plugin->getLabel()));
 
         $request = new DownloadRequest($plugin->getTechnicalName(), $version, $domain, null);
 
@@ -238,7 +239,7 @@ class StoreDownloadCommand extends StoreCommand implements CompletionAwareInterf
      */
     private function handleDummyInstall(PluginStruct $plugin, $domain, $version)
     {
-        $this->io->comment(sprintf('Download plugin install package %s', $plugin->getLabel()));
+        $this->io->comment(\sprintf('Download plugin install package %s', $plugin->getLabel()));
 
         $request = new DownloadRequest($plugin->getTechnicalName(), $version, $domain, null);
 
@@ -254,7 +255,7 @@ class StoreDownloadCommand extends StoreCommand implements CompletionAwareInterf
     private function handleLicenceUpdate(PluginStruct $plugin, $domain, $version, ?AccessTokenStruct $token = null)
     {
         if (!$plugin->isUpdateAvailable()) {
-            $this->io->text(sprintf('No update available for plugin %s', $plugin->getLabel()));
+            $this->io->text(\sprintf('No update available for plugin %s', $plugin->getLabel()));
 
             return;
         }

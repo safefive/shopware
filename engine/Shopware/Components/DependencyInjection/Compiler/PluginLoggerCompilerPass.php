@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -72,9 +73,9 @@ class PluginLoggerCompilerPass implements CompilerPassInterface
     protected function createLoggerHandler(string $servicePrefix): Definition
     {
         return (new Definition(RotatingFileHandler::class, [
-            sprintf('%%kernel.logs_dir%%/%s_%%kernel.environment%%.log', $servicePrefix),
-            sprintf('%%%s%%', $this->getParameterNameLoggerMaxFiles($servicePrefix)),
-            sprintf('%%%s%%', $this->getParameterNameLogLevel($servicePrefix)),
+            \sprintf('%%kernel.logs_dir%%/%s_%%kernel.environment%%.log', $servicePrefix),
+            \sprintf('%%%s%%', $this->getParameterNameLoggerMaxFiles($servicePrefix)),
+            \sprintf('%%%s%%', $this->getParameterNameLogLevel($servicePrefix)),
         ]))
             ->addMethodCall('pushProcessor', [new Reference('monolog.processor.uid')])
             ->setPublic(false)
@@ -99,26 +100,26 @@ class PluginLoggerCompilerPass implements CompilerPassInterface
 
     protected function getServiceIdLogger(string $servicePrefix): string
     {
-        return sprintf('%s.logger', $servicePrefix);
+        return \sprintf('%s.logger', $servicePrefix);
     }
 
     protected function getServiceIdLoggerFormatter(string $servicePrefix): string
     {
-        return sprintf('%s.logger_formatter', $servicePrefix);
+        return \sprintf('%s.logger_formatter', $servicePrefix);
     }
 
     protected function getServiceIdLoggerHandler(string $servicePrefix): string
     {
-        return sprintf('%s.logger_handler', $servicePrefix);
+        return \sprintf('%s.logger_handler', $servicePrefix);
     }
 
     protected function getParameterNameLoggerMaxFiles(string $servicePrefix): string
     {
-        return sprintf('%s.logger.max_files', $servicePrefix);
+        return \sprintf('%s.logger.max_files', $servicePrefix);
     }
 
     protected function getParameterNameLogLevel(string $servicePrefix): string
     {
-        return sprintf('%s.logger.level', $servicePrefix);
+        return \sprintf('%s.logger.level', $servicePrefix);
     }
 }

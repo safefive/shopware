@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -269,7 +270,7 @@ abstract class Shopware_Controllers_Frontend_Payment extends Enlight_Controller_
         $data = $persister->load($signature);
 
         if (!$data) {
-            throw new RuntimeException(sprintf('Basket for signature %s not found', $signature));
+            throw new RuntimeException(\sprintf('Basket for signature %s not found', $signature));
         }
 
         $persister->delete($signature);
@@ -321,7 +322,7 @@ Order number: %s.<br>
 Payment transaction number: %s.
 EOD;
 
-        $content = sprintf($content, $paymentName, $orderNumber, $transactionNumber);
+        $content = \sprintf($content, $paymentName, $orderNumber, $transactionNumber);
 
         try {
             $mail = $this->get('mail');

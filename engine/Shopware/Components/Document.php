@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -225,7 +226,7 @@ class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
             }
 
             if (empty($document->_subshop['id'])) {
-                throw new Enlight_Exception(sprintf('Could not load template path for order "%s"', $orderID));
+                throw new Enlight_Exception(\sprintf('Could not load template path for order "%s"', $orderID));
             }
             if (!empty($config['_allowMultipleDocuments'])) {
                 $document->_allowMultipleDocuments = $config['_allowMultipleDocuments'];
@@ -328,7 +329,7 @@ class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
             $mpdf->Output($tmpFile, 'F');
 
             $stream = fopen($tmpFile, 'rb');
-            $path = sprintf('documents/%s.pdf', $this->_documentHash);
+            $path = \sprintf('documents/%s.pdf', $this->_documentHash);
 
             $filesystem = Shopware()->Container()->get('shopware.filesystem.private');
             $filesystem->putStream($path, $stream);

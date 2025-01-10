@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -33,7 +34,7 @@ class MediaFileExtensionNotAllowedException extends Exception
     {
         $this->extension = $extension;
 
-        $message = sprintf('The media file extension "%s" is not allowed.', $extension);
+        $message = \sprintf('The media file extension "%s" is not allowed.', $extension);
 
         parent::__construct($message);
     }

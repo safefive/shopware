@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -48,7 +49,7 @@ class PriceGroup extends ModelEntity
     /**
      * INVERSE SIDE
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Shopware\Models\Customer\Customer>
+     * @var \Doctrine\Common\Collections\ArrayCollection<Customer>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Customer\Customer", mappedBy="priceGroup")
      */
@@ -142,7 +143,7 @@ class PriceGroup extends ModelEntity
      * the Customer.group property (OWNING SIDE) and the Group.customers (INVERSE SIDE) property.
      * The customer data is joined over the s_user.groupkey field.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection<\Shopware\Models\Customer\Customer>
+     * @return \Doctrine\Common\Collections\ArrayCollection<Customer>
      */
     public function getCustomers()
     {
@@ -155,7 +156,7 @@ class PriceGroup extends ModelEntity
      * the Customer.group property (OWNING SIDE) and the Group.customers (INVERSE SIDE) property.
      * The customer data is joined over the s_user.groupkey field.
      *
-     * @param \Doctrine\Common\Collections\ArrayCollection<\Shopware\Models\Customer\Customer> $customers
+     * @param \Doctrine\Common\Collections\ArrayCollection<Customer> $customers
      */
     public function setCustomers($customers)
     {

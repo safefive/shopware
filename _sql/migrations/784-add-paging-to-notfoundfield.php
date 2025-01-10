@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -33,7 +34,7 @@ class Migrations_Migration784 extends Shopware\Components\Migrations\AbstractMig
             'pageSize' => 25,
         ];
 
-        $sql = sprintf("UPDATE s_core_config_elements SET `options` = '%s' WHERE `name` = 'PageNotFoundDestination'", serialize($data));
+        $sql = \sprintf("UPDATE s_core_config_elements SET `options` = '%s' WHERE `name` = 'PageNotFoundDestination'", serialize($data));
         $this->addSql($sql);
     }
 }

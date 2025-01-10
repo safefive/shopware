@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -58,7 +59,7 @@ class ContentType extends Enlight_Controller_Action
         $criteria->limit = self::LIMIT;
         $criteria->sort = [['property' => 'id', 'direction' => 'DESC']];
 
-        $this->get('events')->notify(sprintf('Content_Type_Frontend_Criteria_Creation_%s', $this->type->getInternalName()), [
+        $this->get('events')->notify(\sprintf('Content_Type_Frontend_Criteria_Creation_%s', $this->type->getInternalName()), [
             'subject' => $this,
             'criteria' => $criteria,
         ]);
@@ -81,7 +82,7 @@ class ContentType extends Enlight_Controller_Action
         $result = $this->repository->findAll($criteria);
 
         if (\count($result->items) === 0) {
-            throw new Enlight_Controller_Exception(sprintf('Cannot find element with id %d of type \'%s\'', $id, $this->type->getInternalName()));
+            throw new Enlight_Controller_Exception(\sprintf('Cannot find element with id %d of type \'%s\'', $id, $this->type->getInternalName()));
         }
 
         $item = current($result->items);

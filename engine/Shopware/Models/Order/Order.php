@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -1119,7 +1120,7 @@ class Order extends ModelEntity
      */
     public function calculateInvoiceAmount()
     {
-        trigger_error(sprintf(
+        trigger_error(\sprintf(
             '%s:%s is deprecated since Shopware 5.7 and will be removed with 5.8. Please use the service with id `%s` instead',
             __CLASS__,
             __METHOD__,

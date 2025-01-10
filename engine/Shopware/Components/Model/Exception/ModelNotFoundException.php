@@ -42,7 +42,7 @@ class ModelNotFoundException extends RuntimeException
         int $code = 0,
         ?Throwable $previous = null
     ) {
-        $message = sprintf('Model of "%s" for %s "%s" not found', $modelClass, $identifier, (string) $identifierValue);
+        $message = \sprintf('Model of "%s" for %s "%s" not found', $modelClass, $identifier, (string) $identifierValue);
         parent::__construct($message, $code, $previous);
     }
 }

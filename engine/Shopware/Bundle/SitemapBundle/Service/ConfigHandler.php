@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -66,7 +67,7 @@ class ConfigHandler
             return $customUrls;
         }
 
-        throw new RuntimeException(sprintf("Invalid sitemap config key: '%s'", $key));
+        throw new RuntimeException(\sprintf("Invalid sitemap config key: '%s'", $key));
     }
 
     public function save(array $config): void

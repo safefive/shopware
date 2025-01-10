@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -78,7 +79,7 @@ class Shop extends Resource
         $shop = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$shop) {
-            throw new NotFoundException(sprintf('Shop by id %s not found', $id));
+            throw new NotFoundException(\sprintf('Shop by id %s not found', $id));
         }
 
         return $shop;
@@ -161,7 +162,7 @@ class Shop extends Resource
         $shop = $this->getRepository()->find($id);
 
         if (!$shop) {
-            throw new NotFoundException(sprintf('Shop by id %s not found', $id));
+            throw new NotFoundException(\sprintf('Shop by id %s not found', $id));
         }
 
         $params = $this->prepareShopData($params, $shop);
@@ -196,7 +197,7 @@ class Shop extends Resource
         $shop = $this->getRepository()->find($id);
 
         if (!$shop) {
-            throw new NotFoundException(sprintf('Shop by id %s not found', $id));
+            throw new NotFoundException(\sprintf('Shop by id %s not found', $id));
         }
 
         $this->getManager()->remove($shop);
@@ -220,7 +221,7 @@ class Shop extends Resource
                 }
             } else {
                 if (isset($params[$param]) && empty($params[$param])) {
-                    throw new RuntimeException(sprintf('param %s may not be empty', $param));
+                    throw new RuntimeException(\sprintf('param %s may not be empty', $param));
                 }
             }
         }
@@ -230,7 +231,7 @@ class Shop extends Resource
             if ($currency !== null) {
                 $params['currency'] = $currency;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid currency id', $params['currencyId']));
+                throw new RuntimeException(\sprintf('%s is not a valid currency id', $params['currencyId']));
             }
         }
 
@@ -239,7 +240,7 @@ class Shop extends Resource
             if ($locale !== null) {
                 $params['locale'] = $locale;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid locale id', $params['localeId']));
+                throw new RuntimeException(\sprintf('%s is not a valid locale id', $params['localeId']));
             }
         }
 
@@ -248,7 +249,7 @@ class Shop extends Resource
             if ($customerGroup !== null) {
                 $params['customerGroup'] = $customerGroup;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid customerGroup id', $params['customerGroupId']));
+                throw new RuntimeException(\sprintf('%s is not a valid customerGroup id', $params['customerGroupId']));
             }
         }
 
@@ -257,7 +258,7 @@ class Shop extends Resource
             if ($shopModel instanceof ShopModel) {
                 $params['main'] = $shopModel;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid shop id', $params['mainId']));
+                throw new RuntimeException(\sprintf('%s is not a valid shop id', $params['mainId']));
             }
         }
 
@@ -266,7 +267,7 @@ class Shop extends Resource
             if ($template !== null) {
                 $params['template'] = $template;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid template id', $params['templateId']));
+                throw new RuntimeException(\sprintf('%s is not a valid template id', $params['templateId']));
             }
         }
 
@@ -275,7 +276,7 @@ class Shop extends Resource
             if ($template !== null) {
                 $params['documentTemplate'] = $template;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid template id', $params['documentTemplateId']));
+                throw new RuntimeException(\sprintf('%s is not a valid template id', $params['documentTemplateId']));
             }
         }
 
@@ -284,7 +285,7 @@ class Shop extends Resource
             if ($category !== null) {
                 $params['category'] = $category;
             } else {
-                throw new RuntimeException(sprintf('%s is not a valid category id', $params['categoryId']));
+                throw new RuntimeException(\sprintf('%s is not a valid category id', $params['categoryId']));
             }
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -39,7 +40,7 @@ class MigrationHelper
     {
         $identifiers = ['id', 'billingID', 'shippingID'];
 
-        $columns = $this->connection->query(sprintf('DESCRIBE `%s`', $table))->fetchAll(PDO::FETCH_ASSOC);
+        $columns = $this->connection->query(\sprintf('DESCRIBE `%s`', $table))->fetchAll(PDO::FETCH_ASSOC);
 
         $definition = [];
 
@@ -112,13 +113,13 @@ SQL;
 
     private function createColumn(string $table, string $name, string $type): void
     {
-        $sql = sprintf('ALTER TABLE `%s` ADD `%s` %s NULL DEFAULT NULL', $table, $name, $type);
+        $sql = \sprintf('ALTER TABLE `%s` ADD `%s` %s NULL DEFAULT NULL', $table, $name, $type);
         $this->connection->exec($sql);
     }
 
     private function changeColumn(string $table, string $name, string $type): void
     {
-        $sql = sprintf('ALTER TABLE `%s` CHANGE `%s` `%s` %s NULL DEFAULT NULL;', $table, $name, $name, $type);
+        $sql = \sprintf('ALTER TABLE `%s` CHANGE `%s` `%s` %s NULL DEFAULT NULL;', $table, $name, $name, $type);
         $this->connection->exec($sql);
     }
 

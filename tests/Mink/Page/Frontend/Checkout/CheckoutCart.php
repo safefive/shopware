@@ -108,7 +108,7 @@ class CheckoutCart extends Page implements HelperSelectorInterface
         $result = Helper::checkArray($check);
 
         if ($result !== true) {
-            $message = sprintf(
+            $message = \sprintf(
                 'The value of "%s" is "%s"! (should be "%s")',
                 $result,
                 $check[$result][1],
@@ -178,7 +178,7 @@ class CheckoutCart extends Page implements HelperSelectorInterface
         $originalPath = $this->path;
 
         foreach ($items as $item) {
-            $this->path = sprintf('/checkout/addArticle/sAdd/%s/sQuantity/%d', $item['number'], $item['quantity']);
+            $this->path = \sprintf('/checkout/addArticle/sAdd/%s/sQuantity/%d', $item['number'], $item['quantity']);
             $this->open();
         }
 
@@ -198,7 +198,7 @@ class CheckoutCart extends Page implements HelperSelectorInterface
         if ($result !== true) {
             $messages = ['The following articles are wrong:'];
             foreach ($result as $product) {
-                $messages[] = sprintf(
+                $messages[] = \sprintf(
                     '%s - %s (%s is "%s", should be "%s")',
                     $product['properties']['number'],
                     $product['properties']['name'],
@@ -311,9 +311,9 @@ class CheckoutCart extends Page implements HelperSelectorInterface
     {
         $positionText = $cartPositionToCheck->getText();
         foreach ($taxValues as $taxValue) {
-            $taxString = sprintf('%s: %s', $taxValue['taxRate'], $taxValue['value']);
+            $taxString = \sprintf('%s: %s', $taxValue['taxRate'], $taxValue['value']);
             if (!str_contains($positionText, $taxString)) {
-                Helper::throwException(sprintf('Could not find tax "%s" in position "%s"', $taxString, $positionText));
+                Helper::throwException(\sprintf('Could not find tax "%s" in position "%s"', $taxString, $positionText));
             }
         }
     }
@@ -331,14 +331,14 @@ class CheckoutCart extends Page implements HelperSelectorInterface
         if (str_contains($key, '%')) {
             $taxRate = (float) $key;
 
-            return sprintf($labels['tax'][$language], $taxRate);
+            return \sprintf($labels['tax'][$language], $taxRate);
         }
 
         if (isset($labels[$key][$language])) {
             return $labels[$key][$language];
         }
 
-        $message = sprintf('Label "%s" is not defined for language key "%s"', $key, $language);
+        $message = \sprintf('Label "%s" is not defined for language key "%s"', $key, $language);
         Helper::throwException($message, Helper::EXCEPTION_PENDING);
     }
 
@@ -355,7 +355,7 @@ class CheckoutCart extends Page implements HelperSelectorInterface
             }
         }
 
-        $message = sprintf('Label "%s" does not exist on the page! ("%s")', $labelKey, $givenLabel);
+        $message = \sprintf('Label "%s" does not exist on the page! ("%s")', $labelKey, $givenLabel);
         Helper::throwException($message);
     }
 }

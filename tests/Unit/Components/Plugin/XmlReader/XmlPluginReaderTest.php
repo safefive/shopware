@@ -120,7 +120,7 @@ class XmlPluginReaderTest extends TestCase
     private function readFile(string $fileName = 'plugin'): array
     {
         return $this->pluginReader->read(
-            sprintf('%s/examples/plugin/%s.xml', __DIR__, $fileName)
+            \sprintf('%s/examples/plugin/%s.xml', __DIR__, $fileName)
         );
     }
 }

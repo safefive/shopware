@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -93,7 +94,7 @@ class SnippetsToIniCommand extends ShopwareCommand implements CompletionAwareInt
         if (!file_exists($dir) || !is_writable($dir)) {
             $old = umask(0);
             if (!mkdir($dir, 0777, true) && !is_dir($dir)) {
-                throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
+                throw new RuntimeException(\sprintf('Directory "%s" was not created', $dir));
             }
             chmod($dir, 0777);
             umask($old);

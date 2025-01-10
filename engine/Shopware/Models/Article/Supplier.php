@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -82,7 +83,7 @@ class Supplier extends ModelEntity
      * INVERSE SIDE
      * Articles can be bound to a specific supplier
      *
-     * @var ArrayCollection<\Shopware\Models\Article\Article>
+     * @var ArrayCollection<Article>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Article", mappedBy="supplier", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="id", referencedColumnName="supplierID")
@@ -277,7 +278,7 @@ class Supplier extends ModelEntity
     /**
      * Returns all articles assigned to this supplier
      *
-     * @return ArrayCollection<\Shopware\Models\Article\Article>
+     * @return ArrayCollection<Article>
      */
     public function getArticles()
     {
@@ -287,7 +288,7 @@ class Supplier extends ModelEntity
     /**
      * Takes an array of articles, in most cases doctrine will take care of this.
      *
-     * @param ArrayCollection<\Shopware\Models\Article\Article> $articles
+     * @param ArrayCollection<Article> $articles
      *
      * @return Supplier
      */

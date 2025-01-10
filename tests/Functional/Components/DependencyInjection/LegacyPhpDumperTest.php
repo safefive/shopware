@@ -58,12 +58,12 @@ class LegacyPhpDumperTest extends TestCase
         $testContainer = new TestContainerLegacyPhpDumperTest();
 
         $privateCalled = false;
-        $testContainer->get('events')->addListener(sprintf('Enlight_Bootstrap_InitResource_%s', PrivateTestService::class), function () use (&$privateCalled) {
+        $testContainer->get('events')->addListener(\sprintf('Enlight_Bootstrap_InitResource_%s', PrivateTestService::class), function () use (&$privateCalled) {
             $privateCalled = true;
         });
 
         $publicCalled = false;
-        $testContainer->get('events')->addListener(sprintf('Enlight_Bootstrap_InitResource_%s', PublicTestService::class), function () use (&$publicCalled) {
+        $testContainer->get('events')->addListener(\sprintf('Enlight_Bootstrap_InitResource_%s', PublicTestService::class), function () use (&$publicCalled) {
             $publicCalled = true;
         });
 

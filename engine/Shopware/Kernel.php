@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -621,10 +622,10 @@ class Kernel extends SymfonyKernel
         foreach ($runtimeDirectories as $name => $dir) {
             if (!is_dir($dir)) {
                 if (@mkdir($dir, 0777, true) === false && !is_dir($dir)) {
-                    throw new RuntimeException(sprintf("Unable to create the %s directory (%s)\n", $name, $dir));
+                    throw new RuntimeException(\sprintf("Unable to create the %s directory (%s)\n", $name, $dir));
                 }
             } elseif (!is_writable($dir)) {
-                throw new RuntimeException(sprintf("Unable to write in the %s directory (%s)\n", $name, $dir));
+                throw new RuntimeException(\sprintf("Unable to write in the %s directory (%s)\n", $name, $dir));
             }
         }
 

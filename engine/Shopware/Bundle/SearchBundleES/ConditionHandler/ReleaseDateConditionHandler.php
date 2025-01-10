@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -94,7 +95,7 @@ class ReleaseDateConditionHandler implements PartialConditionHandlerInterface
                 ]);
 
             default:
-                throw new RuntimeException(sprintf('Provided release date direction %s not supported', $criteriaPart->getDirection()));
+                throw new RuntimeException(\sprintf('Provided release date direction %s not supported', $criteriaPart->getDirection()));
         }
     }
 }

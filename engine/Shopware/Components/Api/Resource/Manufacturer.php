@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -67,7 +68,7 @@ class Manufacturer extends Resource
         $manufacturer = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$manufacturer) {
-            throw new NotFoundException(sprintf('Manufacturer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Manufacturer by id %d not found', $id));
         }
 
         return $manufacturer;
@@ -150,7 +151,7 @@ class Manufacturer extends Resource
         $manufacturer = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$manufacturer) {
-            throw new NotFoundException(sprintf('Manufacturer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Manufacturer by id %d not found', $id));
         }
 
         $params = $this->prepareManufacturerData($params);
@@ -186,7 +187,7 @@ class Manufacturer extends Resource
         $manufacturer = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$manufacturer) {
-            throw new NotFoundException(sprintf('Manufacturer by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Manufacturer by id %d not found', $id));
         }
 
         $this->getManager()->remove($manufacturer);
@@ -238,7 +239,7 @@ class Manufacturer extends Resource
             $media = $this->getManager()->find(MediaModel::class, (int) $data['image']['mediaId']);
 
             if (!($media instanceof MediaModel)) {
-                throw new ApiException\CustomValidationException(sprintf('Media by mediaId %s not found', $data['image']['mediaId']));
+                throw new ApiException\CustomValidationException(\sprintf('Media by mediaId %s not found', $data['image']['mediaId']));
             }
         }
 

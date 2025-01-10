@@ -123,7 +123,7 @@ class SubContext extends PageObjectContext implements KernelAwareContext, MinkAw
     {
         $element = $this->getElement($elementName);
         if (!$element instanceof $elementName) {
-            Helper::throwException(sprintf('Element expected to be a %s', $elementName));
+            Helper::throwException(\sprintf('Element expected to be a %s', $elementName));
         }
 
         $element->setParent($page);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -154,7 +155,7 @@ class Shopware_Controllers_Backend_FirstRunWizard extends Shopware_Controllers_B
                     continue;
                 }
 
-                $configValue = sprintf(
+                $configValue = \sprintf(
                     "<div>\n<img src=\"{media path='%s'}\" style=\"max-height: 20mm\" alt=\"Logo\"><br />",
                     $configValue
                 );
@@ -199,7 +200,7 @@ class Shopware_Controllers_Backend_FirstRunWizard extends Shopware_Controllers_B
 
             if ($key === 'logo') {
                 $hash = Random::getAlphanumericString(16);
-                $value = sprintf(
+                $value = \sprintf(
                     '<p><img id="tinymce-editor-image-%s" class="tinymce-editor-image tinymce-editor-image-%s" src="{media path=\'%s\'}" style="max-height: 20mm;" data-src="%s" /></p>',
                     $hash,
                     $hash,
@@ -563,7 +564,7 @@ class Shopware_Controllers_Backend_FirstRunWizard extends Shopware_Controllers_B
         $this->get('plugins')->Controller()->ViewRenderer()->setNoRender(false);
         $this->Front()->Plugins()->Json()->setRenderer(false);
 
-        $this->View()->loadTemplate(sprintf('backend/first_run_wizard/template/%s.tpl', $view));
+        $this->View()->loadTemplate(\sprintf('backend/first_run_wizard/template/%s.tpl', $view));
     }
 
     private function getVersion(): string

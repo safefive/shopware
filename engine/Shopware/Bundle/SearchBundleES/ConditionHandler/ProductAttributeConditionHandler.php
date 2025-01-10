@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -90,7 +91,7 @@ class ProductAttributeConditionHandler implements PartialConditionHandlerInterfa
         $attribute = $this->attributeService->get('s_articles_attributes', $criteriaPart->getField());
 
         if (!$attribute instanceof ConfigurationStruct) {
-            throw new RuntimeException(sprintf('Attribute not found for field %s', $criteriaPart->getField()));
+            throw new RuntimeException(\sprintf('Attribute not found for field %s', $criteriaPart->getField()));
         }
 
         $type = $attribute->getElasticSearchType()['type'];
@@ -207,7 +208,7 @@ class ProductAttributeConditionHandler implements PartialConditionHandlerInterfa
                 return new WildcardQuery($field, '*' . $value);
 
             default:
-                throw new RuntimeException(sprintf('Operator %s is not supported in elastic search', $criteriaPart->getOperator()));
+                throw new RuntimeException(\sprintf('Operator %s is not supported in elastic search', $criteriaPart->getOperator()));
         }
     }
 }

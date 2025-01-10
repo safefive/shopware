@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -98,19 +99,19 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
 
         if (!$plugin->getActive()) {
-            $output->writeln(sprintf('The plugin %s is already deactivated.', $pluginName));
+            $output->writeln(\sprintf('The plugin %s is already deactivated.', $pluginName));
 
             return 1;
         }
 
         $deactivationContext = $pluginManager->deactivatePlugin($plugin);
-        $output->writeln(sprintf('Plugin %s has been deactivated', $pluginName));
+        $output->writeln(\sprintf('Plugin %s has been deactivated', $pluginName));
 
         $this->clearCachesIfRequested($input, $output, $deactivationContext);
 

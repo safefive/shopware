@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -49,7 +50,7 @@ class Migrations_Migration935 extends AbstractMigration
             'frontend/listing/layout 0',
         ]);
 
-        $this->addSql(sprintf(
+        $this->addSql(\sprintf(
             "UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'cacheControllers'",
             serialize($tags)
         ));
@@ -68,7 +69,7 @@ class Migrations_Migration935 extends AbstractMigration
             $value = implode("\n", $value);
             $value = serialize($value);
 
-            $sql = sprintf("UPDATE `s_core_config_values` SET `value` = '%s' WHERE id = " . (int) $row['id'], $value);
+            $sql = \sprintf("UPDATE `s_core_config_values` SET `value` = '%s' WHERE id = " . (int) $row['id'], $value);
             $this->addSql($sql);
         }
     }

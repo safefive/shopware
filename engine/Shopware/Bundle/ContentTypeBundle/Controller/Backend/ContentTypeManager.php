@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -112,7 +113,7 @@ class ContentTypeManager extends Shopware_Controllers_Backend_ExtJs
 
             if ($name === TypeField::class || $name === TypeGrid::class) {
                 $snippetName = 'type-' . explode('-', $id)[1];
-                $label = sprintf($namespace->get($snippetName, $snippetName, true), ucfirst(explode('-', $id)[0]));
+                $label = \sprintf($namespace->get($snippetName, $snippetName, true), ucfirst(explode('-', $id)[0]));
             }
 
             if (($query !== '') && !str_contains(strtolower($name), $query) && !str_contains(strtolower($label), $query)) {

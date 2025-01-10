@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -85,7 +86,7 @@ class Order extends Resource
         $orderModel = $this->getRepository()->findOneBy(['number' => $number]);
 
         if (!$orderModel) {
-            throw new NotFoundException(sprintf('Order by number %s not found', $number));
+            throw new NotFoundException(\sprintf('Order by number %s not found', $number));
         }
 
         return $orderModel->getId();
@@ -131,7 +132,7 @@ class Order extends Resource
             ->getOneOrNullResult($this->getResultMode());
 
         if ($order === null) {
-            throw new NotFoundException(sprintf('Order by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Order by id %d not found', $id));
         }
 
         if (\is_array($order)) {
@@ -301,7 +302,7 @@ class Order extends Resource
         $order = $this->getRepository()->find($id);
 
         if (!$order) {
-            throw new NotFoundException(sprintf('Order by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Order by id %d not found', $id));
         }
 
         $params = $this->prepareOrderData($params, $order);
@@ -401,7 +402,7 @@ class Order extends Resource
 
         $params['customer'] = $this->getContainer()->get(ModelManager::class)->find(CustomerModel::class, $params['customerId']);
         if (empty($params['customer'])) {
-            throw new NotFoundException(sprintf('Customer by id %s not found', $params['customerId']));
+            throw new NotFoundException(\sprintf('Customer by id %s not found', $params['customerId']));
         }
         unset($params['customerId']);
 
@@ -410,7 +411,7 @@ class Order extends Resource
             'group' => 'state',
         ]);
         if (empty($params['orderStatus'])) {
-            throw new NotFoundException(sprintf('OrderStatus by id %s not found', $params['orderStatusId']));
+            throw new NotFoundException(\sprintf('OrderStatus by id %s not found', $params['orderStatusId']));
         }
         unset($params['orderStatusId']);
 
@@ -419,19 +420,19 @@ class Order extends Resource
             'group' => 'payment',
         ]);
         if (empty($params['paymentStatus'])) {
-            throw new NotFoundException(sprintf('PaymentStatus by id %s not found', $params['paymentStatusId']));
+            throw new NotFoundException(\sprintf('PaymentStatus by id %s not found', $params['paymentStatusId']));
         }
         unset($params['paymentStatusId']);
 
         $params['payment'] = $this->getContainer()->get(ModelManager::class)->find(Payment::class, $params['paymentId']);
         if (empty($params['payment'])) {
-            throw new NotFoundException(sprintf('Payment by id %s not found', $params['paymentId']));
+            throw new NotFoundException(\sprintf('Payment by id %s not found', $params['paymentId']));
         }
         unset($params['paymentId']);
 
         $params['dispatch'] = $this->getContainer()->get(ModelManager::class)->find(Dispatch::class, $params['dispatchId']);
         if (empty($params['dispatch'])) {
-            throw new NotFoundException(sprintf('Dispatch by id %s not found', $params['dispatchId']));
+            throw new NotFoundException(\sprintf('Dispatch by id %s not found', $params['dispatchId']));
         }
         unset($params['dispatchId']);
 
@@ -439,7 +440,7 @@ class Order extends Resource
             $params['partner'] = $this->getContainer()->get(ModelManager::class)->find(Partner::class, $params['partnerId']);
 
             if (empty($params['partner'])) {
-                throw new NotFoundException(sprintf('Partner by id %s not found', $params['partnerId']));
+                throw new NotFoundException(\sprintf('Partner by id %s not found', $params['partnerId']));
             }
 
             unset($params['partnerId']);
@@ -447,7 +448,7 @@ class Order extends Resource
 
         $params['shop'] = $this->getContainer()->get(ModelManager::class)->find(Shop::class, $params['shopId']);
         if (empty($params['shop'])) {
-            throw new NotFoundException(sprintf('Shop by id %s not found', $params['shopId']));
+            throw new NotFoundException(\sprintf('Shop by id %s not found', $params['shopId']));
         }
 
         unset($params['shopId']);
@@ -521,14 +522,14 @@ class Order extends Resource
 
             $status = $this->getContainer()->get(ModelManager::class)->find(DetailStatus::class, $detail['statusId']);
             if (!$status) {
-                throw new NotFoundException(sprintf('DetailStatus by id %s not found', $detail['statusId']));
+                throw new NotFoundException(\sprintf('DetailStatus by id %s not found', $detail['statusId']));
             }
             $detailModel->setStatus($status);
             unset($detail['statusId']);
 
             $tax = $this->getContainer()->get(ModelManager::class)->find(Tax::class, $detail['taxId']);
             if (!$tax) {
-                throw new NotFoundException(sprintf('Tax by id %s not found', $detail['taxId']));
+                throw new NotFoundException(\sprintf('Tax by id %s not found', $detail['taxId']));
             }
             $detailModel->setTax($tax);
             unset($detail['taxId']);
@@ -593,7 +594,7 @@ class Order extends Resource
             );
 
             if (empty($params['orderStatus'])) {
-                throw new NotFoundException(sprintf('OrderStatus by id %s not found', $params['orderStatusId']));
+                throw new NotFoundException(\sprintf('OrderStatus by id %s not found', $params['orderStatusId']));
             }
         }
 
@@ -606,7 +607,7 @@ class Order extends Resource
             );
 
             if (empty($params['paymentStatus'])) {
-                throw new NotFoundException(sprintf('PaymentStatus by id %s not found', $params['paymentStatusId']));
+                throw new NotFoundException(\sprintf('PaymentStatus by id %s not found', $params['paymentStatusId']));
             }
 
             return $params;
@@ -663,7 +664,7 @@ class Order extends Resource
                 $status = Shopware()->Models()->find(DetailStatus::class, $detail['status']);
 
                 if (!$status) {
-                    throw new NotFoundException(sprintf('DetailStatus by id %s not found', $detail['status']));
+                    throw new NotFoundException(\sprintf('DetailStatus by id %s not found', $detail['status']));
                 }
 
                 $detailModel->setStatus($status);
@@ -709,7 +710,7 @@ class Order extends Resource
         if (isset($billing['stateId'])) {
             $state = $this->getContainer()->get(ModelManager::class)->find(State::class, (int) $billing['stateId']);
             if (!$state instanceof State) {
-                throw new NotFoundException(sprintf('Billing State by id %s not found', $billing['stateId']));
+                throw new NotFoundException(\sprintf('Billing State by id %s not found', $billing['stateId']));
             }
         } else {
             $billing['stateId'] = 0;
@@ -717,11 +718,11 @@ class Order extends Resource
 
         $country = $this->getContainer()->get(ModelManager::class)->find(CountryModel::class, $billing['countryId']);
         if (!$country instanceof CountryModel) {
-            throw new NotFoundException(sprintf('Billing Country by id %s not found', $billing['countryId']));
+            throw new NotFoundException(\sprintf('Billing Country by id %s not found', $billing['countryId']));
         }
 
         if (!$order->getCustomer() instanceof CustomerModel) {
-            throw new NotFoundException(sprintf('Order with ID "%s" has no customer', $order->getId()));
+            throw new NotFoundException(\sprintf('Order with ID "%s" has no customer', $order->getId()));
         }
 
         $billingAddress = new Billing();
@@ -746,7 +747,7 @@ class Order extends Resource
         if (isset($shipping['stateId'])) {
             $state = $this->getContainer()->get(ModelManager::class)->find(State::class, (int) $shipping['stateId']);
             if (!$state instanceof State) {
-                throw new NotFoundException(sprintf('Shipping State by id %s not found', $shipping['stateId']));
+                throw new NotFoundException(\sprintf('Shipping State by id %s not found', $shipping['stateId']));
             }
         } else {
             $shipping['stateId'] = 0;
@@ -754,7 +755,7 @@ class Order extends Resource
 
         $country = $this->getContainer()->get(ModelManager::class)->find(CountryModel::class, $shipping['countryId']);
         if (!$country) {
-            throw new NotFoundException(sprintf('Shipping Country by id %s not found', $shipping['countryId']));
+            throw new NotFoundException(\sprintf('Shipping Country by id %s not found', $shipping['countryId']));
         }
 
         $shippingAddress = new Shipping();

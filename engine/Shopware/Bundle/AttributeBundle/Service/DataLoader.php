@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -53,7 +54,7 @@ class DataLoader implements DataLoaderInterface
     public function load($table, $foreignKey)
     {
         if (!$this->mapping->isAttributeTable($table)) {
-            throw new Exception(sprintf('Table %s is no attribute table', $table));
+            throw new Exception(\sprintf('Table %s is no attribute table', $table));
         }
 
         if (!$foreignKey) {

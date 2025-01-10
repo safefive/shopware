@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -80,7 +81,7 @@ class LegacyPluginInstaller
         $pluginName = $plugin->getName();
         $pluginByName = $namespace->get($pluginName);
         if ($pluginByName === null) {
-            throw new RuntimeException(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            throw new RuntimeException(\sprintf('Plugin by name "%s" was not found.', $pluginName));
         }
 
         return $pluginByName;
@@ -101,16 +102,16 @@ class LegacyPluginInstaller
         try {
             $result = $namespace->installPlugin($bootstrap);
         } catch (Exception $e) {
-            throw new Exception(sprintf("Unable to install '%s', got exception:\n%s\n", $plugin->getName(), $e->getMessage()), 0, $e);
+            throw new Exception(\sprintf("Unable to install '%s', got exception:\n%s\n", $plugin->getName(), $e->getMessage()), 0, $e);
         }
 
         $result = \is_bool($result) ? ['success' => $result] : $result;
 
         if (!$result['success']) {
             if (isset($result['message'])) {
-                throw new Exception(sprintf("Unable to install '%s', got message:\n'%s'\n", $plugin->getName(), $result['message']));
+                throw new Exception(\sprintf("Unable to install '%s', got message:\n'%s'\n", $plugin->getName(), $result['message']));
             }
-            throw new Exception(sprintf('Unable to install "%s", an unknown error occured.', $plugin->getName()));
+            throw new Exception(\sprintf('Unable to install "%s", an unknown error occured.', $plugin->getName()));
         }
 
         return $result;
@@ -133,16 +134,16 @@ class LegacyPluginInstaller
         try {
             $result = $namespace->uninstallPlugin($bootstrap, $removeData);
         } catch (Exception $e) {
-            throw new Exception(sprintf("Unable to uninstall '%s', got exception:\n%s\n", $plugin->getName(), $e->getMessage()), 0, $e);
+            throw new Exception(\sprintf("Unable to uninstall '%s', got exception:\n%s\n", $plugin->getName(), $e->getMessage()), 0, $e);
         }
 
         $result = \is_bool($result) ? ['success' => $result] : $result;
 
         if (!$result['success']) {
             if (isset($result['message'])) {
-                throw new Exception(sprintf("Unable to uninstall '%s', got message:\n%s\n", $plugin->getName(), $result['message']));
+                throw new Exception(\sprintf("Unable to uninstall '%s', got message:\n%s\n", $plugin->getName(), $result['message']));
             }
-            throw new Exception(sprintf('Unable to uninstall %s, an unknown error occured.', $plugin->getName()));
+            throw new Exception(\sprintf('Unable to uninstall %s, an unknown error occured.', $plugin->getName()));
         }
 
         return $result;
@@ -163,16 +164,16 @@ class LegacyPluginInstaller
         try {
             $result = $namespace->updatePlugin($bootstrap);
         } catch (Exception $e) {
-            throw new Exception(sprintf("Unable to update '%s', got exception:\n'%s'\n", $plugin->getName(), $e->getMessage()), 0, $e);
+            throw new Exception(\sprintf("Unable to update '%s', got exception:\n'%s'\n", $plugin->getName(), $e->getMessage()), 0, $e);
         }
 
         $result = \is_bool($result) ? ['success' => $result] : $result;
 
         if (!$result['success']) {
             if (isset($result['message'])) {
-                throw new Exception(sprintf("Unable to update '%s', got message:\n%s\n", $plugin->getName(), $result['message']));
+                throw new Exception(\sprintf("Unable to update '%s', got message:\n%s\n", $plugin->getName(), $result['message']));
             }
-            throw new Exception(sprintf('Unable to update "%s", an unknown error occured.', $plugin->getName()));
+            throw new Exception(\sprintf('Unable to update "%s", an unknown error occured.', $plugin->getName()));
         }
 
         return $result;
@@ -191,7 +192,7 @@ class LegacyPluginInstaller
         $result = \is_bool($result) ? ['success' => $result] : $result;
 
         if ($result['success'] == false) {
-            throw new Exception(sprintf('Not allowed to enable plugin "%s".', $plugin->getName()));
+            throw new Exception(\sprintf('Not allowed to enable plugin "%s".', $plugin->getName()));
         }
 
         $plugin->setActive(true);
@@ -214,7 +215,7 @@ class LegacyPluginInstaller
         $result = \is_bool($result) ? ['success' => $result] : $result;
 
         if ($result['success'] == false) {
-            throw new Exception(sprintf('Not allowed to disable plugin "%s".', $plugin->getName()));
+            throw new Exception(\sprintf('Not allowed to disable plugin "%s".', $plugin->getName()));
         }
 
         $plugin->setActive(false);
@@ -253,7 +254,7 @@ class LegacyPluginInstaller
                     $name = $dir->getFilename();
 
                     if ($this->validateIonCube($file)) {
-                        throw new Exception(sprintf('Plugin "%s" is encrypted but the ionCube Loader extension is not installed', $name));
+                        throw new Exception(\sprintf('Plugin "%s" is encrypted but the ionCube Loader extension is not installed', $name));
                     }
 
                     $plugin = $collection->get($name);

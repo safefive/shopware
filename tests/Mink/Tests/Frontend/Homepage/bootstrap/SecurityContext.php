@@ -82,6 +82,6 @@ class SecurityContext extends SubContext
             return;
         }
 
-        Helper::throwException(sprintf('Expected http response code %d, got %d instead.', $expectedCode, $code));
+        Helper::throwException(\sprintf('Expected http response code %d, got %d instead.', $expectedCode, $code));
     }
 }

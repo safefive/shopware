@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -113,7 +114,7 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
@@ -141,7 +142,7 @@ EOF
 
             return 1;
         }
-        $output->writeln(sprintf('Plugin %s has been deleted successfully.', $pluginName));
+        $output->writeln(\sprintf('Plugin %s has been deleted successfully.', $pluginName));
 
         return 0;
     }

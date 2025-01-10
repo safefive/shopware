@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -91,7 +92,7 @@ class UpdateCommand extends Command
             $ioService->cls();
             $ioService->printBanner();
             $ioService->writeln('<info>Welcome to the Shopware updater </info>');
-            $ioService->writeln(sprintf('Shopware Version %s', $version));
+            $ioService->writeln(\sprintf('Shopware Version %s', $version));
             $ioService->writeln('');
             $ioService->ask('Press return to start the update.');
             $ioService->cls();
@@ -110,7 +111,7 @@ class UpdateCommand extends Command
         $ioService->writeln('');
         $ioService->writeln('<info>The update has been finished succesfuly.</info>');
         $ioService->writeln('Your shop is currently in maintenance mode.');
-        $ioService->writeln(sprintf('Please delete <question>%s</question> to finish the update.', UPDATE_ASSET_PATH));
+        $ioService->writeln(\sprintf('Please delete <question>%s</question> to finish the update.', UPDATE_ASSET_PATH));
         $ioService->writeln('');
 
         return 0;

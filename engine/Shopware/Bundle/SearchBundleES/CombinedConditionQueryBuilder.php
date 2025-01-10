@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -48,7 +49,7 @@ class CombinedConditionQueryBuilder
         $handlerRegistry = $this->container->get(HandlerRegistry::class);
 
         if (!$handlerRegistry instanceof HandlerRegistry) {
-            throw new RuntimeException(sprintf('%s is missing', HandlerRegistry::class));
+            throw new RuntimeException(\sprintf('%s is missing', HandlerRegistry::class));
         }
 
         foreach ($conditions as $condition) {

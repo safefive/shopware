@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -106,13 +107,13 @@ class ThemeCacheGenerateCommand extends ShopwareCommand implements CompletionAwa
 
         foreach ($shopsWithThemes as $shop) {
             if (!$current) {
-                $output->writeln(sprintf('Generating new theme cache for shop "%s" ...', $shop->getName()));
+                $output->writeln(\sprintf('Generating new theme cache for shop "%s" ...', $shop->getName()));
                 $compiler->compile($shop);
                 continue;
             }
 
             $timestamp = $this->container->get('theme_timestamp_persistor')->getCurrentTimestamp($shop->getId());
-            $output->writeln(sprintf('Generating theme cache for shop "%s" from current timestamp %s', $shop->getName(), $timestamp));
+            $output->writeln(\sprintf('Generating theme cache for shop "%s" from current timestamp %s', $shop->getName(), $timestamp));
             $compiler->recompile($shop);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -81,7 +82,7 @@ class ProductQueryFactory implements ProductQueryFactoryInterface
      */
     public function createPriceIdQuery($priceIds, $limit = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $dbal = $this->createQuery($limit)
             ->innerJoin('variant', 's_articles_details', 'subVariant', 'subVariant.articleID = variant.articleID')
@@ -111,7 +112,7 @@ class ProductQueryFactory implements ProductQueryFactoryInterface
      */
     public function createVoteIdQuery($voteIds, $limit = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $dbal = $this->createQuery($limit)
             ->innerJoin('product', 's_articles_vote', 'vote', 'vote.articleID = product.id')
@@ -140,7 +141,7 @@ class ProductQueryFactory implements ProductQueryFactoryInterface
      */
     public function createVariantIdQuery($variantIds, $limit = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $dbal = $this->createQuery($limit)
             ->innerJoin('variant', 's_articles_details', 'subVariant', 'subVariant.articleID = variant.articleID')
@@ -181,7 +182,7 @@ class ProductQueryFactory implements ProductQueryFactoryInterface
      */
     public function createProductCategoryQuery($categoryIds, $limit = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $dbal = $this->createQuery($limit)
             ->innerJoin('variant', 's_articles_categories_ro', 'shopProducts', 'shopProducts.articleID = variant.articleID')

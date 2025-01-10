@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -93,7 +94,7 @@ class QueryBuilder extends BaseQueryBuilder
      */
     public function setParameters($parameters)
     {
-        trigger_error(sprintf('%s::%s() is deprecated. Please use setParameter().', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s::%s() is deprecated. Please use setParameter().', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $existingParameters = $this->getParameters();
 
@@ -118,7 +119,7 @@ class QueryBuilder extends BaseQueryBuilder
      */
     public function addParameters(array $parameters)
     {
-        trigger_error(sprintf('%s::%s() is deprecated. Please use addParameter().', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s::%s() is deprecated. Please use addParameter().', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $existingParameters = $this->getParameters();
         $newParameters = new ArrayCollection();

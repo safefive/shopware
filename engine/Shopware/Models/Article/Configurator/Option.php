@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -50,7 +51,7 @@ class Option extends ModelEntity
     protected $articles;
 
     /**
-     * @var ArrayCollection<\Shopware\Models\Article\Configurator\Set>
+     * @var ArrayCollection<Set>
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Article\Configurator\Set", mappedBy="options")
      */
@@ -104,14 +105,14 @@ class Option extends ModelEntity
     private $group;
 
     /**
-     * @var ArrayCollection<\Shopware\Models\Article\Configurator\Dependency>
+     * @var ArrayCollection<Dependency>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Configurator\Dependency", mappedBy="parentOption", orphanRemoval=true)
      */
     private $dependencyParents;
 
     /**
-     * @var ArrayCollection<\Shopware\Models\Article\Configurator\Dependency>
+     * @var ArrayCollection<Dependency>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Configurator\Dependency", mappedBy="childOption", orphanRemoval=true)
      */
@@ -187,7 +188,7 @@ class Option extends ModelEntity
     }
 
     /**
-     * @return ArrayCollection<\Shopware\Models\Article\Configurator\Dependency>
+     * @return ArrayCollection<Dependency>
      */
     public function getDependencyParents()
     {
@@ -195,7 +196,7 @@ class Option extends ModelEntity
     }
 
     /**
-     * @param ArrayCollection<\Shopware\Models\Article\Configurator\Dependency> $dependencyParents
+     * @param ArrayCollection<Dependency> $dependencyParents
      */
     public function setDependencyParents($dependencyParents)
     {
@@ -203,7 +204,7 @@ class Option extends ModelEntity
     }
 
     /**
-     * @return ArrayCollection<\Shopware\Models\Article\Configurator\Dependency>
+     * @return ArrayCollection<Dependency>
      */
     public function getDependencyChildren()
     {
@@ -211,7 +212,7 @@ class Option extends ModelEntity
     }
 
     /**
-     * @param ArrayCollection<\Shopware\Models\Article\Configurator\Dependency> $dependencyChildren
+     * @param ArrayCollection<Dependency> $dependencyChildren
      */
     public function setDependencyChildren($dependencyChildren)
     {

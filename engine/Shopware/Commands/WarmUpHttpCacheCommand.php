@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -148,7 +149,7 @@ class WarmUpHttpCacheCommand extends ShopwareCommand implements CompletionAwareI
          */
         $concurrentRequests = (int) trim($input->getOption('concurrent-requests'), '=');
         $limit = $concurrentRequests > 10 ? $concurrentRequests : 10;
-        $io->writeln(sprintf('Calling URLs with %d concurrent requests', $concurrentRequests));
+        $io->writeln(\sprintf('Calling URLs with %d concurrent requests', $concurrentRequests));
 
         // Print warming information
         if (!\in_array(false, $options, true)) {
@@ -184,7 +185,7 @@ class WarmUpHttpCacheCommand extends ShopwareCommand implements CompletionAwareI
 
             // Progressbar
             $progressBar = $io->createProgressBar($totalResultCount);
-            $io->writeln(sprintf("\nShop '%s' (ID: %s)", $shop->getName(), $shop->getId()));
+            $io->writeln(\sprintf("\nShop '%s' (ID: %s)", $shop->getName(), $shop->getId()));
             $progressBar->setBarWidth(100);
             $progressBar->setFormat('very_verbose');
             $progressBar->start();

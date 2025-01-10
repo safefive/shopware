@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -193,7 +194,7 @@ class PdoSessionHandler implements SessionHandlerInterface
     {
         if ($pdoOrDsn instanceof PDO) {
             if ($pdoOrDsn->getAttribute(PDO::ATTR_ERRMODE) !== PDO::ERRMODE_EXCEPTION) {
-                throw new InvalidArgumentException(sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
+                throw new InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
             }
 
             $this->pdo = $pdoOrDsn;
@@ -251,7 +252,7 @@ class PdoSessionHandler implements SessionHandlerInterface
                 $sql = "CREATE TABLE $this->table ($this->idCol VARCHAR(128) NOT NULL PRIMARY KEY, $this->dataCol VARBINARY(MAX) NOT NULL, $this->expiryCol INTEGER NOT NULL, $this->timeCol INTEGER NOT NULL)";
                 break;
             default:
-                throw new DomainException(sprintf('Creating the session table is currently not implemented for PDO driver "%s".', $this->driver));
+                throw new DomainException(\sprintf('Creating the session table is currently not implemented for PDO driver "%s".', $this->driver));
         }
 
         try {
@@ -659,7 +660,7 @@ class PdoSessionHandler implements SessionHandlerInterface
             case 'sqlite':
                 throw new DomainException('SQLite does not support advisory locks.');
             default:
-                throw new DomainException(sprintf('Advisory locks are currently not implemented for PDO driver "%s".', $this->driver));
+                throw new DomainException(\sprintf('Advisory locks are currently not implemented for PDO driver "%s".', $this->driver));
         }
     }
 
@@ -686,7 +687,7 @@ class PdoSessionHandler implements SessionHandlerInterface
                     // we already locked when starting transaction
                     break;
                 default:
-                    throw new DomainException(sprintf('Transactional locks are currently not implemented for PDO driver "%s".', $this->driver));
+                    throw new DomainException(\sprintf('Transactional locks are currently not implemented for PDO driver "%s".', $this->driver));
             }
         }
 

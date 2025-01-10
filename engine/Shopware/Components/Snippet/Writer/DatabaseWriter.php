@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -107,7 +108,7 @@ class DatabaseWriter
             $this->db->commit();
         } catch (Exception $e) {
             $this->db->rollBack();
-            throw new Exception(sprintf('An error occurred when importing namespace "%s" for locale "%s"', $namespace, $localeId), 0, $e);
+            throw new Exception(\sprintf('An error occurred when importing namespace "%s" for locale "%s"', $namespace, $localeId), 0, $e);
         }
     }
 

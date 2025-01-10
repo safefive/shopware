@@ -42,7 +42,7 @@ class StructNotFoundException extends RuntimeException
         int $code = 0,
         ?Throwable $previous = null
     ) {
-        $message = sprintf('Struct of "%s" for %s "%s" not found', $structClass, $identifier, (string) $identifierValue);
+        $message = \sprintf('Struct of "%s" for %s "%s" not found', $structClass, $identifier, (string) $identifierValue);
         parent::__construct($message, $code, $previous);
     }
 }

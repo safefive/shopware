@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -103,7 +104,7 @@ class XmlPluginReader extends XmlReaderBase
         $compatibility = $xpath->query('//plugin/compatibility');
         if ($compatibility instanceof DOMNodeList) {
             if (\count($compatibility) > 1) {
-                throw new InvalidArgumentException(sprintf('Element with name "compatibility" found multiple times in file "%s", but expected to be there only once', static::$xmlFile));
+                throw new InvalidArgumentException(\sprintf('Element with name "compatibility" found multiple times in file "%s", but expected to be there only once', static::$xmlFile));
             }
             $compatibility = $compatibility->item(0);
             if ($compatibility instanceof DOMNode) {

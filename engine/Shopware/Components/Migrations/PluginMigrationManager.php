@@ -135,14 +135,14 @@ ENGINE=InnoDB
         }
 
         $currentVersion = $this->getCurrentVersion();
-        $this->log(sprintf('Current MigrationNumber: %s', $currentVersion));
+        $this->log(\sprintf('Current MigrationNumber: %s', $currentVersion));
 
         $migrations = $this->getMigrationsForDowngrade($currentVersion);
 
-        $this->log(sprintf('Found %s migrations to apply', \count($migrations)));
+        $this->log(\sprintf('Found %s migrations to apply', \count($migrations)));
 
         foreach ($migrations as $migration) {
-            $this->log(sprintf('Revert MigrationNumber: %s - %s', $migration->getVersion(), $migration->getLabel()));
+            $this->log(\sprintf('Revert MigrationNumber: %s - %s', $migration->getVersion(), $migration->getLabel()));
             try {
                 $this->apply($migration, $modus, $keepUserData);
             } catch (Exception $e) {
@@ -154,12 +154,12 @@ ENGINE=InnoDB
 
     public function log($str): void
     {
-        $this->logger->info(sprintf('[Migration from %s] %s', $this->plugin->getName(), $str));
+        $this->logger->info(\sprintf('[Migration from %s] %s', $this->plugin->getName(), $str));
     }
 
     protected function loadMigration(array $result, string $migrationPath): AbstractMigration
     {
-        $migrationClassName = sprintf('%s\\Migrations\\Migration%d', $this->plugin->getName(), $result['1']);
+        $migrationClassName = \sprintf('%s\\Migrations\\Migration%d', $this->plugin->getName(), $result['1']);
         if (!class_exists($migrationClassName, false)) {
             $file = $migrationPath . '/' . $result['0'];
             require $file;
@@ -232,7 +232,7 @@ ENGINE=InnoDB
         } catch (Exception $e) {
             $this->markMigrationAsFailed($migration, $e);
 
-            throw new RuntimeException(sprintf('Could not revert migration (%s). Error: %s ', \get_class($migration), $e->getMessage()));
+            throw new RuntimeException(\sprintf('Could not revert migration (%s). Error: %s ', \get_class($migration), $e->getMessage()));
         }
 
         $this->removeMigration($migration);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -42,17 +43,17 @@ class EventListenerCompilerPass implements CompilerPassInterface
             $def->setPublic(true);
 
             if ($def->isAbstract()) {
-                throw new InvalidArgumentException(sprintf('The service "%s" must not be abstract as event listeners are lazy-loaded.', $id));
+                throw new InvalidArgumentException(\sprintf('The service "%s" must not be abstract as event listeners are lazy-loaded.', $id));
             }
 
             foreach ($events as $event) {
                 $priority = isset($event['priority']) ? $event['priority'] : 0;
                 if (!isset($event['event'])) {
-                    throw new InvalidArgumentException(sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, 'shopware.event_listener'));
+                    throw new InvalidArgumentException(\sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, 'shopware.event_listener'));
                 }
 
                 if (!isset($event['method'])) {
-                    throw new InvalidArgumentException(sprintf('Service "%s" must define the "method" attribute on "%s" tags.', $id, 'shopware.event_listener'));
+                    throw new InvalidArgumentException(\sprintf('Service "%s" must define the "method" attribute on "%s" tags.', $id, 'shopware.event_listener'));
                 }
 
                 $definition->addMethodCall('addListenerService', [$event['event'], [$id, $event['method']], $priority]);

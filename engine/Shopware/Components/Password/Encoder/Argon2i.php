@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -93,7 +94,7 @@ class Argon2i implements PasswordEncoderInterface
         $hash = password_hash($password, PASSWORD_ARGON2I, $this->options);
 
         if (!\is_string($hash)) {
-            throw new DomainException(sprintf('Password could not be encoded by the encoder %s.', PASSWORD_ARGON2I));
+            throw new DomainException(\sprintf('Password could not be encoded by the encoder %s.', PASSWORD_ARGON2I));
         }
 
         return $hash;

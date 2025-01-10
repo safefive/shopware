@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -32,14 +33,14 @@ class Migrations_Migration1701 extends Shopware\Components\Migrations\AbstractMi
         foreach ($values as $row) {
             $value = $this->addCacheEntry($row['value']);
 
-            $sql = sprintf('UPDATE `s_core_config_values` SET `value` = \'%s\' WHERE id = %d', $value, (int) $row['id']);
+            $sql = \sprintf('UPDATE `s_core_config_values` SET `value` = \'%s\' WHERE id = %d', $value, (int) $row['id']);
             $this->addSql($sql);
         }
 
         // Update default
         $value = $this->connection->query('SELECT `value` FROM s_core_config_elements WHERE `name` = "cacheControllers"')->fetchColumn();
         $value = $this->addCacheEntry($value);
-        $this->addSql(sprintf('UPDATE s_core_config_elements SET `value` = \'%s\' WHERE `name` = "cacheControllers"', $value));
+        $this->addSql(\sprintf('UPDATE s_core_config_elements SET `value` = \'%s\' WHERE `name` = "cacheControllers"', $value));
 
         $sql = <<<'EOD'
 SET @plugin_id = (SELECT id FROM s_core_plugins WHERE name='HttpCache');

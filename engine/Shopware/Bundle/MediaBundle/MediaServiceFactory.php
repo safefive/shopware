@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -69,7 +70,7 @@ class MediaServiceFactory
     public function factory($backendName)
     {
         if (!isset($this->cdnConfig['adapters'][$backendName])) {
-            throw new Exception(sprintf('Configuration "%s" not found', $backendName));
+            throw new Exception(\sprintf('Configuration "%s" not found', $backendName));
         }
 
         // Filesystem
@@ -103,7 +104,7 @@ class MediaServiceFactory
         $adapter = $adapters->first();
 
         if (!$adapter) {
-            throw new Exception(sprintf('CDN Adapter "%s" not found.', $config['type']));
+            throw new Exception(\sprintf('CDN Adapter "%s" not found.', $config['type']));
         }
 
         return $adapter;

@@ -156,7 +156,7 @@ abstract class CheckoutTestCase extends ControllerTestCase
         }
 
         if (!$cartItemFound) {
-            static::fail(sprintf('Cart item by name "%s" not found', $itemName));
+            static::fail(\sprintf('Cart item by name "%s" not found', $itemName));
         }
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -74,7 +75,7 @@ class MySQLVersionCheck implements CheckInterface
             return [
                 'type' => self::CHECK_TYPE,
                 'errorLevel' => Validation::REQUIREMENT_VALID,
-                'message' => sprintf(
+                'message' => \sprintf(
                     $successMessage,
                     $minMySQLVersion,
                     $version
@@ -85,7 +86,7 @@ class MySQLVersionCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf(
+            'message' => \sprintf(
                 $failMessage,
                 $minMySQLVersion,
                 $version

@@ -61,7 +61,7 @@ class MediaCleanupCommand extends ShopwareCommand
 
         $io->section('Searching for unused media files.');
         $total = $this->handleMove();
-        $io->text(sprintf('%s unused item(s) found.', $total));
+        $io->text(\sprintf('%s unused item(s) found.', $total));
 
         if ($total === 0) {
             return 0;
@@ -73,12 +73,12 @@ class MediaCleanupCommand extends ShopwareCommand
             }
 
             $deleted = $this->handleCleanup($io);
-            $io->success(sprintf('%d item(s) deleted.', $deleted));
+            $io->success(\sprintf('%d item(s) deleted.', $deleted));
 
             return 0;
         }
 
-        $io->success(sprintf('%d item(s) in recycle bin.', $total));
+        $io->success(\sprintf('%d item(s) in recycle bin.', $total));
 
         return 0;
     }

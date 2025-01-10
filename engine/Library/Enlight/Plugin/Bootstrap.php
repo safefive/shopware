@@ -118,7 +118,7 @@ abstract class Enlight_Plugin_Bootstrap extends Enlight_Class
     public function get($name)
     {
         if (!$this->collection instanceof Enlight_Plugin_PluginCollection) {
-            throw new RuntimeException(sprintf('Could not get "%s". Plugin collection is not set.', $name));
+            throw new RuntimeException(\sprintf('Could not get "%s". Plugin collection is not set.', $name));
         }
 
         return $this->collection->Application()->Container()->get($name);

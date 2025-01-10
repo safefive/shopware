@@ -137,7 +137,7 @@ class CartPositionProduct extends MultipleElement
         if ($result !== true) {
             $messages = ['The cart item has different names!'];
             foreach ($name as $key => $value) {
-                $messages[] = sprintf('"%s" (Key: "%s")', $value, $key);
+                $messages[] = \sprintf('"%s" (Key: "%s")', $value, $key);
             }
 
             Helper::throwException($messages);

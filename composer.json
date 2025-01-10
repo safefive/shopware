@@ -60,7 +60,7 @@
         "laminas/laminas-escaper": "2.12.0 || 2.15.0",
         "league/flysystem": "~1.1.4",
         "league/flysystem-aws-s3-v3": "1.0.30",
-        "monolog/monolog": "2.9.3",
+        "monolog/monolog": "2.10.0",
         "mpdf/mpdf": "8.2.4",
         "ongr/elasticsearch-dsl": "7.2.2",
         "psr/link": "1.0.0",

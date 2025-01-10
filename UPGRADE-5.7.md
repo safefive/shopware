@@ -29,7 +29,7 @@ This changelog references changes done in Shopware 5.7 patch versions.
 * Updated `google/cloud-storage` to version 1.39.0
 * Updated `guzzlehttp/guzzle` to version 7.9.2
 * Updated `guzzlehttp/psr7` to version 2.7.0
-* Updated `monolog/monolog` to version 2.9.3
+* Updated `monolog/monolog` to version 2.10.0
 * Updated `mpdf/mpdf` to version 8.2.4
 * Updated `laminas/laminas-code` to version 4.16.0 for PHP 8.1 and newer
 * Updated `laminas/laminas-escaper` to version 2.15.0 for PHP 8.1 and newer

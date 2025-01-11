@@ -18,7 +18,7 @@ jobs:
             PACKAGE_DELIMITER: _
             UPDATE_ASSET_DIR: './update-assets/'
 
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
 
         steps:
             -   name: Create version

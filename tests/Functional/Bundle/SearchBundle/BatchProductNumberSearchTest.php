@@ -270,7 +270,7 @@ class BatchProductNumberSearchTest extends TestCase
     private function assertProductNumbersExists(array $result, array $numbers): void
     {
         array_walk($numbers, function ($number) use ($result) {
-            static::assertArrayHasKey($number, $result, sprintf('Expected "%s" to be in [%s]', $number, implode(', ', array_keys($result))));
+            static::assertArrayHasKey($number, $result, \sprintf('Expected "%s" to be in [%s]', $number, implode(', ', array_keys($result))));
             static::assertSame($number, $result[$number]->getNumber());
         });
     }

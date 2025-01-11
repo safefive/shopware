@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -102,7 +103,7 @@ class Variant extends Resource implements BatchInterface
         $variant = $builder->getQuery()->getOneOrNullResult($this->getResultMode());
 
         if (!$variant) {
-            throw new NotFoundException(sprintf('Variant by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Variant by id %d not found', $id));
         }
 
         if (\is_array($variant) && !empty($options['considerTaxInput'])) {
@@ -177,7 +178,7 @@ class Variant extends Resource implements BatchInterface
         $productVariant = $this->getRepository()->findOneBy(['number' => $number]);
 
         if (!$productVariant) {
-            throw new NotFoundException(sprintf('Variant by number %s not found', $number));
+            throw new NotFoundException(\sprintf('Variant by number %s not found', $number));
         }
 
         return $productVariant->getId();
@@ -217,7 +218,7 @@ class Variant extends Resource implements BatchInterface
         $productVariant = $this->getRepository()->find($id);
 
         if (!$productVariant instanceof Detail) {
-            throw new NotFoundException(sprintf('Variant by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Variant by id %d not found', $id));
         }
 
         if ($productVariant->getKind() === 1) {
@@ -264,7 +265,7 @@ class Variant extends Resource implements BatchInterface
         $variant = $this->getRepository()->find($id);
 
         if (!$variant instanceof Detail) {
-            throw new NotFoundException(sprintf('Variant by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Variant by id %d not found', $id));
         }
 
         $variant = $this->internalUpdate($id, $params, $variant->getArticle());
@@ -300,7 +301,7 @@ class Variant extends Resource implements BatchInterface
         $product = $this->getManager()->find(ProductModel::class, $productId);
 
         if (!$product) {
-            throw new NotFoundException(sprintf('Product by id %d not found', $productId));
+            throw new NotFoundException(\sprintf('Product by id %d not found', $productId));
         }
 
         $variant = $this->internalCreate($params, $product);
@@ -339,7 +340,7 @@ class Variant extends Resource implements BatchInterface
         $variant = $this->getRepository()->find($id);
 
         if (!$variant instanceof Detail) {
-            throw new NotFoundException(sprintf('Variant by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Variant by id %d not found', $id));
         }
 
         $variant->setArticle($article);
@@ -509,7 +510,7 @@ class Variant extends Resource implements BatchInterface
                 ->get(Connection::class)
                 ->fetchColumn('SELECT id FROM s_articles_details WHERE ordernumber = ?', [$data['number']]);
             if ($exists) {
-                throw new CustomValidationException(sprintf('A variant with the given order number "%s" already exists.', $data['number']));
+                throw new CustomValidationException(\sprintf('A variant with the given order number "%s" already exists.', $data['number']));
             }
         }
 
@@ -565,7 +566,7 @@ class Variant extends Resource implements BatchInterface
                     $media = $this->getManager()->find(MediaModel::class, (int) $imageData['mediaId']);
 
                     if (!$media) {
-                        throw new CustomValidationException(sprintf('Media by id %s not found', (int) $imageData['mediaId']));
+                        throw new CustomValidationException(\sprintf('Media by id %s not found', (int) $imageData['mediaId']));
                     }
 
                     $image = $this->getArticleResource()->createNewArticleImage($article, $media);
@@ -663,7 +664,7 @@ class Variant extends Resource implements BatchInterface
                 ->findOneBy(['key' => $priceData['customerGroupKey']]);
 
             if (!$customerGroup instanceof CustomerGroup) {
-                throw new CustomValidationException(sprintf('Customer Group by key %s not found', $priceData['customerGroupKey']));
+                throw new CustomValidationException(\sprintf('Customer Group by key %s not found', $priceData['customerGroupKey']));
             }
 
             $priceData['customerGroup'] = $customerGroup;
@@ -769,7 +770,7 @@ class Variant extends Resource implements BatchInterface
             $data['unit'] = $this->getManager()->find(Unit::class, $data['unitId']);
 
             if (empty($data['unit'])) {
-                throw new CustomValidationException(sprintf('Unit by id %s not found', $data['unitId']));
+                throw new CustomValidationException(\sprintf('Unit by id %s not found', $data['unitId']));
             }
 
         // New unit data send? create new unit for this variant
@@ -802,14 +803,14 @@ class Variant extends Resource implements BatchInterface
 
         // Unit identifier send and unit not found? throw exception => Not allowed to create a new unit in this case
         if (!$unit && isset($unitData['id'])) {
-            throw new CustomValidationException(sprintf('Unit by id %s not found', $unitData['id']));
+            throw new CustomValidationException(\sprintf('Unit by id %s not found', $unitData['id']));
         }
 
         // To create a new unit, the unit name and unit is required. Otherwise we throw an exception
         if (!$unit && isset($unitData['name'], $unitData['unit'])) {
             $unit = new Unit();
         } elseif (!$unit) {
-            throw new CustomValidationException(sprintf('To create a unit you need to pass `name` and `unit`'));
+            throw new CustomValidationException(\sprintf('To create a unit you need to pass `name` and `unit`'));
         }
 
         $unit->fromArray($unitData);
@@ -836,7 +837,7 @@ class Variant extends Resource implements BatchInterface
         );
 
         if (empty($tax)) {
-            throw new CustomValidationException(sprintf('No product tax configured for variant: %s', $variant['id']));
+            throw new CustomValidationException(\sprintf('No product tax configured for variant: %s', $variant['id']));
         }
 
         $variant['prices'] = $this->getArticleResource()->getTaxPrices(
@@ -875,7 +876,7 @@ class Variant extends Resource implements BatchInterface
         if (\array_key_exists('from', $priceData)) {
             $priceData['from'] = (int) $priceData['from'];
             if ($priceData['from'] <= 0) {
-                throw new CustomValidationException(sprintf('Invalid Price "from" value'));
+                throw new CustomValidationException(\sprintf('Invalid Price "from" value'));
             }
         }
         if (\array_key_exists('to', $priceData)) {
@@ -977,7 +978,7 @@ class Variant extends Resource implements BatchInterface
             return ['name' => $data['name']];
         }
 
-        throw new CustomValidationException(sprintf('To create a unit you need to pass `name` and `unit`'));
+        throw new CustomValidationException(\sprintf('To create a unit you need to pass `name` and `unit`'));
     }
 
     /**
@@ -1016,7 +1017,7 @@ class Variant extends Resource implements BatchInterface
                 $saveFile = $esdDir . '/' . $saveFileName;
 
                 if (!is_writable($esdDir)) {
-                    throw new RuntimeException(sprintf('Unable to save ESD-file, as the directory "%s" is not writable.', $esdDir));
+                    throw new RuntimeException(\sprintf('Unable to save ESD-file, as the directory "%s" is not writable.', $esdDir));
                 }
 
                 copy($file, $saveFile);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -113,7 +114,7 @@ class SwitchAliasCommand extends ShopwareCommand implements CompletionAwareInter
 
         $exist = $client->indices()->exists(['index' => $indexName]);
         if (!$exist) {
-            throw new RuntimeException(sprintf('Index "%s" does not exist', $indexName));
+            throw new RuntimeException(\sprintf('Index "%s" does not exist', $indexName));
         }
 
         $actions = [

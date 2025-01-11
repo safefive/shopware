@@ -59,7 +59,7 @@ class Note extends Page
         $originalPath = $this->path;
 
         foreach ($items as $item) {
-            $this->path = sprintf('/note/add/ordernumber/%s', $item['number']);
+            $this->path = \sprintf('/note/add/ordernumber/%s', $item['number']);
             $this->open();
         }
 

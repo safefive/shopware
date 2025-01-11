@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -100,7 +101,7 @@ class SitemapExporter implements SitemapExporterInterface
     public function generate(Shop $shop)
     {
         if (!$this->sitemapLock->doLock($shop, $this->shopwareConfig->get('sitemapRefreshTime'))) {
-            throw new AlreadyLockedException(sprintf('Cannot acquire lock for shop %d', $shop->getId()));
+            throw new AlreadyLockedException(\sprintf('Cannot acquire lock for shop %d', $shop->getId()));
         }
 
         $routerContext = Context::createFromShop($shop, $this->shopwareConfig);

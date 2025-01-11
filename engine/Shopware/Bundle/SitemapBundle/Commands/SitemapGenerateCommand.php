@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -84,7 +85,7 @@ class SitemapGenerateCommand extends ShopwareCommand
 
         $sitemapExporter = $this->container->get(SitemapExporter::class);
         foreach ($shops as $shop) {
-            $output->writeln(sprintf('Generating sitemaps for shop #%d (%s)...', $shop->getId(), $shop->getName()));
+            $output->writeln(\sprintf('Generating sitemaps for shop #%d (%s)...', $shop->getId(), $shop->getName()));
 
             if ($input->getOption('force')) {
                 $this->container
@@ -95,7 +96,7 @@ class SitemapGenerateCommand extends ShopwareCommand
             try {
                 $sitemapExporter->generate($shop);
             } catch (AlreadyLockedException $exception) {
-                $output->writeln(sprintf('ERROR: %s', $exception->getMessage()));
+                $output->writeln(\sprintf('ERROR: %s', $exception->getMessage()));
             }
         }
 

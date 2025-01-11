@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -136,7 +137,7 @@ class Shopware_Controllers_Backend_MediaManager extends Shopware_Controllers_Bac
         }
 
         $file = $media['path'];
-        $tmpFileName = sprintf('%s.%s', $media['name'], $media['extension']);
+        $tmpFileName = \sprintf('%s.%s', $media['name'], $media['extension']);
         $mediaService = $this->get(MediaServiceInterface::class);
 
         @set_time_limit(0);
@@ -330,7 +331,7 @@ class Shopware_Controllers_Backend_MediaManager extends Shopware_Controllers_Bac
 
         // Check if the media is loaded.
         if ($media === null || empty($media)) {
-            $this->View()->assign(['success' => false, 'message' => sprintf('Media with id %s not found', $id)]);
+            $this->View()->assign(['success' => false, 'message' => \sprintf('Media with id %s not found', $id)]);
 
             return;
         }
@@ -818,7 +819,7 @@ class Shopware_Controllers_Backend_MediaManager extends Shopware_Controllers_Bac
         // Iterate thumbnail sizes
         foreach ($sizes as $size) {
             if (strpos($size, 'x') === false) {
-                $size = sprintf('%sx%s', $size, $size);
+                $size = \sprintf('%sx%s', $size, $size);
             }
 
             $projectDir = $this->container->getParameter('shopware.app.rootDir');

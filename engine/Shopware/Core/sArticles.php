@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -249,7 +250,7 @@ class sArticles implements Enlight_Hook
      */
     public function sGetComparisonProperties($articles)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use the sArticlesComparisons::sGetComparisonProperties instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use the sArticlesComparisons::sGetComparisonProperties instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this->productComparisons->sGetComparisonProperties($articles);
     }
@@ -266,7 +267,7 @@ class sArticles implements Enlight_Hook
      */
     public function sFillUpComparisonArticles($properties, $articles)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use sArticlesComparisons::sFillUpComparisonArticles instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use sArticlesComparisons::sFillUpComparisonArticles instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this->productComparisons->sFillUpComparisonArticles($properties, $articles);
     }
@@ -396,7 +397,7 @@ class sArticles implements Enlight_Hook
      */
     public function sGetArticlesBySupplier($supplierID = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if (!empty($supplierID)) {
             $this->frontController->Request()->setQuery('sSearch', $supplierID);
@@ -460,7 +461,7 @@ class sArticles implements Enlight_Hook
      */
     public function sGetSupplierById($id)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $id = (int) $id;
         $categoryId = (int) $this->frontController->Request()->getQuery('sCategory');
@@ -661,7 +662,7 @@ class sArticles implements Enlight_Hook
      */
     public function sCheckIfEsd($id, $detailsID, $realtime = false)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         // Check if this product is esd-only (check in variants, too -> later)
         $id = (int) $id;
@@ -907,7 +908,7 @@ class sArticles implements Enlight_Hook
         $returnArrayIfConfigurator = false,
         $checkLiveshopping = false
     ) {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if ($group != $this->sSYSTEM->sUSERGROUP) {
             $fetchGroup = $group;
@@ -1154,7 +1155,7 @@ class sArticles implements Enlight_Hook
         $price = str_replace('.', ',', (string) $price); // Replaces points with commas
         $commaPos = strpos((string) $price, ',');
         if ($commaPos) {
-            $part = substr((string) $price, $commaPos + 1, \strlen((string) $price) - $commaPos);
+            $part = (string) substr((string) $price, $commaPos + 1, \strlen((string) $price) - $commaPos);
             switch (\strlen($part)) {
                 case 1:
                     $price .= '0';
@@ -1183,7 +1184,7 @@ class sArticles implements Enlight_Hook
     public function sRound($moneyfloat = null)
     {
         if (is_numeric($moneyfloat)) {
-            $moneyfloat = sprintf('%F', $moneyfloat);
+            $moneyfloat = \sprintf('%F', $moneyfloat);
         }
         $money_str = explode('.', (string) $moneyfloat);
         if (empty($money_str[1])) {
@@ -1356,7 +1357,7 @@ class sArticles implements Enlight_Hook
      */
     public function getArticleListingCover($articleId, $forceMainImage = false)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use the sArticles::sGetArticlePictures instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use the sArticles::sGetArticlePictures instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this->sGetArticlePictures($articleId, true, 0, null, false, false, $forceMainImage);
     }
@@ -1595,7 +1596,7 @@ class sArticles implements Enlight_Hook
      */
     public function sGetArticleTaxById($id)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $checkForProduct = $this->db->fetchRow(
             'SELECT s_core_tax.tax AS tax
@@ -1624,7 +1625,7 @@ class sArticles implements Enlight_Hook
      */
     public function sGetTranslations($data, $object)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use sArticle::sGetTranslation instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Use sArticle::sGetTranslation instead.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         if (Shopware()->Shop()->get('skipbackend') || empty($data)) {
             return $data;
@@ -1845,7 +1846,7 @@ class sArticles implements Enlight_Hook
                         if (!empty($option['selected'])) {
                             $replacedOptionVal = str_replace(' ', '', $optionVal);
                             \assert(\is_string($replacedOptionVal));
-                            $referenceImages[strtolower(sprintf('%s:%s', $groupVal, $replacedOptionVal))] = true;
+                            $referenceImages[strtolower(\sprintf('%s:%s', $groupVal, $replacedOptionVal))] = true;
                         }
                     }
                 }
@@ -2144,7 +2145,7 @@ class sArticles implements Enlight_Hook
 
         $queryPrams = http_build_query($params, '', '&');
 
-        return sprintf('%s?%s', $this->config->get('sBASEFILE'), $queryPrams);
+        return \sprintf('%s?%s', $this->config->get('sBASEFILE'), $queryPrams);
     }
 
     /**
@@ -2264,7 +2265,7 @@ class sArticles implements Enlight_Hook
 
         foreach ($sizes as $key => $size) {
             if (str_starts_with($size, 'x')) {
-                $size = sprintf('%sx%s', $size, $size);
+                $size = \sprintf('%sx%s', $size, $size);
             }
 
             if (isset($image['type']) && $image['type'] === Media::TYPE_IMAGE || $image['media']['type'] === Media::TYPE_IMAGE) {

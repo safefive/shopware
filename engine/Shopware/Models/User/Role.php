@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -113,7 +114,7 @@ class Role extends ModelEntity implements Zend_Acl_Role_Interface
      * The privileges property is the inverse side of the association between resource and privileges.
      * The association is joined over the s_core_acl_privileges.resourceID field and the s_core_acl_resources.id
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Shopware\Models\User\Rule>
+     * @var \Doctrine\Common\Collections\ArrayCollection<Rule>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\User\Rule", mappedBy="role", cascade={"remove"})
      */
@@ -123,7 +124,7 @@ class Role extends ModelEntity implements Zend_Acl_Role_Interface
      * The children property contains all inherited Shopware\Models\User\Role instances.
      * The children inherits all privileges from his parent.
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Shopware\Models\User\Role>
+     * @var \Doctrine\Common\Collections\ArrayCollection<Role>
      *
      * @ORM\OneToMany(targetEntity="\Shopware\Models\User\Role", mappedBy="parent")
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -213,10 +214,10 @@ class Configuration extends BaseConfiguration
     {
         if (!is_dir($dir)) {
             if (@mkdir($dir, 0777, true) === false && !is_dir($dir)) {
-                throw new RuntimeException(sprintf("Unable to create the doctrine attribute directory (%s)\n", $dir));
+                throw new RuntimeException(\sprintf("Unable to create the doctrine attribute directory (%s)\n", $dir));
             }
         } elseif (!is_writable($dir)) {
-            throw new RuntimeException(sprintf("Unable to write in the doctrine attribute directory (%s)\n", $dir));
+            throw new RuntimeException(\sprintf("Unable to write in the doctrine attribute directory (%s)\n", $dir));
         }
 
         $dir = rtrim((string) realpath($dir), '\\/') . DIRECTORY_SEPARATOR;
@@ -245,10 +246,10 @@ class Configuration extends BaseConfiguration
     {
         if (!is_dir($dir)) {
             if (@mkdir($dir, 0777, true) === false && !is_dir($dir)) {
-                throw new RuntimeException(sprintf("Unable to create the doctrine proxy directory (%s)\n", $dir));
+                throw new RuntimeException(\sprintf("Unable to create the doctrine proxy directory (%s)\n", $dir));
             }
         } elseif (!is_writable($dir)) {
-            throw new RuntimeException(sprintf("Unable to write in the doctrine proxy directory (%s)\n", $dir));
+            throw new RuntimeException(\sprintf("Unable to write in the doctrine proxy directory (%s)\n", $dir));
         }
 
         parent::setProxyDir($dir);
@@ -296,7 +297,7 @@ class Configuration extends BaseConfiguration
         }
 
         if (!class_exists($provider)) {
-            throw new Exception(sprintf('Doctrine cache provider "%s" not found failure.', $provider));
+            throw new Exception(\sprintf('Doctrine cache provider "%s" not found failure.', $provider));
         }
 
         return new $provider();

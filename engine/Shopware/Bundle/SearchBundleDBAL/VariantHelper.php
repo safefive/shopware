@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -329,7 +330,7 @@ class VariantHelper implements VariantHelperInterface
             ',',
             array_map(
                 function ($column) use ($template) {
-                    return sprintf($template, $column, $column, $column);
+                    return \sprintf($template, $column, $column, $column);
                 },
                 $this->listingPriceHelper->getPriceColumns()
             )

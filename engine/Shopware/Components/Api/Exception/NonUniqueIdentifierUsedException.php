@@ -44,7 +44,7 @@ class NonUniqueIdentifierUsedException extends Enlight_Exception implements ApiE
     {
         $this->alternativeIds = $alternativeIds;
 
-        $message = sprintf("Identifier '%s' with value '%s' for entity '%s' is not unique.", $identifier, $identifierValue, $model);
+        $message = \sprintf("Identifier '%s' with value '%s' for entity '%s' is not unique.", $identifier, $identifierValue, $model);
         parent::__construct($message, Response::HTTP_CONFLICT);
     }
 

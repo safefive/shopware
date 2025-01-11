@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -181,7 +182,7 @@ class Shopware_Components_TemplateMail
                 ['name' => $modelName]
             );
             if (!$mailModel instanceof Mail) {
-                throw new Enlight_Exception(sprintf('Mail-Template with name "%s" could not be found.', $modelName));
+                throw new Enlight_Exception(\sprintf('Mail-Template with name "%s" could not be found.', $modelName));
             }
         }
 

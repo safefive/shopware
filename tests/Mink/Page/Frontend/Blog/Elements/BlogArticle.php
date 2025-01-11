@@ -170,7 +170,7 @@ class BlogArticle extends MultipleElement
         if ($result !== true) {
             $messages = ['The blog article has different titles!'];
             foreach ($title as $key => $value) {
-                $messages[] = sprintf('"%s" (Key: "%s")', $value, $key);
+                $messages[] = \sprintf('"%s" (Key: "%s")', $value, $key);
             }
 
             Helper::throwException($messages);

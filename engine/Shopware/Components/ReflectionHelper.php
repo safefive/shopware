@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -89,7 +90,7 @@ class ReflectionHelper
 
             if (!isset($arguments[$paramName])) {
                 if (!$constructorParam->isOptional()) {
-                    throw new RuntimeException(sprintf('Required constructor parameter missing: "$%s".', $paramName));
+                    throw new RuntimeException(\sprintf('Required constructor parameter missing: "$%s".', $paramName));
                 }
                 $newParams[] = $constructorParam->getDefaultValue();
 
@@ -122,7 +123,7 @@ class ReflectionHelper
 
         // Trying to execute a class outside the Shopware DocumentRoot
         if ($fileDir !== $docPath) {
-            throw new InvalidArgumentException(sprintf('Class "%s" out of scope', $class->getFileName()), 1);
+            throw new InvalidArgumentException(\sprintf('Class "%s" out of scope', $class->getFileName()), 1);
         }
 
         $fileName = substr($fileName, \strlen($docPath));
@@ -143,13 +144,13 @@ class ReflectionHelper
         }
 
         if ($error) {
-            throw new InvalidArgumentException(sprintf('Class "%s" out of scope', $class->getFileName()), 2);
+            throw new InvalidArgumentException(\sprintf('Class "%s" out of scope', $class->getFileName()), 2);
         }
 
         $className = $class->getName();
         $classImplements = class_implements($className);
         if (!\is_array($classImplements) || !\array_key_exists(ReflectionAwareInterface::class, $classImplements)) {
-            throw new InvalidArgumentException(sprintf('Class %s has to implement the interface %s', $className, ReflectionAwareInterface::class));
+            throw new InvalidArgumentException(\sprintf('Class %s has to implement the interface %s', $className, ReflectionAwareInterface::class));
         }
     }
 }

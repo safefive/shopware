@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -192,6 +193,6 @@ EOF
             return $job;
         }
 
-        throw new RuntimeException(sprintf('Cron not found by action name "%s".', $action));
+        throw new RuntimeException(\sprintf('Cron not found by action name "%s".', $action));
     }
 }

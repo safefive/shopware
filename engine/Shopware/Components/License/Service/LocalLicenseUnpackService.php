@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -50,7 +51,7 @@ class LocalLicenseUnpackService implements LicenseUnpackServiceInterface
         }
 
         if ($info['host'] != $host) {
-            throw new LicenseHostException(new LicenseInformation($info), sprintf('License key is not valid for domain %s', $request->host));
+            throw new LicenseHostException(new LicenseInformation($info), \sprintf('License key is not valid for domain %s', $request->host));
         }
 
         $info['edition'] = $info['product'];

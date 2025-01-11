@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -44,7 +45,7 @@ class PrivacyService implements PrivacyServiceInterface
     public function cleanupGuestUsers($months)
     {
         $threshold = (new DateTime())
-            ->modify(sprintf('-%d months', $months))
+            ->modify(\sprintf('-%d months', $months))
             ->format('Y-m-d H:i:s');
 
         $query = <<<'SQL'
@@ -63,7 +64,7 @@ SQL;
     public function cleanupCanceledOrders($months)
     {
         $threshold = (new DateTime())
-            ->modify(sprintf('-%d months', $months))
+            ->modify(\sprintf('-%d months', $months))
             ->format('Y-m-d H:i:s');
 
         $query = <<<'SQL'

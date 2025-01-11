@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -84,7 +85,7 @@ class RegexCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf($message, implode('<br>', $files)),
+            'message' => \sprintf($message, implode('<br>', $files)),
         ];
     }
 

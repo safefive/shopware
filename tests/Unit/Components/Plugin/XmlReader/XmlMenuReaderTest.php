@@ -100,7 +100,7 @@ class XmlMenuReaderTest extends TestCase
     private function readFile(string $file): array
     {
         return $this->menuReader->read(
-            sprintf('%s/examples/menu/%s', __DIR__, $file)
+            \sprintf('%s/examples/menu/%s', __DIR__, $file)
         );
     }
 }

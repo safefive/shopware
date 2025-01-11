@@ -218,10 +218,10 @@ abstract class TestCase extends Enlight_Components_Test_TestCase
         }, $result->getProducts());
 
         foreach ($numbers as $number) {
-            static::assertContains($number, $expectedNumbers, sprintf('Product with number: `%s` found but not expected', $number));
+            static::assertContains($number, $expectedNumbers, \sprintf('Product with number: `%s` found but not expected', $number));
         }
         foreach ($expectedNumbers as $number) {
-            static::assertContains($number, $numbers, sprintf('Expected product number: `%s` not found', $number));
+            static::assertContains($number, $numbers, \sprintf('Expected product number: `%s` not found', $number));
         }
 
         static::assertCount(\count($expectedNumbers), $result->getProducts());
@@ -241,7 +241,7 @@ abstract class TestCase extends Enlight_Components_Test_TestCase
             static::assertEquals(
                 $expectedProduct,
                 $product->getNumber(),
-                sprintf(
+                \sprintf(
                     'Expected %s at search result position %s, but got product %s',
                     $expectedProduct,
                     $index,

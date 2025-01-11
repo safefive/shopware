@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -972,7 +973,7 @@ class DqlHelper
                 );
         }
 
-        throw new RuntimeException(sprintf('Foreign table %s not defined, yet. Please report this error.', $foreignPrefix));
+        throw new RuntimeException(\sprintf('Foreign table %s not defined, yet. Please report this error.', $foreignPrefix));
     }
 
     /**

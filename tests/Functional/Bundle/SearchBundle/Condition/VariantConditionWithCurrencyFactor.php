@@ -528,10 +528,10 @@ class VariantConditionWithCurrencyFactor extends TestCase
         $expectedCheapestPriceNumbers = array_keys($prices['cheapestPrice']);
 
         foreach ($numbers as $number) {
-            static::assertContains($number, $expectedCheapestPriceNumbers, sprintf('Cheapest price of product with number: `%s` found but not expected', $number));
+            static::assertContains($number, $expectedCheapestPriceNumbers, \sprintf('Cheapest price of product with number: `%s` found but not expected', $number));
         }
         foreach ($expectedCheapestPriceNumbers as $number) {
-            static::assertContains($number, $numbers, sprintf('Expected cheapest price of product with number: `%s` not found', $number));
+            static::assertContains($number, $numbers, \sprintf('Expected cheapest price of product with number: `%s` not found', $number));
         }
 
         static::assertCount(\count($expectedCheapestPriceNumbers), $products);
@@ -540,10 +540,10 @@ class VariantConditionWithCurrencyFactor extends TestCase
         $expectedPseudoPriceNumbers = array_keys($prices['pseudoPrice']);
 
         foreach ($numbers as $number) {
-            static::assertContains($number, $expectedPseudoPriceNumbers, sprintf('Pseudo price of product with number: `%s` found but not expected', $number));
+            static::assertContains($number, $expectedPseudoPriceNumbers, \sprintf('Pseudo price of product with number: `%s` found but not expected', $number));
         }
         foreach ($expectedPseudoPriceNumbers as $number) {
-            static::assertContains($number, $numbers, sprintf('Expected pseudo price of product with number: `%s` not found', $number));
+            static::assertContains($number, $numbers, \sprintf('Expected pseudo price of product with number: `%s` not found', $number));
         }
 
         static::assertCount(\count($expectedPseudoPriceNumbers), $products);

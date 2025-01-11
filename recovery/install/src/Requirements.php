@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -46,7 +47,7 @@ class Requirements
     public function __construct($sourceFile, TranslationService $translations)
     {
         if (!is_readable($sourceFile)) {
-            throw new RuntimeException(sprintf('Cannot read requirements file in %s.', $sourceFile));
+            throw new RuntimeException(\sprintf('Cannot read requirements file in %s.', $sourceFile));
         }
 
         $this->sourceFile = $sourceFile;
@@ -496,7 +497,7 @@ class Requirements
             $maxCompatibleVersion = str_replace('.99', '', $check['maxCompatibleVersion']);
             $key = 'requirements_php_max_compatible_version';
 
-            $check['notice'] = sprintf($this->translations->translate($key), $maxCompatibleVersion);
+            $check['notice'] = \sprintf($this->translations->translate($key), $maxCompatibleVersion);
         }
 
         return $check;

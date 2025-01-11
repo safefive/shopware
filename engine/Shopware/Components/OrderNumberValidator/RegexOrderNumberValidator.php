@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -37,7 +38,7 @@ class RegexOrderNumberValidator implements OrderNumberValidatorInterface
     public function validate(string $orderNumber): bool
     {
         if (preg_match($this->pattern, $orderNumber) === 0) {
-            throw new InvalidOrderNumberException(sprintf('Order number "%s" does not match pattern "%s"', $orderNumber, $this->pattern));
+            throw new InvalidOrderNumberException(\sprintf('Order number "%s" does not match pattern "%s"', $orderNumber, $this->pattern));
         }
 
         return true;

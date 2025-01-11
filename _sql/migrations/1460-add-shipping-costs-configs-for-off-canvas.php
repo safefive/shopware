@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -69,7 +70,7 @@ class Migrations_Migration1460 extends Shopware\Components\Migrations\AbstractMi
         VALUES (@elementId, '2', 'Show shipping costs calculation in mini/offcanvas shopping cart', 'If enabled, a shipping cost calculator will be displayed in the mini/offcanvas cart page. This is only available for customers who haven\'t logged in');
 
 SQL;
-        $this->addSql(sprintf($sql, serialize($options)));
+        $this->addSql(\sprintf($sql, serialize($options)));
 
         if ($modus === self::MODUS_UPDATE) {
             $sql = "INSERT INTO `s_core_config_values` (`element_id`, `shop_id`, `value`)

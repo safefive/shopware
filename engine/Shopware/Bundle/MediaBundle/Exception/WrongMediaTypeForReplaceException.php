@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -36,7 +37,7 @@ class WrongMediaTypeForReplaceException extends Exception
     {
         $this->requiredType = $requiredType;
 
-        $message = sprintf('To replace the media file, a "%s" file is required.', $requiredType);
+        $message = \sprintf('To replace the media file, a "%s" file is required.', $requiredType);
         parent::__construct($message);
     }
 

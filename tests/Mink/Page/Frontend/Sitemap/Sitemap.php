@@ -53,7 +53,7 @@ class Sitemap extends Page
     public function checkGroup($group, string $link, array $sites): void
     {
         if (!($group instanceof SitemapGroup)) {
-            $message = sprintf('Sitemap group "%s" was not found!', $group);
+            $message = \sprintf('Sitemap group "%s" was not found!', $group);
             Helper::throwException($message);
         }
 
@@ -105,14 +105,14 @@ class Sitemap extends Page
         }
 
         if ($result === 'title') {
-            $message = sprintf('Title of "%s" has a different value! (is "%s")', $check['title'][1], $check['title'][0]);
+            $message = \sprintf('Title of "%s" has a different value! (is "%s")', $check['title'][1], $check['title'][0]);
         } elseif (empty($link)) {
             $message = [
-                sprintf('There is a link for the group "%s"!', $title),
+                \sprintf('There is a link for the group "%s"!', $title),
                 $check['link'][0],
             ];
         } else {
-            $message = sprintf('The link of "%s" is different! ("%s" not found in "%s")', $title, $check['link'][1], $check['link'][0]);
+            $message = \sprintf('The link of "%s" is different! ("%s" not found in "%s")', $title, $check['link'][1], $check['link'][0]);
         }
 
         Helper::throwException($message);
@@ -140,7 +140,7 @@ class Sitemap extends Page
             }
         }
 
-        $message = sprintf('The site "%s" with link "%s" was not found!', $title, $link);
+        $message = \sprintf('The site "%s" with link "%s" was not found!', $title, $link);
         Helper::throwException($message);
     }
 }

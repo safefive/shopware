@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -52,7 +53,7 @@ class Template extends ModelEntity
     /**
      * INVERSE SIDE
      *
-     * @var ArrayCollection<\Shopware\Models\Article\Configurator\Template\Price>
+     * @var ArrayCollection<Price>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Configurator\Template\Price", mappedBy="template", orphanRemoval=true, cascade={"persist"})
      */

@@ -170,7 +170,7 @@ class AnalyticsTest extends ControllerTestCase
     {
         $this->getContainer()->get('events')->addListener('Shopware_Analytics_ShopStatisticTurnover', function (Enlight_Event_EventArgs $args) {
             $queryBuilder = $args->getReturn();
-            $queryBuilder->addSelect(sprintf('COUNT(orders.id) as %s', self::TEST_SELECT_KEY));
+            $queryBuilder->addSelect(\sprintf('COUNT(orders.id) as %s', self::TEST_SELECT_KEY));
         });
 
         $request = new Enlight_Controller_Request_RequestTestCase();

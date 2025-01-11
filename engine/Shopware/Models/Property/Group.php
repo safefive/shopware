@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -102,7 +103,7 @@ class Group extends ModelEntity
     private $relations;
 
     /**
-     * @var ArrayCollection<\Shopware\Models\Article\Article>
+     * @var ArrayCollection<Article>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Article", mappedBy="propertyGroup", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="id", referencedColumnName="filtergroupID")

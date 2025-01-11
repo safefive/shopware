@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -128,7 +129,7 @@ class InstallerService
         ]);
 
         if ($plugin === null) {
-            throw new Exception(sprintf('Unknown plugin "%s".', $pluginName));
+            throw new Exception(\sprintf('Unknown plugin "%s".', $pluginName));
         }
 
         return $plugin;
@@ -225,7 +226,7 @@ class InstallerService
         }
 
         if (!$plugin->getInstalled()) {
-            throw new Exception(sprintf('Plugin "%s" has to be installed first before it can be activated.', $plugin->getName()));
+            throw new Exception(\sprintf('Plugin "%s" has to be installed first before it can be activated.', $plugin->getName()));
         }
 
         if (!$plugin->isLegacyPlugin()) {

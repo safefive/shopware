@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -57,11 +58,11 @@ class SearchBuilder
 
             foreach ($terms as $index => $word) {
                 $conditions[] = $field . '  LIKE :phrase' . $index;
-                $select[] = sprintf(' IF(%s LIKE %s, %s, 0) ', $field, ':phrase' . $index, $ranking * 0.5);
-                $select[] = sprintf(' IF(%s = %s, %s, 0) ', $field, ':match' . $index, $ranking);
+                $select[] = \sprintf(' IF(%s LIKE %s, %s, 0) ', $field, ':phrase' . $index, $ranking * 0.5);
+                $select[] = \sprintf(' IF(%s = %s, %s, 0) ', $field, ':match' . $index, $ranking);
             }
 
-            $select[] = sprintf(' IF(%s = :full, %s, 0) ', $field, $ranking * 2);
+            $select[] = \sprintf(' IF(%s = :full, %s, 0) ', $field, $ranking * 2);
         }
 
         foreach ($terms as $index => $word) {

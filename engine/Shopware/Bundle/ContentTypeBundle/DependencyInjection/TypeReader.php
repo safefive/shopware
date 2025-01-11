@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -84,7 +85,7 @@ class TypeReader
             foreach ($type['fieldSets'] as &$fieldSet) {
                 foreach ($fieldSet['fields'] as &$field) {
                     if (!isset($alias[$field['type']])) {
-                        throw new RuntimeException(sprintf('Type with name "%s" does not exist', $field['type']));
+                        throw new RuntimeException(\sprintf('Type with name "%s" does not exist', $field['type']));
                     }
                 }
             }

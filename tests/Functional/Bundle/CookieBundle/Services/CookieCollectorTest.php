@@ -125,7 +125,7 @@ class ExampleTestSubscriber
     public static function addInvalidCookie(): CookieCollection
     {
         $cookieCollection = new CookieCollection();
-        $cookieCollection->add(new class() {
+        $cookieCollection->add(new class {
         });
 
         return $cookieCollection;
@@ -147,7 +147,7 @@ class ExampleTestSubscriber
     public static function addInvalidCookieGroup(): CookieGroupCollection
     {
         $cookieGroupCollection = new CookieGroupCollection();
-        $cookieGroupCollection->add(new class() {
+        $cookieGroupCollection->add(new class {
         });
 
         return $cookieGroupCollection;

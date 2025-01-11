@@ -147,7 +147,7 @@ abstract class Enlight_Class
         if (\is_object($class)) {
             $class = \get_class($class);
         } elseif (!class_exists($class)) {
-            throw new Enlight_Exception(sprintf('Class "%s" does not exist and could not be loaded', $class));
+            throw new Enlight_Exception(\sprintf('Class "%s" does not exist and could not be loaded', $class));
         }
 
         $classImplements = class_implements($class);

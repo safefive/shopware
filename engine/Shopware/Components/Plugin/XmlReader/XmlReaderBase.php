@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -53,7 +54,7 @@ abstract class XmlReaderBase implements XmlReaderInterface
         try {
             $dom = XmlUtils::loadFile($xmlFile, $this->xsdFile);
         } catch (Exception $e) {
-            throw new InvalidArgumentException(sprintf('Unable to parse file "%s". Message: %s', $xmlFile, $e->getMessage()), $e->getCode(), $e);
+            throw new InvalidArgumentException(\sprintf('Unable to parse file "%s". Message: %s', $xmlFile, $e->getMessage()), $e->getCode(), $e);
         }
 
         return $this->parseFile($dom);
@@ -73,7 +74,7 @@ abstract class XmlReaderBase implements XmlReaderInterface
         foreach ($list as $item) {
             $language = $item->getAttribute('lang') ?: self::DEFAULT_LANG;
             if (!\is_string($language)) {
-                throw new RuntimeException(sprintf('Attribute "lang" needs to be a string in file "%s"', static::$xmlFile));
+                throw new RuntimeException(\sprintf('Attribute "lang" needs to be a string in file "%s"', static::$xmlFile));
             }
 
             // XSD Requires en-GB, Zend uses en_GB
@@ -101,7 +102,7 @@ abstract class XmlReaderBase implements XmlReaderInterface
         foreach ($list as $item) {
             $language = $item->getAttribute('lang') ?: self::DEFAULT_LANG;
             if (!\is_string($language)) {
-                throw new RuntimeException(sprintf('Attribute "lang" needs to be a string in file "%s"', static::$xmlFile));
+                throw new RuntimeException(\sprintf('Attribute "lang" needs to be a string in file "%s"', static::$xmlFile));
             }
 
             // XSD Requires en-GB, Zend uses en_GB
@@ -200,12 +201,12 @@ abstract class XmlReaderBase implements XmlReaderInterface
         $children = self::getChildren($element, $name);
 
         if (\count($children) > 1) {
-            throw new InvalidArgumentException(sprintf('Element with name "%s" found multiple times in file "%s", but expected to be there only once', $name, static::$xmlFile));
+            throw new InvalidArgumentException(\sprintf('Element with name "%s" found multiple times in file "%s", but expected to be there only once', $name, static::$xmlFile));
         }
 
         if (\count($children) === 0) {
             if ($throwException) {
-                throw new InvalidArgumentException(sprintf('Element with name "%s" not found in file "%s"', $name, static::$xmlFile));
+                throw new InvalidArgumentException(\sprintf('Element with name "%s" not found in file "%s"', $name, static::$xmlFile));
             }
 
             return null;

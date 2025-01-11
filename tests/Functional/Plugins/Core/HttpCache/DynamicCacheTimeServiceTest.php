@@ -177,7 +177,7 @@ class DynamicCacheTimeServiceTest extends TestCase
             'module' => 'frontend',
             'controller' => 'blog',
             'action' => 'index',
-            'sCategory' => sprintf('%d', $blog->getCategoryId()),
+            'sCategory' => \sprintf('%d', $blog->getCategoryId()),
         ]);
 
         return $request;
@@ -190,7 +190,7 @@ class DynamicCacheTimeServiceTest extends TestCase
             'module' => 'frontend',
             'controller' => 'blog',
             'action' => 'detail',
-            'blogArticle' => sprintf('%d', $blog->getId()),
+            'blogArticle' => \sprintf('%d', $blog->getId()),
         ]);
 
         return $request;
@@ -235,7 +235,7 @@ class DynamicCacheTimeServiceTest extends TestCase
             'module' => 'frontend',
             'controller' => 'listing',
             'action' => 'index',
-            'sCategory' => sprintf('%d', $category->getId()),
+            'sCategory' => \sprintf('%d', $category->getId()),
         ]);
 
         return $request;
@@ -291,7 +291,7 @@ class DynamicCacheTimeServiceTest extends TestCase
             'module' => 'frontend',
             'controller' => 'detail',
             'action' => 'index',
-            'sArticle' => sprintf('%d', $product->getId()),
+            'sArticle' => \sprintf('%d', $product->getId()),
             'number' => $product->getMainDetail()->getNumber(),
         ]);
 

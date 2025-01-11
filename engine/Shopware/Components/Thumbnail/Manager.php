@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -92,7 +93,7 @@ class Manager
         $imagePath = $media->getPath();
 
         if ($media->getType() !== $media::TYPE_IMAGE) {
-            throw new Exception(sprintf('File %s is not an image.', $imagePath));
+            throw new Exception(\sprintf('File %s is not an image.', $imagePath));
         }
 
         if (empty($thumbnailSizes)) {

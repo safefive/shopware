@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -146,7 +147,7 @@ class IndexPopulateCommand extends ShopwareCommand implements CompletionAwareInt
 
         $shopIdsNotFound = array_diff_key($shopIds, $existingShopIds);
         if ($shopIdsNotFound !== []) {
-            $output->writeln(sprintf('<error>Shops with following IDs not found: %s</error>', implode(', ', $shopIdsNotFound)));
+            $output->writeln(\sprintf('<error>Shops with following IDs not found: %s</error>', implode(', ', $shopIdsNotFound)));
         }
 
         return $shops;

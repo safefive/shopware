@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -256,7 +257,7 @@ class SearchIndexer implements SearchIndexerInterface
                     'si',
                     $table['reference_table'] ?: 's_articles',
                     't' . $table['tableID'],
-                    sprintf(
+                    \sprintf(
                         'si.elementID = t%d.%s AND si.fieldID IN (:fieldIDs%1$d)',
                         $table['tableID'],
                         $table['foreign_key']
@@ -267,7 +268,7 @@ class SearchIndexer implements SearchIndexerInterface
 
             if (!\in_array($table['reference_table'] ?: $table['table'], $selected)) {
                 $qb->addSelect(
-                    sprintf(
+                    \sprintf(
                         '(SELECT COUNT(*) * :threshold FROM %s) AS cnt_%1$s',
                         $selected[] = ($table['reference_table'] ?: $table['table'])
                     )
@@ -275,7 +276,7 @@ class SearchIndexer implements SearchIndexerInterface
             }
 
             $qb->orHaving(
-                sprintf(
+                \sprintf(
                     'tableId = %d AND count_self > cnt_%s',
                     $table['tableID'],
                     $table['reference_table'] ?: $table['table']

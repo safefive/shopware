@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -119,7 +120,7 @@ class ModelManagerTest extends \PHPUnit\Framework\TestCase
                 $type = TypeMappingInterface::TYPE_BOOLEAN;
                 break;
             default:
-                throw new InvalidArgumentException(sprintf('Column type "%s" cannot be converted.', $type));
+                throw new InvalidArgumentException(\sprintf('Column type "%s" cannot be converted.', $type));
         }
 
         return $type;

@@ -606,7 +606,7 @@ class ArticleTest extends AbstractApiTestCase
                 ],
             ],
         ];
-        $this->authenticatedApiRequest('PUT', sprintf('/api/articles/%s', $productIdAperitif), [], $data);
+        $this->authenticatedApiRequest('PUT', \sprintf('/api/articles/%s', $productIdAperitif), [], $data);
         $response = $this->client->getResponse();
         static::assertEquals(200, $response->getStatusCode());
         $result = $response->getContent();

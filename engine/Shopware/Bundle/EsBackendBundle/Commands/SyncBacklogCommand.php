@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -86,7 +87,7 @@ class SyncBacklogCommand extends ShopwareCommand
                 continue;
             }
 
-            $output->writeln(sprintf('Sync %s with id %s', $backlog['entity'], $backlog['entity_id']));
+            $output->writeln(\sprintf('Sync %s with id %s', $backlog['entity'], $backlog['entity_id']));
 
             if ($backlog['entity'] === Article::class) {
                 $this->indexArticle($backlog['entity_id']);

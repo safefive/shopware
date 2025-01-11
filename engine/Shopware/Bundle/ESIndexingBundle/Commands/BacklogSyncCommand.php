@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -86,7 +87,7 @@ class BacklogSyncCommand extends ShopwareCommand
         $lastBackLogId = $this->backlogReader->getLastBacklogId();
         $backlogs = $this->backlogReader->read($lastBackLogId, $this->batchSize);
 
-        $output->writeln(sprintf('Current last backlog id: %d', $lastBackLogId));
+        $output->writeln(\sprintf('Current last backlog id: %d', $lastBackLogId));
 
         $io = new SymfonyStyle($input, $output);
 
@@ -106,7 +107,7 @@ class BacklogSyncCommand extends ShopwareCommand
         $last = $backlogs[array_key_last($backlogs)];
         $this->backlogReader->setLastBacklogId($last->getId());
 
-        $io->success(sprintf('Synchronized %d items', \count($backlogs)));
+        $io->success(\sprintf('Synchronized %d items', \count($backlogs)));
 
         return 0;
     }

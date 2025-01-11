@@ -57,7 +57,7 @@ class RandomTest extends Enlight_Components_Test_TestCase
         }
 
         foreach ($sets as $kind => $set) {
-            static::fail(sprintf('Password does not contain following set: %s', $kind));
+            static::fail(\sprintf('Password does not contain following set: %s', $kind));
         }
     }
 

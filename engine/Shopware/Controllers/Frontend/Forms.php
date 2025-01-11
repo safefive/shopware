@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -211,7 +212,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
 
                         $product = Shopware()->Modules()->Articles()->sGetArticleNameByOrderNumber($orderNumber);
 
-                        $element['value'] = sprintf('%s (%s)', $product, $this->get('shopware.escaper')->escapeHtml($orderNumber));
+                        $element['value'] = \sprintf('%s (%s)', $product, $this->get('shopware.escaper')->escapeHtml($orderNumber));
                         $this->_elements[$id]['value'] = $element['value'];
                     } catch (InvalidOrderNumberException $exception) {
                         // Explicit empty catch
@@ -227,7 +228,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                             $getBasket = Shopware()->Modules()->Basket()->sGetBasket();
                             foreach ($getBasket[CartKey::POSITIONS] ?? [] as $basketRow) {
                                 if (empty($basketRow['modus'])) {
-                                    $text .= sprintf(
+                                    $text .= \sprintf(
                                         "\n%s x %s (%s) - %s %s",
                                         $basketRow['quantity'],
                                         $basketRow['articlename'],
@@ -376,7 +377,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
             case 'hidden':
             case 'email':
             case 'text':
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"%s\" class=\"%s %s\" %s value=\"%s\" id=\"%s\" %s name=\"%s\"/>\r\n",
                     $element['typ'],
                     $element['class'],
@@ -390,7 +391,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                 break;
 
             case 'nourl':
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"%s\" class=\"%s %s\" %s value=\"%s\" id=\"%s\" %s name=\"%s\"/>\r\n",
                     'text',
                     $element['class'],
@@ -409,7 +410,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                 } else {
                     $checked = '';
                 }
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"%s\" class=\"%s %s\" %s value=\"%s\" id=\"%s\" name=\"%s\"%s/>\r\n",
                     $element['typ'],
                     $element['class'],
@@ -423,7 +424,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                 break;
 
             case 'file':
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"%s\" class=\"%s %s file\" %s id=\"%s\" %s name=\"%s\" maxlength=\"100000\" accept=\"%s\"/>\r\n",
                     $element['typ'],
                     $element['class'],
@@ -442,14 +443,14 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
 
                 if (strpos($element['label'], ';') !== false) {
                     $placeholders = explode(';', $element['label']);
-                    $placeholder0 = sprintf('placeholder="%s%s"', $placeholders[0], $requiredFieldSnippet);
-                    $placeholder1 = sprintf('placeholder="%s%s"', $placeholders[1], $requiredFieldSnippet);
+                    $placeholder0 = \sprintf('placeholder="%s%s"', $placeholders[0], $requiredFieldSnippet);
+                    $placeholder1 = \sprintf('placeholder="%s%s"', $placeholders[1], $requiredFieldSnippet);
                 } else {
                     $placeholder0 = $placeholder;
                     $placeholder1 = $placeholder;
                 }
 
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"text\" class=\"%s %s\" %s value=\"%s\" %s id=\"%s\" name=\"%s\"/>\r\n",
                     $element['class'][0],
                     $requiredField,
@@ -459,7 +460,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                     $element['name'][0],
                     $element['name'][0]
                 );
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<input type=\"text\" class=\"%s %s\" %s value=\"%s\" %s id=\"%s\" name=\"%s\"/>\r\n",
                     $element['class'][1],
                     $requiredField,
@@ -475,7 +476,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                 if (empty($post) && $element['value']) {
                     $post = $element['value'];
                 }
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<textarea class=\"%s %s\" %s id=\"%s\" %s name=\"%s\">%s</textarea>\r\n",
                     $element['class'],
                     $requiredField,
@@ -489,7 +490,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
 
             case 'select':
                 $values = explode(';', $element['value']);
-                $output .= sprintf(
+                $output .= \sprintf(
                     "<select class=\"%s %s\" %s id=\"%s\" name=\"%s\">\r\n\t", $element['class'],
                     $requiredField,
                     $requiredFieldAria,
@@ -504,15 +505,15 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                 $label = $element['label'] . $requiredFieldSnippet;
 
                 if (empty($post)) {
-                    $output .= sprintf('<option selected="selected" %s value="">%s</option>', $requiredField, $label);
+                    $output .= \sprintf('<option selected="selected" %s value="">%s</option>', $requiredField, $label);
                 } else {
-                    $output .= sprintf('<option %s value="">%s</option>', $requiredField, $label);
+                    $output .= \sprintf('<option %s value="">%s</option>', $requiredField, $label);
                 }
                 foreach ($values as $value) {
                     if ($value == $post) {
-                        $output .= sprintf('<option selected>%s</option>', $value);
+                        $output .= \sprintf('<option selected>%s</option>', $value);
                     } else {
-                        $output .= sprintf('<option>%s</option>', $value);
+                        $output .= \sprintf('<option>%s</option>', $value);
                     }
                 }
                 $output .= "</select>\r\n";
@@ -527,7 +528,7 @@ class Shopware_Controllers_Frontend_Forms extends Enlight_Controller_Action
                         $checked = ' checked';
                     }
 
-                    $output .= sprintf(
+                    $output .= \sprintf(
                         '<input type="radio" class="%s %s" value="%s" id="%s" name="%s"%s> %s ',
                         $element['class'],
                         $requiredField,

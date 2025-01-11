@@ -89,7 +89,7 @@ class XmlCronjobReaderTest extends TestCase
     private function readFile(): array
     {
         return $this->cronjobReader->read(
-            sprintf('%s/examples/cronjob/%s', __DIR__, 'cronjob.xml')
+            \sprintf('%s/examples/cronjob/%s', __DIR__, 'cronjob.xml')
         );
     }
 }

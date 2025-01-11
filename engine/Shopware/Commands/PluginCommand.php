@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -69,7 +70,7 @@ abstract class PluginCommand extends ShopwareCommand
         $cacheManager = $this->container->get(CacheManager::class);
         $cacheTags = $this->getScheduledCaches(...$contexts);
         if ($cacheManager->clearByTags($cacheTags)) {
-            $output->writeln(sprintf('Caches cleared (%s).', implode(', ', $cacheTags)));
+            $output->writeln(\sprintf('Caches cleared (%s).', implode(', ', $cacheTags)));
         }
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -114,7 +115,7 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
@@ -122,17 +123,17 @@ EOF
         $installationContext = null;
 
         if ($plugin->getInstalled()) {
-            $output->writeln(sprintf('The plugin %s is already installed.', $pluginName));
+            $output->writeln(\sprintf('The plugin %s is already installed.', $pluginName));
         } else {
             $installationContext = $pluginManager->installPlugin($plugin);
-            $output->writeln(sprintf('Plugin %s has been installed successfully.', $pluginName));
+            $output->writeln(\sprintf('Plugin %s has been installed successfully.', $pluginName));
         }
 
         $activationContext = null;
 
         if ($input->getOption('activate')) {
             $activationContext = $pluginManager->activatePlugin($plugin);
-            $output->writeln(sprintf('Plugin %s has been activated successfully.', $pluginName));
+            $output->writeln(\sprintf('Plugin %s has been activated successfully.', $pluginName));
         }
 
         $this->clearCachesIfRequested($input, $output, $installationContext, $activationContext);

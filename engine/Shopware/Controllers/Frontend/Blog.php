@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -240,7 +241,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
 
         // Make sure the category exists and is a blog category
         if (empty($categoryContent) || !$categoryContent['blog']) {
-            throw new Enlight_Controller_Exception(sprintf('Blog category by id "%d" is invalid', $categoryId), 404);
+            throw new Enlight_Controller_Exception(\sprintf('Blog category by id "%d" is invalid', $categoryId), 404);
         }
 
         if (!empty($categoryContent['external'])) {
@@ -299,7 +300,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
 
         // Redirect if the blog item is not available
         if (empty($blogArticleData) || empty($blogArticleData['active'])) {
-            throw new Enlight_Controller_Exception(sprintf('Blog article with id %d not found or inactive', $blogArticleId), 404);
+            throw new Enlight_Controller_Exception(\sprintf('Blog article with id %d not found or inactive', $blogArticleId), 404);
         }
 
         // Redirect if category is not available, inactive or external
@@ -498,7 +499,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
      */
     public function getDateFilterData($blogCategoryIds, $selectedFilters, $shopId = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         // Date filter query
         $dateFilterData = $this->repository
@@ -521,7 +522,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
      */
     public function getAuthorFilterData($blogCategoryIds, $filter, $shopId = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         // Date filter query
         $filterData = $this->repository
@@ -544,7 +545,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
      */
     public function getTagsFilterData($blogCategoryIds, $filter, $shopId = null)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         // Date filter query
         $filterData = $this->repository
@@ -565,7 +566,7 @@ class Shopware_Controllers_Frontend_Blog extends Enlight_Controller_Action
      */
     public function getCategoryBreadcrumb($categoryId)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be private with 5.8.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return array_reverse(Shopware()->Modules()->Categories()->sGetCategoriesByParent($categoryId));
     }

@@ -185,7 +185,7 @@ class ShopwareContext extends SubContext
                 $mask = '%saccount/resetPassword/hash/%s';
                 $link = $this->getPage(Homepage::class)->getShopUrl();
 
-                $confirmationLink = sprintf($mask, $link, $optin['hash']);
+                $confirmationLink = \sprintf($mask, $link, $optin['hash']);
                 $session->visit($confirmationLink);
 
                 return;
@@ -219,7 +219,7 @@ class ShopwareContext extends SubContext
         }
 
         foreach ($hashes as $optin) {
-            $confirmationLink = sprintf($mask, $link, $optin['hash']);
+            $confirmationLink = \sprintf($mask, $link, $optin['hash']);
             $session->visit($confirmationLink);
         }
     }
@@ -412,7 +412,7 @@ class ShopwareContext extends SubContext
     {
         $element = $this->getSession()->getPage()->findField($selector);
         if (!$element instanceof NodeElement) {
-            Helper::throwException(sprintf('Could not find element with selector "%s"', $selector));
+            Helper::throwException(\sprintf('Could not find element with selector "%s"', $selector));
         }
         $element->click();
     }
@@ -422,10 +422,10 @@ class ShopwareContext extends SubContext
      */
     public function clickLinkInAccount(string $link): void
     {
-        $element = $this->getSession()->getPage()->findAll('xpath', sprintf('//*[contains(concat(" ",normalize-space(@class)," ")," account--menu ")]//li//a[contains(text(),\'%s\')]', $link));
+        $element = $this->getSession()->getPage()->findAll('xpath', \sprintf('//*[contains(concat(" ",normalize-space(@class)," ")," account--menu ")]//li//a[contains(text(),\'%s\')]', $link));
 
         if (!isset($element[1])) {
-            Helper::throwException(sprintf('Cannot find element with name "%s"', $link));
+            Helper::throwException(\sprintf('Cannot find element with name "%s"', $link));
         }
 
         $element[1]->click();

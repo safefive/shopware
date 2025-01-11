@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -39,7 +40,7 @@ class Queue extends ModelEntity
     /**
      * INVERSE SIDE
      *
-     * @var ArrayCollection<\Shopware\Models\MultiEdit\QueueArticle>
+     * @var ArrayCollection<QueueArticle>
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\MultiEdit\QueueArticle", mappedBy="queue", cascade={"persist"},  fetch="EXTRA_LAZY")
      */

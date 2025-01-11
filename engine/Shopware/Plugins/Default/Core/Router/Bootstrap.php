@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -240,7 +241,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
         if ($cookieKey === 'currency') {
             $path = rtrim((string) $shop->getBasePath(), '/') . '/';
             $response->headers->setCookie(new Cookie($cookieKey, $cookieValue, 0, $path, null, $request->isSecure()));
-            $url = sprintf(
+            $url = \sprintf(
                 '%s://%s%s',
                 $request->getScheme(),
                 $request->getHttpHost(),
@@ -389,7 +390,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
         }
 
         // build full redirect url to allow host switches
-        return sprintf(
+        return \sprintf(
             '%s://%s%s%s',
             $request->getScheme(),
             $host,
@@ -475,7 +476,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     private function validateShop(Shop $shop): void
     {
         if (!$shop->getCustomerGroup() instanceof CustomerGroup) {
-            throw new RuntimeException(sprintf("Shop '%s (id: %s)' has no customer group.", $shop->getName(), $shop->getId()));
+            throw new RuntimeException(\sprintf("Shop '%s (id: %s)' has no customer group.", $shop->getName(), $shop->getId()));
         }
 
         $shop->getCurrency();
@@ -483,11 +484,11 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
 
         $mainShop = $shop->getMain() ?? $shop;
         if (!$mainShop->getTemplate()) {
-            throw new RuntimeException(sprintf("Shop '%s (id: %s)' has no template.", $shop->getName(), $shop->getId()));
+            throw new RuntimeException(\sprintf("Shop '%s (id: %s)' has no template.", $shop->getName(), $shop->getId()));
         }
 
         if (!$mainShop->getDocumentTemplate()) {
-            throw new RuntimeException(sprintf("Shop '%s (id: %s)' has no document template.", $shop->getName(), $shop->getId()));
+            throw new RuntimeException(\sprintf("Shop '%s (id: %s)' has no document template.", $shop->getName(), $shop->getId()));
         }
     }
 

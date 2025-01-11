@@ -110,7 +110,7 @@ class CSRFTokenValidator implements SubscriberInterface
         }
 
         if (!hash_equals($expected, $token)) {
-            throw new CSRFTokenValidationException(sprintf('The provided CSRF-Token is invalid. If you\'re sure that the request to path "%s" should be valid, the called controller action needs to be whitelisted using the CSRFWhitelistAware interface.', $controller->Request()->getRequestUri()));
+            throw new CSRFTokenValidationException(\sprintf('The provided CSRF-Token is invalid. If you\'re sure that the request to path "%s" should be valid, the called controller action needs to be whitelisted using the CSRFWhitelistAware interface.', $controller->Request()->getRequestUri()));
         }
     }
 
@@ -148,7 +148,7 @@ class CSRFTokenValidator implements SubscriberInterface
         }
 
         if (!$this->checkRequest($request)) {
-            throw new CSRFTokenValidationException(sprintf('The provided X-CSRF-Token for path "%s" is invalid. Please go back, reload the page and try again.', $request->getRequestUri()));
+            throw new CSRFTokenValidationException(\sprintf('The provided X-CSRF-Token for path "%s" is invalid. Please go back, reload the page and try again.', $request->getRequestUri()));
         }
 
         // mark request as validated to avoid double validation
@@ -165,7 +165,7 @@ class CSRFTokenValidator implements SubscriberInterface
             $name,
             Random::getAlphanumericString(30),
             0,
-            sprintf('%s/', $shop->getPath() ?: ''),
+            \sprintf('%s/', $shop->getPath() ?: ''),
             '',
             $shop->getSecure(),
             false

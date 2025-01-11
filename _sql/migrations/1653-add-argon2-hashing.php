@@ -45,7 +45,7 @@ class Migrations_Migration1653 extends AbstractMigration
         $this->addSql('SET @parentFormId = (SELECT id FROM s_core_config_forms WHERE NAME = "Passwörter" AND parent_id=(SELECT id FROM s_core_config_forms WHERE NAME="Core") LIMIT 1)');
 
         $sql = 'INSERT IGNORE INTO `s_core_config_elements` (`form_id`, `name`, `value`, `label`, `description`, `type`, `required`, `position`, `scope`, `options`) VALUES ';
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@parentFormId, '%s', '%s', '%s', '%s', 'number', 1, 0, 0, '%s'),",
             'argon2MemoryCost',
             serialize(PASSWORD_ARGON2_DEFAULT_MEMORY_COST),
@@ -53,7 +53,7 @@ class Migrations_Migration1653 extends AbstractMigration
             'Ein höherer Speicherverbrauch macht es einem möglichen Angreifer schwerer, ein passendes Klartext-Passwort zu erzeugen.',
             serialize(['minValue' => (string) (1 << 20), 'maxValue' => (string) (1 << 62)])
         );
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@parentFormId, '%s', '%s', '%s', '%s', 'number', 1, 0, 0, '%s'),",
             'argon2TimeCost',
             serialize(PASSWORD_ARGON2_DEFAULT_TIME_COST),
@@ -61,7 +61,7 @@ class Migrations_Migration1653 extends AbstractMigration
             'Ein höherer Zeitaufwand macht es einem möglichen Angreifer schwerer, ein passendes Klartext-Passwort zu erzeugen.',
             serialize(['minValue' => '1', 'maxValue' => '30'])
         );
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@parentFormId, '%s', '%s', '%s', '%s', 'number', 1, 0, 0, '%s');",
             'argon2Threads',
             serialize(PASSWORD_ARGON2_DEFAULT_THREADS),
@@ -79,21 +79,21 @@ class Migrations_Migration1653 extends AbstractMigration
 
         $sql = 'INSERT IGNORE INTO `s_core_config_element_translations` (`element_id`, `locale_id`, `label`, `description`) VALUES ';
         // memory
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@elemArgon2MemoryCost, 2, '%s', '%s'),",
             'Argon2 memory',
             'Higher memory usage increases the security against attackers.'
         );
 
         // time
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@elemargon2TimeCost, 2, '%s', '%s'),",
             'Argon2 time',
             'Increasing the required time for hash calculation.'
         );
 
         // threads
-        $sql .= sprintf(
+        $sql .= \sprintf(
             "(@elemargon2Threads, 2, '%s', '%s');",
             'Argon2 threads',
             'Use more threads for parallelism and therefore increased security against attackers, based on your setup.'

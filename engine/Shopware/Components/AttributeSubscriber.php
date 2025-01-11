@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -93,7 +94,7 @@ class AttributeSubscriber implements SubscriberInterface
                 $response->sendResponse();
                 exit;
             }
-            exit(sprintf("Failed to create the attribute models, please check the permissions of the '%s' directory", $generator->getPath()));
+            exit(\sprintf("Failed to create the attribute models, please check the permissions of the '%s' directory", $generator->getPath()));
         }
     }
 

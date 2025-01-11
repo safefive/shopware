@@ -198,7 +198,7 @@ class CheckoutConfirm extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The current payment method is "%s" (should be "%s")',
             $result['value'],
             $result['value2']

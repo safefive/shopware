@@ -55,11 +55,11 @@ class GenerateMigrationCommand extends ShopwareCommand
         $migrationDirectory = $this->findMigrationDirectory($pluginName);
 
         if ($migrationDirectory === null) {
-            throw new RuntimeException(sprintf('Plugin by name "%s" does not exists', $pluginName));
+            throw new RuntimeException(\sprintf('Plugin by name "%s" does not exists', $pluginName));
         }
 
         if (!file_exists($migrationDirectory) && !mkdir($migrationDirectory, 0777, true) && !is_dir($migrationDirectory)) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $migrationDirectory));
+            throw new RuntimeException(\sprintf('Directory "%s" was not created', $migrationDirectory));
         }
 
         $nextVersion = $this->getLatestMigrationVersion($migrationDirectory) + 1;
@@ -68,7 +68,7 @@ class GenerateMigrationCommand extends ShopwareCommand
 
         $io = new SymfonyStyle($input, $output);
 
-        $io->success(sprintf('Generated file "%s/%s"', $migrationDirectory, $fileName));
+        $io->success(\sprintf('Generated file "%s/%s"', $migrationDirectory, $fileName));
 
         return 0;
     }
@@ -116,7 +116,7 @@ class GenerateMigrationCommand extends ShopwareCommand
 
     private function createMigration(string $migrationFolder, string $migrationName, ?string $pluginName, int $nextVersion): string
     {
-        $fileName = sprintf('%d-%s.php', $nextVersion, $this->camelCaseToDash($migrationName));
+        $fileName = \sprintf('%d-%s.php', $nextVersion, $this->camelCaseToDash($migrationName));
 
         file_put_contents($migrationFolder . DIRECTORY_SEPARATOR . $fileName, $this->generateMigrationFileContent($pluginName, $nextVersion));
 
@@ -139,7 +139,7 @@ class GenerateMigrationCommand extends ShopwareCommand
 
     private function createCoreMigration(int $nextVersion): string
     {
-        return sprintf('<?php
+        return \sprintf('<?php
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -173,7 +173,7 @@ class Migrations_Migration%d extends Shopware\Components\Migrations\AbstractMigr
 
     private function createPluginMigration(string $pluginName, int $nextVersion): string
     {
-        return sprintf('<?php
+        return \sprintf('<?php
 
 namespace %s\Migrations;
 

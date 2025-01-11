@@ -134,7 +134,7 @@ class Shopware_Plugins_Frontend_AdvancedMenu_Bootstrap extends Shopware_Componen
     {
         $context = $this->get(ContextServiceInterface::class)->getShopContext();
 
-        $cacheKey = sprintf(
+        $cacheKey = \sprintf(
             'Shopware_AdvancedMenu_Tree_%s_%s_%s',
             $context->getShop()->getId(),
             $category,

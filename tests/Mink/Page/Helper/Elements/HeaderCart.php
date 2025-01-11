@@ -79,7 +79,7 @@ class HeaderCart extends Element implements HelperSelectorInterface
         $result = Helper::checkArray($check);
 
         if ($result !== true) {
-            $message = sprintf(
+            $message = \sprintf(
                 'The %s of the header cart is wrong! (%s instead of %s)',
                 $result,
                 $check[$result][0],

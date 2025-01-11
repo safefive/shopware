@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -70,7 +71,7 @@ class PHPVersionCheck implements CheckInterface
             return [
                 'type' => self::CHECK_TYPE,
                 'errorLevel' => Validation::REQUIREMENT_VALID,
-                'message' => sprintf(
+                'message' => \sprintf(
                     $successMessage,
                     $minPHPVersion,
                     PHP_VERSION
@@ -81,7 +82,7 @@ class PHPVersionCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf(
+            'message' => \sprintf(
                 $failMessage,
                 $minPHPVersion,
                 PHP_VERSION

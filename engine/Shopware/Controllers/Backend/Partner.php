@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -219,7 +220,7 @@ class Shopware_Controllers_Backend_Partner extends Shopware_Controllers_Backend_
             return;
         }
 
-        echo sprintf(
+        echo \sprintf(
             '%s %s %s %s|%d',
             $customer->getNumber(),
             $customer->getFirstname() . ' ' . $customer->getLastname(),

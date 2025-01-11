@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -30,11 +31,11 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
         header('Content-type: text/html; charset=utf-8', true, 503);
     }
 
-    echo sprintf($template, 'Error');
+    echo \sprintf($template, 'Error');
     echo 'Please execute "composer install --working-dir=' . __DIR__ . '" or "composer install" in the directory ' .
         __DIR__ . " from the command line to install the required dependencies for the install/update application for Shopware 5\n";
 
-    echo sprintf($template, 'Fehler');
+    echo \sprintf($template, 'Fehler');
     echo 'Bitte führen Sie zuerst "composer install --working-dir=' . __DIR__ . '" oder "composer install" im Verzeichnis ' .
         __DIR__ . " aus um alle von der Shopware 5 Installations-/Aktualisierungsanwendung benötigten Abhängigkeiten zu installieren.\n";
 

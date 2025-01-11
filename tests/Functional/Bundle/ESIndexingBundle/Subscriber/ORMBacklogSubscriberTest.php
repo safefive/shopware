@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -88,7 +89,7 @@ class ORMBacklogSubscriberTest extends TestCase
     {
         $testProduct = $this->createDummyProduct();
 
-        $testProduct->setName(sprintf('%s Update', $testProduct->getName()));
+        $testProduct->setName(\sprintf('%s Update', $testProduct->getName()));
         $this->modelManager->persist($testProduct);
         $this->modelManager->flush();
 

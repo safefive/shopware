@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -81,7 +82,7 @@ class ContentType extends Shopware_Controllers_Api_Rest
         $result = current($this->repository->findAll($criteria)->items);
 
         if (!$result) {
-            throw new NotFoundException(sprintf('Entity by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Entity by id %d not found', $id));
         }
 
         $this->View()->assign('data', $result);

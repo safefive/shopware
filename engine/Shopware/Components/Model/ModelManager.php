@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -342,7 +343,7 @@ class ModelManager extends EntityManager
 
         foreach ($metadata->fieldMappings as $field => $mapping) {
             if (!($metadata->reflFields[$field] instanceof ReflectionProperty)) {
-                throw new InvalidArgumentException(sprintf('Expected an instance of %s', ReflectionProperty::class));
+                throw new InvalidArgumentException(\sprintf('Expected an instance of %s', ReflectionProperty::class));
             }
 
             $data[$field] = $metadata->reflFields[$field]->getValue($entity);
@@ -350,7 +351,7 @@ class ModelManager extends EntityManager
 
         foreach ($metadata->associationMappings as $field => $mapping) {
             if (!($metadata->reflFields[$field] instanceof ReflectionProperty)) {
-                throw new InvalidArgumentException(sprintf('Expected an instance of %s', ReflectionProperty::class));
+                throw new InvalidArgumentException(\sprintf('Expected an instance of %s', ReflectionProperty::class));
             }
 
             $key = $inflector->tableize($field);

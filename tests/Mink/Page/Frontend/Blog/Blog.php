@@ -108,7 +108,7 @@ class Blog extends Page implements HelperSelectorInterface
 
         $messages = ['The following comments are wrong:'];
         foreach ($result as $evaluation) {
-            $messages[] = sprintf(
+            $messages[] = \sprintf(
                 '%s - Bewertung: %s (%s is "%s", should be "%s")',
                 $evaluation['properties']['author'],
                 $evaluation['properties']['stars'],
@@ -149,7 +149,7 @@ class Blog extends Page implements HelperSelectorInterface
         $result = Helper::checkArray($check);
 
         if ($result !== true) {
-            $message = sprintf('There was a different value of the rating! (%s: "%s" instead of "%s")', $result, $check[$result][0], $check[$result][1]);
+            $message = \sprintf('There was a different value of the rating! (%s: "%s" instead of "%s")', $result, $check[$result][0], $check[$result][1]);
             Helper::throwException($message);
         }
     }

@@ -299,7 +299,7 @@ class ConfigGetFormTest extends ControllerTestCase
             ],
         ];
 
-        $requestUrl = sprintf(
+        $requestUrl = \sprintf(
             'backend/Config/getForm?filter=%s&page=1&_dc=' . time() . '&page=1&start=0&limit=25',
             urlencode(json_encode($requestFilter, JSON_THROW_ON_ERROR))
         );

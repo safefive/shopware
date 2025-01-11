@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -166,7 +167,7 @@ class PluginConfigSetCommand extends ShopwareCommand implements CompletionAwareI
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
@@ -188,7 +189,7 @@ class PluginConfigSetCommand extends ShopwareCommand implements CompletionAwareI
             $shop = $em->getRepository(Shop::class)->find($shopId);
 
             if (!$shop) {
-                $output->writeln(sprintf('Could not find shop with id %s.', $shopId));
+                $output->writeln(\sprintf('Could not find shop with id %s.', $shopId));
 
                 return 1;
             }
@@ -208,7 +209,7 @@ class PluginConfigSetCommand extends ShopwareCommand implements CompletionAwareI
         }
 
         $pluginManager->saveConfigElement($plugin, $input->getArgument('key'), $value, $shop);
-        $output->writeln(sprintf('Plugin configuration for Plugin %s saved.', $pluginName));
+        $output->writeln(\sprintf('Plugin configuration for Plugin %s saved.', $pluginName));
 
         return 0;
     }

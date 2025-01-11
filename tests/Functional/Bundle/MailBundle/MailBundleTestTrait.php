@@ -39,7 +39,7 @@ trait MailBundleTestTrait
         $contentText = 'Lorem ipsum dolor sit amet.';
 
         for ($i = 0; $i < 3; ++$i) {
-            $recipients[] = sprintf('test-%d@example.com', $i);
+            $recipients[] = \sprintf('test-%d@example.com', $i);
         }
 
         $mail->setSubject($subject);

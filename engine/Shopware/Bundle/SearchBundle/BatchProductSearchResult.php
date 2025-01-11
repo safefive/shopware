@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -58,7 +59,7 @@ class BatchProductSearchResult
             return $this->storage[$key];
         }
 
-        throw new OutOfBoundsException(sprintf('Key "%s" was not found.', $key));
+        throw new OutOfBoundsException(\sprintf('Key "%s" was not found.', $key));
     }
 
     /**

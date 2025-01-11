@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -882,7 +883,7 @@ class sBasket implements Enlight_Hook
                 'The minimum charge for this voucher is {$sMinimumCharge|currency}'
             );
             $smarty = Shopware()->Container()->get(Enlight_Template_Manager::class);
-            $template = $smarty->createTemplate(sprintf('string:%s', $snippet));
+            $template = $smarty->createTemplate(\sprintf('string:%s', $snippet));
             $template->assign('sMinimumCharge', $voucherDetails['minimumcharge']);
 
             $sErrorMessages[] = $template->fetch();
@@ -1832,7 +1833,7 @@ class sBasket implements Enlight_Hook
                         $params
                     );
                 } catch (Zend_Db_Exception $e) {
-                    throw new Enlight_Exception(sprintf('Basket Update ##01 Could not update quantity %s', $sql));
+                    throw new Enlight_Exception(\sprintf('Basket Update ##01 Could not update quantity %s', $sql));
                 }
             }
         }
@@ -2066,7 +2067,7 @@ class sBasket implements Enlight_Hook
         try {
             $this->db->query($sql, $params);
         } catch (Zend_Db_Exception $e) {
-            throw new Enlight_Exception(sprintf('BASKET-INSERT #02 SQL-Error%s', $sql));
+            throw new Enlight_Exception(\sprintf('BASKET-INSERT #02 SQL-Error%s', $sql));
         }
 
         $insertId = (int) $this->db->lastInsertId();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -74,7 +75,7 @@ class CategoryDuplicator
         $originalCategory = $originalCategoryStmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($originalCategory)) {
-            throw new RuntimeException(sprintf('Category "%s" not found', $originalCategoryId));
+            throw new RuntimeException(\sprintf('Category "%s" not found', $originalCategoryId));
         }
 
         $newPosStmt = $this->connection

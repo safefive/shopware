@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -45,7 +46,7 @@ WHERE name = 'emailheaderhtml'
 AND form_id = @formId;
 SQL;
 
-        $sql = sprintf($sql, 's:' . \strlen(stripslashes($value)) . ':"' . $value . '";');
+        $sql = \sprintf($sql, 's:' . \strlen(stripslashes($value)) . ':"' . $value . '";');
 
         $this->addSql($sql);
     }

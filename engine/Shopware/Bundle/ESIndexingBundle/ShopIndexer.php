@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -133,7 +134,7 @@ class ShopIndexer implements ShopIndexerInterface
     {
         $exist = $this->client->indices()->exists(['index' => $configuration->getName()]);
         if ($exist) {
-            throw new RuntimeException(sprintf('ElasticSearch index %s already exist.', $configuration->getName()));
+            throw new RuntimeException(\sprintf('ElasticSearch index %s already exist.', $configuration->getName()));
         }
 
         $mergedSettings = [

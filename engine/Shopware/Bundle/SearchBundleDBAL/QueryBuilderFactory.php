@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -210,7 +211,7 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
             }
         }
 
-        throw new Exception(sprintf('Sorting %s not supported', \get_class($sorting)));
+        throw new Exception(\sprintf('Sorting %s not supported', \get_class($sorting)));
     }
 
     /**
@@ -226,7 +227,7 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
             }
         }
 
-        throw new Exception(sprintf('Condition %s not supported', \get_class($condition)));
+        throw new Exception(\sprintf('Condition %s not supported', \get_class($condition)));
     }
 
     /**
@@ -270,7 +271,7 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     {
         foreach ($objects as $object) {
             if (!$object instanceof $class) {
-                throw new RuntimeException(sprintf('Object of class "%s" must be instance of "%s".', \get_class($object), $class));
+                throw new RuntimeException(\sprintf('Object of class "%s" must be instance of "%s".', \get_class($object), $class));
             }
         }
     }

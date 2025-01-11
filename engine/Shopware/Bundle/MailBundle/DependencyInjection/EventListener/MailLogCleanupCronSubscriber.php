@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -62,7 +63,7 @@ class MailLogCleanupCronSubscriber implements SubscriberInterface
     public function mailLogCleanup(): void
     {
         $now = new DateTime('now');
-        $maximumAgeInterval = new DateInterval(sprintf('P%dD', $this->maximumAgeInDays));
+        $maximumAgeInterval = new DateInterval(\sprintf('P%dD', $this->maximumAgeInDays));
 
         $this->logRepository->deleteByDate(null, $now->sub($maximumAgeInterval));
     }

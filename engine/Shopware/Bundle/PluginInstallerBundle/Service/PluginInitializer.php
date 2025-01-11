@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -116,13 +117,13 @@ class PluginInitializer
 
         foreach ($pluginsAvailable as $pluginName => $pluginDetails) {
             if (!class_exists($pluginDetails['className'])) {
-                throw new RuntimeException(sprintf('Unable to load class %s for plugin %s in file %s', $pluginDetails['className'], $pluginName, $pluginDetails['pluginFile']));
+                throw new RuntimeException(\sprintf('Unable to load class %s for plugin %s in file %s', $pluginDetails['className'], $pluginName, $pluginDetails['pluginFile']));
             }
 
             $plugin = new $pluginDetails['className']($pluginDetails['isActive'], $pluginDetails['pluginNamespace']);
 
             if (!$plugin instanceof Plugin) {
-                throw new RuntimeException(sprintf('Class %s must extend %s in file %s', \get_class($plugin), Plugin::class, $pluginDetails['pluginFile']));
+                throw new RuntimeException(\sprintf('Class %s must extend %s in file %s', \get_class($plugin), Plugin::class, $pluginDetails['pluginFile']));
             }
 
             $plugins[$plugin->getName()] = $plugin;

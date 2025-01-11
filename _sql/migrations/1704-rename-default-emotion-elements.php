@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -42,7 +43,7 @@ class Migrations_Migration1704 extends Shopware\Components\Migrations\AbstractMi
         ];
 
         foreach ($updates as $update) {
-            $sql = sprintf('UPDATE s_library_component component SET component.name = "%s" WHERE component.name = "%s"', $update[1], $update[0]);
+            $sql = \sprintf('UPDATE s_library_component component SET component.name = "%s" WHERE component.name = "%s"', $update[1], $update[0]);
             $this->addSql($sql);
         }
 

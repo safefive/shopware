@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -246,7 +247,7 @@ class Shopware_Controllers_Backend_Config extends Shopware_Controllers_Backend_E
     {
         $shopRepository = $this->getRepository('shop');
         if (!$shopRepository instanceof ShopRepository) {
-            throw new RuntimeException(sprintf('%s needed', ShopRepository::class));
+            throw new RuntimeException(\sprintf('%s needed', ShopRepository::class));
         }
         $elements = $this->Request()->getParam('elements');
 
@@ -562,7 +563,7 @@ class Shopware_Controllers_Backend_Config extends Shopware_Controllers_Backend_E
         switch ($name) {
             case 'tax':
                 if (!$model instanceof Tax) {
-                    throw new RuntimeException(sprintf('Model object is not an instance of expected class "%s"', Tax::class));
+                    throw new RuntimeException(\sprintf('Model object is not an instance of expected class "%s"', Tax::class));
                 }
                 $this->saveTaxRules($data, $model);
 
@@ -571,7 +572,7 @@ class Shopware_Controllers_Backend_Config extends Shopware_Controllers_Backend_E
             case 'customerGroup':
                 if (isset($data['discounts'])) {
                     if (!$model instanceof CustomerGroup) {
-                        throw new RuntimeException(sprintf('Model object is not an instance of expected class "%s"', CustomerGroup::class));
+                        throw new RuntimeException(\sprintf('Model object is not an instance of expected class "%s"', CustomerGroup::class));
                     }
                     $model->getDiscounts()->clear();
                     $manager->flush();
@@ -717,7 +718,7 @@ class Shopware_Controllers_Backend_Config extends Shopware_Controllers_Backend_E
 
             case 'document':
                 if (!$model instanceof Document) {
-                    throw new RuntimeException(sprintf('Model object is not an instance of expected class "%s"', Document::class));
+                    throw new RuntimeException(\sprintf('Model object is not an instance of expected class "%s"', Document::class));
                 }
 
                 if (!empty($data['id'])) {
@@ -998,7 +999,7 @@ class Shopware_Controllers_Backend_Config extends Shopware_Controllers_Backend_E
                     $repository = DocumentElement::class;
                     break;
                 default:
-                    throw new RuntimeException(sprintf('Repository with name "%s" not found', $name));
+                    throw new RuntimeException(\sprintf('Repository with name "%s" not found', $name));
             }
             self::$repositories[$name] = $this->get('models')->getRepository($repository);
         }

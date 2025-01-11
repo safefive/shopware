@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -31,7 +32,7 @@ class Migrations_Migration1217 extends Shopware\Components\Migrations\AbstractMi
                 'autocomplete' => 'off',
             ],
         ]);
-        $sql = sprintf(
+        $sql = \sprintf(
             "UPDATE `s_core_config_elements` SET options = '%s' WHERE name = 'mailer_password' AND options IS NULL;",
             $inputType
         );

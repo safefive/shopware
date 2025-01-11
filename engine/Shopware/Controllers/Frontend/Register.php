@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -273,7 +274,7 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
             $data = false;
         }
         if ($data === false || !isset($data['customerId'])) {
-            throw new InvalidArgumentException(sprintf('The data for hash \'%s\' is corrupted.', $hash));
+            throw new InvalidArgumentException(\sprintf('The data for hash \'%s\' is corrupted.', $hash));
         }
         $customerId = (int) $data['customerId'];
 
@@ -596,7 +597,7 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
         try {
             Shopware()->Modules()->Admin()->sSaveRegisterSendConfirmation($customer->getEmail());
         } catch (Exception $e) {
-            $message = sprintf('Could not send user registration email to address %s', $customer->getEmail());
+            $message = \sprintf('Could not send user registration email to address %s', $customer->getEmail());
             $this->get('corelogger')->error($message, ['exception' => $e->getMessage()]);
         }
     }

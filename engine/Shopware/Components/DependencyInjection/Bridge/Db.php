@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -68,21 +69,21 @@ class Db
             $conn->exec('SET @@session.sql_mode = ""');
 
             if (isset($dbConfig['timezone'])) {
-                $conn->exec(sprintf('SET @@session.time_zone = %s;', $conn->quote($dbConfig['timezone'])));
+                $conn->exec(\sprintf('SET @@session.time_zone = %s;', $conn->quote($dbConfig['timezone'])));
             }
 
             foreach (($dbConfig['session'] ?? []) as $sessionKey => $sessionValue) {
                 if (\is_int($sessionValue)) {
-                    $conn->exec(sprintf('SET @@session.`%s` = %d;', $sessionKey, $sessionValue));
+                    $conn->exec(\sprintf('SET @@session.`%s` = %d;', $sessionKey, $sessionValue));
                 } elseif (\is_float($sessionValue)) {
-                    $conn->exec(sprintf('SET @@session.`%s` = %f;', $sessionKey, $sessionValue));
+                    $conn->exec(\sprintf('SET @@session.`%s` = %f;', $sessionKey, $sessionValue));
                 } elseif (\is_string($sessionValue)) {
-                    $conn->exec(sprintf('SET @@session.`%s` = %s;', $sessionKey, $conn->quote($sessionValue)));
+                    $conn->exec(\sprintf('SET @@session.`%s` = %s;', $sessionKey, $conn->quote($sessionValue)));
                 } elseif ($sessionValue === null) {
-                    $conn->exec(sprintf('SET @@session.`%s` = NULL;', $sessionKey));
+                    $conn->exec(\sprintf('SET @@session.`%s` = NULL;', $sessionKey));
                 } else {
                     throw new InvalidArgumentException(
-                        sprintf('Unexpected database session value for %s: %s', $sessionKey, serialize($sessionValue))
+                        \sprintf('Unexpected database session value for %s: %s', $sessionKey, serialize($sessionValue))
                     );
                 }
             }
@@ -96,7 +97,7 @@ class Db
                 $e->getMessage()
             );
 
-            throw new RuntimeException(sprintf('Could not connect to database. Message from SQL Server: %s', $message));
+            throw new RuntimeException(\sprintf('Could not connect to database. Message from SQL Server: %s', $message));
         }
 
         return $conn;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -168,7 +169,7 @@ class BatchProcess
                     break;
 
                 default:
-                    throw new RuntimeException(sprintf('Column with type %s was not configured, yet', $type));
+                    throw new RuntimeException(\sprintf('Column with type %s was not configured, yet', $type));
             }
         }
 
@@ -318,7 +319,7 @@ class BatchProcess
         $queue = $entityManager->find(Queue::class, $queueId);
 
         if (!$queue) {
-            throw new RuntimeException(sprintf('Queue with ID %s not found', $queueId));
+            throw new RuntimeException(\sprintf('Queue with ID %s not found', $queueId));
         }
 
         $operations = json_decode($queue->getOperations(), true);
@@ -336,7 +337,7 @@ class BatchProcess
             }
         } catch (Exception $e) {
             $connection->rollBack();
-            throw new RuntimeException(sprintf('Error updating details: %s', $e->getMessage()), 0, $e);
+            throw new RuntimeException(\sprintf('Error updating details: %s', $e->getMessage()), 0, $e);
         }
         $remaining = $queue->getArticleDetails()->count();
 

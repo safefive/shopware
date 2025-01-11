@@ -60,7 +60,7 @@ class CrudService implements CrudServiceInterface
         $column = $this->formatColumnName($column);
 
         if (!$this->tableMapping->isTableColumn($table, $column)) {
-            throw new RuntimeException(sprintf('Table %s has no column with name %s', $table, $column));
+            throw new RuntimeException(\sprintf('Table %s has no column with name %s', $table, $column));
         }
 
         $this->schemaOperator->dropColumn($table, $column);

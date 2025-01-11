@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -602,7 +603,7 @@ class Shopware_Controllers_Backend_Widgets extends Shopware_Controllers_Backend_
         } else {
             $tplMail = 'sCUSTOMERGROUP%sREJECTED';
         }
-        $tplMail = sprintf($tplMail, $customerGroup);
+        $tplMail = \sprintf($tplMail, $customerGroup);
 
         $builder = $this->container->get(ModelManager::class)->createQueryBuilder();
         $builder->select(['customer.email', 'customer.languageId'])

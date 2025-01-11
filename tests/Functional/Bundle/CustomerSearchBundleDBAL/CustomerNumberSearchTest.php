@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -77,7 +78,7 @@ class CustomerNumberSearchTest extends TestCase
     {
         return [
             'number' => $customerNumber,
-            'email' => sprintf('%s@example.com', $customerNumber),
+            'email' => \sprintf('%s@example.com', $customerNumber),
             'active' => true,
             'addresses' => array_map(static function ($id) {
                 return ['country_id' => $id];

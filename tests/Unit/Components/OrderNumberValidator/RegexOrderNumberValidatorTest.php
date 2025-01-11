@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -69,7 +70,7 @@ class RegexOrderNumberValidatorTest extends TestCase
                 $catch = $ordernumber;
             }
 
-            static::assertNull($catch, sprintf('Ordernumber "%s" is not valid', $ordernumber));
+            static::assertNull($catch, \sprintf('Ordernumber "%s" is not valid', $ordernumber));
         }
     }
 
@@ -95,7 +96,7 @@ class RegexOrderNumberValidatorTest extends TestCase
                 $ordernumber = null;
             }
 
-            static::assertNull($ordernumber, sprintf('Ordernumber "%s" should be invalid', $ordernumber));
+            static::assertNull($ordernumber, \sprintf('Ordernumber "%s" should be invalid', $ordernumber));
         }
     }
 }

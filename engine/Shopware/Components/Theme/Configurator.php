@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -113,7 +114,7 @@ class Configurator
         // prevents the theme configuration lazy loading
         $template = $this->getTemplate($theme);
         if (!$template instanceof Template) {
-            $this->logger->error(sprintf('Could not synchronize theme. "%s" instance for theme "%s" not found', Template::class, $theme->getName()));
+            $this->logger->error(\sprintf('Could not synchronize theme. "%s" instance for theme "%s" not found', Template::class, $theme->getName()));
 
             return;
         }
@@ -205,7 +206,7 @@ class Configurator
         // Iterates all configurations sets of the file system
         foreach ($collection as $item) {
             if (!$item instanceof ConfigSet) {
-                throw new Exception(sprintf("Theme %s adds a configuration set which isn't an instance of Shopware\Components\Theme\ConfigSet.", $theme->getTemplate()));
+                throw new Exception(\sprintf("Theme %s adds a configuration set which isn't an instance of Shopware\Components\Theme\ConfigSet.", $theme->getTemplate()));
             }
 
             $item->validate();

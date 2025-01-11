@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -439,7 +440,7 @@ abstract class Shopware_Controllers_Backend_Application extends Shopware_Control
         $this->getManager()->flush();
 
         if (!method_exists($model, 'getId')) {
-            throw new RuntimeException(sprintf('Model "%s" has no "getId" method', $this->model));
+            throw new RuntimeException(\sprintf('Model "%s" has no "getId" method', $this->model));
         }
 
         $detail = $this->getDetail($model->getId());

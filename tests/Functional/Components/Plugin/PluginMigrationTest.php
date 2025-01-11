@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -137,6 +138,6 @@ class PluginMigrationTest extends TestCase
 
     private function assertTableColumnExists(string $table, string $column)
     {
-        static::assertTrue((bool) Shopware()->Db()->fetchOne(sprintf('show columns FROM %s WHERE `Field` = ?', $table), [$column]));
+        static::assertTrue((bool) Shopware()->Db()->fetchOne(\sprintf('show columns FROM %s WHERE `Field` = ?', $table), [$column]));
     }
 }

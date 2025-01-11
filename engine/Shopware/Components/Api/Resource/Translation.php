@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -325,7 +326,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$translation instanceof TranslationModel) {
-            throw new NotFoundException(sprintf('No translation found for type %s, shop id %s and foreign key %s', $data['type'], $data['shopId'], $id));
+            throw new NotFoundException(\sprintf('No translation found for type %s, shop id %s and foreign key %s', $data['type'], $data['shopId'], $id));
         }
 
         $this->getManager()->remove($translation);
@@ -527,7 +528,7 @@ class Translation extends Resource implements BatchInterface
             case self::TYPE_CONFIGURATOR_OPTION:
                 return $this->getConfiguratorOptionIdByNumber($number);
             default:
-                throw new CustomValidationException(sprintf('Unknown translation type %s', $type));
+                throw new CustomValidationException(\sprintf('Unknown translation type %s', $type));
         }
     }
 
@@ -549,7 +550,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Detail) {
-            throw new NotFoundException(sprintf('Variant by order number %s not found', $number));
+            throw new NotFoundException(\sprintf('Variant by order number %s not found', $number));
         }
 
         return $entity->getArticle()->getId();
@@ -573,7 +574,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Detail) {
-            throw new NotFoundException(sprintf('Variant by order number %s not found', $number));
+            throw new NotFoundException(\sprintf('Variant by order number %s not found', $number));
         }
 
         return $entity->getId();
@@ -628,7 +629,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Supplier) {
-            throw new NotFoundException(sprintf('Manufacturer by name %s not found', $number));
+            throw new NotFoundException(\sprintf('Manufacturer by name %s not found', $number));
         }
 
         return $entity->getId();
@@ -655,7 +656,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$country instanceof Country) {
-            throw new NotFoundException(sprintf('Country by iso/name %s not found', $number));
+            throw new NotFoundException(\sprintf('Country by iso/name %s not found', $number));
         }
 
         return $country->getId();
@@ -682,7 +683,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof State) {
-            throw new NotFoundException(sprintf('Country state by name/short code %s not found', $number));
+            throw new NotFoundException(\sprintf('Country state by name/short code %s not found', $number));
         }
 
         return $entity->getId();
@@ -707,7 +708,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Dispatch) {
-            throw new NotFoundException(sprintf('Dispatch by name code %s not found', $number));
+            throw new NotFoundException(\sprintf('Dispatch by name code %s not found', $number));
         }
 
         return $entity->getId();
@@ -733,7 +734,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Payment) {
-            throw new NotFoundException(sprintf('Payment by name/description code %s not found', $number));
+            throw new NotFoundException(\sprintf('Payment by name/description code %s not found', $number));
         }
 
         return $entity->getId();
@@ -758,7 +759,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof Group) {
-            throw new NotFoundException(sprintf('Filter set by name code %s not found', $number));
+            throw new NotFoundException(\sprintf('Filter set by name code %s not found', $number));
         }
 
         return $entity->getId();
@@ -782,7 +783,7 @@ class Translation extends Resource implements BatchInterface
         $numbers = explode('|', $number);
 
         if (\count($numbers) < 2) {
-            throw new CustomValidationException(sprintf('Passed filter group number %s contains not the full path: set|group', $number));
+            throw new CustomValidationException(\sprintf('Passed filter group number %s contains not the full path: set|group', $number));
         }
 
         $set = $this->findEntityByConditions(
@@ -793,7 +794,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$set instanceof Group) {
-            throw new NotFoundException(sprintf('Filter set by name code %s not found', $numbers[0]));
+            throw new NotFoundException(\sprintf('Filter set by name code %s not found', $numbers[0]));
         }
 
         $group = $this->getCollectionElementByProperty(
@@ -803,7 +804,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$group instanceof Option) {
-            throw new NotFoundException(sprintf('Filter group by name code %s not found', $numbers[1]));
+            throw new NotFoundException(\sprintf('Filter group by name code %s not found', $numbers[1]));
         }
 
         return $group->getId();
@@ -827,7 +828,7 @@ class Translation extends Resource implements BatchInterface
         $numbers = explode('|', $number);
 
         if (\count($numbers) < 3) {
-            throw new CustomValidationException(sprintf('Passed filter option number %s contains not the full path: set|group|option', $number));
+            throw new CustomValidationException(\sprintf('Passed filter option number %s contains not the full path: set|group|option', $number));
         }
 
         $set = $this->findEntityByConditions(
@@ -838,7 +839,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$set instanceof Group) {
-            throw new NotFoundException(sprintf('Filter set by name %s not found', $numbers[0]));
+            throw new NotFoundException(\sprintf('Filter set by name %s not found', $numbers[0]));
         }
 
         $group = $this->getCollectionElementByProperty(
@@ -848,7 +849,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$group instanceof Option) {
-            throw new NotFoundException(sprintf('Filter group by name %s not found', $numbers[1]));
+            throw new NotFoundException(\sprintf('Filter group by name %s not found', $numbers[1]));
         }
 
         $option = $this->getCollectionElementByProperty(
@@ -858,7 +859,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$option instanceof Value) {
-            throw new NotFoundException(sprintf('Filter option by name %s not found', $numbers[2]));
+            throw new NotFoundException(\sprintf('Filter option by name %s not found', $numbers[2]));
         }
 
         return $option->getId();
@@ -881,7 +882,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$entity instanceof ConfiguratorGroup) {
-            throw new NotFoundException(sprintf('Configurator group by name %s not found', $number));
+            throw new NotFoundException(\sprintf('Configurator group by name %s not found', $number));
         }
 
         return $entity->getId();
@@ -906,7 +907,7 @@ class Translation extends Resource implements BatchInterface
         $numbers = explode('|', $number);
 
         if (!\is_array($numbers) || \count($numbers) < 2) {
-            throw new CustomValidationException(sprintf('Passed configurator option name %s contains not the full path: group|option', $number));
+            throw new CustomValidationException(\sprintf('Passed configurator option name %s contains not the full path: group|option', $number));
         }
 
         $group = $this->findEntityByConditions(
@@ -915,7 +916,7 @@ class Translation extends Resource implements BatchInterface
         );
 
         if (!$group) {
-            throw new NotFoundException(sprintf('Configurator group by name %s not found', $numbers[0]));
+            throw new NotFoundException(\sprintf('Configurator group by name %s not found', $numbers[0]));
         }
 
         $option = $this->getCollectionElementByProperty(
@@ -924,7 +925,7 @@ class Translation extends Resource implements BatchInterface
             $numbers[1]
         );
         if (!$option instanceof ConfiguratorOption) {
-            throw new NotFoundException(sprintf('Configurator option by name %s not found', $numbers[1]));
+            throw new NotFoundException(\sprintf('Configurator option by name %s not found', $numbers[1]));
         }
 
         return $option->getId();

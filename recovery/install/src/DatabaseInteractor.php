@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -95,7 +96,7 @@ class DatabaseInteractor
         }
 
         $question = new ConfirmationQuestion(
-            sprintf(
+            \sprintf(
                 'The database %s already contains %s tables. Continue? (yes/no) [no]',
                 $databaseName,
                 $tableCount
@@ -124,7 +125,7 @@ class DatabaseInteractor
     protected function askForDatabaseHostname(
         $defaultHostname
     ) {
-        $question = new Question(sprintf('Please enter database host (%s): ', $defaultHostname), $defaultHostname);
+        $question = new Question(\sprintf('Please enter database host (%s): ', $defaultHostname), $defaultHostname);
         $question->setValidator(
             function ($answer) {
                 if (trim($answer) === '') {
@@ -151,7 +152,7 @@ class DatabaseInteractor
         if (empty($defaultUsername)) {
             $question = new Question('Please enter database user: ');
         } else {
-            $question = new Question(sprintf('Please enter database user (%s): ', $defaultUsername), $defaultUsername);
+            $question = new Question(\sprintf('Please enter database user (%s): ', $defaultUsername), $defaultUsername);
         }
 
         $question->setValidator(
@@ -179,7 +180,7 @@ class DatabaseInteractor
         if (empty($defaultPassword)) {
             $question = new Question('Please enter database password: ');
         } else {
-            $question = new Question(sprintf('Please enter database password: (%s): ', $defaultPassword), $defaultPassword);
+            $question = new Question(\sprintf('Please enter database password: (%s): ', $defaultPassword), $defaultPassword);
         }
 
         $databaseUser = $this->askQuestion($question);
@@ -195,7 +196,7 @@ class DatabaseInteractor
     private function askForDatabasePort(
         $defaultPort
     ) {
-        $question = new Question(sprintf('Please enter database port (%s): ', $defaultPort), $defaultPort);
+        $question = new Question(\sprintf('Please enter database port (%s): ', $defaultPort), $defaultPort);
         $question->setValidator(
             function ($answer) {
                 if (trim($answer) === '') {

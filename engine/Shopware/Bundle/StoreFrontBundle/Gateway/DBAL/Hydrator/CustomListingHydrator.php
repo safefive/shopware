@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -56,7 +57,7 @@ class CustomListingHydrator extends Hydrator
         /** @var array<SortingInterface> $sortings */
         $sortings = $this->reflector->unserialize(
             json_decode($data['__customSorting_sortings'], true),
-            sprintf('Serialization error in custom sorting %s', $sorting->getLabel())
+            \sprintf('Serialization error in custom sorting %s', $sorting->getLabel())
         );
 
         $sorting->setSortings($sortings);
@@ -93,7 +94,7 @@ class CustomListingHydrator extends Hydrator
 
         $facets = $this->reflector->unserialize(
             $facets,
-            sprintf('Serialization error in custom facet %s', $customFacet->getName())
+            \sprintf('Serialization error in custom facet %s', $customFacet->getName())
         );
 
         if (empty($facets)) {

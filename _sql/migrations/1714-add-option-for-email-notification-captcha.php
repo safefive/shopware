@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -39,7 +40,7 @@ EOD;
             VALUE
                 (LAST_INSERT_ID(), 'notificationCaptchaConfig', '%s', 'Captcha für E-Mail Benachrichtigungen von Produkten', 'Wenn diese Option aktiv ist, wird das Formular zur E-Mail Benachrichtigung für die Verfügbarkeit eines Produktes mit einem Captcha geschützt.',  'combo', 1, 0, 1, 'a:5:{s:8:"editable";b:0;s:10:"valueField";s:2:"id";s:12:"displayField";s:11:"displayname";s:13:"triggerAction";s:3:"all";s:5:"store";s:12:"base.Captcha";}');
 EOD;
-        $this->addSql(sprintf($sql, serialize('nocaptcha')));
+        $this->addSql(\sprintf($sql, serialize('nocaptcha')));
 
         // Translation
         $sql = <<<'EOD'

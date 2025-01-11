@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -72,7 +73,7 @@ class Migrations_Migration1607 extends Shopware\Components\Migrations\AbstractMi
         UPDATE `s_core_config_elements` SET `description` = 'Artikel hinzuf&uuml;gen, Kommentarfunktion', name = 'commentArticle' WHERE id = @commentArticleElementId;
         UPDATE `s_core_config_element_translations` SET description = 'Add product, comment function' WHERE element_id = @commentArticleElementId;
 SQL;
-        $this->addSql(sprintf($sql, serialize($options)));
+        $this->addSql(\sprintf($sql, serialize($options)));
 
         if ($modus === self::MODUS_UPDATE) {
             $sql = <<<'SQL'

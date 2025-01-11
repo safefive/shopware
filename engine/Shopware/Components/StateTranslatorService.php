@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -62,7 +63,7 @@ class StateTranslatorService implements StateTranslatorServiceInterface
         $type = strtolower($type);
 
         if (empty($this->availableTypes[$type])) {
-            throw new RuntimeException(sprintf('Invalid type \'%s\' given.', $type));
+            throw new RuntimeException(\sprintf('Invalid type \'%s\' given.', $type));
         }
 
         $namespace = $this->availableTypes[$type];

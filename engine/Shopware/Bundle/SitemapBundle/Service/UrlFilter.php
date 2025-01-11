@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -77,7 +78,7 @@ class UrlFilter implements UrlFilterInterface
             $filterHandler = $this->getFilterHandler($url->getResource());
 
             if (!$filterHandler) {
-                throw new UrlFilterException(sprintf('No handler known for resource \'%s\'.', $url->getResource()));
+                throw new UrlFilterException(\sprintf('No handler known for resource \'%s\'.', $url->getResource()));
             }
 
             if ($filterHandler->isFiltered($url->getIdentifier(), $filters)) {

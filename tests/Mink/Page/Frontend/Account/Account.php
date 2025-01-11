@@ -281,7 +281,7 @@ class Account extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The current payment method is "%s" (should be "%s")',
             $result['value'],
             $result['value2']
@@ -342,7 +342,7 @@ class Account extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The addresses are different! ("%s" not was found in "%s")',
             $result['value2'],
             $result['value']
@@ -498,7 +498,7 @@ class Account extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The order number is "%s" (should be "%s")',
             $result['value'],
             $result['value2']
@@ -534,7 +534,7 @@ class Account extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The %s of a position is different! (is "%s", should be "%s")',
             $result['key'],
             $result['value'],
@@ -583,7 +583,7 @@ class Account extends Page implements HelperSelectorInterface
                 }
 
                 if ($download === end($downloads)) {
-                    $message = sprintf('ESD-Article "%s" not found in account!', $givenEsd);
+                    $message = \sprintf('ESD-Article "%s" not found in account!', $givenEsd);
                     Helper::throwException($message);
                 }
             }

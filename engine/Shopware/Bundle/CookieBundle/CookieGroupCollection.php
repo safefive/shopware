@@ -65,7 +65,7 @@ class CookieGroupCollection extends ArrayCollection implements JsonSerializable
         });
 
         if ($cookieGroupCollection->count() === 0) {
-            throw new NoCookieGroupByNameKnownException(sprintf('There is no known cookie group with name %s', $groupName));
+            throw new NoCookieGroupByNameKnownException(\sprintf('There is no known cookie group with name %s', $groupName));
         }
 
         return $cookieGroupCollection->first();

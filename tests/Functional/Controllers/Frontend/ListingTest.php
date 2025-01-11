@@ -55,14 +55,14 @@ class ListingTest extends ControllerTestCase
      */
     public function testDispatchExistingCategory(): void
     {
-        $this->dispatch(sprintf(self::CATEGORY_LINK, 14));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, 14));
         static::assertSame(Response::HTTP_OK, $this->Response()->getHttpResponseCode());
     }
 
     public function testDispatchExistingCategoryWithPageNotAvailable(): void
     {
         $this->expectException(Enlight_Controller_Exception::class);
-        $this->dispatch(sprintf(self::CATEGORY_LINK . '&sPage=2', 14));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK . '&sPage=2', 14));
         static::assertSame(Response::HTTP_OK, $this->Response()->getHttpResponseCode());
     }
 
@@ -72,7 +72,7 @@ class ListingTest extends ControllerTestCase
     public function testDispatchNonExistingCategory(): void
     {
         $this->expectException('Enlight_Exception');
-        $this->dispatch(sprintf(self::CATEGORY_LINK, 4711));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, 4711));
         static::assertSame(Response::HTTP_NOT_FOUND, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
     }
@@ -83,7 +83,7 @@ class ListingTest extends ControllerTestCase
     public function testDispatchEmptyCategoryId(): void
     {
         $this->expectException('Enlight_Exception');
-        $this->dispatch(sprintf(self::CATEGORY_LINK, ''));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, ''));
         static::assertSame(Response::HTTP_NOT_FOUND, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
     }
@@ -94,7 +94,7 @@ class ListingTest extends ControllerTestCase
     public function testDispatchSubshopCategoryId(): void
     {
         $this->expectException('Enlight_Exception');
-        $this->dispatch(sprintf(self::CATEGORY_LINK, 43));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, 43));
         static::assertSame(Response::HTTP_NOT_FOUND, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
     }
@@ -105,7 +105,7 @@ class ListingTest extends ControllerTestCase
     public function testDispatchBlogCategory(): void
     {
         $this->expectException('Enlight_Exception');
-        $this->dispatch(sprintf(self::CATEGORY_LINK, 17));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, 17));
         static::assertSame(Response::HTTP_NOT_FOUND, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
     }
@@ -119,7 +119,7 @@ class ListingTest extends ControllerTestCase
         $this->modelManager->persist($category);
         $this->modelManager->flush($category);
 
-        $this->dispatch(sprintf(self::CATEGORY_LINK, $category->getId()));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, $category->getId()));
 
         static::assertSame(Response::HTTP_MOVED_PERMANENTLY, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
@@ -150,7 +150,7 @@ class ListingTest extends ControllerTestCase
         $this->modelManager->flush($product);
         $this->modelManager->clear();
 
-        $this->dispatch(sprintf(self::CATEGORY_LINK, $category->getId()));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, $category->getId()));
 
         static::assertSame(Response::HTTP_MOVED_PERMANENTLY, $this->Response()->getHttpResponseCode());
         static::assertTrue($this->Response()->isRedirect());
@@ -174,7 +174,7 @@ class ListingTest extends ControllerTestCase
         static::assertInstanceOf(Category::class, $mainCategory);
         $mainCategoryId = $mainCategory->getId();
 
-        $this->dispatch(sprintf(self::CATEGORY_LINK, $mainCategoryId));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, $mainCategoryId));
 
         static::assertSame(Response::HTTP_MOVED_PERMANENTLY, $this->Response()->getHttpResponseCode());
     }
@@ -221,7 +221,7 @@ SQL;
         $connection->executeStatement($createCategoryWithStreamSQL, ['streamId' => $streamId]);
         $categoryId = (int) $connection->lastInsertId();
 
-        $this->dispatch(sprintf(self::CATEGORY_LINK, $categoryId));
+        $this->dispatch(\sprintf(self::CATEGORY_LINK, $categoryId));
 
         static::assertSame(Response::HTTP_OK, $this->Response()->getHttpResponseCode());
         $responseBody = $this->Response()->getBody();

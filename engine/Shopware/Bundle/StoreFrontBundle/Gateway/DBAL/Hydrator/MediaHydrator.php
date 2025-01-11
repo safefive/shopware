@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -193,7 +194,7 @@ class MediaHydrator extends Hydrator
     {
         $imageSize = getimagesizefromstring((string) $this->mediaService->read($data['__media_path']));
         if (!\is_array($imageSize)) {
-            throw new RuntimeException(sprintf('Could not get image size from "%s"', $data['__media_path']));
+            throw new RuntimeException(\sprintf('Could not get image size from "%s"', $data['__media_path']));
         }
         [$width, $height] = $imageSize;
         $this->connection->executeUpdate(

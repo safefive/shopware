@@ -69,7 +69,7 @@ class SitemapLockTest extends TestCase
 
     public function testAcquireLockWorks(): void
     {
-        $data = sprintf('Locked: %s', (new DateTime('NOW', new DateTimeZone('UTC')))->format(DateTimeInterface::ATOM));
+        $data = \sprintf('Locked: %s', (new DateTime('NOW', new DateTimeZone('UTC')))->format(DateTimeInterface::ATOM));
         $this->cacheMock->method('save')
             ->with('sitemap-exporter-running-1', $data, $this->lifeTime)
             ->willReturn(false);

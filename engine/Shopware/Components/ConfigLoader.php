@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -95,7 +96,7 @@ class ConfigLoader
         $suffix = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
         if (!\in_array($suffix, ['php', 'inc'])) {
-            throw new Exception(sprintf('Invalid configuration file provided; unknown config type "%s"', $suffix));
+            throw new Exception(\sprintf('Invalid configuration file provided; unknown config type "%s"', $suffix));
         }
 
         $config = include $file;

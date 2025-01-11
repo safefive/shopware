@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -124,7 +125,7 @@ class Shopware_Controllers_Backend_Export extends Enlight_Controller_Action impl
     {
         $outputHandle = fopen($output, 'w');
         if ($outputHandle === false) {
-            throw new RuntimeException(sprintf('Output file %s can not be opened', $output));
+            throw new RuntimeException(\sprintf('Output file %s can not be opened', $output));
         }
 
         $this->export->sSmarty = $this->View()->Engine();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -68,6 +69,6 @@ class Migrations_Migration1462 extends Shopware\Components\Migrations\AbstractMi
         UPDATE `s_core_config_elements` SET `description` = 'Das Auswahlfeld wird nur bei der Registrierung ausgeblendet, danach ist es beim Ändern der Benutzerdaten trotzdem verfügbar.' WHERE `id` = @element;
         UPDATE `s_core_config_element_translations` SET `description` = 'This option only affects the registration, it is still available when editing user data.' WHERE `element_id` = @element;
 SQL;
-        $this->addSql(sprintf($sql, serialize($options)));
+        $this->addSql(\sprintf($sql, serialize($options)));
     }
 }

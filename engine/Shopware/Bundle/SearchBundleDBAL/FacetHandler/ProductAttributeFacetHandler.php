@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -353,6 +354,6 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
                 }
         }
 
-        throw new RuntimeException(sprintf('Could not find template for type "%s" or default template not set', $type));
+        throw new RuntimeException(\sprintf('Could not find template for type "%s" or default template not set', $type));
     }
 }

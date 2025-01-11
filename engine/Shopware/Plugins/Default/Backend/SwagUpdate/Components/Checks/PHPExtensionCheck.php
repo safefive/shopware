@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -68,7 +69,7 @@ class PHPExtensionCheck implements CheckInterface
             return [
                 'type' => self::CHECK_TYPE,
                 'errorLevel' => Validation::REQUIREMENT_VALID,
-                'message' => sprintf(
+                'message' => \sprintf(
                     $successMessage,
                     $requiredExtension
                 ),
@@ -78,7 +79,7 @@ class PHPExtensionCheck implements CheckInterface
         return [
             'type' => self::CHECK_TYPE,
             'errorLevel' => $requirement['level'],
-            'message' => sprintf(
+            'message' => \sprintf(
                 $failMessage,
                 $requiredExtension
             ),

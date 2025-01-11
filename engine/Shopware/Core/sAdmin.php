@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -2730,12 +2731,12 @@ class sAdmin implements Enlight_Hook
             'b.*',
         ])
             ->from('s_premium_dispatch', 'd')
-            ->join('d', sprintf('(SELECT %s)', $sqlBasket), 'b', '1=1')
+            ->join('d', \sprintf('(SELECT %s)', $sqlBasket), 'b', '1=1')
             ->join('d', 's_premium_dispatch_countries', 'dc', 'd.id = dc.dispatchID AND dc.countryID=b.countryID')
             ->join('d', 's_premium_dispatch_paymentmeans', 'dp', 'd.id = dp.dispatchID AND dp.paymentID=b.paymentID')
             ->leftJoin('d', 's_premium_holidays', 'h', 'h.date = CURDATE()')
             ->leftJoin('d', 's_premium_dispatch_holidays', 'dh', 'd.id=dh.dispatchID AND h.id=dh.holidayID')
-            ->leftJoin('d', sprintf('(%s)', $joinSubSelect->getSQL()), 'dk', 'dk.dispatchID=d.id')
+            ->leftJoin('d', \sprintf('(%s)', $joinSubSelect->getSQL()), 'dk', 'dk.dispatchID=d.id')
             ->leftJoin('b', 's_user', 'u', ' u.id=b.userID AND u.active=1')
             ->leftJoin('u', 's_user_addresses', 'ub', 'ub.user_id = u.id AND ub.id = :billingAddressId')
             ->leftJoin('u', 's_user_addresses', 'us', 'us.user_id = u.id AND us.id = :shippingAddressId')
@@ -3096,7 +3097,7 @@ class sAdmin implements Enlight_Hook
         try {
             $calculationType = (int) $dispatch['calculation'];
             if (!\in_array($calculationType, Dispatch::CALCULATIONS, true)) {
-                throw new RuntimeException(sprintf('Invalid shipping calculation type "%d"', $calculationType));
+                throw new RuntimeException(\sprintf('Invalid shipping calculation type "%d"', $calculationType));
             }
             $from = $this->shippingCostService->getShippingCostMultiplier($calculationType, $basket, $dispatch);
         } catch (RuntimeException $e) {
@@ -3875,7 +3876,7 @@ SQL;
         $entityManager = Shopware()->Container()->get(ModelManager::class);
         $customer = $entityManager->find(Customer::class, $userId);
         if (!$customer) {
-            throw new Exception(sprintf('Customer with id %s not found', $userId));
+            throw new Exception(\sprintf('Customer with id %s not found', $userId));
         }
         $billing = $this->convertToLegacyAddressArray($customer->getDefaultBillingAddress());
         $billing['attributes'] = $this->attributeLoader->load('s_user_addresses_attributes', $billing['id']);

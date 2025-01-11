@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -70,7 +71,7 @@ class PaymentMethods extends Resource
         $payment = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$payment) {
-            throw new NotFoundException(sprintf('Payment by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Payment by id %d not found', $id));
         }
 
         return $payment;
@@ -151,7 +152,7 @@ class PaymentMethods extends Resource
         $payment = $this->getRepository()->find($id);
 
         if (!$payment) {
-            throw new NotFoundException(sprintf('Payment by id "%d" not found', $id));
+            throw new NotFoundException(\sprintf('Payment by id "%d" not found', $id));
         }
 
         $params = $this->preparePaymentData($params);
@@ -233,7 +234,7 @@ class PaymentMethods extends Resource
             foreach ($params['countries'] as &$country) {
                 $countryModel = $this->getContainer()->get(ModelManager::class)->find(CountryModel::class, $country['countryId']);
                 if (!$countryModel) {
-                    throw new NotFoundException(sprintf('Country by id %d not found', $country['countryId']));
+                    throw new NotFoundException(\sprintf('Country by id %d not found', $country['countryId']));
                 }
 
                 $country = $countryModel;
@@ -246,7 +247,7 @@ class PaymentMethods extends Resource
             foreach ($params['shops'] as &$shop) {
                 $shopModel = $this->getContainer()->get(ModelManager::class)->find(ShopModel::class, $shop['shopId']);
                 if (!$shopModel) {
-                    throw new NotFoundException(sprintf('Shop by id %d not found', $shop['shopId']));
+                    throw new NotFoundException(\sprintf('Shop by id %d not found', $shop['shopId']));
                 }
 
                 $shop = $shopModel;
@@ -258,7 +259,7 @@ class PaymentMethods extends Resource
         if (isset($params['pluginId'])) {
             $params['plugin'] = $this->getContainer()->get(ModelManager::class)->find(Plugin::class, $params['pluginId']);
             if (empty($params['plugin'])) {
-                throw new NotFoundException(sprintf('plugin by id %s not found', $params['pluginId']));
+                throw new NotFoundException(\sprintf('plugin by id %s not found', $params['pluginId']));
             }
         }
 

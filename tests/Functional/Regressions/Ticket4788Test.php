@@ -57,11 +57,11 @@ class Ticket4788Test extends Enlight_Components_Test_Controller_TestCase
 
         // Get a copy of article descriptions
         $ids = implode(', ', array_keys($this->articlesToTest));
-        $sql = sprintf('SELECT `id`, `description_long`, `description` FROM s_articles WHERE `id` IN (%s)', $ids);
+        $sql = \sprintf('SELECT `id`, `description_long`, `description` FROM s_articles WHERE `id` IN (%s)', $ids);
         $this->backup = Shopware()->Db()->fetchAssoc($sql);
 
         // Update article description, set UTF-8 string
-        $sql = sprintf('UPDATE s_articles SET `description_long`= ?, `description` = ? WHERE `id` IN (%s)', $ids);
+        $sql = \sprintf('UPDATE s_articles SET `description_long`= ?, `description` = ? WHERE `id` IN (%s)', $ids);
         Shopware()->Db()->query($sql, [$this->longDescription, $this->shortDescription]);
     }
 
@@ -76,7 +76,7 @@ class Ticket4788Test extends Enlight_Components_Test_Controller_TestCase
         $sql = '';
         $values = [];
         foreach ($this->backup as $key => $fields) {
-            $sql .= sprintf('UPDATE s_articles SET `description_long` = ?, `description` = ? WHERE `id` = %s;', $key);
+            $sql .= \sprintf('UPDATE s_articles SET `description_long` = ?, `description` = ? WHERE `id` = %s;', $key);
             $values[] = $fields['description_long'];
             $values[] = $fields['description'];
         }
@@ -115,7 +115,7 @@ class Ticket4788Test extends Enlight_Components_Test_Controller_TestCase
     {
         // Check
         foreach ($this->articlesToTest as $articleId => $categoryId) {
-            $this->dispatch(sprintf('/detail/index/sArticle/%s', $articleId));
+            $this->dispatch(\sprintf('/detail/index/sArticle/%s', $articleId));
             $body = $this->Response()->getBody();
             static::assertIsString($body);
             static::assertStringContainsString($this->longDescription, $body);

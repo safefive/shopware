@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -55,7 +56,7 @@ class TypeSynchronizerCommand extends ShopwareCommand
         $types = $sync->sync(array_keys($activePlugins), $input->getOption('destructive'));
         $io = new SymfonyStyle($input, $output);
 
-        $io->success(sprintf('Synchronized %d type(s)', \count($types)));
+        $io->success(\sprintf('Synchronized %d type(s)', \count($types)));
 
         return 0;
     }

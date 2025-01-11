@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -150,7 +151,7 @@ abstract class StoreCommand extends ShopwareCommand
             throw new Exception('Username and password are required');
         }
 
-        $output->writeln(sprintf('Connect to Store with username: %s...', $username));
+        $output->writeln(\sprintf('Connect to Store with username: %s...', $username));
 
         return $this->container->get(\Shopware\Bundle\PluginInstallerBundle\StoreClient::class)->getAccessToken(
             $username,

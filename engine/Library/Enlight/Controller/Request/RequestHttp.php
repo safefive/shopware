@@ -725,7 +725,7 @@ class Enlight_Controller_Request_RequestHttp extends Request implements Enlight_
      */
     public function setParamSources(array $paramSources = [])
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return $this;
     }
@@ -735,7 +735,7 @@ class Enlight_Controller_Request_RequestHttp extends Request implements Enlight_
      */
     public function getParamSources()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         return ['_GET', '_POST'];
     }
@@ -841,7 +841,7 @@ class Enlight_Controller_Request_RequestHttp extends Request implements Enlight_
      */
     public function isFlashRequest()
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         $userAgent = $this->getHeader('USER_AGENT');
         if (empty($userAgent)) {

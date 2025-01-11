@@ -73,7 +73,7 @@ class CookieCollector implements CookieCollectorInterface
         );
 
         if (!$cookieCollection->isValid()) {
-            throw new InvalidCookieItemException(sprintf('Found item inside cookie collection, which is not of type \Shopware\Bundle\CookieBundle\Structs\CookieStruct'));
+            throw new InvalidCookieItemException(\sprintf('Found item inside cookie collection, which is not of type \Shopware\Bundle\CookieBundle\Structs\CookieStruct'));
         }
 
         $cookieCollection = $this->sortCookies($cookieCollection);

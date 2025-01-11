@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -41,7 +42,7 @@ EOD;
             VALUE 
                 (@formParent, 'newsletterCaptcha', '%s', 'Captcha in Newslettter  verwenden', 'Wenn diese Option aktiv ist, wird ein Captcha zur Newsletter verwendent. Empfohlen für die Newsletter: Honeypot',  'combo', 1, 0, 1, 'a:5:{s:8:"editable";b:0;s:10:"valueField";s:2:"id";s:12:"displayField";s:11:"displayname";s:13:"triggerAction";s:3:"all";s:5:"store";s:12:"base.Captcha";}');
 EOD;
-        $this->addSql(sprintf($sql, serialize('nocaptcha')));
+        $this->addSql(\sprintf($sql, serialize('nocaptcha')));
 
         $sql = <<<'EOD'
             SET @elementId = (SELECT id FROM `s_core_config_elements` WHERE `name` LIKE 'newsletterShowCaptcha' LIMIT 1);

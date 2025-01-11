@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -60,7 +61,7 @@ class SchemaOperator implements SchemaOperatorInterface
             throw new Exception('No column type provided');
         }
 
-        $sql = sprintf(
+        $sql = \sprintf(
             'ALTER TABLE `%s` ADD `%s` %s NULL DEFAULT %s',
             $table,
             $column,
@@ -91,7 +92,7 @@ class SchemaOperator implements SchemaOperatorInterface
         $this->validateField($newName);
         $defaultValue = $this->filterDefaultValue($defaultValue);
 
-        $sql = sprintf(
+        $sql = \sprintf(
             'ALTER TABLE `%s` CHANGE `%s` `%s` %s NULL DEFAULT %s;',
             $table,
             $originalName,
@@ -114,10 +115,10 @@ class SchemaOperator implements SchemaOperatorInterface
         $this->validate($table, $column);
 
         if ($this->tableMapping->isCoreColumn($table, $column)) {
-            throw new Exception(sprintf('Provided column is an core attribute column: %s', $column));
+            throw new Exception(\sprintf('Provided column is an core attribute column: %s', $column));
         }
 
-        $sql = sprintf('ALTER TABLE `%s` DROP `%s`', $table, $column);
+        $sql = \sprintf('ALTER TABLE `%s` DROP `%s`', $table, $column);
         $this->connection->executeQuery($sql);
     }
 
@@ -132,10 +133,10 @@ class SchemaOperator implements SchemaOperatorInterface
         $this->validate($table, $column);
 
         if (!$this->tableMapping->isTableColumn($table, $column)) {
-            throw new Exception(sprintf('Provided column %s does not exist in table %s', $column, $table));
+            throw new Exception(\sprintf('Provided column %s does not exist in table %s', $column, $table));
         }
 
-        $sql = sprintf('UPDATE `%s` SET `%s` = NULL', $table, $column);
+        $sql = \sprintf('UPDATE `%s` SET `%s` = NULL', $table, $column);
         $this->connection->executeUpdate($sql);
     }
 
@@ -158,15 +159,15 @@ class SchemaOperator implements SchemaOperatorInterface
         $this->validateField($name);
 
         if (!$this->tableMapping->isAttributeTable($table)) {
-            throw new Exception(sprintf('Provided table is no attribute table: %s', $table));
+            throw new Exception(\sprintf('Provided table is no attribute table: %s', $table));
         }
         if ($this->tableMapping->isIdentifierColumn($table, $name)) {
-            throw new Exception(sprintf('Provided column is an identifier column: %s', $name));
+            throw new Exception(\sprintf('Provided column is an identifier column: %s', $name));
         }
 
         $lowerCaseName = strtolower($name);
         if (\in_array($lowerCaseName, $this->nameBlacklist, true)) {
-            throw new Exception(sprintf('Provided name %s is a reserved keyword.', $name));
+            throw new Exception(\sprintf('Provided name %s is a reserved keyword.', $name));
         }
     }
 
@@ -182,7 +183,7 @@ class SchemaOperator implements SchemaOperatorInterface
         }
 
         if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $field)) {
-            throw new Exception(sprintf('Invalid chars in %s', $field));
+            throw new Exception(\sprintf('Invalid chars in %s', $field));
         }
     }
 

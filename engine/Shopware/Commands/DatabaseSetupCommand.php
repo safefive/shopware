@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -79,7 +80,7 @@ class DatabaseSetupCommand extends ShopwareCommand implements CompletionAwareInt
             'steps',
             null,
             InputOption::VALUE_REQUIRED,
-            sprintf('Valid steps: %s.', implode(', ', $this->validSteps))
+            \sprintf('Valid steps: %s.', implode(', ', $this->validSteps))
         );
 
         $this->addOption(
@@ -134,7 +135,7 @@ class DatabaseSetupCommand extends ShopwareCommand implements CompletionAwareInt
         foreach ($steps as $step) {
             if (!\in_array($step, $this->validSteps, true)) {
                 $io->error(
-                    sprintf("Unknown install step (%s). Valid steps: %s\n", $step, implode(', ', $this->validSteps))
+                    \sprintf("Unknown install step (%s). Valid steps: %s\n", $step, implode(', ', $this->validSteps))
                 );
 
                 return 1;
@@ -181,7 +182,7 @@ class DatabaseSetupCommand extends ShopwareCommand implements CompletionAwareInt
                     break;
 
                 default:
-                    $io->error(sprintf("Unknown install step (%s). Valid steps: %s\n", $step, implode(', ', $this->validSteps)));
+                    $io->error(\sprintf("Unknown install step (%s). Valid steps: %s\n", $step, implode(', ', $this->validSteps)));
 
                     return 1;
             }
@@ -258,7 +259,7 @@ class DatabaseSetupCommand extends ShopwareCommand implements CompletionAwareInt
         if (!empty($url)) {
             if (parse_url($url) === false) {
                 throw new InvalidArgumentException(
-                    sprintf('Invalid Shop URL (%s).', $url)
+                    \sprintf('Invalid Shop URL (%s).', $url)
                 );
             }
 

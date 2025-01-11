@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -170,7 +171,7 @@ class Shopware_Controllers_Backend_SwagUpdate extends Shopware_Controllers_Backe
             $wrongPermissionCount = \count($result);
 
             $this->container->get('corelogger')->error(
-                sprintf('SwagUpdate: There are %d files without write permission. FTP credentials are needed.', $wrongPermissionCount),
+                \sprintf('SwagUpdate: There are %d files without write permission. FTP credentials are needed.', $wrongPermissionCount),
                 $result
             );
 
@@ -260,7 +261,7 @@ class Shopware_Controllers_Backend_SwagUpdate extends Shopware_Controllers_Backe
         $updateFilePath = $projectDir . 'files/update/update.json';
 
         if (!file_put_contents($updateFilePath, $payload)) {
-            throw new Exception(sprintf('Could not write file %s', $updateFilePath));
+            throw new Exception(\sprintf('Could not write file %s', $updateFilePath));
         }
 
         $this->redirect($base . '/recovery/update/index.php');

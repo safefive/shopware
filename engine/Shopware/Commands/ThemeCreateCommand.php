@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -146,7 +147,7 @@ EOF
         $parent = $this->getRepository()->findOneBy(['template' => $arguments['parent']]);
         if (!$parent instanceof Template) {
             $output->writeln(
-                sprintf(
+                \sprintf(
                     'Shop template by template name "%s" not found',
                     $arguments['parent']
                 )
@@ -160,7 +161,7 @@ EOF
         $themeGenerator = $this->container->get(Generator::class);
         $themeGenerator->generateTheme($arguments, $parent);
 
-        $output->writeln(sprintf('Theme "%s" has been created successfully.', $arguments['name']));
+        $output->writeln(\sprintf('Theme "%s" has been created successfully.', $arguments['name']));
 
         return 0;
     }
@@ -202,7 +203,7 @@ EOF
 
         if (empty($optionValue)) {
             $questionHelper = $this->getHelper('question');
-            $question = new Question(sprintf('Please enter the %s: ', $optionKey));
+            $question = new Question(\sprintf('Please enter the %s: ', $optionKey));
             $optionValue = $questionHelper->ask($input, $output, $question);
         }
 

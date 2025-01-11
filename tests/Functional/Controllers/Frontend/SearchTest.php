@@ -100,13 +100,13 @@ class SearchTest extends Enlight_Components_Test_Controller_TestCase
      */
     public function testSearchEscapes(string $term, string $filtered): void
     {
-        $this->dispatch(sprintf('search?sSearch=%s', $term));
+        $this->dispatch(\sprintf('search?sSearch=%s', $term));
 
         $body = $this->Response()->getBody();
 
         static::assertIsString($body);
-        static::assertStringContainsString($filtered, $body, sprintf('Expected filtered term "%s" not found on search page', $filtered));
-        static::assertStringNotContainsString($term, $body, sprintf('Malicious term "%s" found on search page', $term));
+        static::assertStringContainsString($filtered, $body, \sprintf('Expected filtered term "%s" not found on search page', $filtered));
+        static::assertStringNotContainsString($term, $body, \sprintf('Malicious term "%s" found on search page', $term));
     }
 
     /**

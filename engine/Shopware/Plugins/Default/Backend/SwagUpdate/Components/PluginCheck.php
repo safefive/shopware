@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -81,7 +82,7 @@ class PluginCheck
                     'message' => $description,
                     'updatable' => $inStore && version_compare($plugin['version'], $storePlugins[$key]->getVersion(), '<'),
                     'updatableAfterUpgrade' => $inStore && $targetVersionUpdateAvailable && $storePlugins[$key]->getVersion() !== $updatesAvailable[$key]->getVersion(),
-                    'id' => sprintf('plugin_incompatible-%s', $name),
+                    'id' => \sprintf('plugin_incompatible-%s', $name),
                     'technicalName' => $technicalName,
                     'errorLevel' => $targetVersionUpdateAvailable ? Validation::REQUIREMENT_VALID : Validation::REQUIREMENT_WARNING,
                     'success' => true,

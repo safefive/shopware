@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -132,7 +133,7 @@ class Grammar
                     )) {
                         $attributes[$formattedColumn] = $event->getReturn();
                     } else {
-                        throw new RuntimeException(sprintf('Column with type %s was not configured, yet', $type));
+                        throw new RuntimeException(\sprintf('Column with type %s was not configured, yet', $type));
                     }
             }
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -48,7 +49,7 @@ class PluginRefreshCommand extends ShopwareCommand
         $pluginManager = $this->container->get(InstallerService::class);
         $pluginManager->refreshPluginList();
 
-        $output->writeln(sprintf('Successfully refreshed'));
+        $output->writeln(\sprintf('Successfully refreshed'));
 
         return 0;
     }

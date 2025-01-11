@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -64,7 +65,7 @@ class Shopware_Controllers_Api_GenerateArticleImages extends Shopware_Controller
         $product = $this->resource->getRepository()->find($id);
 
         if (!$product) {
-            throw new ApiException\NotFoundException(sprintf('Product by id %d not found', $id));
+            throw new ApiException\NotFoundException(\sprintf('Product by id %d not found', $id));
         }
 
         $this->resource->generateImages($product, (bool) $request->getParam('force', 0));

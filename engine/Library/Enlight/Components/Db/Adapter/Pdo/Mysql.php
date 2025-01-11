@@ -183,7 +183,7 @@ class Enlight_Components_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Mysql
         }
 
         if (!$this->dbalConnection) {
-            throw new RuntimeException(sprintf('Class can only be constructed using %s::createFromDbalConnectionAndConfig().', __CLASS__));
+            throw new RuntimeException(\sprintf('Class can only be constructed using %s::createFromDbalConnectionAndConfig().', __CLASS__));
         }
 
         $this->_connection = $this->dbalConnection->getWrappedConnection();

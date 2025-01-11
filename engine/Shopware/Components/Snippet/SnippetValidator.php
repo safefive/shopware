@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -50,7 +51,7 @@ class SnippetValidator
     public function validate($snippetsDir)
     {
         if (!file_exists($snippetsDir)) {
-            throw new RuntimeException(sprintf('Could not find %s folder for snippet validation', $snippetsDir));
+            throw new RuntimeException(\sprintf('Could not find %s folder for snippet validation', $snippetsDir));
         }
 
         $dirIterator = new RecursiveDirectoryIterator($snippetsDir, RecursiveDirectoryIterator::SKIP_DOTS);
@@ -94,7 +95,7 @@ class SnippetValidator
                 if (\array_key_exists('default', $data)) {
                     $invalidSnippets[] = '"Default" snippet group is deprecated (' . $entry->getRealPath() . ')';
                 } elseif ($diffGroups) {
-                    $invalidSnippets[] = sprintf(
+                    $invalidSnippets[] = \sprintf(
                         'Invalid snippet group(s): %s (%s)',
                         implode(', ', $diffGroups),
                         $entry->getRealPath()

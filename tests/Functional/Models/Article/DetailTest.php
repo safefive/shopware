@@ -152,6 +152,6 @@ class DetailTest extends Enlight_Components_Test_TestCase
 
         $violations = $this->em->validate($detail);
 
-        static::assertEquals(0, $violations->count(), sprintf('Number "%s" does not match regex "%s"', $number, $regex));
+        static::assertEquals(0, $violations->count(), \sprintf('Number "%s" does not match regex "%s"', $number, $regex));
     }
 }

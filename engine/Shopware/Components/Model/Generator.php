@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -332,7 +333,7 @@ class %className% extends ModelEntity
         $file = $this->getPath() . $className . '.php';
 
         if (file_exists($file) && !is_writable($file)) {
-            throw new Exception(sprintf('File: "%s" isn\'t writable, please check the file permissions for this model!', $file), 501);
+            throw new Exception(\sprintf('File: "%s" isn\'t writable, please check the file permissions for this model!', $file), 501);
         }
 
         $result = file_put_contents($file, $sourceCode);
@@ -433,10 +434,10 @@ class %className% extends ModelEntity
     {
         if (!is_dir($dir)) {
             if (@mkdir($dir, 0777, true) === false && !is_dir($dir)) {
-                throw new RuntimeException(sprintf("Unable to create directory (%s)\n", $dir));
+                throw new RuntimeException(\sprintf("Unable to create directory (%s)\n", $dir));
             }
         } elseif (!is_writable($dir)) {
-            throw new RuntimeException(sprintf("Unable to write in directory (%s)\n", $dir));
+            throw new RuntimeException(\sprintf("Unable to write in directory (%s)\n", $dir));
         }
     }
 

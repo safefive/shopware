@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -74,7 +75,7 @@ class Sha256 implements PasswordEncoderInterface
     public function isPasswordValid($password, $hash)
     {
         if (!str_contains($hash, self::DELIMITER)) {
-            throw new DomainException(sprintf('Invalid hash provided for the encoder %s.', $this->getName()));
+            throw new DomainException(\sprintf('Invalid hash provided for the encoder %s.', $this->getName()));
         }
 
         list($iterations, $salt) = explode(self::DELIMITER, $hash);
@@ -143,7 +144,7 @@ class Sha256 implements PasswordEncoderInterface
         }
 
         if (!\is_string($hash)) {
-            throw new DomainException(sprintf('The password could not be hashed by %s.', $this->getName()));
+            throw new DomainException(\sprintf('The password could not be hashed by %s.', $this->getName()));
         }
 
         return $iterations . ':' . $salt . ':' . $hash;

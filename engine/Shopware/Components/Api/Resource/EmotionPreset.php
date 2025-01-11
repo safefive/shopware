@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -92,11 +93,11 @@ class EmotionPreset extends Resource
         $preset = $this->models->find(Preset::class, $presetId);
 
         if (!$preset) {
-            throw new NotFoundException(sprintf('Emotion preset with id %s not found', $presetId));
+            throw new NotFoundException(\sprintf('Emotion preset with id %s not found', $presetId));
         }
 
         if (!$preset->getCustom()) {
-            throw new PrivilegeException(sprintf('Emotion preset %s is not defined as custom preset', $preset->getName()));
+            throw new PrivilegeException(\sprintf('Emotion preset %s is not defined as custom preset', $preset->getName()));
         }
 
         $this->models->remove($preset);
@@ -135,7 +136,7 @@ class EmotionPreset extends Resource
         /** @var Preset|null $preset */
         $preset = $this->models->getRepository(Preset::class)->find($id);
         if (!$preset) {
-            throw new NotFoundException(sprintf('Preset with id %s not found', $id));
+            throw new NotFoundException(\sprintf('Preset with id %s not found', $id));
         }
 
         $preset->getTranslations()->clear();
@@ -205,7 +206,7 @@ class EmotionPreset extends Resource
             ->getSingleScalarResult();
 
         if ($result > 0) {
-            throw new CustomValidationException(sprintf('Preset with name %s already exists', $preset->getName()));
+            throw new CustomValidationException(\sprintf('Preset with name %s already exists', $preset->getName()));
         }
     }
 

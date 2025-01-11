@@ -156,7 +156,7 @@ class Listing extends Page implements HelperSelectorInterface
         $elements = Helper::findElements($this, ['viewTable', 'viewList'], false);
 
         if (key($elements) !== $view) {
-            $message = sprintf('"%s" is active! (should be "%s")', key($elements), $view);
+            $message = \sprintf('"%s" is active! (should be "%s")', key($elements), $view);
             Helper::throwException($message);
         }
     }
@@ -176,7 +176,7 @@ class Listing extends Page implements HelperSelectorInterface
         }
 
         if (!$result) {
-            $message = sprintf(
+            $message = \sprintf(
                 'The article "%s" is%s in the listing, but should%s.',
                 $name,
                 $negation ? '' : ' not',
@@ -200,7 +200,7 @@ class Listing extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The %s is "%s" (should be "%s")',
             $result['key'],
             $result['value'],
@@ -257,7 +257,7 @@ class Listing extends Page implements HelperSelectorInterface
                     $success = $filterGroup->setProperty($property['value']);
 
                     if (!$success) {
-                        $message = sprintf('The value "%s" was not found for filter "%s"!', $property['value'], $property['filter']);
+                        $message = \sprintf('The value "%s" was not found for filter "%s"!', $property['value'], $property['filter']);
                         Helper::throwException($message);
                     }
 
@@ -274,7 +274,7 @@ class Listing extends Page implements HelperSelectorInterface
             }
 
             if (!$found) {
-                $message = sprintf('The filter "%s" was not found!', $property['filter']);
+                $message = \sprintf('The filter "%s" was not found!', $property['filter']);
                 Helper::throwException($message);
             }
         }

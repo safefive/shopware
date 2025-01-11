@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -101,6 +102,6 @@ class QueryOperatorValidator
             return true;
         }
 
-        throw new InvalidArgumentException(sprintf("'%s' is no valid operator", $operator));
+        throw new InvalidArgumentException(\sprintf("'%s' is no valid operator", $operator));
     }
 }

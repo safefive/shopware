@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -86,7 +87,7 @@ class Category extends Resource
         $categoryResult = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$categoryResult) {
-            throw new NotFoundException(sprintf('Category by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Category by id %d not found', $id));
         }
 
         if ($this->getResultMode() === Resource::HYDRATE_ARRAY) {
@@ -203,7 +204,7 @@ class Category extends Resource
         $category = $this->getRepository()->find($id);
 
         if (!$category) {
-            throw new NotFoundException(sprintf('Category by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Category by id %d not found', $id));
         }
 
         $params = $this->prepareCategoryData($params);
@@ -244,7 +245,7 @@ class Category extends Resource
         $category = $this->getRepository()->find($id);
 
         if (!$category) {
-            throw new NotFoundException(sprintf('Category by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Category by id %d not found', $id));
         }
 
         $this->getManager()->remove($category);
@@ -302,7 +303,7 @@ class Category extends Resource
                 if ($parent === null) {
                     $parent = $this->getRepository()->find($parentId);
                     if (!$parent) {
-                        throw new RuntimeException(sprintf('Could not find parent %s', $parentId));
+                        throw new RuntimeException(\sprintf('Could not find parent %s', $parentId));
                     }
                 }
 
@@ -334,7 +335,7 @@ class Category extends Resource
         foreach ($translations as $translation) {
             $shop = $this->getManager()->find(ShopModel::class, $translation['shopId']);
             if (!$shop) {
-                throw new CustomValidationException(sprintf('Shop by id %s not found', $translation['shopId']));
+                throw new CustomValidationException(\sprintf('Shop by id %s not found', $translation['shopId']));
             }
 
             $attributeTranslation = array_intersect_key($translation, array_flip($attributes));
@@ -365,7 +366,7 @@ class Category extends Resource
         if (!empty($params['parent'])) {
             $params['parent'] = Shopware()->Models()->getRepository(CategoryModel::class)->find($params['parent']);
             if (!$params['parent']) {
-                throw new CustomValidationException(sprintf('Parent by id %s not found', $params['parent']));
+                throw new CustomValidationException(\sprintf('Parent by id %s not found', $params['parent']));
             }
         } else {
             unset($params['parent']);
@@ -405,7 +406,7 @@ class Category extends Resource
             $media = $this->getManager()->find(MediaModel::class, (int) $data['media']['mediaId']);
 
             if (!($media instanceof MediaModel)) {
-                throw new CustomValidationException(sprintf('Media by mediaId %s not found', $data['media']['mediaId']));
+                throw new CustomValidationException(\sprintf('Media by mediaId %s not found', $data['media']['mediaId']));
             }
         }
 
@@ -431,18 +432,18 @@ class Category extends Resource
 
         foreach ($data['manualSorting'] as $sorting) {
             if (!isset($sorting['product_id'])) {
-                throw new CustomValidationException(sprintf('Field product_id is missing in manualSorting array'));
+                throw new CustomValidationException(\sprintf('Field product_id is missing in manualSorting array'));
             }
 
             if (!isset($sorting['position'])) {
-                throw new CustomValidationException(sprintf('Field position is missing in manualSorting array'));
+                throw new CustomValidationException(\sprintf('Field position is missing in manualSorting array'));
             }
 
             if (!$connection->fetchOne('SELECT 1 FROM s_articles_categories_ro WHERE categoryID = ? AND articleID = ?', [
                 $category->getId(),
                 $sorting['product_id'],
             ])) {
-                throw new CustomValidationException(sprintf('Product with id %d is not assigned to the category', $sorting['product_id']));
+                throw new CustomValidationException(\sprintf('Product with id %d is not assigned to the category', $sorting['product_id']));
             }
 
             $sortingObj = new ManualSorting();

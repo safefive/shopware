@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -94,13 +95,13 @@ abstract class ShopwareCommand extends Command implements ContainerAwareInterfac
             if ($output->getVerbosity() === OutputInterface::VERBOSITY_VERBOSE) {
                 $errorName = isset($errorNameMap[$errno]) ? $errorNameMap[$errno] : $errno;
 
-                $message = sprintf("Error: %s, \nFile: %s\nLine: %s, Message:\n%s\n", $errorName, $errfile, $errline, $errstr);
+                $message = \sprintf("Error: %s, \nFile: %s\nLine: %s, Message:\n%s\n", $errorName, $errfile, $errline, $errstr);
                 $output->writeln('<comment>' . $message . '</comment>');
 
                 $output->writeln('<comment>Error stack:</comment>');
                 $stack = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
                 foreach ($stack as $trace) {
-                    $output->writeln(sprintf(' %s%s%s() at <info>%s:%s</info>', $trace['class'] ?? '', $trace['type'] ?? '', $trace['function'], $trace['file'] ?? '', $trace['line'] ?? ''));
+                    $output->writeln(\sprintf(' %s%s%s() at <info>%s:%s</info>', $trace['class'] ?? '', $trace['type'] ?? '', $trace['function'], $trace['file'] ?? '', $trace['line'] ?? ''));
                 }
                 $output->writeln('');
                 $output->writeln('');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -76,7 +77,7 @@ class PluginExtractor
         $destination = $this->pluginDir;
 
         if (!is_writable($destination)) {
-            throw new Exception(sprintf('Destination directory "%s" is not writable', $destination));
+            throw new Exception(\sprintf('Destination directory "%s" is not writable', $destination));
         }
 
         $prefix = $this->getPluginPrefix($archive);
@@ -150,7 +151,7 @@ class PluginExtractor
     private function assertPrefix(string $filename, string $prefix): void
     {
         if (strpos($filename, $prefix) !== 0) {
-            throw new RuntimeException(sprintf('Detected invalid file/directory %s in the plugin zip: %s', $filename, $prefix));
+            throw new RuntimeException(\sprintf('Detected invalid file/directory %s in the plugin zip: %s', $filename, $prefix));
         }
     }
 

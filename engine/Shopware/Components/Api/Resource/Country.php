@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -75,7 +76,7 @@ class Country extends Resource
         /** @var CountryModel|null $country */
         $country = $builder->getQuery()->getOneOrNullResult($this->getResultMode());
         if (!$country) {
-            throw new NotFoundException(sprintf('Country by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Country by id %d not found', $id));
         }
 
         return $country;
@@ -166,7 +167,7 @@ class Country extends Resource
         /** @var CountryModel|null $country */
         $country = $this->getRepository()->find($id);
         if (!$country) {
-            throw new NotFoundException(sprintf('Country by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Country by id %d not found', $id));
         }
 
         $params = $this->prepareCountryData($params, $country);
@@ -203,7 +204,7 @@ class Country extends Resource
         /** @var CountryModel|null $country */
         $country = $this->getRepository()->find($id);
         if (!$country) {
-            throw new NotFoundException(sprintf('Country by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Country by id %d not found', $id));
         }
 
         $this->getManager()->remove($country);
@@ -234,7 +235,7 @@ class Country extends Resource
                 }
             } else {
                 if (isset($params[$param]) && empty($params[$param])) {
-                    throw new CustomValidationException(sprintf('Param "%s" may not be empty', $param));
+                    throw new CustomValidationException(\sprintf('Param "%s" may not be empty', $param));
                 }
             }
         }
@@ -246,7 +247,7 @@ class Country extends Resource
                 if ($area) {
                     $params['area'] = $area;
                 } else {
-                    throw new NotFoundException(sprintf('Area by id %d not found', $areaId));
+                    throw new NotFoundException(\sprintf('Area by id %d not found', $areaId));
                 }
             } else {
                 $params['area'] = null;
@@ -277,7 +278,7 @@ class Country extends Resource
             /** @var State|null $stateModel */
             $stateModel = $this->getManager()->find(State::class, $state['id']);
             if (!$stateModel) {
-                throw new NotFoundException(sprintf('State by id %d not found', (int) $state['id']));
+                throw new NotFoundException(\sprintf('State by id %d not found', (int) $state['id']));
             }
 
             // Update state

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -82,7 +83,7 @@ class Address extends Resource
         $address = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$address) {
-            throw new NotFoundException(sprintf('Address by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Address by id %d not found', $id));
         }
 
         return $address;
@@ -127,7 +128,7 @@ class Address extends Resource
 
         $customer = $this->getContainer()->get(ModelManager::class)->find(CustomerModel::class, $customerId);
         if (!$customer) {
-            throw new NotFoundException(sprintf('Customer by id %s not found', $customerId));
+            throw new NotFoundException(\sprintf('Customer by id %s not found', $customerId));
         }
 
         $this->setupContext($customer->getShop()->getId());
@@ -174,7 +175,7 @@ class Address extends Resource
         $address = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$address) {
-            throw new NotFoundException(sprintf('Address by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Address by id %d not found', $id));
         }
 
         $this->setupContext($address->getCustomer()->getShop()->getId());
@@ -214,7 +215,7 @@ class Address extends Resource
         $address = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$address) {
-            throw new NotFoundException(sprintf('Address by id %d not found', $id));
+            throw new NotFoundException(\sprintf('Address by id %d not found', $id));
         }
 
         $this->addressService->delete($address);

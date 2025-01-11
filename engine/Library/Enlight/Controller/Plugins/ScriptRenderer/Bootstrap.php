@@ -218,7 +218,7 @@ class Enlight_Controller_Plugins_ScriptRenderer_Bootstrap extends Enlight_Plugin
      */
     private function inflectPath($module, $controller, $file)
     {
-        return sprintf(
+        return \sprintf(
             '%s/%s/%s.js',
             mb_strtolower($this->camelCaseToUnderScore($module)),
             mb_strtolower($this->camelCaseToUnderScore($controller)),

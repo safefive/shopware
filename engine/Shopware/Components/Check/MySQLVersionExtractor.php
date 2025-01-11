@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -51,7 +52,7 @@ class MySQLVersionExtractor
             $versionString,
             $versionParts
         )) {
-            throw new RuntimeException(sprintf('Invalid version string: %s', $versionString));
+            throw new RuntimeException(\sprintf('Invalid version string: %s', $versionString));
         }
 
         return $versionParts['major'] . '.' . $versionParts['minor'] . '.' . $versionParts['patch'];

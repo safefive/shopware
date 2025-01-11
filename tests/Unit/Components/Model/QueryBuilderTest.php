@@ -344,7 +344,7 @@ class QueryBuilderTest extends TestCase
     {
         $this->querybuilder->resetDQLParts();
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(sprintf('\'%s\' is no valid operator', $filter['expression']));
+        $this->expectExceptionMessage(\sprintf('\'%s\' is no valid operator', $filter['expression']));
         $this->querybuilder->addFilter([$filter]);
     }
 

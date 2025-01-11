@@ -233,7 +233,7 @@ SQL;
     private function assertStringsEqual(string $expected, string $actual): void
     {
         if (strcasecmp($expected, $actual) !== 0) {
-            Helper::throwException(sprintf("Content '%s' expected, found '%s' instead.", $expected, $actual));
+            Helper::throwException(\sprintf("Content '%s' expected, found '%s' instead.", $expected, $actual));
         }
     }
 }

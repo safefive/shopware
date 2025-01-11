@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -67,7 +68,7 @@ class PropertyGroup extends Resource
         $property = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$property) {
-            throw new NotFoundException(sprintf('PropertyGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('PropertyGroup by id %d not found', $id));
         }
 
         return $property;
@@ -144,7 +145,7 @@ class PropertyGroup extends Resource
         $propertyGroup = $this->getRepository()->find($id);
 
         if (!$propertyGroup) {
-            throw new NotFoundException(sprintf('PropertyGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('PropertyGroup by id %d not found', $id));
         }
 
         $params = $this->preparePropertyData($params, $propertyGroup);
@@ -180,7 +181,7 @@ class PropertyGroup extends Resource
         $propertyGroup = $this->getRepository()->find($id);
 
         if (!$propertyGroup) {
-            throw new NotFoundException(sprintf('PropertyGroup by id %d not found', $id));
+            throw new NotFoundException(\sprintf('PropertyGroup by id %d not found', $id));
         }
 
         $this->getManager()->remove($propertyGroup);

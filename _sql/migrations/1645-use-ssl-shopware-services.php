@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -25,7 +26,7 @@ class Migrations_Migration1645 extends Shopware\Components\Migrations\AbstractMi
 {
     public function up($modus)
     {
-        $this->addSql(sprintf("UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'update-api-endpoint'", serialize('https://update-api.shopware.com/v1/')));
-        $this->addSql(sprintf("UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'update-feedback-api-endpoint'", serialize('https://feedback.update-api.shopware.com/v1/')));
+        $this->addSql(\sprintf("UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'update-api-endpoint'", serialize('https://update-api.shopware.com/v1/')));
+        $this->addSql(\sprintf("UPDATE `s_core_config_elements` SET `value` = '%s' WHERE `name` = 'update-feedback-api-endpoint'", serialize('https://feedback.update-api.shopware.com/v1/')));
     }
 }

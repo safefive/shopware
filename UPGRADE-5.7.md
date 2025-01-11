@@ -17,33 +17,34 @@ This changelog references changes done in Shopware 5.7 patch versions.
 * Changed the test kernel, so PHPUnit tests do no longer ignore PHP warnings and notices and are failing instead
 * Changed the `plugin.xsd` complexType `pluginType` so it could be validated again with newer `libxml2` versions
 
+* Updated `beberlei/assert` to version 3.3.3
 * Updated `beberlei/doctrineextensions` to version 1.4.0
 * Updated `cocur/slugify` to version 4.6.0 for PHP 8.0 and newer
 * Updated `doctrine/annotations` to version 1.14.4
-* Updated `doctrine/common` to version 3.4.5
+* Updated `doctrine/common` to version 3.5.0
 * Updated `doctrine/inflector` to version 2.0.10
 * Updated `doctrine/orm` to version 2.15.5
-* Updated `doctrine/persistence` to version 3.3.3
+* Updated `doctrine/persistence` to version 3.4.0
 * Updated `friendsofphp/proxy-manager-lts` to version 1.0.18
 * Updated `google/cloud-storage` to version 1.39.0
 * Updated `guzzlehttp/guzzle` to version 7.9.2
 * Updated `guzzlehttp/psr7` to version 2.7.0
-* Updated `monolog/monolog` to version 2.9.3
+* Updated `monolog/monolog` to version 2.10.0
 * Updated `mpdf/mpdf` to version 8.2.4
-* Updated `laminas/laminas-code` to version 4.15.1 for PHP 8.1 and newer
+* Updated `laminas/laminas-code` to version 4.16.0 for PHP 8.1 and newer
 * Updated `laminas/laminas-escaper` to version 2.15.0 for PHP 8.1 and newer
 * Updated `phpunit/phpunit` to version 9.6.21
 * Updated `setasign/fpdf` to version 1.8.6
-* Updated `setasign/fpdi` to version 2.6.1
+* Updated `setasign/fpdi` to version 2.6.2
 * Updated `symfony/polyfill-php80` to version 1.31.0
 * Updated `symfony/polyfill-php81` to version 1.31.0
 * Updated `symfony/polyfill-php82` to version 1.31.0
 * Updated `symfony/polyfill-php83` to version 1.31.0
-* Updated `symfony/process` to version 5.4.46
+* Updated `symfony/process` to version 5.4.47
 * Updated `symfony/http-kernel` to version 4.4.51
 * Updated `symfony/serializer` to version 5.4.45
 * Updated `voku/anti-xss` to version 4.1.42
-* Updated `wikimedia/less.php` to version 5.1.1
+* Updated `wikimedia/less.php` to version 5.1.2
 * Updated several indirect dependencies
 * Updated npm dependencies in `themes/package.json`
 * Updated npm dependencies in `themes/Frontend/Responsive/package.json`

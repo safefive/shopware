@@ -26,7 +26,7 @@
 function smarty_modifier_tax($value, $locale = null)
 {
     if (!is_numeric($value)) {
-        throw new InvalidArgumentException(sprintf('Input %s must be numeric.', (string) $value));
+        throw new InvalidArgumentException(\sprintf('Input %s must be numeric.', (string) $value));
     }
 
     $format['precision'] = 2;

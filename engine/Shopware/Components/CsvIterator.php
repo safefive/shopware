@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -89,12 +90,12 @@ class Shopware_Components_CsvIterator extends Enlight_Class implements Iterator
         $realPath = realpath($filename);
 
         if ($realPath === false) {
-            throw new InvalidArgumentException(sprintf('Given file path "%s" does not exist', $filename));
+            throw new InvalidArgumentException(\sprintf('Given file path "%s" does not exist', $filename));
         }
 
         $handler = fopen($realPath, 'r');
         if (!\is_resource($handler)) {
-            throw new Exception(sprintf('The file "%s" cannot be opened', $realPath));
+            throw new Exception(\sprintf('The file "%s" cannot be opened', $realPath));
         }
         $this->_handler = $handler;
 

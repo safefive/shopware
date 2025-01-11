@@ -184,17 +184,17 @@ class ProportionalTaxCalculatorTest extends Enlight_Components_Test_TestCase
 
         static::assertFalse(
             is_nan($result->getPrice()),
-            sprintf($messageTemplate, 'Price', $result->getPrice())
+            \sprintf($messageTemplate, 'Price', $result->getPrice())
         );
 
         static::assertFalse(
             is_nan($result->getNetPrice()),
-            sprintf($messageTemplate, 'NetPrice', $result->getNetPrice())
+            \sprintf($messageTemplate, 'NetPrice', $result->getNetPrice())
         );
 
         static::assertFalse(
             is_nan($result->getTax()),
-            sprintf($messageTemplate, 'Tax', $result->getTax())
+            \sprintf($messageTemplate, 'Tax', $result->getTax())
         );
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -415,7 +416,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
         if ($destPath === false || !file_exists($destPath)) {
             echo json_encode([
                 'success' => false,
-                'message' => sprintf("Destination directory '%s' does not exist.", $destPath),
+                'message' => \sprintf("Destination directory '%s' does not exist.", $destPath),
             ]);
 
             return;
@@ -424,7 +425,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
         if (!is_writable($destPath)) {
             echo json_encode([
                 'success' => false,
-                'message' => sprintf("Destination directory '%s' does not have write permissions.", $destPath),
+                'message' => \sprintf("Destination directory '%s' does not have write permissions.", $destPath),
             ]);
 
             return;
@@ -434,7 +435,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
         if ($filePath === false) {
             echo json_encode([
                 'success' => false,
-                'message' => sprintf('Could not create a tmp file for %s', $filePath),
+                'message' => \sprintf('Could not create a tmp file for %s', $filePath),
             ]);
 
             return;
@@ -443,7 +444,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
         if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath) === false) {
             echo json_encode([
                 'success' => false,
-                'message' => sprintf('Could not move %s to %s.', $_FILES['file']['tmp_name'], $filePath),
+                'message' => \sprintf('Could not move %s to %s.', $_FILES['file']['tmp_name'], $filePath),
             ]);
 
             return;
@@ -618,7 +619,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
                 $value = $this->database->quote($row['value']);
                 $value = str_replace("\n", '\\n', $value);
 
-                $rows[] = sprintf(
+                $rows[] = \sprintf(
                     "(%s, %s, %s, '%s', '%s', '%s', NOW(), %d)",
                     $this->database->quote($row['namespace']),
                     $this->database->quote($row['name']),
@@ -865,7 +866,7 @@ class Shopware_Controllers_Backend_Snippet extends Shopware_Controllers_Backend_
      */
     protected function prefixProperties($properties = [], $prefix = '')
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.8. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         foreach ($properties as $key => $property) {
             if (isset($property['property'])) {

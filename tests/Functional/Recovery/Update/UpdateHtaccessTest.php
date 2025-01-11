@@ -308,7 +308,7 @@ EOF;
         static::assertSame(
             $expected,
             file_get_contents($tmpDir . '/.htaccess'),
-            sprintf('File hash is: %s', md5($currentHtaccess))
+            \sprintf('File hash is: %s', md5($currentHtaccess))
         );
     }
 

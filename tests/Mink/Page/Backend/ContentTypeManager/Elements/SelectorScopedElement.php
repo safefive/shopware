@@ -43,7 +43,7 @@ class SelectorScopedElement extends Element
             $parentType = \is_array($parentSelector) ? array_key_first($parentSelector) : 'css';
 
             if ($childType !== $parentType) {
-                Helper::throwException(sprintf("Combining the parent element's %s selector with the child's %s selector won't work.", $parentType, $childType));
+                Helper::throwException(\sprintf("Combining the parent element's %s selector with the child's %s selector won't work.", $parentType, $childType));
             }
 
             return implode(

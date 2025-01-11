@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -122,7 +123,7 @@ class FileSystem
     private function fixDirectoryPermission(SplFileInfo $fileInfo)
     {
         try {
-            $permission = substr(sprintf('%o', $fileInfo->getPerms()), -4);
+            $permission = substr(\sprintf('%o', $fileInfo->getPerms()), -4);
         } catch (Exception $e) {
             // cannot get permissions...
             return;
@@ -143,7 +144,7 @@ class FileSystem
     private function fixFilePermission(SplFileInfo $fileInfo)
     {
         try {
-            $permission = substr(sprintf('%o', $fileInfo->getPerms()), -4);
+            $permission = substr(\sprintf('%o', $fileInfo->getPerms()), -4);
         } catch (Exception $e) {
             // cannot get permissions...
             return;

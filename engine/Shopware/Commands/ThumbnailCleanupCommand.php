@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -88,13 +89,13 @@ class ThumbnailCleanupCommand extends ShopwareCommand
             $io->listing($thumbnailFiles);
         }
 
-        if (!$io->confirm(sprintf('Found %d orphaned thumbnails. Are you sure you want to delete the files? This step is irreversible.', \count($thumbnailFiles)))) {
+        if (!$io->confirm(\sprintf('Found %d orphaned thumbnails. Are you sure you want to delete the files? This step is irreversible.', \count($thumbnailFiles)))) {
             return;
         }
 
         $deletedThumbnails = $this->deleteThumbnails($io, $filesystem, $thumbnailFiles);
 
-        $io->success(sprintf('Removed %d/%d orphaned thumbnails.', $deletedThumbnails, \count($thumbnailFiles)));
+        $io->success(\sprintf('Removed %d/%d orphaned thumbnails.', $deletedThumbnails, \count($thumbnailFiles)));
     }
 
     private function processFilesIn(string $directory, FilesystemInterface $filesystem, ProgressBar $progressBar): void

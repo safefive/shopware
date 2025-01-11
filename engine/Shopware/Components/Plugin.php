@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -214,8 +215,8 @@ abstract class Plugin extends Bundle implements SubscriberInterface
 
     private function registerFilesystem(ContainerBuilder $container, string $key): void
     {
-        $parameterKey = sprintf('shopware.filesystem.%s', $key);
-        $serviceId = sprintf('%s.filesystem.%s', $this->getContainerPrefix(), $key);
+        $parameterKey = \sprintf('shopware.filesystem.%s', $key);
+        $serviceId = \sprintf('%s.filesystem.%s', $this->getContainerPrefix(), $key);
 
         $filesystem = new Definition(
             PrefixFilesystem::class,

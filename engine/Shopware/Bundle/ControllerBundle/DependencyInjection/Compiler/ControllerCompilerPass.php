@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -38,14 +39,14 @@ class ControllerCompilerPass implements CompilerPassInterface
             $options = $options[0];
 
             if (!isset($options['module'])) {
-                throw new RuntimeException(sprintf('Attribute "module" is required for "shopware.controller" tagged service with id "%s"', $id));
+                throw new RuntimeException(\sprintf('Attribute "module" is required for "shopware.controller" tagged service with id "%s"', $id));
             }
 
             if (!isset($options['controller'])) {
-                throw new RuntimeException(sprintf('Attribute "controller" is required for "shopware.controller" tagged service with id "%s"', $id));
+                throw new RuntimeException(\sprintf('Attribute "controller" is required for "shopware.controller" tagged service with id "%s"', $id));
             }
 
-            $controllers[strtolower(sprintf('%s_%s', $options['module'], $options['controller']))] = $id;
+            $controllers[strtolower(\sprintf('%s_%s', $options['module'], $options['controller']))] = $id;
 
             $definition = $container->getDefinition($id);
 

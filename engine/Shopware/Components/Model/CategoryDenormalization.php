@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -598,12 +599,12 @@ class CategoryDenormalization
     {
         $count = (int) $count;
         if ($count <= 0) {
-            throw new Exception(sprintf('LIMIT argument count=%s is not valid', $count));
+            throw new Exception(\sprintf('LIMIT argument count=%s is not valid', $count));
         }
 
         $offset = (int) $offset;
         if ($offset < 0) {
-            throw new Exception(sprintf('LIMIT argument offset=%s is not valid', $offset));
+            throw new Exception(\sprintf('LIMIT argument offset=%s is not valid', $offset));
         }
 
         $sql .= " LIMIT $count";

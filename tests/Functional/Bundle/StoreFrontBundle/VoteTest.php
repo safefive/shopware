@@ -223,14 +223,14 @@ class VoteTest extends TestCase
             if (\array_key_exists('count', $data)) {
                 $votes = $service->get($product, $context);
                 static::assertIsArray($votes);
-                static::assertCount($data['count'], $votes, sprintf('Vote count %s for shop %s of product %s not match', $data['count'], $shopId, $product->getNumber()));
+                static::assertCount($data['count'], $votes, \sprintf('Vote count %s for shop %s of product %s not match', $data['count'], $shopId, $product->getNumber()));
             }
 
             // validates provided average value of provided shop
             if (\array_key_exists('average', $data)) {
                 $average = $service->getAverage($product, $context);
                 static::assertInstanceOf(VoteAverage::class, $average);
-                static::assertEquals($data['average'], $average->getAverage(), sprintf('Vote average %s for shop %s of product %s not match', $data['average'], $shopId, $product->getNumber()));
+                static::assertEquals($data['average'], $average->getAverage(), \sprintf('Vote average %s for shop %s of product %s not match', $data['average'], $shopId, $product->getNumber()));
             }
 
             if (\array_key_exists('points', $data)) {
@@ -243,8 +243,8 @@ class VoteTest extends TestCase
                 }
 
                 foreach ($data['points'] as $point => $count) {
-                    static::assertArrayHasKey($point, $actual, sprintf('Point count for points %s not exist', $point));
-                    static::assertEquals($count, $actual[$point], sprintf('Expected %s times votes with points %s', $count, $point));
+                    static::assertArrayHasKey($point, $actual, \sprintf('Point count for points %s not exist', $point));
+                    static::assertEquals($count, $actual[$point], \sprintf('Expected %s times votes with points %s', $count, $point));
                 }
             }
         }

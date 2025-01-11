@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -33,7 +34,7 @@ trait FixtureBehaviour
         $sql = file_get_contents($name);
 
         if (!\is_string($sql)) {
-            throw new RuntimeException(sprintf('Could not read fixture "%s"', $name));
+            throw new RuntimeException(\sprintf('Could not read fixture "%s"', $name));
         }
 
         Shopware()->Container()->get(Connection::class)->executeStatement($sql);

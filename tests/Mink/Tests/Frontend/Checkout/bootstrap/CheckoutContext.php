@@ -208,7 +208,7 @@ class CheckoutContext extends SubContext
         $productVariant = $modelManager->getRepository(ProductVariant::class)->findOneBy(['number' => $productNumber]);
 
         if (!$productVariant instanceof ProductVariant) {
-            Helper::throwException(sprintf('Product with number "%s" was not found.', $productNumber));
+            Helper::throwException(\sprintf('Product with number "%s" was not found.', $productNumber));
         }
 
         $product = $productVariant->getArticle();
@@ -490,7 +490,7 @@ class CheckoutContext extends SubContext
             }
         }
 
-        $message = sprintf('Given address not found! (%s)', $address);
+        $message = \sprintf('Given address not found! (%s)', $address);
         Helper::throwException($message);
     }
 
@@ -513,7 +513,7 @@ class CheckoutContext extends SubContext
             }
         }
 
-        $message = sprintf('Expected address not found! (%s)', $address);
+        $message = \sprintf('Expected address not found! (%s)', $address);
         Helper::throwException($message);
     }
 
@@ -552,7 +552,7 @@ class CheckoutContext extends SubContext
             }
         }
 
-        $message = sprintf('Expected to find address as %s! (%s)', $title, $address);
+        $message = \sprintf('Expected to find address as %s! (%s)', $title, $address);
         Helper::throwException($message);
     }
 
@@ -598,7 +598,7 @@ class CheckoutContext extends SubContext
             }
         }
 
-        $message = sprintf('Expected address not found! (%s)', $address);
+        $message = \sprintf('Expected address not found! (%s)', $address);
         Helper::throwException($message);
     }
 
@@ -619,7 +619,7 @@ class CheckoutContext extends SubContext
             }
         }
 
-        $message = sprintf('Expected to find address "%s" as "%s", but didn\'t.', $address, $title);
+        $message = \sprintf('Expected to find address "%s" as "%s", but didn\'t.', $address, $title);
         Helper::throwException($message);
     }
 
@@ -814,7 +814,7 @@ EOD;
      */
     public function iCheckoutUsingGet(string $path = '/checkout/finish'): void
     {
-        $this->getSession()->executeScript(sprintf('window.location.href = \'%s\'', $path));
+        $this->getSession()->executeScript(\sprintf('window.location.href = \'%s\'', $path));
     }
 
     /**
@@ -836,7 +836,7 @@ EOD;
         }
 
         if (!$cartPositionToCheck instanceof CartPositionRebate) {
-            Helper::throwException(sprintf('No discount or surcharge element found with name: "%s"', $cartPositionName));
+            Helper::throwException(\sprintf('No discount or surcharge element found with name: "%s"', $cartPositionName));
         }
 
         $page->checkPositionTaxes($cartPositionToCheck, $taxValues);

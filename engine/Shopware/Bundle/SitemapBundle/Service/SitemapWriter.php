@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -122,7 +123,7 @@ class SitemapWriter implements SitemapWriterInterface
     private function closeFile($shopId)
     {
         if (!\array_key_exists($shopId, $this->files)) {
-            throw new UnknownFileException(sprintf('No open file "%s"', $shopId));
+            throw new UnknownFileException(\sprintf('No open file "%s"', $shopId));
         }
 
         $fileHandle = $this->files[$shopId]['fileHandle'];
@@ -155,7 +156,7 @@ class SitemapWriter implements SitemapWriterInterface
             return true;
         }
 
-        $filePath = sprintf(
+        $filePath = \sprintf(
             '%s/sitemap-shop-%d-%s.xml.gz',
             rtrim(sys_get_temp_dir(), '/'),
             $shopId,
@@ -165,7 +166,7 @@ class SitemapWriter implements SitemapWriterInterface
         $fileHandler = gzopen($filePath, 'wb');
 
         if (!$fileHandler) {
-            $this->logger->error(sprintf('Could not generate sitemap file, unable to write to "%s"', $filePath));
+            $this->logger->error(\sprintf('Could not generate sitemap file, unable to write to "%s"', $filePath));
 
             return false;
         }
@@ -199,7 +200,7 @@ class SitemapWriter implements SitemapWriterInterface
         /** @var Sitemap[] $sitemaps */
         foreach ($this->sitemaps as $shopId => $sitemaps) {
             // Delete old sitemaps for this siteId
-            foreach ($this->filesystem->listContents(sprintf('shop-%d', $shopId)) as $file) {
+            foreach ($this->filesystem->listContents(\sprintf('shop-%d', $shopId)) as $file) {
                 $this->filesystem->delete($file['path']);
             }
 
@@ -209,7 +210,7 @@ class SitemapWriter implements SitemapWriterInterface
                 try {
                     $this->filesystem->write($sitemapFileName, file_get_contents($sitemap->getFilename()));
                 } catch (\League\Flysystem\Exception $exception) {
-                    $this->logger->error(sprintf('Could not move sitemap to "%s" in the location for sitemaps', $sitemapFileName));
+                    $this->logger->error(\sprintf('Could not move sitemap to "%s" in the location for sitemaps', $sitemapFileName));
                 } finally {
                     // If we could not move the file to it's target, we remove it here to not clutter tmp dir
                     unlink($sitemap->getFilename());

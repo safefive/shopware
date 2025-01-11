@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -62,7 +63,7 @@ class ComponentInstaller
         $plugin = $repo->findOneBy(['name' => $pluginName]);
 
         if (!$plugin) {
-            throw new Exception(sprintf('Plugin by name %s not found', $pluginName));
+            throw new Exception(\sprintf('Plugin by name %s not found', $pluginName));
         }
 
         $repo = $this->em->getRepository(Component::class);

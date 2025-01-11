@@ -189,7 +189,7 @@ class Homepage extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The banner %s is "%s" (should be "%s")',
             $result['key'],
             $result['value'],
@@ -245,7 +245,7 @@ class Homepage extends Page implements HelperSelectorInterface
         }
 
         $message = [
-            sprintf('The slides have a different %s!', $result['key']),
+            \sprintf('The slides have a different %s!', $result['key']),
             'Given: ' . $result['value'],
             'Expected: ' . $result['value2'],
         ];
@@ -293,7 +293,7 @@ class Homepage extends Page implements HelperSelectorInterface
         }
 
         $message = [
-            sprintf('The slides have a different %s!', $result['key']),
+            \sprintf('The slides have a different %s!', $result['key']),
             'Given: ' . print_r($result['value'], true),
             'Expected: ' . print_r($result['value2'], true),
         ];
@@ -324,7 +324,7 @@ class Homepage extends Page implements HelperSelectorInterface
         }
 
         $message = [
-            sprintf('The slides have a different %s!', $result['key']),
+            \sprintf('The slides have a different %s!', $result['key']),
             'Given: ' . print_r($result['value'], true),
             'Expected: ' . print_r($result['value2'], true),
         ];
@@ -353,7 +353,7 @@ class Homepage extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The category teaser %s is "%s" (should be "%s")',
             $result['key'],
             $result['value'],
@@ -377,7 +377,7 @@ class Homepage extends Page implements HelperSelectorInterface
             return;
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'The article %s is "%s" (should be "%s")',
             $result['key'],
             $result['value'],

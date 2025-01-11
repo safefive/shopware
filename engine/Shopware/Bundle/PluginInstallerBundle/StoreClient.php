@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -475,7 +476,7 @@ class StoreClient
                 throw new MissingDoubleOptInConfirmationException($sbpCode, 'missing_doi_confirmation', $httpCode, $requestException);
         }
 
-        $reason = \array_key_exists('reason', $data) ? $data['reason'] : sprintf('Unknown error occurred. (%s)', $sbpCode);
+        $reason = \array_key_exists('reason', $data) ? $data['reason'] : \sprintf('Unknown error occurred. (%s)', $sbpCode);
 
         throw new StoreException($sbpCode, $reason, $httpCode, $requestException);
     }
@@ -486,7 +487,7 @@ class StoreClient
         $signature = $response->getHeader($signatureHeaderName);
 
         if (!\is_string($signature)) {
-            throw new RuntimeException(sprintf('Signature not found in header "%s"', $signatureHeaderName));
+            throw new RuntimeException(\sprintf('Signature not found in header "%s"', $signatureHeaderName));
         }
 
         if (!$this->openSSLVerifier->isSystemSupported()) {

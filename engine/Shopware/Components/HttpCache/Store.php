@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -205,7 +206,7 @@ class Store extends BaseStore
             $content[$cacheKey] = $headerKey;
 
             if (!$this->save($key, json_encode($content))) {
-                throw new RuntimeException(sprintf('Could not write cacheKey "%s"', $key));
+                throw new RuntimeException(\sprintf('Could not write cacheKey "%s"', $key));
             }
         }
 
@@ -265,7 +266,7 @@ class Store extends BaseStore
         /**
          * Normalize URL to consistently return the same path even when variables are present
          */
-        $uri = sprintf(
+        $uri = \sprintf(
             '%s%s%s',
             $request->getSchemeAndHttpHost(),
             $path,

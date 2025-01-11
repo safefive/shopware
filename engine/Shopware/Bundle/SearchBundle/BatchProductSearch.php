@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -81,10 +82,10 @@ class BatchProductSearch
     }
 
     /**
-     * @param array<string, Struct\ListProduct|null> $products
-     * @param Struct\BaseProduct[]                   $searchProducts
+     * @param array<string, ListProduct|null> $products
+     * @param Struct\BaseProduct[]            $searchProducts
      *
-     * @return Struct\ListProduct[]
+     * @return ListProduct[]
      */
     private function assignAttributes($products, $searchProducts)
     {

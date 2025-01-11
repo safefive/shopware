@@ -63,7 +63,7 @@ class Shopware_Controllers_Widgets_Captcha extends Enlight_Controller_Action
         $captcha = $this->container->get('shopware.captcha.repository')->getConfiguredCaptcha();
 
         $captchaName = $captcha->getName();
-        $this->View()->loadTemplate(sprintf('widgets/captcha/%s.tpl', $captchaName));
+        $this->View()->loadTemplate(\sprintf('widgets/captcha/%s.tpl', $captchaName));
         $this->View()->assign($captcha->getTemplateData());
     }
 
@@ -86,7 +86,7 @@ class Shopware_Controllers_Widgets_Captcha extends Enlight_Controller_Action
             $captcha = $captchaRepository->getCaptchaByName('nocaptcha');
         }
 
-        $this->View()->loadTemplate(sprintf('widgets/captcha/%s.tpl', $captcha->getName()));
+        $this->View()->loadTemplate(\sprintf('widgets/captcha/%s.tpl', $captcha->getName()));
         $this->View()->assign($captcha->getTemplateData());
     }
 }

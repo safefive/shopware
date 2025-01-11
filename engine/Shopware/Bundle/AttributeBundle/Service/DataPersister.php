@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -63,7 +64,7 @@ class DataPersister implements DataPersisterInterface
     public function persist($data, $table, $foreignKey)
     {
         if (!$this->mapping->isAttributeTable($table)) {
-            throw new Exception(sprintf('Table %s is no attribute table', $table));
+            throw new Exception(\sprintf('Table %s is no attribute table', $table));
         }
         if (!$foreignKey) {
             throw new Exception('No foreign key provided');
@@ -93,7 +94,7 @@ class DataPersister implements DataPersisterInterface
     public function cloneAttribute($table, $sourceForeignKey, $targetForeignKey)
     {
         if (!$this->mapping->isAttributeTable($table)) {
-            throw new Exception(sprintf('Table %s is no attribute table', $table));
+            throw new Exception(\sprintf('Table %s is no attribute table', $table));
         }
         if (!$sourceForeignKey) {
             throw new Exception('No foreign key provided');
@@ -117,7 +118,7 @@ class DataPersister implements DataPersisterInterface
     public function cloneAttributeTranslations($table, $sourceForeignKey, $targetForeignKey)
     {
         if (!$this->mapping->isAttributeTable($table)) {
-            throw new Exception(sprintf('Table %s is no attribute table', $table));
+            throw new Exception(\sprintf('Table %s is no attribute table', $table));
         }
         if (!$sourceForeignKey) {
             throw new Exception('No foreign key provided');

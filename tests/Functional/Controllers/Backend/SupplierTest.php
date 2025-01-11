@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -148,7 +149,7 @@ class SupplierTest extends Enlight_Components_Test_Controller_TestCase
             'operator' => null,
             'expression' => null,
         ]);
-        $query_params = urlencode(sprintf('[%s]', $filter));
+        $query_params = urlencode(\sprintf('[%s]', $filter));
         $this->dispatch('backend/supplier/getSuppliers?filter=' . $query_params);
         static::assertTrue($this->View()->getAssign('success'));
 

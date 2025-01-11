@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -174,7 +175,7 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
             $parent = $this->getRepository()->find($parentId);
 
             if (!$parent instanceof Template) {
-                throw new Exception(sprintf('Shop template by id %s not found', $parentId));
+                throw new Exception(\sprintf('Shop template by id %s not found', $parentId));
             }
         }
 
@@ -249,14 +250,14 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
 
             $system->remove($file->getPathname());
 
-            throw new Exception(sprintf('Uploaded file %s is no zip file', $name));
+            throw new Exception(\sprintf('Uploaded file %s is no zip file', $name));
         }
         $targetDirectory = $this->container->get(PathResolver::class)->getFrontendThemeDirectory();
 
         if (!is_writable($targetDirectory)) {
             $this->View()->assign([
                 'success' => false,
-                'error' => sprintf("Target Directory %s isn't writable", $targetDirectory),
+                'error' => \sprintf("Target Directory %s isn't writable", $targetDirectory),
             ]);
 
             return;

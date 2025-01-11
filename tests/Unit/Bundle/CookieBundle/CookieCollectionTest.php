@@ -42,7 +42,7 @@ class CookieCollectionTest extends TestCase
     public function testIsValidReturnsFalse(): void
     {
         $cookieCollection = new CookieCollection();
-        $cookieCollection->add(new class() {
+        $cookieCollection->add(new class {
         });
 
         static::assertFalse($cookieCollection->isValid());

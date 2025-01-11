@@ -137,7 +137,7 @@ class Enlight_Components_Mail extends Zend_Mail
                 return $this->_plainBodyText;
         }
 
-        throw new RuntimeException(sprintf('Could not read value for given name: "%s"', $name));
+        throw new RuntimeException(\sprintf('Could not read value for given name: "%s"', $name));
     }
 
     /**

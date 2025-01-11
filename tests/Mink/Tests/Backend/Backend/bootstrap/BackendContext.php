@@ -107,7 +107,7 @@ return Shopware.app.Application.getActiveWindows().filter(function(activeWindow)
 }).length > 0;
 JS;
 
-        return (bool) $this->getDriver()->evaluateScript(sprintf($script, $alias));
+        return (bool) $this->getDriver()->evaluateScript(\sprintf($script, $alias));
     }
 
     /**
@@ -115,7 +115,7 @@ JS;
      */
     protected function checkIfThereIsText(string $text, SubContext $context): bool
     {
-        $result = $context->getSession()->getPage()->findAll('xpath', sprintf("//*[contains(., '%s')]", $text));
+        $result = $context->getSession()->getPage()->findAll('xpath', \sprintf("//*[contains(., '%s')]", $text));
 
         return !empty($result);
     }

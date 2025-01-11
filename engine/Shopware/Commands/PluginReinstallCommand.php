@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -99,7 +100,7 @@ class PluginReinstallCommand extends PluginCommand implements CompletionAwareInt
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
@@ -109,7 +110,7 @@ class PluginReinstallCommand extends PluginCommand implements CompletionAwareInt
         $uninstallationContext = $pluginManager->uninstallPlugin($plugin, $removeData);
         $installationContext = $pluginManager->installPlugin($plugin);
         $activationContext = $pluginManager->activatePlugin($plugin);
-        $output->writeln(sprintf('Plugin %s has been reinstalled successfully.', $pluginName));
+        $output->writeln(\sprintf('Plugin %s has been reinstalled successfully.', $pluginName));
 
         $this->clearCachesIfRequested($input, $output, $uninstallationContext, $installationContext, $activationContext);
 

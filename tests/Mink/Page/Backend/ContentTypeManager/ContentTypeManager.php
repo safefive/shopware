@@ -100,7 +100,7 @@ class ContentTypeManager extends Page
             return;
         }
 
-        throw new ElementNotFoundException(sprintf("Couldn't find '%s' on the current page", ContentTypeManagerListWindow::class));
+        throw new ElementNotFoundException(\sprintf("Couldn't find '%s' on the current page", ContentTypeManagerListWindow::class));
     }
 
     private function clickUsingJs(NodeElement $el, ?NodeElement $contextNode = null): void
@@ -119,7 +119,7 @@ btn.click();
 JS;
 
         $this->getDriver()->executeScript(
-            sprintf($script, $contextNode ? $contextNode->getXpath() : '', $el->getXpath()
+            \sprintf($script, $contextNode ? $contextNode->getXpath() : '', $el->getXpath()
             )
         );
     }

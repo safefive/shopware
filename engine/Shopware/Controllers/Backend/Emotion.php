@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -334,7 +335,7 @@ class Shopware_Controllers_Backend_Emotion extends Shopware_Controllers_Backend_
 
             $this->View()->assign([
                 'success' => false,
-                'message' => sprintf(
+                'message' => \sprintf(
                     'Uploaded file %s is no zip file',
                     $name
                 ),
@@ -343,19 +344,19 @@ class Shopware_Controllers_Backend_Emotion extends Shopware_Controllers_Backend_
             return;
         }
 
-        $downloadPath = sprintf('%s%s', sys_get_temp_dir(), DIRECTORY_SEPARATOR);
+        $downloadPath = \sprintf('%s%s', sys_get_temp_dir(), DIRECTORY_SEPARATOR);
 
         if (!is_writable($downloadPath)) {
             $this->View()->assign([
                 'success' => false,
-                'error' => sprintf("Target Directory %s isn't writable", $downloadPath),
+                'error' => \sprintf("Target Directory %s isn't writable", $downloadPath),
             ]);
 
             return;
         }
 
-        $tempFile = sprintf('%s%s', Random::getAlphanumericString(32), '.zip');
-        $copyTo = sprintf('%s%s', $downloadPath, $tempFile);
+        $tempFile = \sprintf('%s%s', Random::getAlphanumericString(32), '.zip');
+        $copyTo = \sprintf('%s%s', $downloadPath, $tempFile);
 
         $fileSystem->copy($file, $copyTo);
         $fileSystem->remove($file->getPathname());
@@ -373,7 +374,7 @@ class Shopware_Controllers_Backend_Emotion extends Shopware_Controllers_Backend_
      */
     public function importAction()
     {
-        $filePath = sprintf(
+        $filePath = \sprintf(
             '%s%s%s',
             sys_get_temp_dir(),
             DIRECTORY_SEPARATOR,
@@ -407,7 +408,7 @@ class Shopware_Controllers_Backend_Emotion extends Shopware_Controllers_Backend_
                 throw new InvalidArgumentException('File path can not be empty', 1);
             }
 
-            $filePath = sprintf(
+            $filePath = \sprintf(
                 '%s%s%s',
                 sys_get_temp_dir(),
                 DIRECTORY_SEPARATOR,
@@ -1384,7 +1385,7 @@ class Shopware_Controllers_Backend_Emotion extends Shopware_Controllers_Backend_
         }
 
         if (\is_array($value)) {
-            throw new UnexpectedValueException(sprintf('Use field value type "%s" if arrays should be saved. Got value type "%s" instead', Field::VALUE_TYPE_JSON, $valueType));
+            throw new UnexpectedValueException(\sprintf('Use field value type "%s" if arrays should be saved. Got value type "%s" instead', Field::VALUE_TYPE_JSON, $valueType));
         }
 
         return $value;

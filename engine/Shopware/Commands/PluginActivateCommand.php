@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -98,25 +99,25 @@ EOF
         try {
             $plugin = $pluginManager->getPluginByName($pluginName);
         } catch (Exception $e) {
-            $output->writeln(sprintf('Plugin by name "%s" was not found.', $pluginName));
+            $output->writeln(\sprintf('Plugin by name "%s" was not found.', $pluginName));
 
             return 1;
         }
 
         if ($plugin->getActive()) {
-            $output->writeln(sprintf('The plugin %s is already activated.', $pluginName));
+            $output->writeln(\sprintf('The plugin %s is already activated.', $pluginName));
 
             return 0;
         }
 
         if (!$plugin->getInstalled()) {
-            $output->writeln(sprintf('The plugin %s has to be installed first.', $pluginName));
+            $output->writeln(\sprintf('The plugin %s has to be installed first.', $pluginName));
 
             return 1;
         }
 
         $activationContext = $pluginManager->activatePlugin($plugin);
-        $output->writeln(sprintf('Plugin %s has been activated.', $pluginName));
+        $output->writeln(\sprintf('Plugin %s has been activated.', $pluginName));
 
         $this->clearCachesIfRequested($input, $output, $activationContext);
 

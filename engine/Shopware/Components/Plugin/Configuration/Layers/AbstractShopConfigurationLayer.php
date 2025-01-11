@@ -118,13 +118,13 @@ abstract class AbstractShopConfigurationLayer implements ConfigurationLayerInter
         /** @var Plugin|null $plugin */
         $plugin = $pluginRepository->findOneBy(['name' => $pluginName]);
         if ($plugin === null) {
-            throw new WriterException(sprintf('Plugin by name "%s" not found.', $pluginName));
+            throw new WriterException(\sprintf('Plugin by name "%s" not found.', $pluginName));
         }
 
         /** @var Form|null $form */
         $form = $formRepository->findOneBy(['pluginId' => $plugin->getId()]);
         if ($form === null) {
-            throw new WriterException(sprintf('Plugin form by plugin id "%u" not found.', $plugin->getId()));
+            throw new WriterException(\sprintf('Plugin form by plugin id "%u" not found.', $plugin->getId()));
         }
 
         $parentValues = $this->getParent()->readValues($pluginName, $shopId);
@@ -151,11 +151,11 @@ abstract class AbstractShopConfigurationLayer implements ConfigurationLayerInter
         /** @var Element|null $element */
         $element = $elementRepository->findOneBy(['form' => $form, 'name' => $name]);
         if ($element === null) {
-            throw new WriterException(sprintf('Config element "%s" not found.', $name));
+            throw new WriterException(\sprintf('Config element "%s" not found.', $name));
         }
 
         if ($shopId !== 1 && $element->getScope() === 0) {
-            $message = sprintf("Element '%s' is not writeable for shop %u", $element->getName(), $shopId);
+            $message = \sprintf("Element '%s' is not writeable for shop %u", $element->getName(), $shopId);
             $baseException = new InvalidArgumentException($message);
             throw new WriterException('Element is not valid', 0, $baseException);
         }

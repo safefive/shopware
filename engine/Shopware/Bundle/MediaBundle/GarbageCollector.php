@@ -232,7 +232,7 @@ SQL;
 
     private function handleTable(MediaPosition $mediaPosition): void
     {
-        $sql = sprintf(
+        $sql = \sprintf(
             'INSERT INTO s_media_used
                 SELECT DISTINCT NULL, media.id
                 FROM s_media media
@@ -274,7 +274,7 @@ SQL;
         if (!empty($this->queue['id'])) {
             $ids = array_keys(array_flip($this->queue['id']));
             $this->connection->executeQuery(
-                sprintf('INSERT INTO s_media_used (mediaId) VALUES (%s)', implode('),(', $ids))
+                \sprintf('INSERT INTO s_media_used (mediaId) VALUES (%s)', implode('),(', $ids))
             );
         }
     }

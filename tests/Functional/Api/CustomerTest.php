@@ -393,7 +393,7 @@ class CustomerTest extends AbstractApiTestCase
 
         static::assertCount(2, $customersWithSameNumber);
 
-        $this->authenticatedApiRequest('DELETE', sprintf('/api/customers/%d?useNumberAsId=1', $existingCustomerNumber));
+        $this->authenticatedApiRequest('DELETE', \sprintf('/api/customers/%d?useNumberAsId=1', $existingCustomerNumber));
         $response = $this->client->getResponse();
 
         static::assertInstanceOf(Enlight_Controller_Response_ResponseTestCase::class, $response);
@@ -407,7 +407,7 @@ class CustomerTest extends AbstractApiTestCase
 
         static::assertFalse($response['success']);
         static::assertSame(
-            sprintf(
+            \sprintf(
                 "Identifier 'number' with value '%s' for entity 'Shopware\Models\Customer\Customer' is not unique.",
                 $existingCustomerNumber
             ),

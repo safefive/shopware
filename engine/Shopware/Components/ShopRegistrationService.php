@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -105,11 +106,11 @@ class ShopRegistrationService implements ShopRegistrationServiceInterface
         if ($template->getVersion() === 3) {
             $this->registerTheme($template);
         } else {
-            throw new RuntimeException(sprintf('Tried to load unsupported template version %s for template: %s', $template->getVersion(), $template->getName()));
+            throw new RuntimeException(\sprintf('Tried to load unsupported template version %s for template: %s', $template->getVersion(), $template->getName()));
         }
 
         $this->container->get(Enlight_Template_Manager::class)->setCompileId(
-            sprintf('frontend_%s_%s_%s', $template->toString(), $localeName, $shop->getId())
+            \sprintf('frontend_%s_%s_%s', $template->toString(), $localeName, $shop->getId())
         );
     }
 

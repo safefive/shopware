@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -112,7 +113,7 @@ class Article extends Resource implements BatchInterface
         $productVariant = $this->getDetailRepository()->findOneBy(['number' => $number]);
 
         if (!$productVariant instanceof Detail) {
-            throw new NotFoundException(sprintf('Product by number "%s" not found', $number));
+            throw new NotFoundException(\sprintf('Product by number "%s" not found', $number));
         }
 
         return $productVariant->getArticle()->getId();
@@ -179,7 +180,7 @@ class Article extends Resource implements BatchInterface
         $product = $builder->getQuery()->getOneOrNullResult($this->getResultMode());
 
         if ($product === null) {
-            throw new NotFoundException(sprintf('Product by id "%d" not found', $id));
+            throw new NotFoundException(\sprintf('Product by id "%d" not found', $id));
         }
 
         if ($this->getResultMode() === self::HYDRATE_ARRAY) {
@@ -399,7 +400,7 @@ class Article extends Resource implements BatchInterface
         $product = $builder->getQuery()->getOneOrNullResult(self::HYDRATE_OBJECT);
 
         if (!$product instanceof ProductModel) {
-            throw new NotFoundException(sprintf('Product by id "%d" not found', $id));
+            throw new NotFoundException(\sprintf('Product by id "%d" not found', $id));
         }
 
         $translations = [];
@@ -456,7 +457,7 @@ class Article extends Resource implements BatchInterface
         $product = $this->getRepository()->find($id);
 
         if (!$product instanceof ProductModel) {
-            throw new NotFoundException(sprintf('Product by "id" %d not found', $id));
+            throw new NotFoundException(\sprintf('Product by "id" %d not found', $id));
         }
 
         // Delete associated data
@@ -647,7 +648,7 @@ class Article extends Resource implements BatchInterface
         foreach ($translations as $translation) {
             $shop = $this->getManager()->find(Shop::class, $translation['shopId']);
             if (!$shop instanceof Shop) {
-                throw new CustomValidationException(sprintf('Shop by id "%s" not found', $translation['shopId']));
+                throw new CustomValidationException(\sprintf('Shop by id "%s" not found', $translation['shopId']));
             }
 
             // Backward compatibility for attribute translations
@@ -1161,7 +1162,7 @@ class Article extends Resource implements BatchInterface
             if (isset($groupData['id'])) {
                 $group = $this->getManager()->getRepository(ConfiguratorGroup::class)->find($groupData['id']);
                 if (!$group) {
-                    throw new CustomValidationException(sprintf('ConfiguratorGroup by id "%s" not found', $groupData['id']));
+                    throw new CustomValidationException(\sprintf('ConfiguratorGroup by id "%s" not found', $groupData['id']));
                 }
             } elseif (isset($groupData['name'])) {
                 $group = $this->getManager()->getRepository(ConfiguratorGroup::class)->findOneBy(['name' => $groupData['name']]);
@@ -1182,7 +1183,7 @@ class Article extends Resource implements BatchInterface
                     if (isset($optionData['id'])) {
                         $option = $this->getManager()->find(ConfiguratorOption::class, $optionData['id']);
                         if (!$option) {
-                            throw new CustomValidationException(sprintf('ConfiguratorOption by id "%s" not found', $optionData['id']));
+                            throw new CustomValidationException(\sprintf('ConfiguratorOption by id "%s" not found', $optionData['id']));
                         }
                     } else {
                         $option = $this->getManager()->getRepository(ConfiguratorOption::class)->findOneBy([
@@ -1243,12 +1244,12 @@ class Article extends Resource implements BatchInterface
             $data['tax'] = $this->getManager()->find(Tax::class, $data['taxId']);
 
             if (empty($data['tax'])) {
-                throw new CustomValidationException(sprintf('Tax by id "%s" not found', $data['taxId']));
+                throw new CustomValidationException(\sprintf('Tax by id "%s" not found', $data['taxId']));
             }
         } elseif (isset($data['tax']) && ($data['tax'] >= 0)) {
             $tax = $this->getManager()->getRepository(Tax::class)->findOneBy(['tax' => $data['tax']]);
             if (!$tax) {
-                throw new CustomValidationException(sprintf('Tax by taxrate "%s" not found', $data['tax']));
+                throw new CustomValidationException(\sprintf('Tax by taxrate "%s" not found', $data['tax']));
             }
             $data['tax'] = $tax;
         } else {
@@ -1259,7 +1260,7 @@ class Article extends Resource implements BatchInterface
         if (!empty($data['supplierId'])) {
             $data['supplier'] = $this->getManager()->find(Supplier::class, $data['supplierId']);
             if (empty($data['supplier'])) {
-                throw new CustomValidationException(sprintf('Supplier by id "%s" not found', $data['supplierId']));
+                throw new CustomValidationException(\sprintf('Supplier by id "%s" not found', $data['supplierId']));
             }
         } elseif (!empty($data['supplier'])) {
             $supplier = $this->getManager()->getRepository(Supplier::class)->findOneBy(['name' => $data['supplier']]);
@@ -1279,7 +1280,7 @@ class Article extends Resource implements BatchInterface
             } else {
                 $data['priceGroup'] = $this->getManager()->find(Group::class, $data['priceGroupId']);
                 if (empty($data['priceGroup'])) {
-                    throw new CustomValidationException(sprintf('Pricegroup by id "%s" not found', $data['priceGroupId']));
+                    throw new CustomValidationException(\sprintf('Pricegroup by id "%s" not found', $data['priceGroupId']));
                 }
             }
         } else {
@@ -1294,7 +1295,7 @@ class Article extends Resource implements BatchInterface
                 $data['propertyGroup'] = $this->getManager()->find(PropertyGroup::class, $data['filterGroupId']);
 
                 if (empty($data['propertyGroup'])) {
-                    throw new CustomValidationException(sprintf('PropertyGroup by id "%s" not found', $data['filterGroupId']));
+                    throw new CustomValidationException(\sprintf('PropertyGroup by id "%s" not found', $data['filterGroupId']));
                 }
             }
         } else {
@@ -1358,7 +1359,7 @@ class Article extends Resource implements BatchInterface
                     $category = $categoryResource->findCategoryByPath($categoryData['path'], true);
 
                     if (!$category) {
-                        throw new CustomValidationException(sprintf('Could not find or create category by path: %s.', $categoryData['path']));
+                        throw new CustomValidationException(\sprintf('Could not find or create category by path: %s.', $categoryData['path']));
                     }
 
                     if (isset($categoryIds[$category->getId()])) {
@@ -1413,21 +1414,21 @@ class Article extends Resource implements BatchInterface
                 );
 
                 if (!$shop instanceof Shop) {
-                    throw new CustomValidationException(sprintf('Could not find shop by id: %s.', $categoryData['shopId']));
+                    throw new CustomValidationException(\sprintf('Could not find shop by id: %s.', $categoryData['shopId']));
                 }
 
                 $seoCategory->setShop($shop);
             }
 
             if (!$seoCategory->getShop()) {
-                throw new CustomValidationException(sprintf('A product seo category requires a configured shop'));
+                throw new CustomValidationException(\sprintf('A product seo category requires a configured shop'));
             }
 
             if (isset($categoryData['categoryId'])) {
                 $category = $this->manager->find(Category::class, $categoryData['categoryId']);
 
                 if (!$category instanceof Category) {
-                    throw new CustomValidationException(sprintf('Could not find category by id: %s.', $categoryData['categoryId']));
+                    throw new CustomValidationException(\sprintf('Could not find category by id: %s.', $categoryData['categoryId']));
                 }
 
                 $seoCategory->setCategory($category);
@@ -1437,7 +1438,7 @@ class Article extends Resource implements BatchInterface
                     true
                 );
                 if (!$category instanceof Category) {
-                    throw new CustomValidationException(sprintf('Could not find category by path: %s.', $categoryData['categoryPath']));
+                    throw new CustomValidationException(\sprintf('Could not find category by path: %s.', $categoryData['categoryPath']));
                 }
                 $seoCategory->setCategory($category);
             }
@@ -1449,7 +1450,7 @@ class Article extends Resource implements BatchInterface
             );
 
             if (!$existing instanceof Category) {
-                throw new CustomValidationException(sprintf("Seo category isn't assigned as normal product category. Only assigned categories can be used as seo category"));
+                throw new CustomValidationException(\sprintf("Seo category isn't assigned as normal product category. Only assigned categories can be used as seo category"));
             }
 
             $seoCategory->setArticle($article);
@@ -1535,7 +1536,7 @@ class Article extends Resource implements BatchInterface
             // no valid entity found, throw exception!
             if ($relatedProduct === null) {
                 $property = $relatedData['number'] ?: $relatedData['id'];
-                throw new CustomValidationException(sprintf('Related product by number/id "%s" not found', $property));
+                throw new CustomValidationException(\sprintf('Related product by number/id "%s" not found', $property));
             }
 
             if (!empty($relatedData['cross'])) {
@@ -1595,7 +1596,7 @@ class Article extends Resource implements BatchInterface
             // No valid entity found, throw exception!
             if ($similarProduct === null) {
                 $property = $similarData['number'] ?: $similarData['id'];
-                throw new CustomValidationException(sprintf('Similar product by number/id "%s" not found', $property));
+                throw new CustomValidationException(\sprintf('Similar product by number/id "%s" not found', $property));
             }
 
             if (!empty($similarData['cross'])) {
@@ -1647,7 +1648,7 @@ class Article extends Resource implements BatchInterface
             if (isset($valueData['id'])) {
                 $value = $this->getManager()->getRepository(Value::class)->find($valueData['id']);
                 if (!$value instanceof Value) {
-                    throw new CustomValidationException(sprintf('Property value by id "%s" not found', $valueData['id']));
+                    throw new CustomValidationException(\sprintf('Property value by id "%s" not found', $valueData['id']));
                 }
             // Get / create value by name
             } elseif (isset($valueData['value'])) {
@@ -1657,7 +1658,7 @@ class Article extends Resource implements BatchInterface
                     if (isset($valueData['option']['id'])) {
                         $option = $this->getManager()->getRepository(Option::class)->find($valueData['option']['id']);
                         if (!$option instanceof Option) {
-                            throw new CustomValidationException(sprintf('Property option by id "%s" not found', $valueData['option']['id']));
+                            throw new CustomValidationException(\sprintf('Property option by id "%s" not found', $valueData['option']['id']));
                         }
                         $filters = [
                             ['property' => 'options.id', 'expression' => '=', 'value' => $option->getId()],
@@ -1764,7 +1765,7 @@ class Article extends Resource implements BatchInterface
      */
     protected function isVariantImageExist(Detail $variant, Image $image)
     {
-        trigger_error(sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
+        trigger_error(\sprintf('%s:%s is deprecated since Shopware 5.6 and will be removed with 5.7. Will be removed without replacement.', __CLASS__, __METHOD__), E_USER_DEPRECATED);
 
         foreach ($variant->getImages() as $variantImage) {
             if ((int) $variantImage->getParent()->getId() === (int) $image->getId()) {
@@ -1836,7 +1837,7 @@ class Article extends Resource implements BatchInterface
 
                 if (!$available) {
                     $property = $option['id'] ?: $option['name'];
-                    throw new CustomValidationException(sprintf('Passed option "%s" does not exist in the configurator set of the product', $property));
+                    throw new CustomValidationException(\sprintf('Passed option "%s" does not exist in the configurator set of the product', $property));
                 }
 
                 $options->add($available);
@@ -2260,7 +2261,7 @@ class Article extends Resource implements BatchInterface
                 try { // persist the model into the model manager
                     $this->getManager()->persist($media);
                 } catch (ORMException $e) {
-                    throw new CustomValidationException(sprintf('Some error occurred while loading your image from link "%s"', $downloadData['link']));
+                    throw new CustomValidationException(\sprintf('Some error occurred while loading your image from link "%s"', $downloadData['link']));
                 }
 
                 $download->setFile($media->getPath());
@@ -2336,7 +2337,7 @@ class Article extends Resource implements BatchInterface
                 );
 
                 if (!($media instanceof MediaModel)) {
-                    throw new CustomValidationException(sprintf('Media by mediaId "%s" not found', $imageData['mediaId']));
+                    throw new CustomValidationException(\sprintf('Media by mediaId "%s" not found', $imageData['mediaId']));
                 }
 
                 $image = $this->updateArticleImageWithMedia(

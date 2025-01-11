@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -49,7 +50,7 @@ class NumberRangeIncrementer implements NumberRangeIncrementerInterface
             $number = $this->connection->fetchColumn('SELECT number FROM s_order_number WHERE name = ? FOR UPDATE', [$name]);
 
             if ($number === false) {
-                throw new RuntimeException(sprintf('Number range with name "%s" does not exist.', $name));
+                throw new RuntimeException(\sprintf('Number range with name "%s" does not exist.', $name));
             }
 
             $this->connection->executeUpdate('UPDATE s_order_number SET number = number + 1 WHERE name = ?', [$name]);

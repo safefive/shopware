@@ -3543,7 +3543,7 @@ class sGetArticleByIdTest extends Enlight_Components_Test_Plugin_TestCase
             static::assertEquals(
                 $expected[$property] ?? null,
                 $data[$property],
-                sprintf('Property %s dont match for article : %s - %s', $property, $expected['ordernumber'], $expected['articleName'])
+                \sprintf('Property %s dont match for article : %s - %s', $property, $expected['ordernumber'], $expected['articleName'])
             );
         }
     }
@@ -3553,7 +3553,7 @@ class sGetArticleByIdTest extends Enlight_Components_Test_Plugin_TestCase
         static::assertCount(
             \count($expected['sLinks']),
             $data['sLinks'],
-            sprintf("Link count doesn't match for article : %s - %s", $expected['ordernumber'], $expected['articleName'])
+            \sprintf("Link count doesn't match for article : %s - %s", $expected['ordernumber'], $expected['articleName'])
         );
     }
 
@@ -3579,7 +3579,7 @@ class sGetArticleByIdTest extends Enlight_Components_Test_Plugin_TestCase
                 static::assertEquals(
                     $expectedArticle[$property],
                     $gotArticle[$property],
-                    sprintf("sRelatedArticles property %s doesn't match for article %s - %s", $property, $expected['ordernumber'], $expected['articleName'])
+                    \sprintf("sRelatedArticles property %s doesn't match for article %s - %s", $property, $expected['ordernumber'], $expected['articleName'])
                 );
             }
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -202,10 +203,10 @@ class Shopware_Controllers_Backend_ProductFeed extends Shopware_Controllers_Back
 
         if (!is_dir($cacheDir)) {
             if (@mkdir($cacheDir, 0777, true) === false) {
-                throw new RuntimeException(sprintf("Unable to create the %s directory (%s)\n", 'Productexport', $cacheDir));
+                throw new RuntimeException(\sprintf("Unable to create the %s directory (%s)\n", 'Productexport', $cacheDir));
             }
         } elseif (!is_writable($cacheDir)) {
-            throw new RuntimeException(sprintf("Unable to write in the %s directory (%s)\n", 'Productexport', $cacheDir));
+            throw new RuntimeException(\sprintf("Unable to write in the %s directory (%s)\n", 'Productexport', $cacheDir));
         }
 
         $fileName = $productFeed->getHash() . '_' . $productFeed->getFileName();

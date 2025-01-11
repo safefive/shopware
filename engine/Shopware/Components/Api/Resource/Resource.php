@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shopware 5
  * Copyright (c) shopware AG
@@ -141,7 +142,7 @@ abstract class Resource implements ContainerAwareInterface
         $role = $this->getRole();
 
         if ($this->getAcl()->isAllowed($role, $resource, $privilege) === false) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Role "%s" is not allowed to "%s" on resource "%s"',
                 \is_string($role) ? $role : $role->getRoleId(),
                 $privilege,
@@ -455,7 +456,7 @@ abstract class Resource implements ContainerAwareInterface
             $getterMethod = 'get' . ucfirst($property);
 
             if (!method_exists($entity, $getterMethod)) {
-                throw new RuntimeException(sprintf('Method %s not found on entity %s', $getterMethod, \get_class($entity)));
+                throw new RuntimeException(\sprintf('Method %s not found on entity %s', $getterMethod, \get_class($entity)));
             }
             if ($entity->$getterMethod() === $value) {
                 return $entity;
@@ -506,7 +507,7 @@ abstract class Resource implements ContainerAwareInterface
     {
         $repo = $this->getManager()->getRepository($entity);
         if (!$repo instanceof ModelRepository) {
-            throw new RuntimeException(sprintf('Passed entity has no configured repository: %s', $entity));
+            throw new RuntimeException(\sprintf('Passed entity has no configured repository: %s', $entity));
         }
 
         foreach ($conditions as $condition) {
@@ -551,7 +552,7 @@ abstract class Resource implements ContainerAwareInterface
             $item = $this->getCollectionElementByProperty($collection, $property, $data[$property]);
 
             if (!$item) {
-                throw new CustomValidationException(sprintf('%s by %s %s not found', $entityType, $property, $data[$property]));
+                throw new CustomValidationException(\sprintf('%s by %s %s not found', $entityType, $property, $data[$property]));
             }
 
             return $item;
@@ -605,7 +606,7 @@ abstract class Resource implements ContainerAwareInterface
             $item = $repo->findOneBy([$property => $data[$property]]);
 
             if (!$item) {
-                throw new CustomValidationException(sprintf('%s by %s %s not found', $entityType, $property, $data[$property]));
+                throw new CustomValidationException(\sprintf('%s by %s %s not found', $entityType, $property, $data[$property]));
             }
 
             $collection->add($item);

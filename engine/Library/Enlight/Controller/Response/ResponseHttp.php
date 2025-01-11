@@ -220,7 +220,7 @@ class Enlight_Controller_Response_ResponseHttp extends Response implements Enlig
         $parts = self::getRawHeaderParts($value);
 
         if (\count($parts) !== 2) {
-            throw new InvalidArgumentException(sprintf('Given Header "%s" is invalid', $value));
+            throw new InvalidArgumentException(\sprintf('Given Header "%s" is invalid', $value));
         }
 
         $this->headers->set($parts[0], $parts[1]);

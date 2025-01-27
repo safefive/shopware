@@ -4055,8 +4055,12 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function prepareImageAssociatedData($data)
     {
+        if (!isset($data['images']) || !\is_array($data['images']) || \count($data['images']) === 0) {
+            return $data;
+        }
+
         $position = 1;
-        foreach ($data['images'] ?? [] as &$imageData) {
+        foreach ($data['images'] as &$imageData) {
             $imageData['position'] = $position;
             if (!empty($imageData['mediaId'])) {
                 $media = $this->get('models')->find(Media::class, $imageData['mediaId']);
@@ -4140,7 +4144,11 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function prepareLinkAssociatedData($data)
     {
-        foreach ($data['links'] ?? [] as &$linkData) {
+        if (!isset($data['links']) || !\is_array($data['links']) || \count($data['links']) === 0) {
+            return $data;
+        }
+
+        foreach ($data['links'] as &$linkData) {
             $linkData['link'] = trim($linkData['link']);
             // Map the boolean ExtJS link target to the string format which used in the database
             $linkData['target'] = ($linkData['target'] === true) ? '_blank' : '_parent';
@@ -4158,8 +4166,12 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     protected function prepareDownloadAssociatedData($data)
     {
+        if (!isset($data['downloads']) || !\is_array($data['downloads']) || \count($data['downloads']) === 0) {
+            return $data;
+        }
+
         $mediaService = Shopware()->Container()->get(MediaServiceInterface::class);
-        foreach ($data['downloads'] ?? [] as &$downloadData) {
+        foreach ($data['downloads'] as &$downloadData) {
             $downloadData['file'] = $mediaService->normalize($downloadData['file']);
         }
 

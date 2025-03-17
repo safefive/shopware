@@ -35,7 +35,7 @@ This changelog references changes done in Shopware 5.7 patch versions.
 * Updated `laminas/laminas-escaper` to version 2.16.0 for PHP 8.1 and newer
 * Updated `phpunit/phpunit` to version 9.6.21
 * Updated `setasign/fpdf` to version 1.8.6
-* Updated `setasign/fpdi` to version 2.6.2
+* Updated `setasign/fpdi` to version 2.6.3
 * Updated `symfony/polyfill-php80` to version 1.31.0
 * Updated `symfony/polyfill-php81` to version 1.31.0
 * Updated `symfony/polyfill-php82` to version 1.31.0

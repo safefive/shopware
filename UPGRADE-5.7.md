@@ -2,9 +2,9 @@
 
 This changelog references changes done in Shopware 5.7 patch versions.
 
-## 5.7.20
+## 5.7.21
 
-[View all changes from v5.7.19...v5.7.20](https://github.com/shopware5/shopware/compare/v5.7.19...v5.7.20)
+[View all changes from v5.7.20...v5.7.21](https://github.com/shopware5/shopware/compare/v5.7.20...v5.7.21)
 
 ### Additions
 
@@ -53,6 +53,18 @@ This changelog references changes done in Shopware 5.7 patch versions.
 ### Removals
 
 * Removed development dependency `phpspec/prophecy-phpunit` as it is no longer used due to a refactoring of `Shopware\Tests\Unit\Components\DependencyInjection\ContainerTest`
+
+## 5.7.20
+
+[View all changes from v5.7.19...v5.7.20](https://github.com/shopware5/shopware/compare/v5.7.19...v5.7.20)
+
+### Changes
+
+* Changed the removal of font files provided by mPDF from the `vendor` directory so that `DejaVu` font is kept as default.
+
+### Removals
+
+* Removed the font files from `engine/Library/Mpdf/ttfonts` and their loading. Provide the font on your own, if you still need them.
 
 ## 5.7.19
 

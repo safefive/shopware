@@ -1,7 +1,7 @@
 {extends file="backend/base/header.tpl"}
 
 {* Page title *}
-{block name='backend/base/header/title'}Shopware {$SHOPWARE_VERSION} {$SHOPWARE_VERSION_TEXT} (Rev. {$SHOPWARE_REVISION}) - Backend (c) shopware AG{/block}
+{block name='backend/base/header/title'}Unofficial Shopware {$SHOPWARE_VERSION} {$SHOPWARE_VERSION_TEXT} (Rev. {$SHOPWARE_REVISION}) - Backend{/block}
 
 {block name="backend/base/header/css" append}
 <link rel="stylesheet" type="text/css" href="{link file="backend/_resources/styles/growl.css"}" />

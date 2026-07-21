@@ -1,0 +1,49 @@
+{
+    "name": "shopwareresponsivetheme",
+    "version": "1.0.0",
+    "description": "The default responsive theme for Shopware",
+    "private": true,
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "build": "grunt",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shopware5/shopware.git"
+    },
+    "keywords": [
+        "shopware",
+        "theme",
+        "responsive",
+        "default",
+        "ecommcerce"
+    ],
+    "author": "shopware AG",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://issues.shopware.com"
+    },
+    "homepage": "https://github.com/shopware5/shopware#readme",
+    "dependencies": {
+        "flatpickr": "2.6.3",
+        "jquery": "3.6.0",
+        "jquery.event.move": "git+https://github.com/stephband/jquery.event.move.git",
+        "jquery.event.swipe": "0.5.4",
+        "jquery.transit": "0.9.12",
+        "normalize.css.less": "3.0.3",
+        "open-sans-fontface": "git+https://github.com/FontFaceKit/open-sans.git#gh-pages",
+        "picturefill": "3.0.3",
+        "pocketgrid-less": "1.0.1"
+    },
+    "devDependencies": {
+        "grunt": "^1.4.0",
+        "grunt-contrib-clean": "^2.0.1",
+        "grunt-contrib-copy": "1.0.0",
+        "grunt-modernizr": "^3.0.3",
+        "jest": "28.1.3",
+        "jest-environment-jsdom": "28.1.3"
+    }
+}

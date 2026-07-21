@@ -1,0 +1,280 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true" />
+
+        <service id="shopware_search_es.struct_hydrator" class="Shopware\Bundle\SearchBundleES\StructHydrator" />
+
+        <service id="Shopware\Bundle\SearchBundleES\HandlerRegistry">
+            <argument type="tagged" tag="shopware_search_es.search_handler" />
+            <argument type="service" id="events"/>
+        </service>
+
+        <service id="shopware_search_es.product_number_search" class="Shopware\Bundle\SearchBundleES\ProductNumberSearch">
+            <argument type="service" id="shopware_elastic_search.client"/>
+            <argument type="service" id="shopware_elastic_search.index_factory"/>
+            <argument type="service" id="Shopware\Bundle\SearchBundleES\HandlerRegistry"/>
+        </service>
+
+        <service id="shopware_search_es.search_term_query_builder" class="Shopware\Bundle\SearchBundleES\SearchTermQueryBuilder">
+            <argument>%shopware.es.max_expansions%</argument>
+        </service>
+
+        <service id="shopware_search_es.category_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\CategoryConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.similar_product_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\SimilarProductConditionHandler" >
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.closeout_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\CloseoutConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.ordernumber_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\OrdernumberConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.productid_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ProductIdConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.customer_group_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\CustomerGroupConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.has_pseudo_price_condtion_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\HasPseudoPriceConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.is_new_condtion_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\IsNewConditionHandler" >
+            <argument type="service" id="Shopware_Components_Config" />
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.create_date_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\CreateDateConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.release_date_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ReleaseDateConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.immediate_delivery_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ImmediateDeliveryConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.manufacturer_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ManufacturerConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.price_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\PriceConditionHandler" >
+            <argument type="service" id="shopware_search_es.price_field_mapper"/>
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_attribute_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ProductAttributeConditionHandler" >
+            <argument type="service" id="Shopware\Bundle\AttributeBundle\Service\CrudService" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.property_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\PropertyConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.search_term_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\SearchTermConditionHandler" >
+            <argument type="service" id="shopware_search_es.search_term_query_builder" />
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.shipping_free_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\ShippingFreeConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.vote_average_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\VoteAverageConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.sales_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\SalesConditionHandler" >
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.is_available_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\IsAvailableConditionHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.last_id_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\LastProductIdConditionHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.price_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\PriceFacetHandler">
+            <argument type="service" id="Shopware_Components_Snippet_Manager" />
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+            <argument type="service" id="shopware_search_es.price_field_mapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.manufacturer_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\ManufacturerFacetHandler">
+            <argument type="service" id="Shopware\Bundle\StoreFrontBundle\Service\ManufacturerServiceInterface" />
+            <argument type="service" id="Shopware_Components_Snippet_Manager" />
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.property_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\PropertyFacetHandler">
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+            <argument type="service" id="Elasticsearch\Client" />
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <argument type="service" id="shopware_search_es.struct_hydrator" />
+            <argument type="service" id="Shopware\Bundle\ESIndexingBundle\IndexFactory" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.shipping_free_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\ShippingFreeFacetHandler">
+            <argument type="service" id="Shopware_Components_Snippet_Manager" />
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.immediate_delivery_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\ImmediateDeliveryFacetHandler">
+            <argument type="service" id="Shopware_Components_Snippet_Manager" />
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.vote_average_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\VoteAverageFacetHandler">
+            <argument type="service" id="Shopware_Components_Snippet_Manager" />
+            <argument type="service" id="Shopware\Components\QueryAliasMapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_attribute_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\ProductAttributeFacetHandler">
+            <argument type="service" id="Shopware\Bundle\AttributeBundle\Service\CrudService" />
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.category_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\CategoryFacetHandler">
+            <argument type="service" id="Shopware\Bundle\StoreFrontBundle\Service\CategoryServiceInterface" />
+            <argument type="service" id="shopware_storefront.category_depth_service" />
+            <argument type="service" id="shopware_search.category_tree_facet_result_builder" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.price_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\PriceSortingHandler">
+            <argument type="service" id="shopware_search_es.price_field_mapper" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.popularity_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\PopularitySortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_attribute_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ProductAttributeSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_name_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ProductNameSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_number_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ProductNumberSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.release_date_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ReleaseDateSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.search_ranking_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\SearchRankingSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.search_random_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\RandomSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.product_stock_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ProductStockSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.manual_sorting_handler" class="Shopware\Bundle\SearchBundleES\SortingHandler\ManualSortingHandler">
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.service_subscriber" class="Shopware\Bundle\SearchBundleES\Subscriber\ServiceSubscriber">
+            <argument type="service" id="service_container" />
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <service id="shopware_search_es.combined_condition_query_builder" class="Shopware\Bundle\SearchBundleES\CombinedConditionQueryBuilder">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="shopware_search_es.combined_condition_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\CombinedConditionFacetHandler">
+            <argument type="service" id="Shopware\Bundle\SearchBundleES\CombinedConditionQueryBuilder" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.combined_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\CombinedConditionHandler">
+            <argument type="service" id="Shopware\Bundle\SearchBundleES\CombinedConditionQueryBuilder" />
+
+            <tag name="shopware_search_es.search_handler" />
+        </service>
+
+        <service id="shopware_search_es.width_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\WidthConditionHandler">
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.height_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\HeightConditionHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.length_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\LengthConditionHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.weight_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\WeightConditionHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.product_dimensions_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\ProductDimensionsFacetHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.variant_search" class="Shopware\Bundle\SearchBundleES\VariantSearch" decorates="shopware_search_es.product_number_search">
+            <argument type="service" id="shopware_search_es.variant_search.inner" />
+        </service>
+
+        <service id="shopware_search_es.main_variant_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\MainVariantConditionHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.variant_condition_handler" class="Shopware\Bundle\SearchBundleES\ConditionHandler\VariantConditionHandler" >
+            <tag name="shopware_search_es.search_handler"/>
+        </service>
+
+        <service id="shopware_search_es.variant_condition_facet_handler" class="Shopware\Bundle\SearchBundleES\FacetHandler\VariantFacetHandler">
+            <tag name="shopware_search_es.search_handler"/>
+            <argument type="service" id="Shopware\Bundle\StoreFrontBundle\Gateway\ConfiguratorOptionsGatewayInterface"/>
+            <argument type="service" id="Shopware\Components\QueryAliasMapper"/>
+        </service>
+
+        <service class="Shopware\Bundle\SearchBundleES\PriceFieldMapper" id="shopware_search_es.price_field_mapper"/>
+    </services>
+</container>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true"/>
+        <service id="shopware.cart.proportional_tax_calculator"
+                 class="Shopware\Components\Cart\ProportionalTaxCalculator"/>
+
+        <service id="shopware.cart.basket_query_helper" class="Shopware\Components\Cart\BasketQueryHelper">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="shopware.cart.proportional_cart_merger" class="Shopware\Components\Cart\ProportionalCartMerger">
+            <argument type="service" id="Shopware_Components_Modules"/>
+        </service>
+
+        <service id="shopware.cart.net_rounding.after_quantity"
+                 class="Shopware\Components\Cart\NetRounding\RoundLineAfterQuantity"/>
+
+        <service id="shopware.cart.net_rounding.after_tax"
+                 class="Shopware\Components\Cart\NetRounding\RoundLineAfterTax"/>
+
+        <service id="shopware.cart.net_rounding" class="Shopware\Components\Cart\NetRounding\RoundingInterface">
+            <factory class="Shopware\Components\DependencyInjection\SimpleFactory" method="factory"/>
+            <argument type="expression">container.get('config').offsetGet('roundNetAfterTax') ? service('shopware.cart.net_rounding.after_tax') : service('shopware.cart.net_rounding.after_quantity')</argument>
+        </service>
+
+        <service id="shopware.components.cart.cart_migration" class="Shopware\Components\Cart\CartMigration">
+            <argument type="service" id="Symfony\Component\HttpFoundation\Session\SessionInterface"/>
+            <argument type="expression">container.get('Shopware_Components_Modules').Basket()</argument>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Components\Cart\CartMigrationCleaner"/>
+        </service>
+
+        <service id="shopware.components.cart.cart_migration_cleaner" class="Shopware\Components\Cart\CartMigrationCleaner">
+            <argument type="service" id="Symfony\Component\HttpFoundation\Session\SessionInterface"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Components\Cart\ConditionalLineItemServiceInterface" class="Shopware\Components\Cart\ConditionalLineItemService">
+            <argument type="expression">container.get('modules').System()</argument>
+            <argument type="service" id="session"/>
+            <argument type="service" id="config"/>
+            <argument type="service" id="shopware.cart.basket_helper"/>
+            <argument type="service" id="dbal_connection"/>
+        </service>
+
+        <service id="Shopware\Components\Cart\CartOrderNumberProviderInterface" class="Shopware\Components\Cart\CartOrderNumberProvider">
+            <argument type="service" id="dbal_connection"/>
+            <argument type="service" id="config"/>
+        </service>
+    </services>
+</container>

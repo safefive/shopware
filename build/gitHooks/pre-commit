@@ -1,0 +1,282 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+/**
+ * .git/hooks/pre-commit
+ */
+class PreCommitChecks
+{
+    public const ALLOWED_DIRECTORIES = [
+        'engine/Shopware',
+        'engine/Library/Enlight',
+        'tests',
+        'recovery',
+    ];
+
+    private bool $error = false;
+
+    public function run(): int
+    {
+        $this->writeln();
+        $this->writeln('Checking commit requirements', 0);
+        $this->writeln();
+
+        if ($this->isRebase()) {
+            echo 'Not on branch' . PHP_EOL;
+
+            return 0;
+        }
+
+        $this->runPhpLint($this->getCommittedFileList());
+        $this->runPhpCsFixer($this->getCommittedFileList());
+        $this->runEsLint($this->getCommittedFileList('js'));
+        $this->runVarDumpCheck($this->getCommittedFileList());
+        $this->runMigrationCheck();
+
+        if ($this->error) {
+            $this->writeln("If you are ABSOLUTELY sure your code is correct, you can use 'git commit --no-verify' to bypass this validation", 0);
+        }
+
+        exit((int) $this->error);
+    }
+
+    public function isPHPCSFixerAvailable(): bool
+    {
+        return is_executable('./vendor/bin/php-cs-fixer');
+    }
+
+    private function isPHPStanAvailable(): bool
+    {
+        return is_executable('./vendor/bin/phpstan');
+    }
+
+    public function isVarDumpCheckerAvailable(): bool
+    {
+        return is_executable('./vendor/bin/var-dump-check');
+    }
+
+    public function isESLintAvailable(): bool
+    {
+        return is_executable('./themes/node_modules/eslint/bin/eslint.js');
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getCommittedFileList($extension = 'php'): array
+    {
+        exec("git diff --name-only --diff-filter=ACMRTUXB \"HEAD\" | grep -e '\." . $extension . "$'", $fileList);
+
+        return array_filter($fileList, function ($filePath) {
+            foreach (self::ALLOWED_DIRECTORIES as $dir) {
+                if (strpos($filePath, $dir) === 0) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+    }
+
+    private function checkESLint(array $fileList = []): void
+    {
+        $output = [];
+        $return = 0;
+        exec(
+            './themes/node_modules/eslint/bin/eslint.js ' .
+            '-c ./themes/.eslintrc.js --ignore-path themes/.eslintignore ' . implode(' ', $fileList),
+            $output,
+            $return
+        );
+        $return = !(bool) $return;
+
+        if (!$return) {
+            $this->error = true;
+
+            foreach ($output as $line) {
+                $this->writeln($line, 2);
+            }
+
+            $this->writeln('Help:', 2);
+            $this->writeln('./themes/node_modules/.bin/eslint --fix -c themes/.eslintrc.js --ignore-path themes/.eslintignore ' . implode(' ', $fileList), 3);
+        }
+    }
+
+    private function isRebase(): bool
+    {
+        $output = [];
+        exec('git symbolic-ref --short -q HEAD', $output);
+
+        return empty($output);
+    }
+
+    /**
+     * Check for duplicated migrations
+     *
+     * @return string|false
+     */
+    private function hasDuplicateMigrations()
+    {
+        $this->writeln('# Checking for duplicate migrations');
+        $this->writeln('> find ./_sql/migrations -maxdepth 1 -type f | cut -d\/ -f4 | cut -d\- -f1 | sort | uniq -d');
+        exec('find ./_sql/migrations -maxdepth 1 -type f | cut -d\/ -f4 | cut -d\- -f1 | sort | uniq -d', $output);
+
+        if (\count($output)) {
+            return current($output);
+        }
+
+        return false;
+    }
+
+    private function runPhpLint(array $fileList): void
+    {
+        $this->writeln('# Checking php syntax');
+        $this->writeln('> php -l');
+
+        foreach ($fileList as $file) {
+            exec('php -l ' . escapeshellarg($file) . ' 2> /dev/null', $output, $return);
+            if ($return !== 0) {
+                $this->writeln('- ' . $output[1], 2);
+                $this->error = true;
+            }
+        }
+
+        $this->writeln();
+    }
+
+    private function runPhpCsFixer(array $fileList): void
+    {
+        $this->writeln('# Checking php code style');
+        $this->writeln('> php-cs-fixer fix -v --no-ansi --dry-run');
+
+        if (!$this->isPHPCSFixerAvailable()) {
+            $this->error = true;
+            $this->writeln('- php-cs-fixer is NOT installed. Please run composer install including dev dependencies using `--dev` (superfluous when using composer v2).', 2);
+            $this->writeln();
+
+            return;
+        }
+
+        foreach ($fileList as $file) {
+            $configParameter = '';
+
+            if (strpos($file, 'engine/Library/Enlight/') === 0) {
+                $configParameter = '--config engine/Library/Enlight/.php-cs-fixer.php';
+            }
+
+            exec('./vendor/bin/php-cs-fixer fix -v ' . $configParameter . ' --no-ansi --dry-run ' . escapeshellarg($file) . ' 2>&1', $output, $return);
+
+            if ($return !== 0) {
+                $this->writeln('- ' . preg_replace('#^(\s+)?\d\)\s#', '', $output[3]), 2);
+                $fixes[] = './vendor/bin/php-cs-fixer fix -v ' . $configParameter . ' ' . escapeshellarg($file);
+                $this->error = true;
+            }
+        }
+
+        if (!empty($fixes)) {
+            $this->writeln();
+            $this->writeln('Help:', 2);
+            foreach ($fixes as $fix) {
+                $this->writeln($fix, 3);
+            }
+        }
+
+        $this->writeln();
+    }
+
+    private function runPHPStan(array $fileList): void
+    {
+        $this->writeln('# Checking code with PHPStan');
+        $this->writeln('> phpstan analyse');
+        $this->writeln();
+
+        if ($fileList === []) {
+            return;
+        }
+
+        if (!$this->isPHPStanAvailable()) {
+            $this->writeln('- PHPStan is NOT installed. Please run composer install including dev dependencies using `--dev` (superfluous when using composer v2).', 2);
+            $this->writeln();
+
+            return;
+        }
+
+        exec('php -d memory_limit=4G ./vendor/bin/phpstan analyze -c .phpstan.neon --no-progress --error-format=table', $output, $return);
+        if ($return !== 0) {
+            $this->error = true;
+            $this->writeln('> PHPStan errors found');
+        }
+
+        $this->writeln();
+    }
+
+    private function runEsLint(array $fileList): void
+    {
+        $this->writeln('# Checking javascript code style');
+        $this->writeln('> eslint.js -c themes/.eslintrc.js --ignore-path themes/.eslintignore');
+
+        if (!$this->isESLintAvailable()) {
+            $this->writeln('- eslint.js not found. Skipping javascript code style check.', 2);
+            $this->writeln();
+
+            return;
+        }
+
+        $this->checkESLint($fileList);
+
+        $this->writeln();
+    }
+
+    private function runVarDumpCheck(array $fileList): void
+    {
+        $this->writeln('# Searching for var-dumps');
+
+        if (!$this->isVarDumpCheckerAvailable()) {
+            $this->error = true;
+            $this->writeln('- var-dump-checker is NOT installed. Please run composer install including dev dependencies using `--dev` (superfluous when using composer v2).', 2);
+            $this->writeln();
+
+            return;
+        }
+
+        $fileList = array_map('escapeshellarg', $fileList);
+        $files = implode(' ', $fileList);
+
+        exec('./vendor/bin/var-dump-check --doctrine --symfony --laravel ' . $files . ' 2>&1', $output, $return);
+        if ($return !== 0) {
+            foreach ($output as $item) {
+                $this->writeln($item);
+            }
+
+            $this->error = true;
+        }
+    }
+
+    private function runMigrationCheck(): void
+    {
+        $duplicateMigrationId = $this->hasDuplicateMigrations();
+        if ($duplicateMigrationId !== false) {
+            $this->writeln('- Migration #' . $duplicateMigrationId . ' is duplicated.', 2);
+            $this->error = true;
+        }
+
+        $this->writeln();
+    }
+
+    private function write($output = '', $level = 1): void
+    {
+        $spaces = $level * 3;
+
+        echo str_pad($output, \strlen($output) + $spaces, ' ', STR_PAD_LEFT);
+    }
+
+    private function writeln($output = '', $level = 1): void
+    {
+        $this->write($output, $level);
+        echo PHP_EOL;
+    }
+}
+
+$checks = new PreCommitChecks();
+$checks->run();

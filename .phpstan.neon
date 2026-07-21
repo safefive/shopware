@@ -1,0 +1,201 @@
+includes:
+    - .phpstan-baseline.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+services:
+    -
+        class: \Shopware\Tests\PHPStan\Extension\SmartyClassDynamicReturnTypeExtension
+        tags:
+                - phpstan.broker.dynamicMethodReturnTypeExtension
+
+parameters:
+    level: 8
+    phpVersion: 70400
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: true
+    treatPhpDocTypesAsCertain: false
+    tmpDir: var/cache/phpstan
+    bootstrapFiles:
+        - recovery/common/autoload.php # Additional autoloading for testing classes under recovery/*
+        - tests/phpstan-dba-bootstrap.php
+
+    symfony:
+        constantHassers: false
+        containerXmlPath: 'var/cache/production____REVISION___/container.xml'
+        consoleApplicationLoader: tests/phpstan-console-application.php
+
+    doctrine:
+        queryBuilderClass: Shopware\Components\Model\QueryBuilder
+        repositoryClass: Shopware\Components\Model\ModelRepository
+        objectManagerLoader: tests/phpstan-doctrine-model-manager.php
+
+    scanDirectories:
+        - var/cache/production____REVISION___/doctrine
+        - var/cache/production____REVISION___/proxies
+        - engine/Library
+
+    stubFiles:
+        - tests/PHPStan/Stub/Behat/Context.stub
+        - tests/PHPStan/Stub/Behat/InitializedContextEnvironment.stub
+
+    paths:
+        - _sql/migrations
+        - engine/Shopware
+        - tests
+        - engine/Library/Enlight
+        - themes/Frontend/Bare/Theme.php
+        - themes/Frontend/Responsive/Theme.php
+    excludePaths:
+        - engine/Shopware/Plugins/Community
+        - engine/Shopware/Plugins/Local
+        - engine/Shopware/Components/DependencyInjection/LegacyPhpDumper.php # is copied from Symfony. To keep it comparable, we don't change it
+        - tests/Functional/Components/DependencyInjection/LegacyPhpDumperTest.php
+    ignoreErrors:
+        - '#apcu_#'
+
+        # Interface / Implementation Switch
+        - '#expects Shopware\\Bundle\\SearchBundle\\Facet\\[a-zA-Z]+Facet, Shopware\\Bundle\\SearchBundle\\[a-zA-Z]+Interface given#'
+        - '#expects Shopware\\Bundle\\SearchBundle\\Condition\\[a-zA-Z]+Condition, Shopware\\Bundle\\SearchBundle\\[a-zA-Z]+Interface given#'
+        # Product/ShopContext mix-up
+        - '#expects Shopware\\Bundle\\StoreFrontBundle\\Struct\\ProductContextInterface, Shopware\\Bundle\\StoreFrontBundle\\Struct\\ShopContextInterface given#'
+
+        - # Config is read out in kernel, so there is a context for $this
+            message: '#Variable \$this might not be defined#'
+            path: engine/Shopware/Configs/Default.php
+
+        - # Every API resource class has those methods, but we cannot put that into an interface or abstract class, because the parameter amount is different
+            message: '#Call to an undefined method \$this\(Shopware\\Components\\Api\\Resource\\Resource\)&Shopware\\Components\\Api\\BatchInterface::(delete|update|create)\(\)#'
+            path: engine/Shopware/Components/Api/Resource/Resource.php
+
+        - # Currently the ModelManager extends the EntityManager class, but this is not supported in the future anymore. Changing this, would cause breaks, so it should be done in Shopware 5.8
+            message: '#Class Shopware\\Components\\Model\\ModelManager extends @final class Doctrine\\ORM\\EntityManager#'
+            path: engine/Shopware/Components/Model/ModelManager.php
+
+        - # Overwrite of parent methods to have a proper type declaration of the entity manager
+            message: '#Method .*::getEntityManager\(\) should return Shopware\\Components\\Model\\ModelManager but returns Doctrine\\ORM\\EntityManagerInterface#'
+            paths:
+                - engine/Shopware/Components/Model/ModelRepository.php
+                - engine/Shopware/Components/Model/QueryBuilder.php
+
+        - # Currently not possible to determine the paginator generic type at those places
+            message: '#return type with generic class Doctrine\\ORM\\Tools\\Pagination\\Paginator does not specify its types: T#'
+            paths:
+                - engine/Shopware/Controllers/Backend/Search.php
+
+        # Some day this should be specified
+        - '#type specified in iterable type Doctrine\\DBAL\\#'
+        - '#type specified in iterable type PDOStatement#'
+        - '#generic class PDOStatement .*does not specify its types: rowType#'
+
+        # This method does not exist, but it does not throw an error. Needs to be checked
+        - '#Call to an undefined method Enlight_Template_Manager::setCompileId\(\)#'
+
+        # Needs some improvements in the doctrine PHPStan extensions: see https://github.com/phpstan/phpstan-doctrine/pull/167
+        - '#Cannot call method (fetch.*|rowCount)\(\) on Doctrine\\DBAL\\.*\|int#'
+
+        - # This property contains many repositories, so we do not specify the type
+            message: '#with generic class Shopware\\Components\\Model\\ModelRepository does not specify its types: TEntityClass#'
+            path: engine/Shopware/Controllers/Backend/Config.php
+
+        - # While cloning entities the ID or foreign key columns need to be set to `null` even if they do not allow that from the database definition
+            message: '#Property Shopware\\Models\\Emotion\\.*::.*id|Id \(int\) does not accept null#'
+            paths:
+                - engine/Shopware/Models/Emotion/Data.php
+                - engine/Shopware/Models/Emotion/Element.php
+                - engine/Shopware/Models/Emotion/ElementViewport.php
+                - engine/Shopware/Models/Emotion/Emotion.php
+                - engine/Shopware/Models/Emotion/Preset.php
+                - engine/Shopware/Models/Emotion/PresetTranslation.php
+                - engine/Shopware/Models/Emotion/Template.php
+
+        - # The config stores values as serialized strings, but the getter of the models return the actual type like bool or int
+            message: '#::\$value type mapping mismatch: database|property can contain #'
+            paths:
+                - engine/Shopware/Models/Config/Element.php
+                - engine/Shopware/Models/Config/Value.php
+
+        - # Testing DI container stuff with auto-wiring services into controller actions. No possibility to teach that to PHPStan
+            message: '#Service "Shopware\\Tests\\Functional\\Bundle\\ControllerBundle\\TestController\\Test" is not registered in the container#'
+            path: tests/Functional/Bundle/ControllerBundle/ControllerActionTest.php
+        -
+            message: '#Instantiated class TestContainer not found#'
+            path: tests/Functional/Bundle/ControllerBundle/ControllerActionTest.php
+        -
+            message: '#Parameter \#1 \$loader of method Enlight_Controller_Action::setContainer\(\) expects Shopware\\Components\\DependencyInjection\\Container\|null, TestContainer given#'
+            path: tests/Functional/Bundle/ControllerBundle/ControllerActionTest.php
+
+        - # PHPStan has issues to recognize the inheritance of SortingInterface and ConditionInterface
+            message: '#Parameter \#1 \$criteriaPart of method Shopware\\Bundle\\SearchBundleES\\SortingHandler\\.*SortingHandler::getSorting\(\) expects Shopware\\Bundle\\SearchBundle\\Sorting\\.*Sorting, Shopware\\Bundle\\SearchBundle\\CriteriaPartInterface given#'
+            path: engine/Shopware/Bundle/SearchBundleES/SortingHandler
+        -
+            message: '#Parameter \#1 \$sorting of method Shopware\\Bundle\\SearchBundleDBAL\\SortingHandler\\.*SortingHandler::addSorting\(\) expects Shopware\\Bundle\\SearchBundle\\Sorting\\.*Sorting, Shopware\\Bundle\\SearchBundle\\SortingInterface given#'
+            path: engine/Shopware/Bundle/SearchBundleDBAL/SortingHandler
+        -
+            message: '#Parameter \#1 \$condition of method Shopware\\Bundle\\CustomerSearchBundleDBAL\\ConditionHandler\\.*ConditionHandler::addCondition\(\) expects Shopware\\Bundle\\CustomerSearchBundle\\Condition\\.*Condition, Shopware\\Bundle\\SearchBundle\\ConditionInterface given#'
+            path: engine/Shopware/Bundle/CustomerSearchBundleDBAL/ConditionHandler
+        -
+            message: '#Parameter \#1 \$sorting of method Shopware\\Bundle\\CustomerSearchBundleDBAL\\SortingHandler\\.*SortingHandler::addSorting\(\) expects Shopware\\Bundle\\CustomerSearchBundle\\Sorting\\.*Sorting, Shopware\\Bundle\\SearchBundle\\SortingInterface given#'
+            path: engine/Shopware/Bundle/CustomerSearchBundleDBAL/SortingHandler
+
+        - # For testing, it is not necessary to declare the whole basket array correctly
+            message: '#Parameter \#1 \$basket of method Shopware\\Components\\BasketSignature\\BasketSignatureGenerator::generateSignature\(\) expects array.*, array.* given#'
+            path: tests/Unit/Components/BasketSignature/BasketSignatureCreatorTest.php
+
+        - # Parent setUp method is not called on purpose
+            message: '#Missing call to parent::setUp\(\) method#'
+            paths:
+                - tests/Functional/Core/sCoreTest.php
+                - tests/Functional/Controllers/Backend/OrderTest.php
+                - tests/Functional/Controllers/Backend/UserManagerTest.php
+
+        - # Some class properties do not have a getter or setter, but they are needed for the Doctrine column declaration
+            message: '#Property Shopware\\Models\\.*::\$.* is never written, only read#'
+            path: engine/Shopware/Models
+
+        - # Giving "test" as construct parameter sets up a test storage
+            message: '#Parameter \#1 \$options of class Enlight_Event_Subscriber_Config constructor expects array\|null, string given#'
+            path: tests/Unit/Components/Event/SubscriberConfigTest.php
+
+        - # The Symfony extension does not correctly recognize the helper type. see: https://github.com/phpstan/phpstan-symfony/issues/239
+            message: '#Call to an undefined method Symfony\\Component\\Console\\Helper\\HelperInterface::ask\(\)#'
+            paths:
+                - engine/Shopware/Bundle/MediaBundle/Commands/MediaOptimizeCommand.php
+                - engine/Shopware/Commands/ThemeCreateCommand.php
+
+        - # For testing purposes the constructor of the price struct gets strings
+            message: '#Parameter .* of class Shopware\\Components\\Cart\\Struct\\Price constructor expects float.*string given#'
+            path: tests/Functional/Components/Cart/ProportionalTaxCalculatorTest.php
+
+        # This is a bleeding edge feature and not working well since now. See https://github.com/phpstan/phpstan-doctrine/issues/332
+        - '#Parameter .* of method Doctrine\\ORM\\.*::.*\(\) expects .*literal-string.* given#'
+
+        - # Doctrine type is integer|string. PHPStan allows only specific values defined by constants
+            message: '#Property Shopware\\Models\\.*\\.*::\$.* type mapping mismatch: database can contain (int|string) but property expects .*#'
+            paths:
+                 - engine/Shopware/Models/Dispatch/Dispatch.php
+                 - engine/Shopware/Models/Newsletter/Container.php
+                 - engine/Shopware/Models/ProductStream/ProductStream.php
+
+        - # PHPStan DBA extension complains about temporary database table, which is only active during the time the migrations run
+            message: "#^Query error\\: SQLSTATE\\[42S02\\]\\: Base table or view not found\\: 1146 Table .*translation_migration_id' doesn't exist \\(42S02\\)\\.$#"
+            count: 1
+            path: _sql/migrations/common/AttributeTranslationMigrationHelper.php
+        - # PHPStan DBA extension complains about temporary database column, which is only active during the time of the test
+            message: '#Query error: Column "s_order_basket_attributes.test_attr" does not exist#'
+            count: 1
+            path: tests/Functional/Components/Cart/CartToOrderAttributeTest.php
+
+        - # Bug in PHPStan. See https://github.com/phpstan/phpstan/issues/6653
+            message: "#^Method sArticles\\:\\:sGetProductByOrdernumber\\(\\) should return array\\<string, mixed\\>\\|false but returns array\\<string, mixed\\>\\|bool\\.$#"
+            count: 1
+            path: engine/Shopware/Core/sArticles.php
+
+        - # In this case PHPStan does not consider the second parameter flag of \Symfony\Component\DependencyInjection\ContainerInterface::get
+            message: '#Method Shopware\\Tests\\Mink\\Tests\\General\\Helpers\\SubContext::getService\(\) should return TService of object but returns object\|null#'
+            count: 1
+            path: tests/Mink/Tests/General/Helpers/SubContext.php
+
+        - # Intentionally pass a wrong value for the test
+            message: '#Parameter \#1 \$calculationType of method Shopware\\Bundle\\OrderBundle\\Service\\ShippingCostService::getShippingCostMultiplier\(\) expects 0\|1\|2\|3, 99 given#'
+            count: 1
+            path: tests/Unit/Bundle/OrderBundle/ShippingConstServiceTest.php

@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="fields.xml"/>
+        <import resource="resolvers.xml"/>
+    </imports>
+    <services>
+        <defaults public="true"/>
+        <service id="Shopware\Bundle\ContentTypeBundle\Controller\Backend\ContentTypeManager">
+            <argument>%shopware.bundle.content_type.field_alias%</argument>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeProvider"/>
+            <argument type="service" id="Shopware_Components_Snippet_Manager"/>
+            <argument type="service" id="shopware.slug"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeBuilder"/>
+            <argument type="service" id="Shopware\Components\CacheManager"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\SynchronizerService"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\ContentTypeCleanupServiceInterface"/>
+            <tag name="shopware.controller" module="Backend" controller="ContentTypeManager"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Subscriber\SyncSubscriber">
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\DatabaseContentTypeSynchronizerInterface"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="Shopware\Components\CacheManager"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Subscriber\EntitySearchSubscriber">
+            <argument id="Shopware\Bundle\ContentTypeBundle\Services\TypeProvider" type="service"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\SynchronizerService">
+            <argument type="service" id="Shopware\Components\Model\ModelManager"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeProvider"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\MenuSynchronizerInterface"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\AclSynchronizerInterface"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\DatabaseContentTypeSynchronizerInterface" class="Shopware\Bundle\ContentTypeBundle\Services\DatabaseContentTypeSynchronizer">
+            <argument>%shopware.bundle.content_type.field_alias%</argument>
+            <argument type="collection">
+                <argument type="string" key="ShopwarePlugins">%shopware.plugin_directories.ShopwarePlugins%</argument>
+                <argument type="string" key="ProjectPlugins">%shopware.plugin_directories.ProjectPlugins%</argument>
+            </argument>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeBuilder"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\SynchronizerService"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\ContentTypeCleanupServiceInterface"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeProvider"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\TypeProvider">
+            <argument>%shopware.bundle.content_type.types%</argument>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\TypeBuilder"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\TypeBuilder">
+            <argument>%shopware.bundle.content_type.field_alias%</argument>
+            <argument>%shopware.bundle.content_type.types%</argument>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Commands\TypeSynchronizerCommand">
+            <tag name="console.command" command="sw:content:type:sync"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\ExtjsBuilderInterface" class="Shopware\Bundle\ContentTypeBundle\Services\ExtjsBuilder">
+            <argument type="service" id="Shopware_Components_Snippet_Manager"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\MenuSynchronizerInterface" class="Shopware\Bundle\ContentTypeBundle\Services\MenuSynchronizer">
+            <argument type="service" id="Shopware\Components\Model\ModelManager"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\AclSynchronizerInterface" class="Shopware\Bundle\ContentTypeBundle\Services\AclSynchronizer">
+            <argument type="service" id="Shopware\Components\Model\ModelManager"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\ContentTypeCleanupServiceInterface" class="Shopware\Bundle\ContentTypeBundle\Services\ContentTypeCleanupService">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Bundle\ContentTypeBundle\Services\AclSynchronizerInterface"/>
+        </service>
+
+        <service id="Shopware\Bundle\ContentTypeBundle\Services\FrontendTypeTranslatorInterface" class="Shopware\Bundle\ContentTypeBundle\Services\FrontendTypeTranslator">
+            <argument type="service" id="Shopware_Components_Snippet_Manager"/>
+        </service>
+    </services>
+</container>

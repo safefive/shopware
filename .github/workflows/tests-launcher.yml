@@ -6,8 +6,6 @@ on:
     push:
         branches:
             - "5.7"
-    schedule:
-        -   cron: '0 2 * * *'
 
 jobs:
     check-php-code:

@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "scripts": {
+        "watch": "grunt",
+        "build": "grunt production",
+        "lint": "eslint Frontend/Responsive/frontend/_public/src/js",
+        "lintBackend": "eslint Backend/ExtJs/backend",
+        "fix": "eslint --fix Frontend/Responsive/frontend/_public/src/js",
+        "fixBackend": "eslint --fix Backend/ExtJs/backend",
+        "configFrontend": "eslint --print-config .",
+        "configBackend": "eslint --print-config Backend/ExtJs/backend"
+    },
+    "devDependencies": {
+        "eslint": "^7.0.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-jest": "^26.1.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.2.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "grunt": "^1.4.0",
+        "grunt-chokidar": "^1.0.2",
+        "grunt-contrib-eslint": "0.0.5",
+        "grunt-contrib-less": "^2.0.0",
+        "grunt-contrib-uglify": "5.0.0",
+        "grunt-file-exists": "0.1.4",
+        "grunt-subgrunt": "github:tusbar/grunt-subgrunt#master",
+        "gruntify-eslint": "5.0.0",
+        "jit-grunt": "0.10.0",
+        "load-grunt-config": "^4.0.1",
+        "md5-file": "^4.0.0"
+    }
+}

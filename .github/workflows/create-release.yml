@@ -1,0 +1,141 @@
+name: Create release package
+on:
+    workflow_dispatch:
+        branches:
+            - "**"
+    push:
+        tags:
+            - "*"
+
+permissions:
+    contents: write
+
+jobs:
+    create-install-package:
+        env:
+            PACKAGE_PREFIX: install
+            PACKAGE_DELIMITER: _
+            DB_NAME: Shopware
+            DB_USER: root
+            DB_PORT: 4406
+            DB_HOST: 127.0.0.1
+            DB_PASSWORD: root
+
+        services:
+            mysql:
+                image: mysql:5.6
+                ports:
+                    - 4406:3306
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+
+        runs-on: ubuntu-22.04
+        steps:
+            -   name: Create version
+                run: |
+                    TAG=${{ github.ref_name }}
+                    echo "VERSION=$(echo ${TAG#v} | cut -d "-" -f 1)" >> $GITHUB_ENV
+                    echo "VERSION_TEXT=$(echo ${TAG#v} | cut -d "-" -s -f 2)" >> $GITHUB_ENV
+                shell: bash
+
+            -   name: Clone
+                uses: actions/checkout@v4
+
+            -   name: Set current date as env variable
+                run: echo "REVISION=$(git log -1 --format="%at" | xargs -I{} date -d @{} +'%Y%m%d%H%M')" >> $GITHUB_ENV
+
+            -   name: Get Composer Cache Directory
+                id: composer-cache
+                run: |
+                    echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+            -   uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-composer-
+
+            -   name: Install Composer
+                run: |
+                    composer install --no-dev
+                    composer install --no-dev -d recovery/common/
+
+            -   name: Replace placeholder
+                run: |
+                    sed -i 's=___VERSION___=${{ env.VERSION }}=g' engine/Shopware/Kernel.php
+                    sed -i 's=___VERSION_TEXT___=${{ env.VERSION_TEXT }}=g' engine/Shopware/Kernel.php
+                    sed -i 's=___REVISION___=${{ env.REVISION }}=g' engine/Shopware/Kernel.php
+                    sed -i 's=___VERSION___=${{ env.VERSION }}=g' recovery/install/data/version
+                    sed -i 's=___VERSION_TEXT___=${{ env.VERSION_TEXT }}=g' recovery/install/data/version
+                shell: bash
+
+            -   name: Create hash files
+                run: |
+                    mkdir -p engine/Shopware/Components/Check/Data
+                    find engine/Shopware themes -type f \( -iname '*.php' -o -iname '*.tpl' -o -iname '*.js' -o -iname '*.less' \) -print0 | xargs -0 md5sum | sort -k 2 -d > engine/Shopware/Components/Check/Data/Files.md5sums
+
+            -   name: Download CaRoot
+                run: |
+                    wget -O engine/Shopware/Components/HttpClient/cacert.pem https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
+
+            -   name: Create database
+                run: |
+                    mysql -u root -proot -P ${{ env.DB_PORT }} -h ${{ env.DB_HOST }} -e "DROP DATABASE IF EXISTS ${{ env.DB_NAME }}; CREATE DATABASE ${{ env.DB_NAME }} CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+
+            -   name: Load latest sql
+                run: |
+                    mysql -u root -proot -P ${{ env.DB_PORT }} -h ${{ env.DB_HOST }}  ${{ env.DB_NAME }} < _sql/install/latest.sql
+
+            -   name: Generate new sql
+                run: |
+                    make config
+                    php bin/console sw:migrations:migrate --mode=install
+                    php bin/console sw:snippets:to:sql ./recovery/install/data/sql/snippets.sql --force --include-default-plugins --update=false
+
+            -   name: Save sql
+                run: |
+                    mysqldump --column-statistics=0 --quick  -u root -proot -P ${{ env.DB_PORT }} -h ${{ env.DB_HOST }}  ${{ env.DB_NAME }} > recovery/install/data/sql/install.sql
+
+            -   name: Copy Config
+                run: |
+                    mv config.php.dist config.php
+                    chmod 0664 config.php
+
+            -   name: Copy htaccess
+                run: |
+                    mv .htaccess.dist .htaccess
+                    chmod 0664 .htaccess
+
+            -   name: Configure git
+                run: |
+                    git config --global user.name "shopware5"
+                    git config --global user.email "<>"
+
+            -   name: Create Zip
+                run: |
+                    rm -rf _sql
+                    git add .
+                    git commit -m "Create release package"
+                    git archive -v -o ${{ env.PACKAGE_PREFIX }}.zip HEAD
+                    zip -r ${{ env.PACKAGE_PREFIX }}.zip vendor recovery/common/vendor .htaccess config.php recovery/install/data/sql/install.sql recovery/install/data/sql/snippets.sql
+
+            -   run: echo "SHA=$(sha1sum ${{ env.PACKAGE_PREFIX }}.zip | awk '{print $1}')" >> $GITHUB_ENV
+
+            -   name: Rename Zip
+                run: |
+                    mv ${{ env.PACKAGE_PREFIX }}.zip ${{ env.PACKAGE_PREFIX }}${{ env.PACKAGE_DELIMITER }}${{ env.SHA }}.zip
+
+            -   name: Archive results
+                if: always()
+                uses: actions/upload-artifact@v4
+                with:
+                    path: ${{ env.PACKAGE_PREFIX }}${{ env.PACKAGE_DELIMITER }}${{ env.SHA }}.zip
+
+            -   name: Push to release
+                uses: xresloader/upload-to-github-release@v1.6.0
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                with:
+                    file: "*.zip"
+                    tags: true
+                    draft: true

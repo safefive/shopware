@@ -1,0 +1,22 @@
+Frontend/Responsive/frontend/_public/src/js/vendors/modernizr/
+Frontend/Responsive/frontend/_public/src/js/vendors/raphael/
+Frontend/Responsive/frontend/_public/vendors/js/**/*.js
+
+# The pre commit hook will be called in the root directory instead of the theme folder, therefore we have to define
+# them twice with the "themes" directory as prefix
+themes/Frontend/Responsive/frontend/_public/js/src/vendors/modernizr/
+themes/Frontend/Responsive/frontend/_public/js/src/vendors/raphael/
+themes/Frontend/Responsive/frontend/_public/vendors/js/**/*.js
+engine/Library/ExtJs/
+
+# Backend files
+Backend/ExtJs/backend/_resources/
+
+Backend/ExtJs/backend/base/bootstrap.js
+Backend/ExtJs/backend/base/component/Shopware.form.field.TinyMCE.js
+Backend/ExtJs/backend/base/component/Shopware.global.ErrorReporter.js
+
+# Ignored because of the Smarty syntax which is invalid JavaScript
+Backend/ExtJs/backend/article/view/detail/base.js
+Backend/ExtJs/backend/article/view/variant/list.js
+Backend/ExtJs/backend/article/view/variant/detail.js

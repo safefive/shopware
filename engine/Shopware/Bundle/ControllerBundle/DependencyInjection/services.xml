@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter type="collection" key="shopware.controller.blacklisted_controllers">
+            <parameter type="string">Shopware_Controllers_Backend_Application</parameter>
+            <parameter type="string">Shopware_Controllers_Backend_ExtJs</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <defaults public="true"/>
+        <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory" />
+
+        <service id="argument_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver">
+            <argument type="service" id="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface" />
+            <argument type="tagged" tag="controller.argument_value_resolver"/>
+        </service>
+
+        <service id="argument_resolver.request_value" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver">
+            <argument type="collection" />
+            <tag name="controller.argument_value_resolver" priority="50" />
+        </service>
+
+        <service id="argument_resolver.request_parameter" class="Shopware\Bundle\ControllerBundle\ArgumentResolver\RequestParameterResolver">
+            <argument type="collection" />
+            <tag name="controller.argument_value_resolver" />
+        </service>
+
+        <service
+            id="Shopware\Bundle\ControllerBundle\ArgumentResolver\ShopContextResolver"
+            class="Shopware\Bundle\ControllerBundle\ArgumentResolver\ShopContextResolver">
+            <argument type="service" id="shopware_storefront.context_service"/>
+            <tag name="controller.argument_value_resolver" />
+        </service>
+
+        <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
+            <argument type="service" id="service_container"/>
+            <tag name="controller.argument_value_resolver" priority="-50" />
+        </service>
+
+        <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
+            <argument type="collection" />
+            <tag name="controller.argument_value_resolver" priority="-100" />
+        </service>
+    </services>
+</container>

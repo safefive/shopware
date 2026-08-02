@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true"/>
+        <service id="Shopware\Bundle\CookieBundle\Services\CookieCollector">
+            <argument id="events" type="service" />
+            <argument id="snippets" type="service" />
+            <argument id="config" type="service" />
+        </service>
+
+        <service id="Shopware\Bundle\CookieBundle\Services\CookieHandler">
+            <argument type="expression">service('Shopware\\Bundle\\CookieBundle\\Services\\CookieCollector').collect()</argument>
+        </service>
+
+        <service id="Shopware\Bundle\CookieBundle\Services\CookieRemoveHandler">
+            <argument type="expression">service('Shopware\\Bundle\\CookieBundle\\Services\\CookieCollector').collect()</argument>
+        </service>
+
+        <service id="Shopware\Bundle\CookieBundle\Controllers\CookieController">
+            <argument type="service" id="config" />
+            <argument type="service" id="Shopware\Bundle\CookieBundle\Services\CookieRemoveHandler" />
+            <tag name="shopware.controller" module="widgets" controller="cookiecontroller" />
+        </service>
+    </services>
+</container>
